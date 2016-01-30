@@ -20,9 +20,9 @@ public struct Grid {
         let w = rect.width / content.count
         let h = rect.height / content[0].count
         
-        for (c,col) in content.enumerate() {
+        for (r,row) in content.enumerate() {
             
-            for (r,item) in col.enumerate() {
+            for (c,item) in row.enumerate() {
                 
                 let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
                 

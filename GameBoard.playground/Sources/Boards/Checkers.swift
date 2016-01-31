@@ -43,6 +43,7 @@ public struct Checkers {
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
         
+        guard p2 == "" else { throw MoveError.InvalidMove }
         guard (abs(m1) == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid) else { throw MoveError.InvalidMove }
         
         grid[s2.0,s2.1] = p1 // place my piece in target square

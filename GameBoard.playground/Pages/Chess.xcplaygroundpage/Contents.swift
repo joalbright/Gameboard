@@ -7,15 +7,15 @@ var chess = GameBoard(.Chess)
 
 let moves: [(ChessSquare,ChessSquare)] = [
     
-    (B7,B5),
-    (C2,C4),
-    (B5,C4),
-    (B1,C3),
-    (C8,A6),
-    (E2,E4),
-    (G7,G6),
-    (F1,C4),
-    (A6,C4)
+    (B7,B5), // pawn leaps
+    (C2,C4), // pawn leaps
+    (B5,C4), // pawn takes pawn
+    (B1,C3), // knight charges
+    (C8,A6), // bishop advances
+    (E2,E4), // pawn leaps
+    (G7,G6), // pawn creeps
+    (F1,C4), // bishop take pawn
+    (A6,D3), // blocked move throws error
     
 ]
 

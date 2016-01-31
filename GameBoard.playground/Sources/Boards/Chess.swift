@@ -24,7 +24,7 @@ public struct Chess {
     
     public static var board: Grid {
         
-        var grid = Grid(8 ✕ (8 ✕ ""))
+        let grid = Grid(8 ✕ (8 ✕ ""))
         
         grid[0] = ["♜","♞","♝","♛","♚","♝","♞","♜"]
         grid[1] = 8 ✕ "♟"
@@ -37,17 +37,40 @@ public struct Chess {
     
     public static let playerPieces = ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]
     
-    public static func validateMove(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece) throws {
+    public static func validateEmptyPath(s1: Square, _ s2: Square, _ grid: Grid) throws {
         
         let mRow = s2.0 - s1.0
         let mCol = s2.1 - s1.1
         
-        print(mRow,mCol)
+        let d1 = mRow == 0 ? 0 : mRow > 0 ? 1 : -1
+        let d2 = mCol == 0 ? 0 : mCol > 0 ? 1 : -1
+        
+        var p1 = s1.0 + d1, p2 = s1.1 + d2
+        
+        while p1 != s2.0 || p2 != s2.1 {
+            
+            guard let piece = grid[p1][p2] as? Piece where piece == "" else { throw MoveError.BlockedMove }
+            
+            p1 += d1
+            p2 += d2
+            
+        }
+        
+    }
+    
+    public static func validateMove(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid) throws {
+        
+        let mRow = s2.0 - s1.0
+        let mCol = s2.1 - s1.1
+        
+        let d1 = mRow == 0 ? 0 : mRow > 0 ? 1 : -1
+        let d2 = mCol == 0 ? 0 : mCol > 0 ? 1 : -1
         
         switch PieceType(rawValue: p1) ?? .None {
             
         case .Bishop1, .Bishop2:
             
+            try validateEmptyPath(s1, s2, grid)
             guard abs(mRow) == abs(mCol) else { throw MoveError.InvalidMove }
             
         case .King1, .King2:
@@ -56,29 +79,36 @@ public struct Chess {
             
         case .Knight1, .Knight2:
             
-            guard (mRow == 2 && mCol == 1) || (mRow == 1 && mCol == 2) else { throw MoveError.InvalidMove }
+            guard let piece = grid[s1.0 + d1][s1.1 + d2] as? Piece where piece == "" else { throw MoveError.BlockedMove }
+            guard (abs(mRow) == 2 && abs(mCol) == 1) || (abs(mRow) == 1 && abs(mCol) == 2) else { throw MoveError.InvalidMove }
             
         case .Pawn1:
             
+            try validateEmptyPath(s1, s2, grid)
             guard abs(mCol) == 0 || (abs(mCol) == 1 && mRow == 1 && p2 != "") else { throw MoveError.InvalidMove }
             guard mRow < 2 || (s1.0 == 1 && mRow == 2) else { throw MoveError.InvalidMove }
             
         case .Pawn2:
             
-            
+            try validateEmptyPath(s1, s2, grid)
             guard abs(mCol) == 0 || (abs(mCol) == 1 && mRow == -1 && p2 != "") else { throw MoveError.InvalidMove }
             guard mRow > -2 || (s1.0 == 6 && mRow == -2) else { throw MoveError.InvalidMove }
             
-        case .Queen1, .Queen2: break
+        case .Queen1, .Queen2:
+            
+            try validateEmptyPath(s1, s2, grid)
             
         case .Rook1, .Rook2:
             
+            try validateEmptyPath(s1, s2, grid)
             guard mRow == 0 || mCol == 0 else { throw MoveError.InvalidMove }
             
         case .None: throw MoveError.IncorrectPiece
             
         }
         
+        grid[s2.0,s2.1] = p1 // place my piece in target square
+        grid[s1.0,s1.1] = "" // remove my piece from original square
         
     }
     

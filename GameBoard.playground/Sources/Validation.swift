@@ -16,7 +16,7 @@ public enum MoveError: ErrorType {
     case NoPlayer
     /// What type of game are you playing???
     case IncorrectPiece
-    /// Validation is unfinished... go ahead and cheat.
+    /// Validation is unfinished... not letting you cheat.
     case ValidationFailed
     
 }
@@ -65,8 +65,8 @@ extension GameBoard {
         
         switch _type {
             
-        case .Chess: try Chess.validateMove(s1, s2, p1, p2)
-        case .Checkers: try Checkers.validateMove(s1, s2, p1, p2)
+        case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid)
+        case .Checkers: try Checkers.validateMove(s1, s2, p1, p2, grid)
             
         }
         

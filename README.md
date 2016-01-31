@@ -3,6 +3,8 @@
 Gameboards built in a playground
 
 - [x] Swift Player Per Turn
+- [x] Coordinate System
+- [x] Ability to Reset
 - [ ] Piece Collection
 - [ ] Simple Move AI
 
@@ -15,25 +17,33 @@ Gameboards built in a playground
 
 ## Chess
 
+- [x] Coordinates
+	- columns A - H
+	- rows 8 - 1
+
 ![Chess](./images/chess.png)
 
 #### Validation
 
 - [x] Pawn
-- [ ] Rook ~
-- [ ] Knight ~
-- [ ] Bishop ~
-- [ ] Queen ~
+- [x] Rook ~
+- [x] Knight ~
+- [x] Bishop ~
+- [x] Queen ~
 - [x] King
 
 ~ *needs to check path*
 
 ## Checkers
 
+- [x] Coordinates
+	- columns 0 - 7
+	- rows 0 - 7
+
 ![Checkers](./images/checkers.png)
 
 #### Validation
 
 - [x] Diagonal -> 1
-- [ ] Diagonal Jump
+- [x] Diagonal Jump
 - [ ] Multiple Jumps

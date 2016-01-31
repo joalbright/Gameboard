@@ -28,11 +28,7 @@ public struct GameBoard {
         
         try validateMove(s1, s2)
         
-        let piece1 = grid[s1.0,s1.1]
         let piece2 = grid[s2.0,s2.1]
-        
-        grid[s2.0,s2.1] = piece1
-        grid[s1.0,s1.1] = ""
         
         player1Turn = !player1Turn
         
@@ -48,11 +44,7 @@ public struct GameBoard {
         
         try validateMove((r1,c1), (r2,c2))
         
-        let piece1 = grid[r1,c1]
         let piece2 = grid[r2,c2]
-        
-        grid[r2,c2] = piece1
-        grid[r1,c1] = ""
         
         player1Turn = !player1Turn
         

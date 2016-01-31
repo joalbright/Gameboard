@@ -1,6 +1,6 @@
 import UIKit
 
-public struct Grid {
+public class Grid {
     
     public var content: [[Any]]
     

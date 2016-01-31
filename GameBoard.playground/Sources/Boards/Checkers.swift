@@ -4,7 +4,7 @@ public struct Checkers {
     
     public static var board: Grid {
         
-        var grid = Grid(8 ✕ (8 ✕ ""))
+        let grid = Grid(8 ✕ (8 ✕ ""))
         
         grid[0] = 8 ✕ ("" %% "◎")
         grid[1] = 8 ✕ ("◎" %% "")
@@ -19,12 +19,34 @@ public struct Checkers {
     
     public static let playerPieces = ["◎","◉"]
     
-    public static func validateMove(s1: Square, _ s2: Square, _ piece: Piece, _ p2: Piece) throws {
+    public static func validateJump(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid) -> Bool {
         
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
         
-        guard abs(m1) == 1 && abs(m2) == 1 else { throw MoveError.InvalidMove }
+        let e1 = s1.0 + m1 / 2
+        let e2 = s1.1 + m2 / 2
+        
+        guard abs(m1) == 2 && abs(m2) == 2 else { return false }
+        guard let piece1 = grid[s1.0][s1.1] as? String else { return false }
+        guard let piece2 = grid[e1][e2] as? String else { return false }
+        guard piece2 != "" && piece1 != piece2 else { return false }
+        
+        grid[e1][e2] = "" // remove other player piece
+        
+        return true
+        
+    }
+    
+    public static func validateMove(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid) throws {
+        
+        let m1 = s2.0 - s1.0
+        let m2 = s2.1 - s1.1
+        
+        guard (abs(m1) == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid) else { throw MoveError.InvalidMove }
+        
+        grid[s2.0,s2.1] = p1 // place my piece in target square
+        grid[s1.0,s1.1] = "" // remove my piece from original square
         
     }
     

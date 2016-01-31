@@ -67,6 +67,22 @@ extension GameBoard {
             
         case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid)
         case .Checkers: try Checkers.validateMove(s1, s2, p1, p2, grid)
+        case.TicTacToe: throw MoveError.IncorrectPiece
+            
+        }
+        
+    }
+    
+    func validateMove(s1: Square) throws {
+        
+        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        
+        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPiece }
+             
+        switch _type {
+            
+        case .Chess, .Checkers: MoveError.IncorrectPiece
+        case.TicTacToe: try TicTacToe.validateMove(s1, p1, grid, player1Turn)
             
         }
         

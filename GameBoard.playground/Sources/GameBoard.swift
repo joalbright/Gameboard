@@ -8,7 +8,7 @@ public struct GameBoard {
     
     public enum BoardType: String {
         
-        case Chess, Checkers
+        case Chess, Checkers, TicTacToe
         
     }
     
@@ -21,6 +21,13 @@ public struct GameBoard {
         
         _type = type
         reset()
+        
+    }
+    
+    public mutating func move(toSquare s1: Square) throws {
+        
+        try validateMove(s1)
+        player1Turn = !player1Turn
         
     }
     
@@ -68,13 +75,28 @@ public struct GameBoard {
             grid = Checkers.board
             playerPieces = Checkers.playerPieces
             
+        case .TicTacToe:
+            
+            grid = TicTacToe.board
+            playerPieces = TicTacToe.playerPieces
+            
         }
         
     }
     
+    public var highlights: [Square] = []
+    public var selected: Square?
+    
     public func visualize(rect: CGRect = CGRect(x: 0, y: 0, width: 200, height: 200)) -> UIView {
         
-        return grid.checker(rect)
+        switch _type {
+            
+        case .Chess, .Checkers: return grid.checker(rect, highlights: highlights, selected: selected)
+        case .TicTacToe: return grid.ttt(rect)
+            
+        }
+        
+        
         
     }
     

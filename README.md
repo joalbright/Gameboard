@@ -117,6 +117,9 @@ for move in moves {
     }
     
 }
+
+
+checkers.visualize()
 ```
 
 ![Checkers](./images/checkers.png?raw=true)
@@ -130,3 +133,56 @@ for move in moves {
 - [ ] Special Moves
 	- [ ] Multiple Jumps
 	- [ ] Promotion
+
+	
+## TicTacToe
+
+- [x] Coordinates
+	- columns 0 - 2
+	- rows 0 - 2
+
+```swift
+var tictactoe = GameBoard(.TicTacToe)
+
+// collection of moves
+
+let moves: [Square] = [
+ 
+    (1,1),
+    (0,0),
+    (0,2),
+    (2,0),
+    (1,0),
+    (1,2),
+    (0,1),
+    (1,1), // cant play filled spot
+    (2,1),
+    (2,2), // stalemate
+    
+]
+
+// loop moves
+
+for move in moves {
+    
+    do {
+        
+        try tictactoe.move(toSquare: move)
+        
+    } catch {
+        
+        error
+        
+    }
+    
+}
+
+
+tictactoe.visualize()
+```
+
+![TicTacToe](./images/tictactoe.png?raw=true)
+
+#### Validation
+
+- [x] Standard Moves

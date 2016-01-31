@@ -3,5 +3,6 @@
     <pages>
         <page name='Chess'/>
         <page name='Checkers'/>
+        <page name='TicTacToe'/>
     </pages>
 </playground>

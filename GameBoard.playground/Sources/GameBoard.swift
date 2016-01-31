@@ -6,62 +6,47 @@ public typealias Piece = String
 
 public struct GameBoard {
     
-    public enum BoardType {
+    public enum BoardType: String {
         
         case Chess, Checkers
         
     }
     
-    var grid: Grid
-    
+    var _type: BoardType
+    var player1Turn: Bool = false // arc4random_uniform(100) % 2 == 0 // uncomment to randomize starting player
+    var playerPieces: [Piece] = []
+    var grid: Grid = Grid(1 ✕ (1 ✕ ""))
     
     public init(_ type: BoardType) {
         
-        switch type {
-            
-        case .Chess:
-            
-            grid = Grid(8 ✕ (8 ✕ ""))
-            
-            grid[0] = ["♜","♞","♝","♛","♚","♝","♞","♜"]
-            grid[1] = 8 ✕ "♟"
-            grid[6] = 8 ✕ "♙"
-            grid[7] = ["♖","♘","♗","♕","♔","♗","♘","♖"]
-        
-        case .Checkers:
-            
-            grid = Grid(8 ✕ (8 ✕ ""))
-            
-            grid[0] = 8 ✕ ("" %% "◎")
-            grid[1] = 8 ✕ ("◎" %% "")
-            grid[2] = 8 ✕ ("" %% "◎")
-            grid[5] = 8 ✕ ("◉" %% "")
-            grid[6] = 8 ✕ ("" %% "◉")
-            grid[7] = 8 ✕ ("◉" %% "")
-            
-        }
-        
+        _type = type
+        reset()
         
     }
     
-    public mutating func move(pieceAt s1: Square, toSquare s2: Square) -> Piece? {
+    public mutating func move(pieceAt s1: Square, toSquare s2: Square) throws -> Piece? {
         
         let piece1 = grid[s1.0,s1.1]
         let piece2 = grid[s2.0,s2.1]
         
+        try validateMove(s1, s2)
+        
         grid[s2.0,s2.1] = piece1
         grid[s1.0,s1.1] = ""
+        
+        player1Turn = !player1Turn
         
         return piece2 as? Piece
         
     }
     
-    public mutating func move(pieceAt s1: ChessSquare, toSquare s2: ChessSquare) -> Piece? {
+    public mutating func move(pieceAt s1: ChessSquare, toSquare s2: ChessSquare) throws -> Piece? {
         
         let cols: [String] = "abcdefgh".characters.map { "\($0)" }
-        guard let c1 = cols.indexOf(s1.0), let c2 = cols.indexOf(s1.0) else { return nil }
-        let r1 = 8 - s1.1
-        let r2 = 8 - s2.1
+        guard let c1 = cols.indexOf(s1.0), let c2 = cols.indexOf(s2.0) else { return nil }
+        let r1 = 8 - s1.1, r2 = 8 - s2.1
+        
+        try validateMove((r1,c1), (r2,c2))
         
         let piece1 = grid[r1,c1]
         let piece2 = grid[r2,c2]
@@ -69,7 +54,29 @@ public struct GameBoard {
         grid[r2,c2] = piece1
         grid[r1,c1] = ""
         
+        player1Turn = !player1Turn
+        
         return piece2 as? Piece
+        
+    }
+    
+    public mutating func reset() {
+        
+        player1Turn = !player1Turn
+        
+        switch _type {
+            
+        case .Chess:
+            
+            grid = Chess.board
+            playerPieces = Chess.playerPieces
+            
+        case .Checkers:
+            
+            grid = Checkers.board
+            playerPieces = Checkers.playerPieces
+            
+        }
         
     }
     
@@ -80,3 +87,5 @@ public struct GameBoard {
     }
     
 }
+
+

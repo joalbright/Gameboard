@@ -2,11 +2,24 @@
 
 Gameboards built in a playground
 
+#### Games
+
+- [x] Chess
+- [x] Checkers
+- [x] TicTacToe
+- [ ] Mancala
+- [ ] Backgammon
+- [ ] Sudoku
+- [ ] MineSweeper
+
+#### Features
+
 - [x] Swift Player Per Turn
 - [x] Coordinate System
 - [x] Ability to Reset
 - [ ] Available Moves : *hint system*
 - [ ] Piece Collection
+- [ ] Time Control
 - [ ] Simple Move AI
 
 #### Overall Validation

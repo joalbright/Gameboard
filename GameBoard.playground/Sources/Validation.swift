@@ -2,6 +2,8 @@ import UIKit
 
 public enum MoveError: ErrorType {
     
+    /// Seriously??? There is no reason to go off the board.
+    case OutOfBounds
     /// Piece cannot move to that square
     case InvalidMove
     /// Cannot take out your own piece
@@ -13,7 +15,7 @@ public enum MoveError: ErrorType {
     /// Ummm... I think you may be lost
     case NoPlayer
     /// What type of game are you playing???
-    case IncorrectPieces
+    case IncorrectPiece
     /// Validation is unfinished... go ahead and cheat.
     case ValidationFailed
     
@@ -53,8 +55,10 @@ extension GameBoard {
     
     func validateMove(s1: Square, _ s2: Square) throws {
         
-        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPieces }
-        guard let p2 = grid[s2.0][s2.1] as? Piece else { throw MoveError.IncorrectPieces }
+        guard grid.onBoard(s1, s2) else { throw MoveError.OutOfBounds }
+        
+        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPiece }
+        guard let p2 = grid[s2.0][s2.1] as? Piece else { throw MoveError.IncorrectPiece }
         
         guard validatePlayer(p1) else { throw MoveError.NotYourTurn }
         try validateNotFriendlyFire(p1, p2)

@@ -4,38 +4,15 @@ import UIKit
 var chess = GameBoard(.Chess)
 
 // history of moves
+let moves: [(ChessSquare,ChessSquare)] = [
+    
+    (B7,B5),
+    (C2,C4),
+    (B5,C5)
+    
+]
 
 // current move
-
-do {
-    
-    try chess.move(pieceAt: ("b",7), toSquare: ("b",5))
-    
-} catch {
-    
-    error
-    
-}
-
-do {
-    
-    try chess.move(pieceAt: ("c",2), toSquare: ("c",4))
-    
-} catch {
-    
-    error
-    
-}
-
-do {
-    
-    try chess.move(pieceAt: ("b",5), toSquare: ("c",4))
-    
-} catch {
-    
-    error
-    
-}
 
 
 chess.visualize()

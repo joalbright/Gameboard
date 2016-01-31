@@ -4,6 +4,9 @@ public struct Grid {
     
     public var content: [[Any]]
     
+    public var rowRange: Range<Int> { return 0..<content.count }
+    public var colRange: Range<Int> { return 0..<content[0].count }
+    
     public init(_ content: [[Any]]) {
         
         self.content = content
@@ -77,6 +80,12 @@ public struct Grid {
         
     }
     
+    public func onBoard(s1: Square, _ s2: Square) -> Bool {
+        
+        return s1.0.within(rowRange) && s1.1.within(colRange) && s2.0.within(rowRange) && s2.1.within(colRange)
+        
+    }
+    
     public subscript ( c: Int, r: Int) -> Any {
         
         get { return content[c][r] }
@@ -88,6 +97,16 @@ public struct Grid {
         
         get { return content[c] }
         set { content[c] = newValue }
+        
+    }
+    
+}
+
+extension Int {
+    
+    func within(r: Range<Int>) -> Bool {
+        
+        return self >= r.startIndex && self <= r.endIndex
         
     }
     

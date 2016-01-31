@@ -75,7 +75,7 @@ public struct Chess {
             
             guard mRow == 0 || mCol == 0 else { throw MoveError.InvalidMove }
             
-        case .None: throw MoveError.IncorrectPieces
+        case .None: throw MoveError.IncorrectPiece
             
         }
         
@@ -83,3 +83,15 @@ public struct Chess {
     }
     
 }
+
+
+
+
+public let A8 = ("a",8), A7 = ("a",7), A6 = ("a",6), A5 = ("a",5), A4 = ("a",4), A3 = ("a",3), A2 = ("a",2), A1 = ("a",1)
+public let B8 = ("b",8), B7 = ("b",7), B6 = ("b",6), B5 = ("b",5), B4 = ("b",4), B3 = ("b",3), B2 = ("b",2), B1 = ("b",1)
+public let C8 = ("c",8), C7 = ("c",7), C6 = ("c",6), C5 = ("c",5), C4 = ("c",4), C3 = ("c",3), C2 = ("c",2), C1 = ("c",1)
+public let D8 = ("d",8), D7 = ("d",7), D6 = ("d",6), D5 = ("d",5), D4 = ("d",4), D3 = ("d",3), D2 = ("d",2), D1 = ("d",1)
+public let E8 = ("e",8), E7 = ("e",7), E6 = ("e",6), E5 = ("e",5), E4 = ("e",4), E3 = ("e",3), E2 = ("e",2), E1 = ("e",1)
+public let F8 = ("f",8), F7 = ("f",7), F6 = ("f",6), F5 = ("f",5), F4 = ("f",4), F3 = ("f",3), F2 = ("f",2), F1 = ("f",1)
+public let G8 = ("g",8), G7 = ("g",7), G6 = ("g",6), G5 = ("g",5), G4 = ("g",4), G3 = ("g",3), G2 = ("g",2), G1 = ("g",1)
+public let H8 = ("h",8), H7 = ("h",7), H6 = ("h",6), H5 = ("h",5), H4 = ("h",4), H3 = ("h",3), H2 = ("h",2), H1 = ("h",1)

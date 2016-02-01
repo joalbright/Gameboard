@@ -4,13 +4,13 @@ Gameboards built in a playground
 
 #### Games
 
-- [x] Chess
-- [x] Checkers
-- [x] TicTacToe
-- [ ] Mancala
 - [ ] Backgammon
-- [ ] Sudoku
+- [x] Checkers
+- [x] Chess
+- [ ] Mancala
 - [ ] MineSweeper
+- [ ] Sudoku
+- [x] TicTacToe
 
 #### Features
 
@@ -28,6 +28,61 @@ Gameboards built in a playground
 - [x] Only play on your turn : *checks against pieces for player*
 - [x] No piece available : *checks for no piece*
 - [x] Off the board : *checks if target square is on board*
+
+## Checkers
+
+- [x] Coordinates
+	- columns 0 - 7
+	- rows 0 - 7
+
+```swift
+var checkers = GameBoard(.Checkers)
+
+// collection of moves
+
+let moves: [(Square,Square)] = [
+
+    ((2,1),(3,2)), // move
+    ((5,2),(4,3)), // move
+    ((2,3),(3,4)), // move
+    ((4,3),(2,1)), // jump
+    ((2,5),(4,3)), // cannot jump yourself
+    ((2,5),(3,4)), // cannot land on your own piece
+    ((1,0),(2,1)), // cannot land on another piece
+
+]
+
+// loop moves
+
+for move in moves {
+    
+    do {
+        
+        try checkers.move(pieceAt: move.0, toSquare: move.1)
+    
+    } catch {
+        
+        error
+    
+    }
+    
+}
+
+
+checkers.visualize()
+```
+
+![Checkers](./images/checkers.png?raw=true)
+
+#### Validation
+
+- [x] Standard Moves
+	- [x] Diagonal -> 1
+	- [x] Diagonal Jump
+
+- [ ] Special Moves
+	- [ ] Multiple Jumps
+	- [ ] Promotion
 
 ## Chess
 
@@ -91,61 +146,6 @@ chess.visualize()
 	- [ ] En passant : *pawn take down in passing*
 	- [ ] Pawn Promotion
 	- [ ] Check & Checkmate
-
-## Checkers
-
-- [x] Coordinates
-	- columns 0 - 7
-	- rows 0 - 7
-
-```swift
-var checkers = GameBoard(.Checkers)
-
-// collection of moves
-
-let moves: [(Square,Square)] = [
-
-    ((2,1),(3,2)), // move
-    ((5,2),(4,3)), // move
-    ((2,3),(3,4)), // move
-    ((4,3),(2,1)), // jump
-    ((2,5),(4,3)), // cannot jump yourself
-    ((2,5),(3,4)), // cannot land on your own piece
-    ((1,0),(2,1)), // cannot land on another piece
-
-]
-
-// loop moves
-
-for move in moves {
-    
-    do {
-        
-        try checkers.move(pieceAt: move.0, toSquare: move.1)
-    
-    } catch {
-        
-        error
-    
-    }
-    
-}
-
-
-checkers.visualize()
-```
-
-![Checkers](./images/checkers.png?raw=true)
-
-#### Validation
-
-- [x] Standard Moves
-	- [x] Diagonal -> 1
-	- [x] Diagonal Jump
-
-- [ ] Special Moves
-	- [ ] Multiple Jumps
-	- [ ] Promotion
 
 ## Sudoku
 

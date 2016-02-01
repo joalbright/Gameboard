@@ -1,7 +1,5 @@
 import UIKit
 
-import UIKit
-
 public func * (lhs: CGFloat, rhs: Int) -> CGFloat {
     
     return lhs * CGFloat(rhs)
@@ -42,7 +40,7 @@ public func + (lhs: Int, rhs: CGFloat) -> CGFloat {
 
 infix operator ✕ { associativity left precedence 100 }
 
-public func ✕ <T: Any>(lhs: Int, rhs: Int -> T) -> [T] {
+public func ✕ <T: AnyObject>(lhs: Int, rhs: Int -> T) -> [T] {
     
     var a: [T] = []
     
@@ -52,13 +50,19 @@ public func ✕ <T: Any>(lhs: Int, rhs: Int -> T) -> [T] {
     
 }
 
-public func ✕ <T: Any>(lhs: Int, rhs: T) -> [T] {
+public func ✕ <T: AnyObject>(lhs: Int, rhs: T) -> [T] {
     
     return [T](count: lhs, repeatedValue: rhs)
     
 }
 
-public func ✕ <T: Any>(lhs: Int, rhs: T.Type) -> [T?] {
+public func ✕ <T: AnyObject>(lhs: Int, rhs: [T]) -> [[T]] {
+    
+    return [[T]](count: lhs, repeatedValue: rhs)
+    
+}
+
+public func ✕ <T: AnyObject>(lhs: Int, rhs: T.Type) -> [T?] {
     
     return [T?](count: lhs, repeatedValue: nil)
     
@@ -66,7 +70,7 @@ public func ✕ <T: Any>(lhs: Int, rhs: T.Type) -> [T?] {
 
 infix operator %% { associativity left precedence 150 }
 
-public func %% <T: Any>(lhs: T, rhs: T) -> Int -> Any {
+public func %% <T: AnyObject>(lhs: T, rhs: T) -> Int -> AnyObject {
     
     return { $0 % 2 == 0 ? lhs : rhs }
     

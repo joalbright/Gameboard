@@ -1,7 +1,6 @@
 import UIKit
 
-
-var chess = GameBoard(.Chess)
+var chess = Gameboard(.Chess)
 
 // collection of moves
 
@@ -29,7 +28,7 @@ for move in moves {
         
     } catch {
         
-        error
+        print(error)
     
     }
     

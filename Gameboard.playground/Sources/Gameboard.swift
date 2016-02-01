@@ -1,26 +1,48 @@
 import UIKit
 
-public typealias Square = (c: Int, r: Int)
-public typealias ChessSquare = (c: String, r: Int)
-public typealias Piece = String
-
-public struct GameBoard {
+public struct Gameboard {
     
     public enum BoardType: String {
         
-        case Chess, Checkers, TicTacToe
+        case Backgammon, Checkers, Chess, Mancala, Minesweeper, Sudoku, TicTacToe
+        
+    }
+    
+    public enum DifficultyLevel: String {
+        
+        case Easy, Medium, Hard, Expert, Nightmare
         
     }
     
     var _type: BoardType
+    
     var player1Turn: Bool = false // arc4random_uniform(100) % 2 == 0 // uncomment to randomize starting player
     var playerPieces: [Piece] = []
+    
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
+    var solution: Grid = Grid(1 ✕ (1 ✕ ""))
+    
+    var _size: Int?
+    var _difficulty: DifficultyLevel = .Easy
     
     public init(_ type: BoardType) {
         
         _type = type
         reset()
+        
+    }
+    
+    public init(_ type: BoardType, size: Int) {
+        
+        _type = type
+        _size = size
+        reset()
+        
+    }
+    
+    public mutating func guess(toSquare s1: Square, withGuess g1: Guess) throws {
+        
+        try validateGuess(s1, g1)
         
     }
     
@@ -45,7 +67,7 @@ public struct GameBoard {
     
     public mutating func move(pieceAt s1: ChessSquare, toSquare s2: ChessSquare) throws -> Piece? {
         
-        let cols: [String] = "abcdefgh".characters.map { "\($0)" }
+        let cols = "abcdefgh".array()
         guard let c1 = cols.indexOf(s1.0), let c2 = cols.indexOf(s2.0) else { return nil }
         let r1 = 8 - s1.1, r2 = 8 - s2.1
         
@@ -65,15 +87,27 @@ public struct GameBoard {
         
         switch _type {
             
-        case .Chess:
-            
-            grid = Chess.board
-            playerPieces = Chess.playerPieces
+        case .Backgammon: break
             
         case .Checkers:
             
             grid = Checkers.board
             playerPieces = Checkers.playerPieces
+            
+        case .Chess:
+            
+            grid = Chess.board
+            playerPieces = Chess.playerPieces
+            
+        case .Mancala: break
+            
+        case .Minesweeper: break
+            
+        case .Sudoku:
+            
+            solution = Sudoku.board
+            grid = Sudoku.puzzle(solution)
+            playerPieces = Sudoku.playerPieces
             
         case .TicTacToe:
             
@@ -91,12 +125,13 @@ public struct GameBoard {
         
         switch _type {
             
-        case .Chess, .Checkers: return grid.checker(rect, highlights: highlights, selected: selected)
+        case .Backgammon: return UIView()
+        case .Checkers, .Chess: return grid.checker(rect, highlights: highlights, selected: selected)
+        case .Mancala, .Minesweeper: return UIView()
+        case .Sudoku: return grid.sudoku(rect)
         case .TicTacToe: return grid.ttt(rect)
             
         }
-        
-        
         
     }
     

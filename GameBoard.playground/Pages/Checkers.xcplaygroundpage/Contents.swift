@@ -1,6 +1,6 @@
 import UIKit
 
-var checkers = GameBoard(.Checkers)
+var checkers = Gameboard(.Checkers)
 
 // collection of moves
 
@@ -26,7 +26,7 @@ for move in moves {
     
     } catch {
         
-        error
+        print(error)
     
     }
     

@@ -115,7 +115,7 @@ public struct Chess {
 }
 
 
-
+// Coordinates
 
 public let A8 = ("a",8), A7 = ("a",7), A6 = ("a",6), A5 = ("a",5), A4 = ("a",4), A3 = ("a",3), A2 = ("a",2), A1 = ("a",1)
 public let B8 = ("b",8), B7 = ("b",7), B6 = ("b",6), B5 = ("b",5), B4 = ("b",4), B3 = ("b",3), B2 = ("b",2), B1 = ("b",1)

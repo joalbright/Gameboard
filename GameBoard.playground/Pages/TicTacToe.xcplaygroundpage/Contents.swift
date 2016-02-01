@@ -1,6 +1,6 @@
 import UIKit
 
-var tictactoe = GameBoard(.TicTacToe)
+var tictactoe = Gameboard(.TicTacToe)
 
 // collection of moves
 
@@ -29,7 +29,7 @@ for move in moves {
         
     } catch {
         
-        error
+        print(error)
         
     }
     

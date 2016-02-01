@@ -147,6 +147,48 @@ checkers.visualize()
 	- [ ] Multiple Jumps
 	- [ ] Promotion
 
+## Sudoku
+
+- [x] Coordinates
+	- columns 0 - 8
+	- rows 0 - 8
+
+```swift
+var sudoku = Gameboard(.Sudoku)
+
+// collection of guesses
+
+let guesses: [(Square,Guess)] = [
+    
+    // guesses
+    
+]
+
+// loop moves
+
+for guess in guesses {
+    
+    do {
+        
+        try sudoku.guess(toSquare: guess.0, withGuess: guess.1)
+        
+    } catch {
+        
+        print(error)
+        
+    }
+    
+}
+
+
+sudoku.visualize()
+```
+
+![Sudoku](./images/sudoku.png?raw=true)
+
+#### Validation
+
+- [ ] Standard Moves
 	
 ## TicTacToe
 

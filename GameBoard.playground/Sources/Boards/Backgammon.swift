@@ -1,10 +1,16 @@
 import UIKit
 
-public struct TicTacToe {
+public struct Backgammon {
     
-    public static var board: Grid = Grid(3 ✕ (3 ✕ ""))
+    public static var board: Grid {
+        
+        let grid = Grid(9 ✕ (9 ✕ ""))
+        
+        return grid
+        
+    }
     
-    public static let playerPieces = ["✕","⦿"]
+    public static let playerPieces = ["",""]
     
     public static func validateMove(s1: Square, _ p1: Piece, _ grid: Grid, _ player1: Bool) throws {
         

@@ -1,7 +1,6 @@
 import UIKit
 
-
-extension GameBoard {
+extension Gameboard {
     
     
     public func showAvailable(s1: Square) {

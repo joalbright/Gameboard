@@ -21,7 +21,7 @@ public enum MoveError: ErrorType {
     
 }
 
-extension GameBoard {
+extension Gameboard {
     
     func validateNotFriendlyFire(p1: Piece, _ p2: Piece) throws -> Bool {
         
@@ -53,6 +53,36 @@ extension GameBoard {
         
     }
     
+    // moves, guesses, etc
+    
+    func validateGuess(s1: Square, _ g1: Guess) throws {
+        
+        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        
+        switch _type {
+            
+        case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Sudoku: try Sudoku.validateGuess(s1, g1, grid)
+            
+        }
+        
+    }
+    
+    func validateMove(s1: Square) throws {
+        
+        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        
+        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPiece }
+        
+        switch _type {
+            
+        case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
+        case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, player1Turn)
+            
+        }
+        
+    }
+    
     func validateMove(s1: Square, _ s2: Square) throws {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.OutOfBounds }
@@ -65,24 +95,9 @@ extension GameBoard {
         
         switch _type {
             
-        case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid)
         case .Checkers: try Checkers.validateMove(s1, s2, p1, p2, grid)
-        case.TicTacToe: throw MoveError.IncorrectPiece
-            
-        }
-        
-    }
-    
-    func validateMove(s1: Square) throws {
-        
-        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
-        
-        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPiece }
-             
-        switch _type {
-            
-        case .Chess, .Checkers: MoveError.IncorrectPiece
-        case.TicTacToe: try TicTacToe.validateMove(s1, p1, grid, player1Turn)
+        case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid)
+        case .Backgammon, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
             
         }
         

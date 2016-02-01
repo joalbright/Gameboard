@@ -2,12 +2,18 @@ import UIKit
 
 public class Grid {
     
-    public var content: [[Any]]
+    public var content: [[AnyObject]]
     
     public var rowRange: Range<Int> { return 0..<content.count }
     public var colRange: Range<Int> { return 0..<content[0].count }
+//    
+//    public init(_ content: [[Any]]) {
+//        
+////        self.content = content
+//        
+//    }
     
-    public init(_ content: [[Any]]) {
+    public init(_ content: [[AnyObject]]) {
         
         self.content = content
         
@@ -93,6 +99,38 @@ public class Grid {
         
     }
     
+    public func sudoku(rect: CGRect) -> UIView {
+        
+        let view = SudokuView(frame: rect)
+        
+        view.backgroundColor = UIColor.whiteColor()
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        
+        let w = rect.width / content.count
+        let h = rect.height / content[0].count
+        
+        for (r,row) in content.enumerate() {
+            
+            for (c,item) in row.enumerate() {
+                
+                let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                
+                label.text = "\(item)"
+                label.textAlignment = .Center
+                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
+                
+                view.addSubview(label)
+                
+            }
+            
+        }
+        
+        return view
+        
+    }
+    
     public func matrix(rect: CGRect) -> UIView {
         
         let view = MatrixView(frame: rect)
@@ -139,27 +177,17 @@ public class Grid {
         
     }
     
-    public subscript ( c: Int, r: Int) -> Any {
+    public subscript ( c: Int, r: Int) -> AnyObject {
         
         get { return content[c][r] }
         set { content[c][r] = newValue }
         
     }
     
-    public subscript ( c: Int) -> [Any] {
+    public subscript ( c: Int) -> [AnyObject] {
         
         get { return content[c] }
         set { content[c] = newValue }
-        
-    }
-    
-}
-
-extension Int {
-    
-    func within(r: Range<Int>) -> Bool {
-        
-        return self >= r.startIndex && self <= r.endIndex
         
     }
     

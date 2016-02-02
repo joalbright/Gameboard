@@ -99,7 +99,7 @@ public class Grid {
         
     }
     
-    public func sudoku(rect: CGRect) -> UIView {
+    public func sudoku(rect: CGRect, highlights: [Square]) -> UIView {
         
         let view = SudokuView(frame: rect)
         
@@ -119,7 +119,15 @@ public class Grid {
                 
                 label.text = "\(item)"
                 label.textAlignment = .Center
-                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
+                label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 10)
+                
+                for highlight in highlights {
+                    
+                    guard highlight.0 == r && highlight.1 == c else { continue }
+                    label.textColor = UIColor.whiteColor()
+                    label.backgroundColor = UIColor.blackColor()
+                    
+                }
                 
                 view.addSubview(label)
                 

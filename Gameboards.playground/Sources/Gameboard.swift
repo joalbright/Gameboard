@@ -84,6 +84,8 @@ public struct Gameboard {
     public mutating func reset() {
         
         player1Turn = !player1Turn
+        highlights = []
+        selected = nil
         
         switch _type {
             
@@ -128,7 +130,7 @@ public struct Gameboard {
         case .Backgammon: return UIView()
         case .Checkers, .Chess: return grid.checker(rect, highlights: highlights, selected: selected)
         case .Mancala, .Minesweeper: return UIView()
-        case .Sudoku: return grid.sudoku(rect)
+        case .Sudoku: return grid.sudoku(rect, highlights: highlights)
         case .TicTacToe: return grid.ttt(rect)
             
         }

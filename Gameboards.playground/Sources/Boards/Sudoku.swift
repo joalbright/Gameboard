@@ -18,15 +18,27 @@ public struct Sudoku {
             
         ])
         
+        // static solution for testing in playground
+        
+        return Grid([ grid[6], grid[8], grid[7], grid[1], grid[0], grid[2], grid[5], grid[3], grid[4] ])
+        
+        // use this to randomize the grid for new puzzles
+        
         return randomize(grid)
         
     }
     
     public static let playerPieces = ["123456789"]
     
-    public static func validateGuess(s1: Square, _ g1: Guess, _ grid: Grid) throws {
+    public static func validateGuess(s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
         
-        guard g1 == "" else { throw MoveError.InvalidMove }
+        guard g1 != "" else { throw MoveError.InvalidMove }
+        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.IncorrectPiece }
+        
+        print(a1)
+        print(g1)
+        
+        guard a1 == g1 else { throw MoveError.IncorrectGuess }
         
         grid[s1.0,s1.1] = g1
         
@@ -70,6 +82,38 @@ public struct Sudoku {
     
     static func puzzle(grid: Grid) -> Grid {
         
+        let grid = Grid(grid.content)
+        
+        // static hidden numbers for testing in playground
+        
+        let hide = [
+        
+            [0,2,3,4,6,7],
+            [0,1,3,6,7,8],
+            [1,2,3,5,6,7],
+            [0,1,2,4,5,8],
+            [0,1,4,6,7,8],
+            [2,3,4,5,7,8],
+            [0,1,2,5,6,7],
+            [0,3,4,5,6,8],
+            [1,3,4,6,7,8]
+        
+        ]
+        
+        for (r,row) in hide.enumerate() {
+            
+            for c in row {
+                
+                grid[r,c] = ""
+                
+            }
+            
+        }
+        
+        return grid
+        
+        // this is to randomize the hidden numbers
+        
         for r in 0...8 {
             
             var cols = [0,1,2,3,4,5,6,7,8].randomize()
@@ -78,7 +122,7 @@ public struct Sudoku {
             
             for c in cols {
                 
-                grid[r][c] = ""
+                grid[r,c] = ""
                 
             }
             

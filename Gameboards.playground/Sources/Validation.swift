@@ -2,6 +2,8 @@ import UIKit
 
 public enum MoveError: ErrorType {
     
+    /// Good try. Need a hint?
+    case IncorrectGuess
     /// Seriously??? There is no reason to go off the board.
     case OutOfBounds
     /// Piece cannot move to that square
@@ -55,16 +57,18 @@ extension Gameboard {
     
     // moves, guesses, etc
     
-    func validateGuess(s1: Square, _ g1: Guess) throws {
+    mutating func validateGuess(s1: Square, _ g1: Guess) throws {
         
         guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
         
         switch _type {
             
         case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
-        case .Sudoku: try Sudoku.validateGuess(s1, g1, grid)
+        case .Sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
             
         }
+        
+        highlights.append(s1)
         
     }
     
@@ -72,7 +76,7 @@ extension Gameboard {
         
         guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
         
-        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPiece }
+        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.IncorrectPiece }
         
         switch _type {
             
@@ -87,8 +91,8 @@ extension Gameboard {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.OutOfBounds }
         
-        guard let p1 = grid[s1.0][s1.1] as? Piece else { throw MoveError.IncorrectPiece }
-        guard let p2 = grid[s2.0][s2.1] as? Piece else { throw MoveError.IncorrectPiece }
+        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.IncorrectPiece }
+        guard let p2 = grid[s2.0,s2.1] as? Piece else { throw MoveError.IncorrectPiece }
         
         guard validatePlayer(p1) else { throw MoveError.NotYourTurn }
         try validateNotFriendlyFire(p1, p2)

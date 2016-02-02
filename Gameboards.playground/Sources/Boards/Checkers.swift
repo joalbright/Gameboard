@@ -28,11 +28,11 @@ public struct Checkers {
         let e2 = s1.1 + m2 / 2
         
         guard abs(m1) == 2 && abs(m2) == 2 else { return false }
-        guard let piece1 = grid[s1.0][s1.1] as? String else { return false }
-        guard let piece2 = grid[e1][e2] as? String else { return false }
+        guard let piece1 = grid[s1.0,s1.1] as? String else { return false }
+        guard let piece2 = grid[e1,e2] as? String else { return false }
         guard piece2 != "" && piece1 != piece2 else { return false }
         
-        grid[e1][e2] = "" // remove other player piece
+        grid[e1,e2] = "" // remove other player piece
         
         return true
         

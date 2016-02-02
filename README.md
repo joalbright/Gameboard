@@ -152,6 +152,8 @@ chess.visualize()
 - [x] Coordinates
 	- columns 0 - 8
 	- rows 0 - 8
+- [x] Solution Generator : *randomizes solution*
+- [x] Puzzle Generator : *hides numbers*
 
 ```swift
 var sudoku = Gameboard(.Sudoku)
@@ -161,6 +163,15 @@ var sudoku = Gameboard(.Sudoku)
 let guesses: [(Square,Guess)] = [
     
     // guesses
+    ((0,2),"5"),
+    ((8,8),"4"),
+    ((6,5),"4"),
+    ((2,7),"4"),
+    ((3,0),"4"),
+    ((5,3),"1"),
+    ((6,2),"1"),
+    ((7,8),"1"),
+    ((2,5),"2"),
     
 ]
 
@@ -188,7 +199,7 @@ sudoku.visualize()
 
 #### Validation
 
-- [ ] Standard Moves
+- [x] Standard Moves
 	
 ## TicTacToe
 

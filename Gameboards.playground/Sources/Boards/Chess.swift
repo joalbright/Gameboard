@@ -49,7 +49,7 @@ public struct Chess {
         
         while p1 != s2.0 || p2 != s2.1 {
             
-            guard let piece = grid[p1][p2] as? Piece where piece == "" else { throw MoveError.BlockedMove }
+            guard let piece = grid[p1,p2] as? Piece where piece == "" else { throw MoveError.BlockedMove }
             
             p1 += d1
             p2 += d2
@@ -79,7 +79,7 @@ public struct Chess {
             
         case .Knight1, .Knight2:
             
-            guard let piece = grid[s1.0 + d1][s1.1 + d2] as? Piece where piece == "" else { throw MoveError.BlockedMove }
+            guard let piece = grid[s1.0 + d1,s1.1 + d2] as? Piece where piece == "" else { throw MoveError.BlockedMove }
             guard (abs(mRow) == 2 && abs(mCol) == 1) || (abs(mRow) == 1 && abs(mCol) == 2) else { throw MoveError.InvalidMove }
             
         case .Pawn1:

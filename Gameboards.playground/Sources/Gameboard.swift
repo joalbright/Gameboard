@@ -40,11 +40,11 @@ public struct Gameboard {
         
     }
     
-    public mutating func guess(toSquare s1: Square, withGuess g1: Guess) throws {
-        
-        try validateGuess(s1, g1)
-        
-    }
+    public mutating func guess(toSquare s1: Square) throws { try validateGuess(s1) }
+    
+    public mutating func guess(toSquare s1: Square, withGuess g1: Guess) throws { try validateGuess(s1, g1) }
+    
+    public mutating func mark(toSquare s1: Square) throws { try validateMark(s1) }
     
     public mutating func move(toSquare s1: Square) throws {
         
@@ -103,7 +103,10 @@ public struct Gameboard {
             
         case .Mancala: break
             
-        case .Minesweeper: break
+        case .Minesweeper:
+            
+            solution = Minesweeper.board
+            grid = Minesweeper.field
             
         case .Sudoku:
             
@@ -129,7 +132,8 @@ public struct Gameboard {
             
         case .Backgammon: return UIView()
         case .Checkers, .Chess: return grid.checker(rect, highlights: highlights, selected: selected)
-        case .Mancala, .Minesweeper: return UIView()
+        case .Mancala: return UIView()
+        case .Minesweeper: return grid.mine(rect)
         case .Sudoku: return grid.sudoku(rect, highlights: highlights)
         case .TicTacToe: return grid.ttt(rect)
             

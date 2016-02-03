@@ -4,7 +4,9 @@
         <page name='Backgammon'/>
         <page name='Checkers'/>
         <page name='Chess'/>
-        <page name='TicTacToe'/>
+        <page name='Mancala'/>
+        <page name='Minesweeper'/>
         <page name='Sudoku'/>
+        <page name='TicTacToe'/>
     </pages>
 </playground>

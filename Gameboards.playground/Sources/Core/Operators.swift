@@ -36,6 +36,18 @@ public func + (lhs: Int, rhs: CGFloat) -> CGFloat {
     
 }
 
+public func - (lhs: CGFloat, rhs: Int) -> CGFloat {
+    
+    return lhs - CGFloat(rhs)
+    
+}
+
+public func - (lhs: Int, rhs: CGFloat) -> CGFloat {
+    
+    return CGFloat(lhs) - rhs
+    
+}
+
 // MATRIX
 
 infix operator ✕ { associativity left precedence 100 }

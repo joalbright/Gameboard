@@ -35,6 +35,5 @@ for move in moves {
     
 }
 
-
 tictactoe.visualize()
 

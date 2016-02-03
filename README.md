@@ -8,8 +8,8 @@ Gameboards built in a playground
 - [x] Checkers
 - [x] Chess
 - [ ] Mancala
-- [ ] MineSweeper
-- [ ] Sudoku
+- [x] MineSweeper
+- [x] Sudoku
 - [x] TicTacToe
 
 #### Features
@@ -68,7 +68,6 @@ for move in moves {
     
 }
 
-
 checkers.visualize()
 ```
 
@@ -125,7 +124,6 @@ for move in moves {
     
 }
 
-
 chess.visualize()
 ```
 
@@ -147,6 +145,66 @@ chess.visualize()
 	- [ ] Pawn Promotion
 	- [ ] Check & Checkmate
 
+## Minesweeper
+
+- [x] Coordinates
+	- columns 0 - 9
+	- rows 0 - 9
+
+```swift
+enum MoveType { case Guess, Mark }
+
+var minesweeper = Gameboard(.Minesweeper)
+
+// collection of guesses
+
+let guesses: [(Square,MoveType)] = [
+    
+    ((4,3),.Guess), // guess
+    ((9,0),.Mark),  // mark
+    ((7,4),.Mark),  // mark
+    ((4,1),.Mark),  // mark
+    ((4,0),.Guess), // guess
+    ((0,9),.Guess), // guess
+    ((2,7),.Mark),  // mark
+    ((6,9),.Guess), // guess
+    ((1,0),.Guess), // game over
+    
+]
+
+// loop moves
+
+for guess in guesses {
+    
+    do {
+        
+        switch guess.1 {
+            
+        case .Guess: try minesweeper.guess(toSquare: guess.0)
+        case .Mark: try minesweeper.mark(toSquare: guess.0)
+            
+        }
+        
+    } catch {
+        
+        print(error)
+        
+    }
+    
+}
+
+minesweeper.visualize()
+```
+
+![Minesweeper](./images/minesweeper.png?raw=true)
+
+#### Validation
+
+- [x] Standard Moves
+	- [x] Mark : *flag*
+	- [x] Guess
+	- [x] Boom : *mine*
+
 ## Sudoku
 
 - [x] Coordinates
@@ -154,6 +212,7 @@ chess.visualize()
 	- rows 0 - 8
 - [x] Solution Generator : *randomizes solution*
 - [x] Puzzle Generator : *hides numbers*
+- [ ] Alphabetical Option
 
 ```swift
 var sudoku = Gameboard(.Sudoku)
@@ -191,8 +250,7 @@ for guess in guesses {
     
 }
 
-
-sudoku.visualize()
+sudoku.visualize(CGRect(x: 0, y: 0, width: 198, height: 198))
 ```
 
 ![Sudoku](./images/sudoku.png?raw=true)
@@ -242,7 +300,6 @@ for move in moves {
     }
     
 }
-
 
 tictactoe.visualize()
 ```

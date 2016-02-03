@@ -139,6 +139,51 @@ public class Grid {
         
     }
     
+    public func mine(rect: CGRect) -> UIView {
+        
+        let view = UIView(frame: rect)
+        
+        view.backgroundColor = UIColor.whiteColor()
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        
+        let w = (rect.width - content.count + 1) / content.count
+        let h = (rect.height - content[0].count + 1) / content[0].count
+        
+        for (r,row) in content.enumerate() {
+            
+            for (c,item) in row.enumerate() {
+                
+                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+                
+                label.text = "\(item)"
+                label.textAlignment = .Center
+                label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 5)
+                
+                if "\(item)" == "•" {
+                    
+                    label.backgroundColor = UIColor.blackColor()
+                    label.textColor = UIColor.blackColor()
+                    
+                }
+                
+                if let num = Int("\(item)") {
+                    
+                    label.textColor = UIColor(white: 1 - num * 0.3, alpha: 1)
+                    
+                }
+                
+                view.addSubview(label)
+                
+            }
+            
+        }
+        
+        return view
+        
+    }
+    
     public func matrix(rect: CGRect) -> UIView {
         
         let view = MatrixView(frame: rect)

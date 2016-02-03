@@ -23,6 +23,17 @@ public enum MoveError: ErrorType {
     
 }
 
+public enum GameStatus: ErrorType {
+    
+    /// Ouch. Why don't you try again?
+    case GameOver
+    /// You win! Don't let it go to your head.
+    case Winner
+    /// This is awkward.
+    case Stalemate
+    
+}
+
 extension Gameboard {
     
     func validateNotFriendlyFire(p1: Piece, _ p2: Piece) throws -> Bool {
@@ -57,6 +68,19 @@ extension Gameboard {
     
     // moves, guesses, etc
     
+    mutating func validateGuess(s1: Square) throws {
+        
+        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        
+        switch _type {
+            
+        case .Backgammon, .Checkers, .Chess, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Minesweeper: try Minesweeper.validateGuess(s1, grid, solution)
+            
+        }
+        
+    }
+    
     mutating func validateGuess(s1: Square, _ g1: Guess) throws {
         
         guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
@@ -69,6 +93,19 @@ extension Gameboard {
         }
         
         highlights.append(s1)
+        
+    }
+    
+    mutating func validateMark(s1: Square) throws {
+        
+        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        
+        switch _type {
+            
+        case .Backgammon, .Checkers, .Chess, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Minesweeper: try Minesweeper.validateMark(s1, grid, solution)
+            
+        }
         
     }
     

@@ -34,6 +34,5 @@ for move in moves {
     
 }
 
-
 chess.visualize()
 

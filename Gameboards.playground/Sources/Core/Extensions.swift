@@ -21,7 +21,7 @@ public extension Int {
     
     public func within(r: Range<Int>) -> Bool {
         
-        return self >= r.startIndex && self <= r.endIndex
+        return self >= r.startIndex && self < r.endIndex
         
     }
     

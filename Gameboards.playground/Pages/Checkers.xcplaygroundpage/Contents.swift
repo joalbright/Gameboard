@@ -32,7 +32,6 @@ for move in moves {
     
 }
 
-
 checkers.visualize()
 
 

@@ -35,9 +35,4 @@ for guess in guesses {
     
 }
 
- 
 sudoku.visualize(CGRect(x: 0, y: 0, width: 198, height: 198))
-
-
-
-

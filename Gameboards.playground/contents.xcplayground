@@ -4,6 +4,7 @@
         <page name='Backgammon'/>
         <page name='Checkers'/>
         <page name='Chess'/>
+        <page name='Go'/>
         <page name='Mancala'/>
         <page name='Minesweeper'/>
         <page name='Sudoku'/>

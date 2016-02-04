@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Chess-->
+        <scene sceneID="t8U-Ar-m2R">
+            <objects>
+                <viewController id="LyG-9y-3z3" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gCd-pI-5Oo"/>
+                        <viewControllerLayoutGuide type="bottom" id="4eh-fn-haR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NoU-js-3Ax">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71R-2Q-9CR" customClass="ChessBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="71R-2Q-9CR" secondAttribute="height" multiplier="1:1" id="t7l-mt-QCI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="71R-2Q-9CR" secondAttribute="trailing" constant="20" id="HgH-m0-cwY"/>
+                            <constraint firstItem="71R-2Q-9CR" firstAttribute="centerY" secondItem="NoU-js-3Ax" secondAttribute="centerY" id="Hi9-CN-1gZ"/>
+                            <constraint firstItem="71R-2Q-9CR" firstAttribute="leading" secondItem="NoU-js-3Ax" secondAttribute="leading" constant="20" id="gfp-D8-QWe"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Chess" id="kJ9-vx-DHs"/>
+                    <navigationItem key="navigationItem" title="Chess" id="EW3-Jj-nHG"/>
+                    <connections>
+                        <outlet property="boardView" destination="71R-2Q-9CR" id="ijG-er-6gt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gBh-0W-lMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-971" y="801"/>
+        </scene>
+        <!--Gameboards-->
+        <scene sceneID="YGs-fQ-K8c">
+            <objects>
+                <viewController id="46n-er-ZX8" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xsY-Ns-WVS"/>
+                        <viewControllerLayoutGuide type="bottom" id="v6Y-kV-MId"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NPR-U0-s2j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ydL-HZ-p1F">
+                                <rect key="frame" x="20" y="84" width="280" height="464"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WL-3F-vl3">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="69"/>
+                                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Checkers">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Oar-bW-K1W" kind="show" id="dvV-eF-MMZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLa-MD-59Y">
+                                        <rect key="frame" x="0.0" y="79" width="280" height="69"/>
+                                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Chess">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="LyG-9y-3z3" kind="show" id="tcp-nJ-MVi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWY-kb-Bbj">
+                                        <rect key="frame" x="0.0" y="158" width="280" height="69"/>
+                                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Go">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="P8f-ot-h1Y" kind="show" id="wlp-Ss-aa8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIU-hX-Xdg">
+                                        <rect key="frame" x="0.0" y="237" width="280" height="69"/>
+                                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Minesweeper">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="xOI-db-YbK" kind="show" id="umM-dN-3jg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTd-ZL-Nnk">
+                                        <rect key="frame" x="0.0" y="316" width="280" height="69"/>
+                                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Sudoku">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="hEg-3a-kwo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5s-Ai-Pdy">
+                                        <rect key="frame" x="0.0" y="395" width="280" height="69"/>
+                                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Tic Tac Toe">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="UUa-3x-e1B" kind="show" id="54T-8I-tcH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ydL-HZ-p1F" secondAttribute="trailing" constant="20" id="Gbf-wJ-UZ1"/>
+                            <constraint firstItem="ydL-HZ-p1F" firstAttribute="leading" secondItem="NPR-U0-s2j" secondAttribute="leading" constant="20" id="Hvi-DX-wzq"/>
+                            <constraint firstItem="ydL-HZ-p1F" firstAttribute="top" secondItem="xsY-Ns-WVS" secondAttribute="bottom" constant="20" id="Nc1-e5-3cO"/>
+                            <constraint firstItem="v6Y-kV-MId" firstAttribute="top" secondItem="ydL-HZ-p1F" secondAttribute="bottom" constant="20" id="vgj-pj-FeG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Gameboards" id="vvu-dp-mjV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYr-Ge-4kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-424" y="15"/>
+        </scene>
+        <!--Minesweeper-->
+        <scene sceneID="YHS-xU-QEq">
+            <objects>
+                <viewController id="xOI-db-YbK" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aNd-NU-L7e"/>
+                        <viewControllerLayoutGuide type="bottom" id="136-6b-f3T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d0G-an-1MX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBg-xX-0Pd" customClass="MinesweeperBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dBg-xX-0Pd" firstAttribute="leading" secondItem="d0G-an-1MX" secondAttribute="leading" constant="20" id="6nx-9V-wY1"/>
+                            <constraint firstItem="dBg-xX-0Pd" firstAttribute="width" secondItem="dBg-xX-0Pd" secondAttribute="height" multiplier="1:1" id="Wck-ix-hwr"/>
+                            <constraint firstAttribute="trailing" secondItem="dBg-xX-0Pd" secondAttribute="trailing" constant="20" id="Wtc-UT-PBO"/>
+                            <constraint firstItem="dBg-xX-0Pd" firstAttribute="centerY" secondItem="d0G-an-1MX" secondAttribute="centerY" id="weT-hy-RhV"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Mines" id="wJ1-gC-d32"/>
+                    <navigationItem key="navigationItem" title="Minesweeper" id="T9w-Dv-Esv"/>
+                    <connections>
+                        <outlet property="boardView" destination="dBg-xX-0Pd" id="gom-1V-3XM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AKi-p4-kn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-239" y="801"/>
+        </scene>
+        <!--Sudoku-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w25-fL-ePC" customClass="SudokuBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="w25-fL-ePC" secondAttribute="height" multiplier="1:1" id="90K-IJ-HeZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078341357409954071" green="0.078339003026485443" blue="0.078340351581573486" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="w25-fL-ePC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="J48-Mw-xD0"/>
+                            <constraint firstItem="w25-fL-ePC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="gh4-ai-ArH"/>
+                            <constraint firstAttribute="trailing" secondItem="w25-fL-ePC" secondAttribute="trailing" constant="20" id="vMO-C7-Y1Q"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Sudoku" id="Jk9-q8-BIL"/>
+                    <navigationItem key="navigationItem" title="Sudoku" id="wnL-Qr-0SC"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="boardView" destination="w25-fL-ePC" id="ga8-DF-MmS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128" y="801"/>
+        </scene>
+        <!--Tic Tac Toe-->
+        <scene sceneID="mcM-SG-ci1">
+            <objects>
+                <viewController id="UUa-3x-e1B" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ubE-QO-s2E"/>
+                        <viewControllerLayoutGuide type="bottom" id="2B6-Gu-oRi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WH0-9j-34v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgB-DL-JD3" customClass="TicTacToeBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YgB-DL-JD3" secondAttribute="height" multiplier="1:1" id="Ww2-93-wbV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YgB-DL-JD3" secondAttribute="trailing" constant="20" id="87B-8z-wmN"/>
+                            <constraint firstItem="YgB-DL-JD3" firstAttribute="leading" secondItem="WH0-9j-34v" secondAttribute="leading" constant="20" id="DSm-z0-9jX"/>
+                            <constraint firstItem="YgB-DL-JD3" firstAttribute="centerY" secondItem="WH0-9j-34v" secondAttribute="centerY" id="RR0-7M-jCz"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="TicTacTie" id="Vif-MS-bca"/>
+                    <navigationItem key="navigationItem" title="Tic Tac Toe" id="1GN-h8-pYV"/>
+                    <connections>
+                        <outlet property="boardView" destination="YgB-DL-JD3" id="2w8-sH-SLr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WAH-yU-jAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="491" y="801"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iwJ-jH-Atn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Shv-Tj-LcY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="yx3-5Q-5Mk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.91665251358695654" green="0.13707967900036677" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="46n-er-ZX8" kind="relationship" relationship="rootViewController" id="CuE-R3-QbA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPC-MF-oNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-821" y="15"/>
+        </scene>
+        <!--Checkers-->
+        <scene sceneID="qrM-kr-ucm">
+            <objects>
+                <viewController id="Oar-bW-K1W" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iq0-Xh-Iul"/>
+                        <viewControllerLayoutGuide type="bottom" id="xYC-Ja-tU6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LHx-JE-Tvz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7l-q1-NIS" customClass="CheckersBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="f7l-q1-NIS" secondAttribute="height" multiplier="1:1" id="2W0-bs-h2z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="f7l-q1-NIS" secondAttribute="trailing" constant="20" id="97D-YP-HGH"/>
+                            <constraint firstItem="f7l-q1-NIS" firstAttribute="leading" secondItem="LHx-JE-Tvz" secondAttribute="leading" constant="20" id="eUi-hE-hw1"/>
+                            <constraint firstItem="f7l-q1-NIS" firstAttribute="centerY" secondItem="LHx-JE-Tvz" secondAttribute="centerY" id="j4q-7n-NAl"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Chess" id="BAa-SF-VYQ"/>
+                    <navigationItem key="navigationItem" title="Checkers" id="T6s-KP-hgl"/>
+                    <connections>
+                        <outlet property="boardView" destination="f7l-q1-NIS" id="YQ9-Bh-lMw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pas-SP-ifD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1337" y="801"/>
+        </scene>
+        <!--Go-->
+        <scene sceneID="vlc-cx-21Y">
+            <objects>
+                <viewController id="P8f-ot-h1Y" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SbM-v4-h3l"/>
+                        <viewControllerLayoutGuide type="bottom" id="w0O-lL-oxY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u2Q-Dw-4aI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="454-82-lue" customClass="GoBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="20" y="144" width="280" height="280"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="454-82-lue" secondAttribute="height" multiplier="1:1" id="osU-oX-dPv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078341357410000007" green="0.078339003030000007" blue="0.078340351579999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="454-82-lue" firstAttribute="centerY" secondItem="u2Q-Dw-4aI" secondAttribute="centerY" id="5gc-hj-hZj"/>
+                            <constraint firstAttribute="trailing" secondItem="454-82-lue" secondAttribute="trailing" constant="20" id="BN8-9C-FQA"/>
+                            <constraint firstItem="454-82-lue" firstAttribute="leading" secondItem="u2Q-Dw-4aI" secondAttribute="leading" constant="20" id="alN-By-Kuy"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Chess" id="8aA-nD-SIX"/>
+                    <navigationItem key="navigationItem" title="Go" id="wd0-2J-P2K"/>
+                    <connections>
+                        <outlet property="boardView" destination="454-82-lue" id="1Gn-N5-FF4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdy-gd-tby" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-605" y="801"/>
+        </scene>
+    </scenes>
+</document>

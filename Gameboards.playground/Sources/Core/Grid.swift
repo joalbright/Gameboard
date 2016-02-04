@@ -6,12 +6,6 @@ public class Grid {
     
     public var rowRange: Range<Int> { return 0..<content.count }
     public var colRange: Range<Int> { return 0..<content[0].count }
-//    
-//    public init(_ content: [[Any]]) {
-//        
-////        self.content = content
-//        
-//    }
     
     public init(_ content: [[AnyObject]]) {
         
@@ -23,11 +17,11 @@ public class Grid {
         
         let view = UIView(frame: rect)
         
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
         let w = rect.width / content.count
         let h = rect.height / content[0].count
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
         
         for (r,row) in content.enumerate() {
             
@@ -65,31 +59,31 @@ public class Grid {
         
     }
     
-    public func ttt(rect: CGRect) -> UIView {
+    public func go(rect: CGRect) -> UIView {
         
-        let view = TicTacToeView(frame: rect)
+        let view = GoView(frame: rect)
         
-        view.p = 20
+        view.p = 30
         view.backgroundColor = UIColor.whiteColor()
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         
-        let p = 20
+        let p = 30
         let w = (rect.width - p * 2) / content.count
         let h = (rect.height - p * 2) / content[0].count
         
-        for (r,row) in content.enumerate() {
+        for (c,col) in content.enumerate() {
             
-            for (c,item) in row.enumerate() {
+            for (r,item) in col.enumerate() {
                 
-                let label = UILabel(frame: CGRect(x: c * w + p, y: r * h + p, width: w, height: h))
-                
-                label.text = "\(item)"
-                label.textAlignment = .Center
-                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
-                
-                view.addSubview(label)
+//                let label = UILabel(frame: CGRect(x: c * w + p, y: r * h + p, width: w, height: h))
+//                
+//                label.text = "\(item)"
+//                label.textAlignment = .Center
+//                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
+//                
+//                view.addSubview(label)
                 
             }
             
@@ -99,35 +93,29 @@ public class Grid {
         
     }
     
-    public func sudoku(rect: CGRect, highlights: [Square]) -> UIView {
+    public func matrix(rect: CGRect) -> UIView {
         
-        let view = SudokuView(frame: rect)
+        let view = MatrixView(frame: rect)
         
+        view.p = 15
         view.backgroundColor = UIColor.whiteColor()
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         
-        let w = rect.width / content.count
-        let h = rect.height / content[0].count
+        let p = 20
+        let w = (rect.width - p * 2) / content.count
+        let h = (rect.height - p * 2) / content[0].count
         
-        for (r,row) in content.enumerate() {
+        for (c,col) in content.enumerate() {
             
-            for (c,item) in row.enumerate() {
+            for (r,item) in col.enumerate() {
                 
-                let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                let label = UILabel(frame: CGRect(x: c * w + p, y: r * h + p, width: w, height: h))
                 
                 label.text = "\(item)"
                 label.textAlignment = .Center
-                label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 10)
-                
-                for highlight in highlights {
-                    
-                    guard highlight.0 == r && highlight.1 == c else { continue }
-                    label.textColor = UIColor.whiteColor()
-                    label.backgroundColor = UIColor.blackColor()
-                    
-                }
+                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
                 
                 view.addSubview(label)
                 
@@ -184,11 +172,51 @@ public class Grid {
         
     }
     
-    public func matrix(rect: CGRect) -> UIView {
+    public func sudoku(rect: CGRect, highlights: [Square]) -> UIView {
         
-        let view = MatrixView(frame: rect)
+        let view = SudokuView(frame: rect)
         
-        view.p = 15
+        view.backgroundColor = UIColor.whiteColor()
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        
+        let w = rect.width / content.count
+        let h = rect.height / content[0].count
+        
+        for (r,row) in content.enumerate() {
+            
+            for (c,item) in row.enumerate() {
+                
+                let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                
+                label.text = "\(item)"
+                label.textAlignment = .Center
+                label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 10)
+                
+                for highlight in highlights {
+                    
+                    guard highlight.0 == r && highlight.1 == c else { continue }
+                    label.textColor = UIColor.whiteColor()
+                    label.backgroundColor = UIColor.blackColor()
+                    
+                }
+                
+                view.addSubview(label)
+                
+            }
+            
+        }
+        
+        return view
+        
+    }
+    
+    public func ttt(rect: CGRect) -> UIView {
+        
+        let view = TicTacToeView(frame: rect)
+        
+        view.p = 20
         view.backgroundColor = UIColor.whiteColor()
         
         view.layer.cornerRadius = 10
@@ -198,9 +226,9 @@ public class Grid {
         let w = (rect.width - p * 2) / content.count
         let h = (rect.height - p * 2) / content[0].count
         
-        for (c,col) in content.enumerate() {
+        for (r,row) in content.enumerate() {
             
-            for (r,item) in col.enumerate() {
+            for (c,item) in row.enumerate() {
                 
                 let label = UILabel(frame: CGRect(x: c * w + p, y: r * h + p, width: w, height: h))
                 

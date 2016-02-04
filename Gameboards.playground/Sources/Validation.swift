@@ -74,7 +74,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Backgammon, .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
         case .Minesweeper: try Minesweeper.validateGuess(s1, grid, solution)
             
         }
@@ -87,7 +87,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Backgammon, .Checkers, .Chess, .Go, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
         case .Sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
             
         }
@@ -102,7 +102,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Backgammon, .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
         case .Minesweeper: try Minesweeper.validateMark(s1, grid, solution)
             
         }
@@ -118,6 +118,7 @@ extension Gameboard {
         switch _type {
             
         case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
+        case .Go: break
         case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, player1Turn)
             
         }
@@ -138,7 +139,7 @@ extension Gameboard {
             
         case .Checkers: try Checkers.validateMove(s1, s2, p1, p2, grid)
         case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid)
-        case .Backgammon, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Backgammon, .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
             
         }
         

@@ -4,7 +4,7 @@ public struct Gameboard {
     
     public enum BoardType: String {
         
-        case Backgammon, Checkers, Chess, Mancala, Minesweeper, Sudoku, TicTacToe
+        case Backgammon, Checkers, Chess, Go, Mancala, Minesweeper, Sudoku, TicTacToe
         
     }
     
@@ -101,6 +101,8 @@ public struct Gameboard {
             grid = Chess.board
             playerPieces = Chess.playerPieces
             
+        case .Go: break
+            
         case .Mancala: break
             
         case .Minesweeper:
@@ -132,6 +134,7 @@ public struct Gameboard {
             
         case .Backgammon: return UIView()
         case .Checkers, .Chess: return grid.checker(rect, highlights: highlights, selected: selected)
+        case .Go: return grid.go(rect)
         case .Mancala: return UIView()
         case .Minesweeper: return grid.mine(rect)
         case .Sudoku: return grid.sudoku(rect, highlights: highlights)

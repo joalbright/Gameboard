@@ -7,6 +7,7 @@ Gameboards built in a playground
 - [ ] Backgammon
 - [x] Checkers
 - [x] Chess
+- [ ] Go
 - [ ] Mancala
 - [x] MineSweeper
 - [x] Sudoku

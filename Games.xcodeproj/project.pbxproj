@@ -1,0 +1,409 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A99018321C62FC5100FFEBAF /* Go.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99018311C62FC5100FFEBAF /* Go.swift */; };
+		A99018341C62FC6500FFEBAF /* GoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99018331C62FC6500FFEBAF /* GoView.swift */; };
+		A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740D1C62A34600219C78 /* AppDelegate.swift */; };
+		A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740F1C62A34600219C78 /* BoardViewController.swift */; };
+		A9DD74131C62A34600219C78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74111C62A34600219C78 /* Main.storyboard */; };
+		A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74141C62A34600219C78 /* Assets.xcassets */; };
+		A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */; };
+		A9DD74341C62A35300219C78 /* Backgammon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74211C62A35300219C78 /* Backgammon.swift */; };
+		A9DD74351C62A35300219C78 /* Checkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74221C62A35300219C78 /* Checkers.swift */; };
+		A9DD74361C62A35300219C78 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74231C62A35300219C78 /* Chess.swift */; };
+		A9DD74371C62A35300219C78 /* Mancala.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74241C62A35300219C78 /* Mancala.swift */; };
+		A9DD74381C62A35300219C78 /* Minesweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74251C62A35300219C78 /* Minesweeper.swift */; };
+		A9DD74391C62A35300219C78 /* Sudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74261C62A35300219C78 /* Sudoku.swift */; };
+		A9DD743A1C62A35300219C78 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74271C62A35300219C78 /* TicTacToe.swift */; };
+		A9DD743B1C62A35300219C78 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74291C62A35300219C78 /* Extensions.swift */; };
+		A9DD743C1C62A35300219C78 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742A1C62A35300219C78 /* Grid.swift */; };
+		A9DD743D1C62A35300219C78 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742B1C62A35300219C78 /* Operators.swift */; };
+		A9DD743E1C62A35300219C78 /* BackgammonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742D1C62A35300219C78 /* BackgammonView.swift */; };
+		A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742E1C62A35300219C78 /* MatrixView.swift */; };
+		A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742F1C62A35300219C78 /* SudokuView.swift */; };
+		A9DD74411C62A35300219C78 /* TicTacToeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74301C62A35300219C78 /* TicTacToeView.swift */; };
+		A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74311C62A35300219C78 /* Gameboard.swift */; };
+		A9DD74431C62A35300219C78 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74321C62A35300219C78 /* Helper.swift */; };
+		A9DD74441C62A35300219C78 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74331C62A35300219C78 /* Validation.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A99018311C62FC5100FFEBAF /* Go.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Go.swift; sourceTree = "<group>"; };
+		A99018331C62FC6500FFEBAF /* GoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoView.swift; sourceTree = "<group>"; };
+		A9DD740A1C62A34600219C78 /* Games.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Games.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9DD740D1C62A34600219C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A9DD740F1C62A34600219C78 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		A9DD74121C62A34600219C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9DD74141C62A34600219C78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9DD74171C62A34600219C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A9DD74191C62A34600219C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9DD74211C62A35300219C78 /* Backgammon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backgammon.swift; sourceTree = "<group>"; };
+		A9DD74221C62A35300219C78 /* Checkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkers.swift; sourceTree = "<group>"; };
+		A9DD74231C62A35300219C78 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chess.swift; sourceTree = "<group>"; };
+		A9DD74241C62A35300219C78 /* Mancala.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mancala.swift; sourceTree = "<group>"; };
+		A9DD74251C62A35300219C78 /* Minesweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minesweeper.swift; sourceTree = "<group>"; };
+		A9DD74261C62A35300219C78 /* Sudoku.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sudoku.swift; sourceTree = "<group>"; };
+		A9DD74271C62A35300219C78 /* TicTacToe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
+		A9DD74291C62A35300219C78 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A9DD742A1C62A35300219C78 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		A9DD742B1C62A35300219C78 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		A9DD742D1C62A35300219C78 /* BackgammonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgammonView.swift; sourceTree = "<group>"; };
+		A9DD742E1C62A35300219C78 /* MatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
+		A9DD742F1C62A35300219C78 /* SudokuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
+		A9DD74301C62A35300219C78 /* TicTacToeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeView.swift; sourceTree = "<group>"; };
+		A9DD74311C62A35300219C78 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameboard.swift; sourceTree = "<group>"; };
+		A9DD74321C62A35300219C78 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		A9DD74331C62A35300219C78 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9DD74071C62A34600219C78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A9DC4FA81C62B89700E7920E /* System */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD740D1C62A34600219C78 /* AppDelegate.swift */,
+				A9DD74141C62A34600219C78 /* Assets.xcassets */,
+				A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */,
+				A9DD74191C62A34600219C78 /* Info.plist */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
+		A9DD74011C62A34600219C78 = {
+			isa = PBXGroup;
+			children = (
+				A9DD740C1C62A34600219C78 /* Games */,
+				A9DD740B1C62A34600219C78 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A9DD740B1C62A34600219C78 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD740A1C62A34600219C78 /* Games.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9DD740C1C62A34600219C78 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD741F1C62A35300219C78 /* Gameboards */,
+				A9DD740F1C62A34600219C78 /* BoardViewController.swift */,
+				A9DD74111C62A34600219C78 /* Main.storyboard */,
+				A9DC4FA81C62B89700E7920E /* System */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		A9DD741F1C62A35300219C78 /* Gameboards */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD74201C62A35300219C78 /* Boards */,
+				A9DD74281C62A35300219C78 /* Core */,
+				A9DD74311C62A35300219C78 /* Gameboard.swift */,
+				A9DD74321C62A35300219C78 /* Helper.swift */,
+				A9DD74331C62A35300219C78 /* Validation.swift */,
+			);
+			name = Gameboards;
+			path = ../../../_github/Gameboard/Gameboards.playground/Sources;
+			sourceTree = "<group>";
+		};
+		A9DD74201C62A35300219C78 /* Boards */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD74211C62A35300219C78 /* Backgammon.swift */,
+				A9DD74221C62A35300219C78 /* Checkers.swift */,
+				A9DD74231C62A35300219C78 /* Chess.swift */,
+				A99018311C62FC5100FFEBAF /* Go.swift */,
+				A9DD74241C62A35300219C78 /* Mancala.swift */,
+				A9DD74251C62A35300219C78 /* Minesweeper.swift */,
+				A9DD74261C62A35300219C78 /* Sudoku.swift */,
+				A9DD74271C62A35300219C78 /* TicTacToe.swift */,
+			);
+			path = Boards;
+			sourceTree = "<group>";
+		};
+		A9DD74281C62A35300219C78 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD74291C62A35300219C78 /* Extensions.swift */,
+				A9DD742A1C62A35300219C78 /* Grid.swift */,
+				A9DD742B1C62A35300219C78 /* Operators.swift */,
+				A9DD742C1C62A35300219C78 /* Views */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A9DD742C1C62A35300219C78 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A9DD742D1C62A35300219C78 /* BackgammonView.swift */,
+				A9DD742E1C62A35300219C78 /* MatrixView.swift */,
+				A9DD742F1C62A35300219C78 /* SudokuView.swift */,
+				A9DD74301C62A35300219C78 /* TicTacToeView.swift */,
+				A99018331C62FC6500FFEBAF /* GoView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A9DD74091C62A34600219C78 /* Games */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9DD741C1C62A34600219C78 /* Build configuration list for PBXNativeTarget "Games" */;
+			buildPhases = (
+				A9DD74061C62A34600219C78 /* Sources */,
+				A9DD74071C62A34600219C78 /* Frameworks */,
+				A9DD74081C62A34600219C78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Games;
+			productName = Games;
+			productReference = A9DD740A1C62A34600219C78 /* Games.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9DD74021C62A34600219C78 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Jo Albright";
+				TargetAttributes = {
+					A9DD74091C62A34600219C78 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = A9DD74051C62A34600219C78 /* Build configuration list for PBXProject "Games" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A9DD74011C62A34600219C78;
+			productRefGroup = A9DD740B1C62A34600219C78 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A9DD74091C62A34600219C78 /* Games */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9DD74081C62A34600219C78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */,
+				A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */,
+				A9DD74131C62A34600219C78 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9DD74061C62A34600219C78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */,
+				A9DD743A1C62A35300219C78 /* TicTacToe.swift in Sources */,
+				A9DD74351C62A35300219C78 /* Checkers.swift in Sources */,
+				A9DD743E1C62A35300219C78 /* BackgammonView.swift in Sources */,
+				A9DD74391C62A35300219C78 /* Sudoku.swift in Sources */,
+				A99018341C62FC6500FFEBAF /* GoView.swift in Sources */,
+				A9DD74431C62A35300219C78 /* Helper.swift in Sources */,
+				A9DD743C1C62A35300219C78 /* Grid.swift in Sources */,
+				A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */,
+				A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */,
+				A9DD743D1C62A35300219C78 /* Operators.swift in Sources */,
+				A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */,
+				A9DD74411C62A35300219C78 /* TicTacToeView.swift in Sources */,
+				A9DD743B1C62A35300219C78 /* Extensions.swift in Sources */,
+				A99018321C62FC5100FFEBAF /* Go.swift in Sources */,
+				A9DD74441C62A35300219C78 /* Validation.swift in Sources */,
+				A9DD74371C62A35300219C78 /* Mancala.swift in Sources */,
+				A9DD74361C62A35300219C78 /* Chess.swift in Sources */,
+				A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */,
+				A9DD74381C62A35300219C78 /* Minesweeper.swift in Sources */,
+				A9DD74341C62A35300219C78 /* Backgammon.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A9DD74111C62A34600219C78 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9DD74121C62A34600219C78 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9DD74171C62A34600219C78 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A9DD741A1C62A34600219C78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A9DD741B1C62A34600219C78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A9DD741D1C62A34600219C78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Games/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.Games;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A9DD741E1C62A34600219C78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Games/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.Games;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9DD74051C62A34600219C78 /* Build configuration list for PBXProject "Games" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9DD741A1C62A34600219C78 /* Debug */,
+				A9DD741B1C62A34600219C78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9DD741C1C62A34600219C78 /* Build configuration list for PBXNativeTarget "Games" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9DD741D1C62A34600219C78 /* Debug */,
+				A9DD741E1C62A34600219C78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A9DD74021C62A34600219C78 /* Project object */;
+}

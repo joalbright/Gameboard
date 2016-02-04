@@ -24,7 +24,7 @@ public struct Sudoku {
         
         // use this to randomize the grid for new puzzles
         
-        return randomize(grid)
+//        return randomize(grid)
         
     }
     
@@ -114,21 +114,21 @@ public struct Sudoku {
         
         // this is to randomize the hidden numbers
         
-        for r in 0...8 {
-            
-            var cols = [0,1,2,3,4,5,6,7,8].randomize()
-            
-            cols.removeRange(3...5)
-            
-            for c in cols {
-                
-                grid[r,c] = ""
-                
-            }
-            
-        }
-        
-        return grid
+//        for r in 0...8 {
+//            
+//            var cols = [0,1,2,3,4,5,6,7,8].randomize()
+//            
+//            cols.removeRange(3...5)
+//            
+//            for c in cols {
+//                
+//                grid[r,c] = ""
+//                
+//            }
+//            
+//        }
+//        
+//        return grid
         
     }
     

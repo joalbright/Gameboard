@@ -7,6 +7,10 @@ var go = Gameboard(.Go)
 let moves: [Square] = [
     
     // moves
+    (1,1),
+    (6,7),
+    (1,7),
+    (6,0)
     
 ]
 
@@ -16,7 +20,7 @@ for move in moves {
     
     do {
         
-        try sudoku.guess(toSquare: move)
+        try go.move(toSquare: move)
         
     } catch {
         

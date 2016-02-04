@@ -97,6 +97,7 @@ public struct Chess {
         case .Queen1, .Queen2:
             
             try validateEmptyPath(s1, s2, grid)
+            guard mRow == 0 || mCol == 0 || abs(mRow) == abs(mCol) else { throw MoveError.InvalidMove }
             
         case .Rook1, .Rook2:
             

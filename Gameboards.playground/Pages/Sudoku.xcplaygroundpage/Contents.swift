@@ -19,7 +19,7 @@ let guesses: [(Square,Guess)] = [
     
 ]
 
-// loop moves
+// loop guesses
 
 for guess in guesses {
     

@@ -66,9 +66,9 @@ public struct Sudoku {
         
         let newGrid = Grid(9 ✕ (9 ✕ ""))
         
-        for r in 0...8 {
+        for r in newGrid.rowRange {
             
-            for c in 0...8 {
+            for c in newGrid.colRange {
                 
                 newGrid[c,r] = grid[r,c]
                 

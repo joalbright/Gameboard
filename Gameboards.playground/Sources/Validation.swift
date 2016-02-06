@@ -34,6 +34,13 @@ public enum GameStatus: ErrorType {
     
 }
 
+public enum FunctionalityError: ErrorType {
+    
+    /// Can't do this... maybe a future feature if you bug me enough.
+    case Unavailable
+    
+}
+
 extension Gameboard {
     
     func validateNotFriendlyFire(p1: Piece, _ p2: Piece) throws -> Bool {
@@ -125,7 +132,7 @@ extension Gameboard {
         
     }
     
-    func validateMove(s1: Square, _ s2: Square) throws {
+    func validateMove(s1: Square, _ s2: Square, _ hint: Bool = false) throws {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.OutOfBounds }
         
@@ -137,8 +144,8 @@ extension Gameboard {
         
         switch _type {
             
-        case .Checkers: try Checkers.validateMove(s1, s2, p1, p2, grid)
-        case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid)
+        case .Checkers: try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
+        case .Chess: try Chess.validateMove(s1, s2, p1, p2, grid, hint)
         case .Backgammon, .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
             
         }

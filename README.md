@@ -69,6 +69,10 @@ for move in moves {
     
 }
 
+// show available moves for a square
+
+checkers.showAvailable((1,2))
+
 checkers.visualize()
 ```
 
@@ -125,6 +129,10 @@ for move in moves {
     
 }
 
+// show available moves for a square
+
+chess.showAvailable(A6)
+
 chess.visualize()
 ```
 
@@ -173,7 +181,7 @@ let guesses: [(Square,MoveType)] = [
     
 ]
 
-// loop moves
+// loop guesses
 
 for guess in guesses {
     
@@ -235,7 +243,7 @@ let guesses: [(Square,Guess)] = [
     
 ]
 
-// loop moves
+// loop guesses
 
 for guess in guesses {
     

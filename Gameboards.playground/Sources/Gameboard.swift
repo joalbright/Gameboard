@@ -55,7 +55,7 @@ public struct Gameboard {
     
     public mutating func move(pieceAt s1: Square, toSquare s2: Square) throws -> Piece? {
         
-        try validateMove(s1, s2)
+        try validateMove(s1,s2)
         
         let piece2 = grid[s2.0,s2.1]
         
@@ -101,7 +101,10 @@ public struct Gameboard {
             grid = Chess.board
             playerPieces = Chess.playerPieces
             
-        case .Go: break
+        case .Go:
+            
+            grid = Go.board
+            playerPieces = Go.playerPieces
             
         case .Mancala: break
             

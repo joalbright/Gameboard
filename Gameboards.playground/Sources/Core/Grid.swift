@@ -5,7 +5,7 @@ public class Grid {
     public var content: [[AnyObject]]
     
     public var rowRange: Range<Int> { return 0..<content.count }
-    public var colRange: Range<Int> { return 0..<content[0].count }
+    public var colRange: Range<Int> { return content.count > 0 ? 0..<content[0].count : 0..<0 }
     
     public init(_ content: [[AnyObject]]) {
         
@@ -27,27 +27,17 @@ public class Grid {
             
             for (c,item) in row.enumerate() {
                 
-                let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                let label = HintLabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
                 
                 label.backgroundColor = (c + r) % 2 == 0 ? UIColor.whiteColor() : UIColor.blackColor()
                 label.textColor = (c + r) % 2 == 0 ? UIColor.blackColor() : UIColor.whiteColor()
                 
+                if let selected = selected where selected.0 == r && selected.1 == c { label.textColor = UIColor.redColor() }
+                for highlight in highlights { label.highlight = label.highlight ? true : highlight.0 == r && highlight.1 == c }
+                
                 label.text = "\(item)"
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
-                
-                for highlight in highlights {
-                    
-                    guard highlight.0 == r && highlight.1 == c else { continue }
-                    label.backgroundColor = UIColor.magentaColor()
-                    
-                }
-                
-                if let selected = selected where selected.0 == r && selected.1 == c {
-                    
-                    label.backgroundColor = UIColor.cyanColor()
-                
-                }
                 
                 view.addSubview(label)
                 

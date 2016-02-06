@@ -32,6 +32,8 @@ for move in moves {
     
 }
 
+checkers.showAvailable((1,2))
+
 checkers.visualize()
 
 

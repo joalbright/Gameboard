@@ -16,6 +16,7 @@ let moves: [(ChessSquare,ChessSquare)] = [
     (F1,C4), // bishop take pawn
     (A6,D3), // blocked move throws error
     
+    
 ]
 
 // loop moves
@@ -33,6 +34,8 @@ for move in moves {
     }
     
 }
+
+chess.showAvailable(A6)
 
 chess.visualize()
 

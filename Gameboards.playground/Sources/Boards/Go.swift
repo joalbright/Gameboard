@@ -6,10 +6,13 @@ public struct Go {
     
     public static let playerPieces = ["●1","●2"]
     
-    public static func validateMove(s1: Square, _ grid: Grid) throws {
+    public static func validateMove(s1: Square, _ grid: Grid, _ player1: Bool) throws {
+        
+        // validate if playable
         
         // current player
-//        grid[s1.0,s1.1] = // place my piece in target square
+        let player = player1 ? 0 : 1
+        grid[s1.0,s1.1] = playerPieces[player]
         
     }
     

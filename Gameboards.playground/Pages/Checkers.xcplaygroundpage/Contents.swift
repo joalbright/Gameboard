@@ -2,6 +2,21 @@ import UIKit
 
 var checkers = Gameboard(.Checkers)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.66, green:0.62, blue:0.48, alpha:1)
+colors.foreground = UIColor(red:0.62, green:0.58, blue:0.44, alpha:1)
+
+colors.player1 = UIColor(red:0.8, green:0.13, blue:0, alpha:1)
+colors.player2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1)
+
+colors.selected = UIColor.whiteColor()
+colors.highlight = UIColor.whiteColor()
+
+checkers.boardColors = colors
+
 // collection of moves
 
 let moves: [(Square,Square)] = [

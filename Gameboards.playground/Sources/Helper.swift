@@ -19,7 +19,6 @@ extension Gameboard {
                 for c in grid.colRange {
                     
                     guard let _ = try? validateMove(s1, (r,c), true) else { continue }
-                    print((r,c))
                     highlights.append((r,c))
                     
                 }

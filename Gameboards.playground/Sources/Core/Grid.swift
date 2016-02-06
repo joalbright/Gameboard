@@ -7,6 +7,9 @@ public class Grid {
     public var rowRange: Range<Int> { return 0..<content.count }
     public var colRange: Range<Int> { return content.count > 0 ? 0..<content[0].count : 0..<0 }
     
+    public var boardColors = BoardColors()
+    public var playerPieces: [Piece] = []
+    
     public init(_ content: [[AnyObject]]) {
         
         self.content = content
@@ -28,14 +31,22 @@ public class Grid {
             for (c,item) in row.enumerate() {
                 
                 let label = HintLabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                var piece = "\(item)"
                 
-                label.backgroundColor = (c + r) % 2 == 0 ? UIColor.whiteColor() : UIColor.blackColor()
-                label.textColor = (c + r) % 2 == 0 ? UIColor.blackColor() : UIColor.whiteColor()
+                label.backgroundColor = (c + r) % 2 == 0 ? boardColors.background : boardColors.foreground
+                label.textColor = player(piece) == 0 ? boardColors.player1 : boardColors.player2
+                label.highlightColor = boardColors.highlight
                 
-                if let selected = selected where selected.0 == r && selected.1 == c { label.textColor = UIColor.redColor() }
+                if player(piece) == 1 {
+                    
+                    if let index = playerPieces[1].array().indexOf(piece) { piece = playerPieces[0].array()[index] }
+                    
+                }
+                
+                if let selected = selected where selected.0 == r && selected.1 == c { label.textColor = boardColors.selected }
                 for highlight in highlights { label.highlight = label.highlight ? true : highlight.0 == r && highlight.1 == c }
                 
-                label.text = "\(item)"
+                label.text = piece
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
                 
@@ -88,7 +99,8 @@ public class Grid {
         let view = MatrixView(frame: rect)
         
         view.p = 15
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = boardColors.background
+        view.lineColor = boardColors.foreground
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
@@ -121,7 +133,7 @@ public class Grid {
         
         let view = UIView(frame: rect)
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = boardColors.background
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
@@ -139,18 +151,10 @@ public class Grid {
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 5)
                 
-                if "\(item)" == "•" {
-                    
-                    label.backgroundColor = UIColor.blackColor()
-                    label.textColor = UIColor.blackColor()
-                    
-                }
+                label.textColor = boardColors.foreground
                 
-                if let num = Int("\(item)") {
-                    
-                    label.textColor = UIColor(white: 1 - num * 0.3, alpha: 1)
-                    
-                }
+                if "\(item)" == "•" { label.backgroundColor = boardColors.foreground }
+                if let num = Int("\(item)") { label.textColor = boardColors.foreground.colorWithAlphaComponent(num * 0.3) }
                 
                 view.addSubview(label)
                 
@@ -166,7 +170,7 @@ public class Grid {
         
         let view = SudokuView(frame: rect)
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = boardColors.background
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
@@ -183,12 +187,13 @@ public class Grid {
                 label.text = "\(item)"
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 10)
+                label.textColor = boardColors.foreground
                 
                 for highlight in highlights {
                     
                     guard highlight.0 == r && highlight.1 == c else { continue }
-                    label.textColor = UIColor.whiteColor()
-                    label.backgroundColor = UIColor.blackColor()
+                    label.textColor = boardColors.background
+                    label.backgroundColor = boardColors.foreground
                     
                 }
                 
@@ -207,7 +212,7 @@ public class Grid {
         let view = TicTacToeView(frame: rect)
         
         view.p = 20
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = boardColors.background
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
@@ -225,6 +230,7 @@ public class Grid {
                 label.text = "\(item)"
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
+                label.textColor = boardColors.foreground
                 
                 view.addSubview(label)
                 
@@ -259,6 +265,18 @@ public class Grid {
         
         get { return content[c] }
         set { content[c] = newValue }
+        
+    }
+    
+    func player(piece: Piece) -> Int {
+        
+        for (p,player) in playerPieces.enumerate() {
+            
+            if player.containsString(piece) { return p }
+            
+        }
+        
+        return 0
         
     }
     

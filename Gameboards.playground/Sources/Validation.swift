@@ -69,7 +69,7 @@ extension Gameboard {
     
     func validatePlayer(piece: Piece) -> Bool {
         
-        return player1Turn ? playerPieces[0].containsString(piece) : playerPieces[1].containsString(piece)
+        return playerPieces[playerTurn].containsString(piece)
         
     }
     
@@ -126,7 +126,7 @@ extension Gameboard {
             
         case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
         case .Go: break
-        case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, player1Turn)
+        case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
             
         }
         

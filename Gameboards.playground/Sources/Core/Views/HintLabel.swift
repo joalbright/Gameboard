@@ -3,6 +3,7 @@ import UIKit
 class HintLabel: UILabel {
     
     var highlight: Bool = false { didSet { setNeedsDisplay() } }
+    var highlightColor: UIColor = UIColor.redColor()
     
     override func drawTextInRect(rect: CGRect) {
         
@@ -10,7 +11,7 @@ class HintLabel: UILabel {
         
         let ctx = UIGraphicsGetCurrentContext()
         
-        UIColor.redColor().set()
+        highlightColor.set()
         
         CGContextSetLineJoin(ctx, .Round)
         CGContextSetLineWidth(ctx, 1)

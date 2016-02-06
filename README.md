@@ -18,10 +18,11 @@ Gameboards built in a playground
 - [x] Swift Player Per Turn
 - [x] Coordinate System
 - [x] Ability to Reset
-- [ ] Available Moves : *hint system*
+- [x] Available Moves : *hint system*
+- [x] Custom Colors
 - [ ] Piece Collection
-- [ ] Time Control
-- [ ] Simple Move AI
+- [ ] Time Control : *timer for moves*
+- [ ] Simple Move AI : *need a friend?*
 
 #### Overall Validation
 

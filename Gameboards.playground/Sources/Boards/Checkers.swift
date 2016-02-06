@@ -6,18 +6,18 @@ public struct Checkers {
         
         let grid = Grid(8 ✕ (8 ✕ ""))
         
-        grid[0] = 8 ✕ ("" %% "◎")
-        grid[1] = 8 ✕ ("◎" %% "")
-        grid[2] = 8 ✕ ("" %% "◎")
-        grid[5] = 8 ✕ ("◉" %% "")
-        grid[6] = 8 ✕ ("" %% "◉")
-        grid[7] = 8 ✕ ("◉" %% "")
+        grid[0] = 8 ✕ ("" %% "●")
+        grid[1] = 8 ✕ ("●" %% "")
+        grid[2] = 8 ✕ ("" %% "●")
+        grid[5] = 8 ✕ ("◎" %% "")
+        grid[6] = 8 ✕ ("" %% "◎")
+        grid[7] = 8 ✕ ("◎" %% "")
         
         return grid
         
     }
     
-    public static let playerPieces = ["◎","◉"]
+    public static let playerPieces = ["●","◎"]
     
     public static func validateJump(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) -> Bool {
         

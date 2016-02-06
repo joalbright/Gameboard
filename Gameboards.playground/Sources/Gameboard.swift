@@ -14,10 +14,13 @@ public struct Gameboard {
         
     }
     
+    public var boardColors = BoardColors() { didSet { grid.boardColors = boardColors } }
+    
     var _type: BoardType
     
-    var player1Turn: Bool = false // arc4random_uniform(100) % 2 == 0 // uncomment to randomize starting player
-    var playerPieces: [Piece] = []
+    var playerCount: Int = 2
+    var playerTurn: Int = 0 // arc4random_uniform(100) % playerCount // randomize starting player
+    var playerPieces: [Piece] = [] { didSet { grid.playerPieces = playerPieces } }
     
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
     var solution: Grid = Grid(1 ✕ (1 ✕ ""))
@@ -40,6 +43,12 @@ public struct Gameboard {
         
     }
     
+    mutating func changePlayer() {
+        
+        playerTurn = playerTurn < playerCount - 1 ? playerTurn + 1 : 0
+        
+    }
+    
     public mutating func guess(toSquare s1: Square) throws { try validateGuess(s1) }
     
     public mutating func guess(toSquare s1: Square, withGuess g1: Guess) throws { try validateGuess(s1, g1) }
@@ -49,7 +58,8 @@ public struct Gameboard {
     public mutating func move(toSquare s1: Square) throws {
         
         try validateMove(s1)
-        player1Turn = !player1Turn
+        
+        changePlayer()
         
     }
     
@@ -59,7 +69,7 @@ public struct Gameboard {
         
         let piece2 = grid[s2.0,s2.1]
         
-        player1Turn = !player1Turn
+        changePlayer()
         
         return piece2 as? Piece
         
@@ -75,7 +85,7 @@ public struct Gameboard {
         
         let piece2 = grid[r2,c2]
         
-        player1Turn = !player1Turn
+        changePlayer()
         
         return piece2 as? Piece
         
@@ -83,7 +93,6 @@ public struct Gameboard {
     
     public mutating func reset() {
         
-        player1Turn = !player1Turn
         highlights = []
         selected = nil
         
@@ -149,4 +158,18 @@ public struct Gameboard {
     
 }
 
+public struct BoardColors {
+    
+    public var background = UIColor.whiteColor()
+    public var foreground = UIColor.blackColor()
+    
+    public var player1 = UIColor.redColor()
+    public var player2 = UIColor.blueColor()
+    
+    public var highlight = UIColor.greenColor()
+    public var selected = UIColor.greenColor()
+    
+    public init() { }
+    
+}
 

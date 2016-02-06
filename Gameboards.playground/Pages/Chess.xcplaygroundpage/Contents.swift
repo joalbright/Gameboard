@@ -2,6 +2,21 @@ import UIKit
 
 var chess = Gameboard(.Chess)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.52, green:0.68, blue:0.43, alpha:1)
+colors.foreground = UIColor(red:0.48, green:0.64, blue:0.39, alpha:1)
+
+colors.player1 = UIColor.whiteColor()
+colors.player2 = UIColor.blackColor()
+
+colors.selected = UIColor(red:0.06, green:0.46, blue:0.71, alpha:1)
+colors.highlight = UIColor(red:0.06, green:0.46, blue:0.71, alpha:1)
+
+chess.boardColors = colors
+
 // collection of moves
 
 let moves: [(ChessSquare,ChessSquare)] = [

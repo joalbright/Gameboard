@@ -4,6 +4,8 @@ public class MatrixView: UIView {
     
     public var p: CGFloat = 10
     
+    var lineColor = UIColor.blackColor()
+    
     public override func drawRect(rect: CGRect) {
         
         let c = UIGraphicsGetCurrentContext()
@@ -11,6 +13,8 @@ public class MatrixView: UIView {
         CGContextSetLineCap(c, .Round)
         CGContextSetLineJoin(c, .Round)
         CGContextSetLineWidth(c, 2)
+        
+        lineColor.set()
         
         CGContextMoveToPoint(c, p * 2, p)
         CGContextAddLineToPoint(c, p, p)

@@ -32,3 +32,12 @@ Gameboards built in a playground
 - [x] Only play on your turn : *checks against pieces for player*
 - [x] No piece available : *checks for no piece*
 - [x] Off the board : *checks if target square is on board*
+
+### Images
+
+![Checkers](./images/checkers_sm.png?raw=true)
+![Chess](./images/chess_sm.png?raw=true)
+![Go](./images/go_sm.png?raw=true)
+![Minesweeper](./images/minesweeper_sm.png?raw=true)
+![Sudoku](./images/sudoku_sm.png?raw=true)
+![TicTacToe](./images/tictactoe_sm.png?raw=true)

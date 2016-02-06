@@ -4,6 +4,21 @@ enum MoveType { case Guess, Mark }
 
 var minesweeper = Gameboard(.Minesweeper)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.5, green:0.5, blue:0.5, alpha:1)
+colors.foreground = UIColor(red:0.6, green:0.6, blue:0.6, alpha:1)
+
+colors.player1 = UIColor.yellowColor()
+colors.player2 = UIColor.blackColor()
+
+colors.highlight = UIColor.blueColor()
+colors.selected = UIColor.redColor()
+
+minesweeper.boardColors = colors
+
 // collection of guesses
 
 let guesses: [(Square,MoveType)] = [

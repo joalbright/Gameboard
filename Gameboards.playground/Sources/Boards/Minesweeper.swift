@@ -25,7 +25,7 @@ public struct Minesweeper {
         
 //        let grid = Grid(10 ✕ (10 ✕ " "))
 //        
-//        for (r,_) in grid.content.enumerate() { grid[r,0] = "✴︎" }
+//        for (r,_) in grid.content.enumerate() { grid[r,0] = "✘" }
 //        for (r,row) in grid.content.enumerate() { grid[r] = row.randomize() }
 //        
 //        return grid
@@ -34,6 +34,8 @@ public struct Minesweeper {
     
     public static var field = Grid(10 ✕ (10 ✕ "•"))
     
+    public static let playerPieces = ["⚑","✘"]
+    
     public static func validateGuess(s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
         guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.IncorrectPiece }
@@ -41,7 +43,7 @@ public struct Minesweeper {
         
         grid[s1.0,s1.1] = a1
         
-        guard a1 != "•" else { grid[s1.0,s1.1] = "✴︎"; throw GameStatus.GameOver }
+        guard a1 != "•" else { grid[s1.0,s1.1] = "✘"; throw GameStatus.GameOver }
         guard a1 == " " else { return }
                 
         try checkAdjacent(s1, grid, solution)
@@ -52,9 +54,9 @@ public struct Minesweeper {
         
         guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.IncorrectPiece }
         
-        guard g1 != "⌀" else { return grid[s1.0,s1.1] = "•" }
+        guard g1 != "⚑" else { return grid[s1.0,s1.1] = "•" }
         
-        grid[s1.0,s1.1] = "⌀"
+        grid[s1.0,s1.1] = "⚑"
         
     }
     

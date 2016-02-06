@@ -3,6 +3,7 @@ import UIKit
 public class GoView: UIView {
     
     public var p: CGFloat = 20
+    public var lineColor = UIColor.blackColor()
     
     public override func drawRect(rect: CGRect) {
         
@@ -10,6 +11,8 @@ public class GoView: UIView {
         
         CGContextSetLineCap(c, .Round)
         CGContextSetLineJoin(c, .Round)
+        
+        lineColor.set()
         
         let w8 = (rect.width - p * 2) / 8
         let h8 = (rect.height - p * 2) / 8

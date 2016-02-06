@@ -4,7 +4,7 @@ public struct TicTacToe {
     
     public static var board: Grid = Grid(3 ✕ (3 ✕ ""))
     
-    public static let playerPieces = ["✕","⦿"]
+    public static let playerPieces = ["✕","○"]
     
     public static func validateMove(s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
         

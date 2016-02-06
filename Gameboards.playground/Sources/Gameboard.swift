@@ -121,6 +121,7 @@ public struct Gameboard {
             
             solution = Minesweeper.board
             grid = Minesweeper.field
+            playerPieces = Minesweeper.playerPieces
             
         case .Sudoku:
             

@@ -65,26 +65,37 @@ public class Grid {
         let view = GoView(frame: rect)
         
         view.p = 30
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = boardColors.background
+        view.lineColor = boardColors.foreground
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
         
         let p = 30
-        let w = (rect.width - p * 2) / content.count
-        let h = (rect.height - p * 2) / content[0].count
+        let w = (rect.width - p * 2) / 8
+        let h = (rect.height - p * 2) / 8
         
         for (c,col) in content.enumerate() {
             
             for (r,item) in col.enumerate() {
                 
-//                let label = UILabel(frame: CGRect(x: c * w + p, y: r * h + p, width: w, height: h))
-//                
-//                label.text = "\(item)"
-//                label.textAlignment = .Center
-//                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
-//                
-//                view.addSubview(label)
+                let label = UILabel(frame: CGRect(x: c * w + p - w / 2, y: r * h + p - h / 2, width: w, height: h))
+                var piece = "\(item)"
+                
+                label.textColor = player(piece) == 0 ? boardColors.player1 : boardColors.player2
+                
+                if player(piece) == 1 {
+                    
+                    if let index = playerPieces[1].array().indexOf(piece) { piece = playerPieces[0].array()[index] }
+                    
+                }
+                
+                label.text = piece
+                label.textAlignment = .Center
+                label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2)
+                
+                view.addSubview(label)
+
                 
             }
             
@@ -146,15 +157,23 @@ public class Grid {
             for (c,item) in row.enumerate() {
                 
                 let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+                let piece = "\(item)"
                 
-                label.text = "\(item)"
+                label.text = piece
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue", size: (w + h) / 2 - 5)
                 
-                label.textColor = boardColors.foreground
+                label.textColor = player(piece) == 0 ? boardColors.player1 : boardColors.player2
+                label.backgroundColor = player(piece) == 1 ? boardColors.selected : boardColors.background
                 
-                if "\(item)" == "•" { label.backgroundColor = boardColors.foreground }
-                if let num = Int("\(item)") { label.textColor = boardColors.foreground.colorWithAlphaComponent(num * 0.3) }
+                if piece == "•" {
+                    
+                    label.textColor = boardColors.foreground
+                    label.backgroundColor = boardColors.foreground
+                
+                }
+                
+                if let num = Int("\(item)") { label.textColor = boardColors.highlight }
                 
                 view.addSubview(label)
                 
@@ -171,6 +190,7 @@ public class Grid {
         let view = SudokuView(frame: rect)
         
         view.backgroundColor = boardColors.background
+        view.lineColor = boardColors.foreground
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
@@ -226,11 +246,12 @@ public class Grid {
             for (c,item) in row.enumerate() {
                 
                 let label = UILabel(frame: CGRect(x: c * w + p, y: r * h + p, width: w, height: h))
+                let piece = "\(item)"
                 
-                label.text = "\(item)"
+                label.text = piece
                 label.textAlignment = .Center
                 label.font = UIFont(name: "HelveticaNeue-Thin", size: (w + h) / 2 - 10)
-                label.textColor = boardColors.foreground
+                label.textColor = player(piece) == 0 ? boardColors.player1 : boardColors.player2
                 
                 view.addSubview(label)
                 
@@ -276,7 +297,7 @@ public class Grid {
             
         }
         
-        return 0
+        return -1
         
     }
     

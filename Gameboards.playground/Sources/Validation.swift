@@ -125,7 +125,7 @@ extension Gameboard {
         switch _type {
             
         case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
-        case .Go: break
+        case .Go: try Go.validateMove(s1, p1, grid, playerTurn)
         case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
             
         }

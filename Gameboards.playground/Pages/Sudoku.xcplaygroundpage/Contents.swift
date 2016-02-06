@@ -2,6 +2,15 @@ import UIKit
 
 var sudoku = Gameboard(.Sudoku)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.19, green:0.78, blue:0.71, alpha:1)
+colors.foreground = UIColor(red:0.09, green:0.4, blue:0.44, alpha:1)
+
+sudoku.boardColors = colors
+
 // collection of guesses
 
 let guesses: [(Square,Guess)] = [

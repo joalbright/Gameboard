@@ -2,6 +2,15 @@ import UIKit
 
 var tictactoe = Gameboard(.TicTacToe)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.player1 = UIColor(red:0.43, green:0.98, blue:0.7, alpha:1)
+colors.player2 = UIColor(red:1, green:0.15, blue:0.18, alpha:1)
+
+tictactoe.boardColors = colors
+
 // collection of moves
 
 let moves: [Square] = [

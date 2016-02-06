@@ -7,7 +7,7 @@ Gameboards built in a playground
 - [ ] Backgammon
 - [x] Checkers
 - [x] Chess
-- [ ] Go
+- [x] Go
 - [ ] Mancala
 - [x] MineSweeper
 - [x] Sudoku
@@ -39,6 +39,21 @@ Gameboards built in a playground
 
 ```swift
 var checkers = GameBoard(.Checkers)
+
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.66, green:0.62, blue:0.48, alpha:1)
+colors.foreground = UIColor(red:0.62, green:0.58, blue:0.44, alpha:1)
+
+colors.player1 = UIColor(red:0.8, green:0.13, blue:0, alpha:1)
+colors.player2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1)
+
+colors.selected = UIColor.whiteColor()
+colors.highlight = UIColor.whiteColor()
+
+checkers.boardColors = colors
 
 // collection of moves
 
@@ -98,6 +113,21 @@ checkers.visualize()
 ```swift
 var chess = GameBoard(.Chess)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.52, green:0.68, blue:0.43, alpha:1)
+colors.foreground = UIColor(red:0.48, green:0.64, blue:0.39, alpha:1)
+
+colors.player1 = UIColor.whiteColor()
+colors.player2 = UIColor.blackColor()
+
+colors.selected = UIColor(red:0.06, green:0.46, blue:0.71, alpha:1)
+colors.highlight = UIColor(red:0.06, green:0.46, blue:0.71, alpha:1)
+
+chess.boardColors = colors
+
 // collection of moves
 
 let moves: [(ChessSquare,ChessSquare)] = [
@@ -155,6 +185,73 @@ chess.visualize()
 	- [ ] Pawn Promotion
 	- [ ] Check & Checkmate
 
+## Go
+
+- [x] Coordinates
+	- columns 0 - 9
+	- rows 0 - 9
+- [ ] Adjustable Board Size : *9, 13, 17, 19*
+
+```swift
+var go = Gameboard(.Go)
+
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.36, green:0.29, blue:0.16, alpha:1)
+colors.foreground = UIColor(red:0.11, green:0.08, blue:0.03, alpha:1)
+
+colors.player1 = UIColor.whiteColor()
+colors.player2 = UIColor.blackColor()
+
+go.boardColors = colors
+
+// collection of moves
+
+let moves: [Square] = [
+    
+    // moves
+    (1,1),
+    (6,7),
+    (1,7),
+    (6,0),
+    (4,4),
+    (4,5),
+    (1,2),
+    
+]
+
+// loop moves
+
+for move in moves {
+    
+    do {
+        
+        try go.move(toSquare: move)
+        
+    } catch {
+        
+        print(error)
+        
+    }
+    
+}
+
+go.visualize()
+```
+
+![Go](./images/go.png?raw=true)
+
+#### Validation
+
+- [x] Standard Moves
+	- [x] Capture
+
+- [ ] Special Moves
+	- [ ] KO
+	- [ ] Suicide
+
 ## Minesweeper
 
 - [x] Coordinates
@@ -165,6 +262,21 @@ chess.visualize()
 enum MoveType { case Guess, Mark }
 
 var minesweeper = Gameboard(.Minesweeper)
+
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.5, green:0.5, blue:0.5, alpha:1)
+colors.foreground = UIColor(red:0.6, green:0.6, blue:0.6, alpha:1)
+
+colors.player1 = UIColor.yellowColor()
+colors.player2 = UIColor.blackColor()
+
+colors.highlight = UIColor.blueColor()
+colors.selected = UIColor.redColor()
+
+minesweeper.boardColors = colors
 
 // collection of guesses
 
@@ -227,6 +339,15 @@ minesweeper.visualize()
 ```swift
 var sudoku = Gameboard(.Sudoku)
 
+// setup colors
+
+var colors = BoardColors()
+
+colors.background = UIColor(red:0.19, green:0.78, blue:0.71, alpha:1)
+colors.foreground = UIColor(red:0.09, green:0.4, blue:0.44, alpha:1)
+
+sudoku.boardColors = colors
+
 // collection of guesses
 
 let guesses: [(Square,Guess)] = [
@@ -277,6 +398,15 @@ sudoku.visualize(CGRect(x: 0, y: 0, width: 198, height: 198))
 
 ```swift
 var tictactoe = GameBoard(.TicTacToe)
+
+// setup colors
+
+var colors = BoardColors()
+
+colors.player1 = UIColor(red:0.43, green:0.98, blue:0.7, alpha:1)
+colors.player2 = UIColor(red:1, green:0.15, blue:0.18, alpha:1)
+
+tictactoe.boardColors = colors
 
 // collection of moves
 

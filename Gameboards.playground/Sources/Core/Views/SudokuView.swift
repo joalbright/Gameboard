@@ -2,12 +2,16 @@ import UIKit
 
 public class SudokuView: UIView {
     
+    var lineColor = UIColor.blackColor()
+    
     public override func drawRect(rect: CGRect) {
         
         let c = UIGraphicsGetCurrentContext()
         
         CGContextSetLineCap(c, .Round)
         CGContextSetLineJoin(c, .Round)
+        
+        lineColor.set()
         
         let w9 = rect.width / 9
         let h9 = rect.height / 9

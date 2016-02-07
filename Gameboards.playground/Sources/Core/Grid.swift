@@ -21,7 +21,7 @@ public class Grid {
         let view = UIView(frame: rect)
         
         let w = rect.width / content.count
-        let h = rect.height / content[0].count
+        let h = rect.height / content.count
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
@@ -75,10 +75,10 @@ public class Grid {
         let w = (rect.width - p * 2) / 8
         let h = (rect.height - p * 2) / 8
         
-        for (c,col) in content.enumerate() {
+        for (r,row) in content.enumerate() {
             
-            for (r,item) in col.enumerate() {
-                
+            for (c,item) in row.enumerate() {
+            
                 let label = UILabel(frame: CGRect(x: c * w + p - w / 2, y: r * h + p - h / 2, width: w, height: h))
                 var piece = "\(item)"
                 
@@ -118,7 +118,7 @@ public class Grid {
         
         let p = 20
         let w = (rect.width - p * 2) / content.count
-        let h = (rect.height - p * 2) / content[0].count
+        let h = (rect.height - p * 2) / content.count
         
         for (c,col) in content.enumerate() {
             
@@ -150,7 +150,7 @@ public class Grid {
         view.layer.masksToBounds = true
         
         let w = (rect.width - content.count + 1) / content.count
-        let h = (rect.height - content[0].count + 1) / content[0].count
+        let h = (rect.height - content.count + 1) / content.count
         
         for (r,row) in content.enumerate() {
             
@@ -173,7 +173,7 @@ public class Grid {
                 
                 }
                 
-                if let num = Int("\(item)") { label.textColor = boardColors.highlight }
+                if let num = Int("\(item)") where num > 0 { label.textColor = boardColors.highlight }
                 
                 view.addSubview(label)
                 
@@ -196,7 +196,7 @@ public class Grid {
         view.layer.masksToBounds = true
         
         let w = rect.width / content.count
-        let h = rect.height / content[0].count
+        let h = rect.height / content.count
         
         for (r,row) in content.enumerate() {
             
@@ -212,7 +212,7 @@ public class Grid {
                 for highlight in highlights {
                     
                     guard highlight.0 == r && highlight.1 == c else { continue }
-                    label.textColor = boardColors.background
+                    label.textColor = boardColors.highlight
                     label.backgroundColor = boardColors.foreground
                     
                 }
@@ -239,7 +239,7 @@ public class Grid {
         
         let p = 20
         let w = (rect.width - p * 2) / content.count
-        let h = (rect.height - p * 2) / content[0].count
+        let h = (rect.height - p * 2) / content.count
         
         for (r,row) in content.enumerate() {
             

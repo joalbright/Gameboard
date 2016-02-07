@@ -58,7 +58,7 @@ public struct Chess {
         
     }
     
-    public static func validateMove(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws {
+    public static func validateMove(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws -> Piece? {
         
         let mRow = s2.0 - s1.0
         let mCol = s2.1 - s1.1
@@ -83,13 +83,13 @@ public struct Chess {
             
         case .Pawn1:
             
-            guard abs(mCol) == 0 || (abs(mCol) == 1 && mRow == 1 && p2 != "") else { throw MoveError.InvalidMove }
+            guard (abs(mCol) == 0 && p2 == "") || (abs(mCol) == 1 && mRow == 1 && p2 != "") else { throw MoveError.InvalidMove }
             guard (mRow < 2 && mRow > 0) || (s1.0 == 1 && mRow == 2) else { throw MoveError.InvalidMove }
             try validateEmptyPath(s1, s2, grid)
             
         case .Pawn2:
             
-            guard abs(mCol) == 0 || (abs(mCol) == 1 && mRow == -1 && p2 != "") else { throw MoveError.InvalidMove }
+            guard (abs(mCol) == 0 && p2 == "") || (abs(mCol) == 1 && mRow == -1 && p2 != "") else { throw MoveError.InvalidMove }
             guard (mRow > -2 && mRow < 0) || (s1.0 == 6 && mRow == -2) else { throw MoveError.InvalidMove }
             try validateEmptyPath(s1, s2, grid)
             
@@ -107,10 +107,14 @@ public struct Chess {
             
         }
         
-        guard !hint else { return }
+        guard !hint else { return nil }
+        
+        let piece = grid[s2.0,s2.1]
         
         grid[s2.0,s2.1] = p1 // place my piece in target square
         grid[s1.0,s1.1] = "" // remove my piece from original square
+        
+        return piece as? Piece
         
     }
     

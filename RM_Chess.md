@@ -68,6 +68,8 @@ chess.visualize()
 	
 #### Validation
 
+- [ ] Win / Lose
+
 - [x] Standard Moves
 	- [x] Pawn
 	- [x] Rook 

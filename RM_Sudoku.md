@@ -62,4 +62,6 @@ sudoku.visualize(CGRect(x: 0, y: 0, width: 198, height: 198))
 
 #### Validation
 
+- [ ] Win / Lose
+
 - [x] Standard Moves

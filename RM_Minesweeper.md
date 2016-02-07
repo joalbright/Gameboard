@@ -71,6 +71,8 @@ minesweeper.visualize()
 
 #### Validation
 
+- [ ] Win / Lose
+
 - [x] Standard Moves
 	- [x] Mark : *flag*
 	- [x] Guess

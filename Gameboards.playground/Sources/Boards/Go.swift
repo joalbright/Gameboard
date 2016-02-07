@@ -8,7 +8,7 @@ enum GoError: ErrorType {
 
 public struct Go {
     
-    public static var board: Grid = Grid(9 ✕ (9 ✕ ""))
+    public static var board: Grid { return Grid(9 ✕ (9 ✕ "")) }
     
     public static let playerPieces = ["●","○"]
     
@@ -29,7 +29,6 @@ public struct Go {
                 guard a1 != "" else { throw GoError.OpenChain }
                 
                 chain.append(s)
-                print(chain)
                 
                 do { squares += try checkChain(s, chain) } catch { throw error }
                 

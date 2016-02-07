@@ -6,7 +6,6 @@ Gameboards built in a playground
 
 *Links send you to the readme for each game.*
 
-- [ ] Backgammon
 - [x] [Checkers](RM_Checkers.md)
 - [x] [Chess](RM_Chess.md)
 - [x] [Go](RM_Go.md)
@@ -17,7 +16,7 @@ Gameboards built in a playground
 
 ### Features
 
-- [x] Swift Player Per Turn
+- [x] Switch Player Per Turn
 - [x] Coordinate System
 - [x] Ability to Reset
 - [x] Available Moves : *hint system*
@@ -35,9 +34,9 @@ Gameboards built in a playground
 
 ### Images
 
-![Checkers](./images/checkers_sm.png?raw=true)
-![Chess](./images/chess_sm.png?raw=true)
-![Go](./images/go_sm.png?raw=true)
-![Minesweeper](./images/minesweeper_sm.png?raw=true)
-![Sudoku](./images/sudoku_sm.png?raw=true)
-![TicTacToe](./images/tictactoe_sm.png?raw=true)
+[![Checkers](./images/checkers_sm.png?raw=true)](RM_Checkers.md)
+[![Chess](./images/chess_sm.png?raw=true)](RM_Chess.md)
+[![Go](./images/go_sm.png?raw=true)](RM_Go.md)
+[![Minesweeper](./images/minesweeper_sm.png?raw=true)](RM_Minesweeper.md)
+[![Sudoku](./images/sudoku_sm.png?raw=true)](RM_Sudoku.md)
+[![TicTacToe](./images/tictactoe_sm.png?raw=true)](RM_TicTacToe.md)

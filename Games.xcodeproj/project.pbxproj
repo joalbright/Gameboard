@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A99018321C62FC5100FFEBAF /* Go.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99018311C62FC5100FFEBAF /* Go.swift */; };
 		A99018341C62FC6500FFEBAF /* GoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99018331C62FC6500FFEBAF /* GoView.swift */; };
+		A99F572B1C6676BF00E8A9BB /* HintLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99F572A1C6676BF00E8A9BB /* HintLabel.swift */; };
 		A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740D1C62A34600219C78 /* AppDelegate.swift */; };
 		A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740F1C62A34600219C78 /* BoardViewController.swift */; };
 		A9DD74131C62A34600219C78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74111C62A34600219C78 /* Main.storyboard */; };
@@ -31,11 +32,13 @@
 		A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74311C62A35300219C78 /* Gameboard.swift */; };
 		A9DD74431C62A35300219C78 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74321C62A35300219C78 /* Helper.swift */; };
 		A9DD74441C62A35300219C78 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74331C62A35300219C78 /* Validation.swift */; };
+		A9FE2C4D1C6733C200E65D79 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FE2C4C1C6733C200E65D79 /* SimpleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A99018311C62FC5100FFEBAF /* Go.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Go.swift; sourceTree = "<group>"; };
 		A99018331C62FC6500FFEBAF /* GoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoView.swift; sourceTree = "<group>"; };
+		A99F572A1C6676BF00E8A9BB /* HintLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintLabel.swift; sourceTree = "<group>"; };
 		A9DD740A1C62A34600219C78 /* Games.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Games.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DD740D1C62A34600219C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DD740F1C62A34600219C78 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		A9DD74311C62A35300219C78 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameboard.swift; sourceTree = "<group>"; };
 		A9DD74321C62A35300219C78 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A9DD74331C62A35300219C78 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		A9FE2C4C1C6733C200E65D79 /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 			children = (
 				A9DD741F1C62A35300219C78 /* Gameboards */,
 				A9DD740F1C62A34600219C78 /* BoardViewController.swift */,
+				A9FE2C4C1C6733C200E65D79 /* SimpleButton.swift */,
 				A9DD74111C62A34600219C78 /* Main.storyboard */,
 				A9DC4FA81C62B89700E7920E /* System */,
 			);
@@ -153,6 +158,7 @@
 		A9DD742C1C62A35300219C78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A99F572A1C6676BF00E8A9BB /* HintLabel.swift */,
 				A9DD742D1C62A35300219C78 /* BackgammonView.swift */,
 				A9DD742E1C62A35300219C78 /* MatrixView.swift */,
 				A9DD742F1C62A35300219C78 /* SudokuView.swift */,
@@ -240,6 +246,7 @@
 				A9DD74391C62A35300219C78 /* Sudoku.swift in Sources */,
 				A99018341C62FC6500FFEBAF /* GoView.swift in Sources */,
 				A9DD74431C62A35300219C78 /* Helper.swift in Sources */,
+				A99F572B1C6676BF00E8A9BB /* HintLabel.swift in Sources */,
 				A9DD743C1C62A35300219C78 /* Grid.swift in Sources */,
 				A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */,
 				A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */,
@@ -251,6 +258,7 @@
 				A9DD74441C62A35300219C78 /* Validation.swift in Sources */,
 				A9DD74371C62A35300219C78 /* Mancala.swift in Sources */,
 				A9DD74361C62A35300219C78 /* Chess.swift in Sources */,
+				A9FE2C4D1C6733C200E65D79 /* SimpleButton.swift in Sources */,
 				A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */,
 				A9DD74381C62A35300219C78 /* Minesweeper.swift in Sources */,
 				A9DD74341C62A35300219C78 /* Backgammon.swift in Sources */,

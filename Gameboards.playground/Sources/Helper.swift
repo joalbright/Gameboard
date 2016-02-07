@@ -12,13 +12,14 @@ extension Gameboard {
             
         case .Chess, .Checkers:
             
-            selected = s1
+            selected = nil
             
             for r in grid.rowRange {
                 
                 for c in grid.colRange {
                     
                     guard let _ = try? validateMove(s1, (r,c), true) else { continue }
+                    selected = s1
                     highlights.append((r,c))
                     
                 }

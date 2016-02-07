@@ -2,7 +2,7 @@ import UIKit
 
 public struct TicTacToe {
     
-    public static var board: Grid = Grid(3 ✕ (3 ✕ ""))
+    public static var board: Grid { return Grid(3 ✕ (3 ✕ "")) }
     
     public static let playerPieces = ["✕","○"]
     

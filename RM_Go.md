@@ -61,6 +61,8 @@ go.visualize()
 
 #### Validation
 
+- [ ] Win / Lose
+
 - [x] Standard Moves
 	- [x] Capture
 

@@ -19,19 +19,30 @@ public struct Gameboard {
     var _type: BoardType
     
     var playerCount: Int = 2
-    var playerTurn: Int = 0 // arc4random_uniform(100) % playerCount // randomize starting player
+    var playerTurn: Int = 0 { didSet { playerChange?(playerTurn + 1) } }
     var playerPieces: [Piece] = [] { didSet { grid.playerPieces = playerPieces } }
     
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
     var solution: Grid = Grid(1 ✕ (1 ✕ ""))
     
+    var gridSize: Int { return grid.content.count }
+    
     var _size: Int?
     var _difficulty: DifficultyLevel = .Easy
+    
+    public var playerChange: (Int -> ())?
     
     public init(_ type: BoardType) {
         
         _type = type
         reset()
+        
+    }
+    
+    public init(_ type: BoardType, testing: Bool) {
+        
+        _type = type
+        reset(testing)
         
     }
     
@@ -60,19 +71,17 @@ public struct Gameboard {
         try validateMove(s1)
         
         changePlayer()
-        
+    
     }
     
     public mutating func move(pieceAt s1: Square, toSquare s2: Square) throws -> Piece? {
         
-        try validateMove(s1,s2)
-        
-        let piece2 = grid[s2.0,s2.1]
+        let piece = try validateMove(s1,s2)
         
         changePlayer()
         
-        return piece2 as? Piece
-        
+        return piece
+    
     }
     
     public mutating func move(pieceAt s1: ChessSquare, toSquare s2: ChessSquare) throws -> Piece? {
@@ -81,17 +90,15 @@ public struct Gameboard {
         guard let c1 = cols.indexOf(s1.0), let c2 = cols.indexOf(s2.0) else { return nil }
         let r1 = 8 - s1.1, r2 = 8 - s2.1
         
-        try validateMove((r1,c1), (r2,c2))
-        
-        let piece2 = grid[r2,c2]
+        let piece = try validateMove((r1,c1), (r2,c2))
         
         changePlayer()
-        
-        return piece2 as? Piece
+                
+        return piece
         
     }
     
-    public mutating func reset() {
+    public mutating func reset(testing: Bool = false) {
         
         highlights = []
         selected = nil
@@ -123,10 +130,21 @@ public struct Gameboard {
             grid = Minesweeper.field
             playerPieces = Minesweeper.playerPieces
             
+            guard testing else { break }
+            
+            solution = Minesweeper.staticboard
+            playerPieces = Minesweeper.playerPieces
+            
         case .Sudoku:
             
             solution = Sudoku.board
             grid = Sudoku.puzzle(solution)
+            playerPieces = Sudoku.playerPieces
+            
+            guard testing else { break }
+            
+            solution = Sudoku.staticboard
+            grid = Sudoku.staticpuzzle(solution)
             playerPieces = Sudoku.playerPieces
             
         case .TicTacToe:

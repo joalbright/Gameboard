@@ -66,6 +66,8 @@ checkers.visualize()
 
 #### Validation
 
+- [ ] Win / Lose
+
 - [x] Standard Moves
 	- [x] Diagonal -> 1
 	- [x] Diagonal Jump

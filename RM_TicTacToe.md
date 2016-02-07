@@ -59,4 +59,6 @@ tictactoe.visualize()
 
 #### Validation
 
+- [ ] Win / Lose
+
 - [x] Standard Moves

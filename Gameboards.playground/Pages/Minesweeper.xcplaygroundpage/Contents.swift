@@ -2,7 +2,7 @@ import UIKit
 
 enum MoveType { case Guess, Mark }
 
-var minesweeper = Gameboard(.Minesweeper)
+var minesweeper = Gameboard(.Minesweeper, testing: true)
 
 // setup colors
 

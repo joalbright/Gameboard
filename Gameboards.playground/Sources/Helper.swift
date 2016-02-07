@@ -8,7 +8,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: break
+        case .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: break
             
         case .Chess, .Checkers:
             

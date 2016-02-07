@@ -1,6 +1,6 @@
 import UIKit
 
-var sudoku = Gameboard(.Sudoku)
+var sudoku = Gameboard(.Sudoku, testing: true)
 
 // setup colors
 

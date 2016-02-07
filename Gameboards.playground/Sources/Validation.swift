@@ -81,7 +81,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
         case .Minesweeper: try Minesweeper.validateGuess(s1, grid, solution)
             
         }
@@ -94,7 +94,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Go, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Checkers, .Chess, .Go, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
         case .Sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
             
         }
@@ -109,7 +109,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
         case .Minesweeper: try Minesweeper.validateMark(s1, grid, solution)
             
         }
@@ -124,7 +124,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .Backgammon, .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
+        case .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
         case .Go: try Go.validateMove(s1, p1, grid, playerTurn)
         case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
             
@@ -146,7 +146,7 @@ extension Gameboard {
             
         case .Checkers: return try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
         case .Chess: return try Chess.validateMove(s1, s2, p1, p2, grid, hint)
-        case .Backgammon, .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
             
         }
         

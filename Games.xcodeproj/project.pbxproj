@@ -15,7 +15,6 @@
 		A9DD74131C62A34600219C78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74111C62A34600219C78 /* Main.storyboard */; };
 		A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74141C62A34600219C78 /* Assets.xcassets */; };
 		A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */; };
-		A9DD74341C62A35300219C78 /* Backgammon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74211C62A35300219C78 /* Backgammon.swift */; };
 		A9DD74351C62A35300219C78 /* Checkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74221C62A35300219C78 /* Checkers.swift */; };
 		A9DD74361C62A35300219C78 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74231C62A35300219C78 /* Chess.swift */; };
 		A9DD74371C62A35300219C78 /* Mancala.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74241C62A35300219C78 /* Mancala.swift */; };
@@ -46,7 +45,6 @@
 		A9DD74141C62A34600219C78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DD74171C62A34600219C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9DD74191C62A34600219C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9DD74211C62A35300219C78 /* Backgammon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backgammon.swift; sourceTree = "<group>"; };
 		A9DD74221C62A35300219C78 /* Checkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkers.swift; sourceTree = "<group>"; };
 		A9DD74231C62A35300219C78 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chess.swift; sourceTree = "<group>"; };
 		A9DD74241C62A35300219C78 /* Mancala.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mancala.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 		A9DD74201C62A35300219C78 /* Boards */ = {
 			isa = PBXGroup;
 			children = (
-				A9DD74211C62A35300219C78 /* Backgammon.swift */,
 				A9DD74221C62A35300219C78 /* Checkers.swift */,
 				A9DD74231C62A35300219C78 /* Chess.swift */,
 				A99018311C62FC5100FFEBAF /* Go.swift */,
@@ -261,7 +258,6 @@
 				A9FE2C4D1C6733C200E65D79 /* SimpleButton.swift in Sources */,
 				A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */,
 				A9DD74381C62A35300219C78 /* Minesweeper.swift in Sources */,
-				A9DD74341C62A35300219C78 /* Backgammon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

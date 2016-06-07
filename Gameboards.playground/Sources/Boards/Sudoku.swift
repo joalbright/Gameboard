@@ -58,7 +58,9 @@ public struct Sudoku {
         
     }
     
-    static func randomize(var grid: Grid) -> Grid {
+    static func randomize(grid: Grid) -> Grid {
+        
+        var grid = grid
         
         for _ in 0...2 {
             

@@ -24,7 +24,6 @@
 		A9DD743B1C62A35300219C78 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74291C62A35300219C78 /* Extensions.swift */; };
 		A9DD743C1C62A35300219C78 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742A1C62A35300219C78 /* Grid.swift */; };
 		A9DD743D1C62A35300219C78 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742B1C62A35300219C78 /* Operators.swift */; };
-		A9DD743E1C62A35300219C78 /* BackgammonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742D1C62A35300219C78 /* BackgammonView.swift */; };
 		A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742E1C62A35300219C78 /* MatrixView.swift */; };
 		A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742F1C62A35300219C78 /* SudokuView.swift */; };
 		A9DD74411C62A35300219C78 /* TicTacToeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74301C62A35300219C78 /* TicTacToeView.swift */; };
@@ -54,7 +53,6 @@
 		A9DD74291C62A35300219C78 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A9DD742A1C62A35300219C78 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A9DD742B1C62A35300219C78 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		A9DD742D1C62A35300219C78 /* BackgammonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgammonView.swift; sourceTree = "<group>"; };
 		A9DD742E1C62A35300219C78 /* MatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
 		A9DD742F1C62A35300219C78 /* SudokuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
 		A9DD74301C62A35300219C78 /* TicTacToeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeView.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				A99F572A1C6676BF00E8A9BB /* HintLabel.swift */,
-				A9DD742D1C62A35300219C78 /* BackgammonView.swift */,
 				A9DD742E1C62A35300219C78 /* MatrixView.swift */,
 				A9DD742F1C62A35300219C78 /* SudokuView.swift */,
 				A9DD74301C62A35300219C78 /* TicTacToeView.swift */,
@@ -239,7 +236,6 @@
 				A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */,
 				A9DD743A1C62A35300219C78 /* TicTacToe.swift in Sources */,
 				A9DD74351C62A35300219C78 /* Checkers.swift in Sources */,
-				A9DD743E1C62A35300219C78 /* BackgammonView.swift in Sources */,
 				A9DD74391C62A35300219C78 /* Sudoku.swift in Sources */,
 				A99018341C62FC6500FFEBAF /* GoView.swift in Sources */,
 				A9DD74431C62A35300219C78 /* Helper.swift in Sources */,

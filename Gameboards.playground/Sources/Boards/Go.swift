@@ -16,7 +16,9 @@ public struct Go {
         
         let points = [ (-1,0),(0,1),(1,0),(0,-1) ]
         
-        func checkChain(s1: Square, var _ chain: [Square]) throws -> [Square] {
+        func checkChain(s1: Square, _ chain: [Square]) throws -> [Square] {
+            
+            var chain = chain
             
             var squares = [s1]
             

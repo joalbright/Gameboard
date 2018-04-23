@@ -4,33 +4,35 @@ public struct Checkers {
     
     public enum PieceType: String {
         
-        case None = ""
-        case Checker1 = "●"
-        case Checker2 = "○"
+        case none = ""
+        case checker1 = "●"
+        case checker2 = "○"
         
-        case King1 = "◉"
-        case King2 = "◎"
+        case king1 = "◉"
+        case king2 = "◎"
         
     }
     
     public static var board: Grid {
         
-        let grid = Grid(8 ✕ (8 ✕ ""))
-        
-        grid[0] = 8 ✕ ("" %% "●")
-        grid[1] = 8 ✕ ("●" %% "")
-        grid[2] = 8 ✕ ("" %% "●")
-        grid[5] = 8 ✕ ("○" %% "")
-        grid[6] = 8 ✕ ("" %% "○")
-        grid[7] = 8 ✕ ("○" %% "")
-        
-        return grid
+        return Grid([
+            
+            8 ✕ ("" %% "●"),
+            8 ✕ ("●" %% ""),
+            8 ✕ ("" %% "●"),
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ ("○" %% ""),
+            8 ✕ ("" %% "○"),
+            8 ✕ ("○" %% "")
+            
+        ])
         
     }
     
     public static let playerPieces = ["●◉","○◎"]
     
-    public static func validateJump(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) -> Bool {
+    public static func validateJump(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) -> Bool {
         
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
@@ -39,21 +41,21 @@ public struct Checkers {
         let e2 = s1.1 + m2 / 2
         
         
-        switch PieceType(rawValue: p1) ?? .None {
+        switch PieceType(rawValue: p1) ?? .none {
             
-        case .Checker1:
+        case .checker1:
             
             guard m1 == 2 && abs(m2) == 2 else { return false }
             
-        case .Checker2:
+        case .checker2:
             
             guard m1 == -2 && abs(m2) == 2 else { return false }
             
-        case .King1, .King2:
+        case .king1, .king2:
             
             guard abs(m1) == 2 && abs(m2) == 2 else { return false }
             
-        case .None: return false
+        case .none: return false
             
         }
         
@@ -69,28 +71,28 @@ public struct Checkers {
         
     }
     
-    public static func validateMove(s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws -> Piece? {
+    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws -> Piece? {
         
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
         
-        guard p2 == "" else { throw MoveError.InvalidMove }
+        guard p2 == "" else { throw MoveError.invalidmove }
         
-        switch PieceType(rawValue: p1) ?? .None {
+        switch PieceType(rawValue: p1) ?? .none {
          
-        case .Checker1:
+        case .checker1:
             
-            guard (m1 == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.InvalidMove }
+            guard (m1 == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.invalidmove }
             
-        case .Checker2:
+        case .checker2:
             
-            guard (m1 == -1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.InvalidMove }
+            guard (m1 == -1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.invalidmove }
             
-        case .King1, .King2:
+        case .king1, .king2:
             
-            guard (abs(m1) == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.InvalidMove }
+            guard (abs(m1) == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.invalidmove }
             
-        case .None: throw MoveError.IncorrectPiece
+        case .none: throw MoveError.incorrectpiece
 
         }
         

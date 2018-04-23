@@ -4,30 +4,30 @@ public class TicTacToeView: UIView {
     
     public var p: CGFloat = 10
     
-    public override func drawRect(rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
         let c = UIGraphicsGetCurrentContext()
         
-        CGContextSetLineCap(c, .Round)
-        CGContextSetLineJoin(c, .Round)
-        CGContextSetLineWidth(c, 2)
+        c?.setLineCap(.round)
+        c?.setLineJoin(.round)
+        c?.setLineWidth(2)
         
         let w3 = (rect.width - p * 2) / 3
         let h3 = (rect.height - p * 2) / 3
         
-        CGContextMoveToPoint(c, w3 + p, p)
-        CGContextAddLineToPoint(c, w3 + p, rect.height - p)
-        
-        CGContextMoveToPoint(c, w3 * 2 + p, p)
-        CGContextAddLineToPoint(c, w3 * 2 + p, rect.height - p)
-        
-        CGContextMoveToPoint(c, p, h3 + p)
-        CGContextAddLineToPoint(c, rect.width - p, h3 + p)
-        
-        CGContextMoveToPoint(c, p, h3 * 2 + p)
-        CGContextAddLineToPoint(c, rect.width - p, h3 * 2 + p)
-        
-        CGContextStrokePath(c)
+        c?.move(to: CGPoint(x: w3 + p, y: p))
+        c?.addLine(to: CGPoint(x: w3 + p, y: rect.height - p))
+
+        c?.move(to: CGPoint(x: w3 * 2 + p, y: p))
+        c?.addLine(to: CGPoint(x: w3 * 2 + p, y: rect.height - p))
+
+        c?.move(to: CGPoint(x: p, y: h3 + p))
+        c?.addLine(to: CGPoint(x: rect.width - p, y: h3 + p))
+
+        c?.move(to: CGPoint(x: p, y: h3 * 2 + p))
+        c?.addLine(to: CGPoint(x: rect.width - p, y: h3 * 2 + p))
+
+        c?.strokePath()
         
     }
     

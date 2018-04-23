@@ -4,29 +4,29 @@ public class MatrixView: UIView {
     
     public var p: CGFloat = 10
     
-    var lineColor = UIColor.blackColor()
+    var lineColor: UIColor = .black
     
-    public override func drawRect(rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
         let c = UIGraphicsGetCurrentContext()
         
-        CGContextSetLineCap(c, .Round)
-        CGContextSetLineJoin(c, .Round)
-        CGContextSetLineWidth(c, 2)
+        c?.setLineCap(.round)
+        c?.setLineJoin(.round)
+        c?.setLineWidth(2)
         
         lineColor.set()
         
-        CGContextMoveToPoint(c, p * 2, p)
-        CGContextAddLineToPoint(c, p, p)
-        CGContextAddLineToPoint(c, p, rect.height - p)
-        CGContextAddLineToPoint(c, p * 2, rect.height - p)
+        c?.move(to: CGPoint(x: p * 2, y: p))
+        c?.addLine(to: CGPoint(x: p, y: p))
+        c?.addLine(to: CGPoint(x: p, y: rect.height - p))
+        c?.addLine(to: CGPoint(x: p * 2, y: rect.height - p))
         
-        CGContextMoveToPoint(c, rect.width - p * 2, p)
-        CGContextAddLineToPoint(c, rect.width - p, p)
-        CGContextAddLineToPoint(c, rect.width - p, rect.height - p)
-        CGContextAddLineToPoint(c, rect.width - p * 2, rect.height - p)
+        c?.move(to: CGPoint(x: rect.width - p * 2, y: p))
+        c?.addLine(to: CGPoint(x: rect.width - p, y: p))
+        c?.addLine(to: CGPoint(x: rect.width - p, y: rect.height - p))
+        c?.addLine(to: CGPoint(x: rect.width - p * 2, y: rect.height - p))
         
-        CGContextStrokePath(c)
+        c?.strokePath()
         
     }
     

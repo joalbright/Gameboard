@@ -3,35 +3,35 @@ import UIKit
 public class GoView: UIView {
     
     public var p: CGFloat = 20
-    public var lineColor = UIColor.blackColor()
+    public var lineColor: UIColor = .black
     
-    public override func drawRect(rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
-        let c = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()
         
-        CGContextSetLineCap(c, .Round)
-        CGContextSetLineJoin(c, .Round)
+        context?.setLineCap(.round)
+        context?.setLineJoin(.round)
         
         lineColor.set()
         
-        let w8 = (rect.width - p * 2) / 8
-        let h8 = (rect.height - p * 2) / 8
+        let w = (rect.width - p * 2) / 8
+        let h = (rect.height - p * 2) / 8
         
-        for row in 0...8 {
+        for r in 0...8 {
             
-            for col in 0...8 {
+            for c in 0...8 {
                 
-                CGContextMoveToPoint(c, w8 * col + p, p)
-                CGContextAddLineToPoint(c, w8 * col + p, rect.height - p)
-                
-                CGContextMoveToPoint(c, p, h8 * row + p)
-                CGContextAddLineToPoint(c, rect.width - p, h8 * row + p)
+                context?.move(to: CGPoint(x: w * c + p, y: p))
+                context?.addLine(to: CGPoint(x: w * c + p, y: rect.height - p))
+
+                context?.move(to: CGPoint(x: p, y: h * r + p))
+                context?.addLine(to: CGPoint(x: rect.width - p, y: h * r + p))
                 
             }
             
         }
         
-        CGContextStrokePath(c)
+        context?.strokePath()
         
     }
     

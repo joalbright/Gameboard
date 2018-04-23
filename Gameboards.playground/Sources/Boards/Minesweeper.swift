@@ -8,8 +8,8 @@ public struct Minesweeper {
         
         let grid = Grid(10 ✕ (10 ✕ " "))
         
-        for (r,_) in grid.content.enumerate() { grid[r,4] = "•" }
-        for (r,row) in grid.content.enumerate() { grid[r] = row.randomize().randomize().randomize() }
+        for (r,_) in grid.content.enumerated() { grid[r,4] = "•" }
+        for (r,row) in grid.content.enumerated() { grid[r] = row.randomize().randomize().randomize() }
 
         return addMineCount(grid)
 
@@ -40,23 +40,23 @@ public struct Minesweeper {
     
     public static let playerPieces = ["⚑","✘"]
     
-    public static func validateGuess(s1: Square, _ grid: Grid, _ solution: Grid) throws {
+    public static func validateGuess(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
-        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.IncorrectPiece }
-        guard a1 != "⚑" else { throw MoveError.InvalidMove }
+        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
+        guard a1 != "⚑" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = a1
         
-        guard a1 != "•" else { grid[s1.0,s1.1] = "✘"; throw GameStatus.GameOver }
+        guard a1 != "•" else { grid[s1.0,s1.1] = "✘"; throw GameStatus.gameover }
         guard a1 == " " else { return }
                 
         try checkAdjacent(s1, grid, solution)
         
     }
     
-    public static func validateMark(s1: Square, _ grid: Grid, _ solution: Grid) throws {
+    public static func validateMark(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
-        guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.IncorrectPiece }
+        guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
         
         guard g1 != "⚑" else { return grid[s1.0,s1.1] = "•" }
         
@@ -64,7 +64,7 @@ public struct Minesweeper {
         
     }
     
-    public static func checkAdjacent(s1: Square, _ grid: Grid, _ solution: Grid) throws {
+    public static func checkAdjacent(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
         let adjacent2 = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
         
@@ -72,7 +72,7 @@ public struct Minesweeper {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = solution[s.0,s.1] as? String, let g1 = grid[s.0,s.1] as? String where g1 != a1 else { continue }
+            guard let a1 = solution[s.0,s.1] as? String, let g1 = grid[s.0,s.1] as? String, g1 != a1 else { continue }
             
             grid[s.0,s.1] = a1
             
@@ -84,7 +84,7 @@ public struct Minesweeper {
         
     }
     
-    public static func addMineCount(grid: Grid) -> Grid {
+    public static func addMineCount(_ grid: Grid) -> Grid {
         
         for r in grid.rowRange {
             
@@ -105,7 +105,7 @@ public struct Minesweeper {
         
     }
     
-    public static func mineCount(s1: Square, _ grid: Grid) -> Int {
+    public static func mineCount(_ s1: Square, _ grid: Grid) -> Int {
         
         var count = 0
         

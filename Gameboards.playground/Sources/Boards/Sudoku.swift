@@ -1,5 +1,19 @@
 import UIKit
 
+extension Difficulty {
+    
+    var sudokuRange: CountableClosedRange<Int> {
+        
+        switch self {
+        case .easy: return 2...6
+        case .medium: return 3...5
+        case .hard: return 4...4
+        }
+        
+    }
+    
+}
+
 public struct Sudoku {
     
     public static var board: Grid {
@@ -44,21 +58,21 @@ public struct Sudoku {
     
     public static let playerPieces = ["123456789"]
     
-    public static func validateGuess(s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
+    public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
         
-        guard g1 != "" else { throw MoveError.InvalidMove }
-        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.IncorrectPiece }
+        guard g1 != "" else { throw MoveError.invalidmove }
+        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
         
         print(a1)
         print(g1)
         
-        guard a1 == g1 else { throw MoveError.IncorrectGuess }
+        guard a1 == g1 else { throw MoveError.incorrectguess }
         
         grid[s1.0,s1.1] = g1
         
     }
     
-    static func randomize(grid: Grid) -> Grid {
+    static func randomize(_ grid: Grid) -> Grid {
         
         var grid = grid
         
@@ -78,7 +92,7 @@ public struct Sudoku {
         
     }
     
-    static func flipGrid(grid: Grid) -> Grid {
+    static func flipGrid(_ grid: Grid) -> Grid {
         
         let newGrid = Grid(9 ✕ (9 ✕ ""))
         
@@ -96,7 +110,7 @@ public struct Sudoku {
         
     }
     
-    static func puzzle(grid: Grid) -> Grid {
+    static func puzzle(_ grid: Grid, difficulty: Difficulty) -> Grid {
         
         let grid = Grid(grid.content)
         
@@ -104,7 +118,7 @@ public struct Sudoku {
             
             var cols = [0,1,2,3,4,5,6,7,8].randomize()
             
-            cols.removeRange(3...5)
+            cols.removeSubrange(difficulty.sudokuRange)
             
             for c in cols {
                 
@@ -118,7 +132,7 @@ public struct Sudoku {
         
     }
     
-    static func staticpuzzle(grid: Grid) -> Grid {
+    static func staticpuzzle(_ grid: Grid) -> Grid {
         
         let grid = Grid(grid.content)
         
@@ -136,7 +150,7 @@ public struct Sudoku {
         
         ]
         
-        for (r,row) in hide.enumerate() {
+        for (r,row) in hide.enumerated() {
             
             for c in row {
                 

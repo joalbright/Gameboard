@@ -2,14 +2,14 @@ import UIKit
 
 public class SudokuView: UIView {
     
-    var lineColor = UIColor.blackColor()
+    var lineColor: UIColor = .black
     
-    public override func drawRect(rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
         let c = UIGraphicsGetCurrentContext()
         
-        CGContextSetLineCap(c, .Round)
-        CGContextSetLineJoin(c, .Round)
+        c?.setLineCap(.round)
+        c?.setLineJoin(.round)
         
         lineColor.set()
         
@@ -20,19 +20,17 @@ public class SudokuView: UIView {
             
             for col in 1...8 {
                 
-                CGContextSetLineWidth(c, col % 3 == 0 ? 3 : 1)
+                c?.setLineWidth(col % 3 == 0 ? 3 : 1)
+
+                c?.move(to: CGPoint(x: w9 * col, y: 0))
+                c?.addLine(to: CGPoint(x: w9 * col, y: rect.height))
+                c?.strokePath()
                 
-                CGContextMoveToPoint(c, w9 * col, 0)
-                CGContextAddLineToPoint(c, w9 * col, rect.height)
-                
-                CGContextStrokePath(c)
-                
-                CGContextSetLineWidth(c, row % 3 == 0 ? 3 : 1)
-                
-                CGContextMoveToPoint(c, 0, h9 * row)
-                CGContextAddLineToPoint(c, rect.width, h9 * row)
-                
-                CGContextStrokePath(c)
+                c?.setLineWidth(row % 3 == 0 ? 3 : 1)
+
+                c?.move(to: CGPoint(x: 0, y: h9 * row))
+                c?.addLine(to: CGPoint(x: rect.width, y: h9 * row))
+                c?.strokePath()
                 
             }
             

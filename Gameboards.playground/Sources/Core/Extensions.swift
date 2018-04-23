@@ -5,13 +5,20 @@ public typealias ChessSquare = (c: String, r: Int)
 
 public typealias Piece = String
 public typealias Guess = String
+public typealias Card = String
 
 
 public extension String {
     
     public func array() -> [String] {
         
-        return self.characters.map { "\($0)" }
+        return map { "\($0)" }
+        
+    }
+    
+    public func randomize() -> [String] {
+        
+        return array().sorted { _,_ in arc4random() % 2 == 0 }
         
     }
     
@@ -19,9 +26,9 @@ public extension String {
 
 public extension Int {
     
-    public func within(r: Range<Int>) -> Bool {
+    public func within(_ r: CountableRange<Int>) -> Bool {
         
-        return self >= r.startIndex && self < r.endIndex
+        return self >= r.lowerBound && self < r.upperBound
         
     }
     
@@ -31,8 +38,16 @@ public extension Array {
     
     public func randomize() -> [Element] {
     
-        return self.sort { _,_ in arc4random() % 2 == 0 }
+        return sorted { _,_ in arc4random() % 2 == 0 }
     
+    }
+    
+    static func *(lhs: [Element], rhs: Int) -> [Element] {
+        
+        var multipliedArray = lhs
+        for _ in 1..<rhs { multipliedArray += lhs }
+        return multipliedArray
+        
     }
     
 }

@@ -1,65 +1,65 @@
 import UIKit
 
-public enum MoveError: ErrorType {
+public enum MoveError: Error {
     
     /// Good try. Need a hint?
-    case IncorrectGuess
+    case incorrectguess
     /// Seriously??? There is no reason to go off the board.
-    case OutOfBounds
+    case outofbounds
     /// Piece cannot move to that square
-    case InvalidMove
+    case invalidmove
     /// Cannot take out your own piece
-    case FriendlyFire
+    case friendlyfire
     /// Another piece is in the way
-    case BlockedMove
+    case blockedmove
     /// Piece is not of the current player
-    case NotYourTurn
+    case notyourturn
     /// Ummm... I think you may be lost
-    case NoPlayer
+    case noplayer
     /// What type of game are you playing???
-    case IncorrectPiece
+    case incorrectpiece
     /// Validation is unfinished... not letting you cheat.
-    case ValidationFailed
+    case validationfailed
     
 }
 
-public enum GameStatus: ErrorType {
+public enum GameStatus: Error {
     
     /// Ouch. Why don't you try again?
-    case GameOver
+    case gameover
     /// You win! Don't let it go to your head.
-    case Winner
+    case winner
     /// This is awkward.
-    case Stalemate
+    case stalemate
     
 }
 
-public enum FunctionalityError: ErrorType {
+public enum FunctionalityError: Error {
     
     /// Can't do this... maybe a future feature if you bug me enough.
-    case Unavailable
+    case unavailable
     
 }
 
 extension Gameboard {
     
-    func validateNotFriendlyFire(p1: Piece, _ p2: Piece) throws -> Bool {
+    func validateNotFriendlyFire(_ p1: Piece, _ p2: Piece) throws -> Bool {
         
         var _player1: Int?
         var _player2: Int?
         
-        for (p,pieces) in playerPieces.enumerate() {
+        for (p,pieces) in playerPieces.enumerated() {
             
-            if pieces.containsString(p1) { _player1 = p }
-            if pieces.containsString(p2) { _player2 = p }
+            if pieces.contains(p1) { _player1 = p }
+            if pieces.contains(p2) { _player2 = p }
             
         }
         
-        guard let player1 = _player1 else { throw MoveError.NoPlayer }
+        guard let player1 = _player1 else { throw MoveError.noplayer }
         
         if let player2 = _player2 {
             
-            guard player1 != player2 else { throw MoveError.FriendlyFire }
+            guard player1 != player2 else { throw MoveError.friendlyfire }
             
         }
         
@@ -67,35 +67,35 @@ extension Gameboard {
         
     }
     
-    func validatePlayer(piece: Piece) -> Bool {
+    func validatePlayer(_ piece: Piece) -> Bool {
         
-        return playerPieces[playerTurn].containsString(piece)
+        return playerPieces[playerTurn].contains(piece)
         
     }
     
     // moves, guesses, etc
     
-    mutating func validateGuess(s1: Square) throws {
+    mutating func validateGuess(_ s1: Square) throws {
         
-        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
         switch _type {
             
-        case .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
-        case .Minesweeper: try Minesweeper.validateGuess(s1, grid, solution)
+        case .minesweeper: try Minesweeper.validateGuess(s1, grid, solution)
+        default: throw MoveError.incorrectpiece
             
         }
         
     }
     
-    mutating func validateGuess(s1: Square, _ g1: Guess) throws {
+    mutating func validateGuess(_ s1: Square, _ g1: Guess) throws {
         
-        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
         switch _type {
             
-        case .Checkers, .Chess, .Go, .Mancala, .Minesweeper, .TicTacToe: throw MoveError.IncorrectPiece
-        case .Sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
+        case .sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
+        default: throw MoveError.incorrectpiece
             
         }
         
@@ -103,50 +103,81 @@ extension Gameboard {
         
     }
     
-    mutating func validateMark(s1: Square) throws {
+    mutating func validateSelection(_ s1: Square) throws {
         
-        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        guard grid.onBoard(s1) else { throw MoveError.outofbounds }
+        
+        guard let c1 = solution[s1.0,s1.1] as? Card else { throw MoveError.incorrectpiece }
         
         switch _type {
             
-        case .Checkers, .Chess, .Go, .Mancala, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
-        case .Minesweeper: try Minesweeper.validateMark(s1, grid, solution)
+        case .memory: return try Memory.validateSelection(s1, c1, grid)
+        default: throw MoveError.incorrectpiece
             
         }
         
     }
     
-    mutating func validateMove(s1: Square) throws {
+    mutating func validateMatch(_ s1: Square, _ s2: Square, _ reset: Bool = false) throws -> Card? {
         
-        guard grid.onBoard(s1) else { throw MoveError.OutOfBounds }
+        guard grid.onBoard(s1, s2) else { throw MoveError.outofbounds }
         
-        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.IncorrectPiece }
+        guard let c1 = solution[s1.0,s1.1] as? Card else { throw MoveError.incorrectpiece }
+        guard let c2 = solution[s2.0,s2.1] as? Card else { throw MoveError.incorrectpiece }
         
         switch _type {
             
-        case .Checkers, .Chess, .Mancala, .Minesweeper, .Sudoku: throw MoveError.IncorrectPiece
-        case .Go: try Go.validateMove(s1, p1, grid, playerTurn)
-        case .TicTacToe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
+        case .memory: return try Memory.validateMatch(s1, s2, c1, c2, grid, reset)
+        default: throw MoveError.incorrectpiece
             
         }
         
     }
     
-    mutating func validateMove(s1: Square, _ s2: Square, _ hint: Bool = false) throws -> Piece? {
+    mutating func validateMark(_ s1: Square) throws {
         
-        guard grid.onBoard(s1, s2) else { throw MoveError.OutOfBounds }
-        
-        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.IncorrectPiece }
-        guard let p2 = grid[s2.0,s2.1] as? Piece else { throw MoveError.IncorrectPiece }
-        
-        guard validatePlayer(p1) else { throw MoveError.NotYourTurn }
-        try validateNotFriendlyFire(p1, p2)
+        guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
         switch _type {
             
-        case .Checkers: return try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
-        case .Chess: return try Chess.validateMove(s1, s2, p1, p2, grid, hint)
-        case .Go, .Mancala, .Minesweeper, .Sudoku, .TicTacToe: throw MoveError.IncorrectPiece
+        case .minesweeper: try Minesweeper.validateMark(s1, grid, solution)
+        default: throw MoveError.incorrectpiece
+            
+        }
+        
+    }
+    
+    mutating func validateMove(_ s1: Square) throws {
+        
+        guard grid.onBoard(s1) else { throw MoveError.outofbounds }
+        
+        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.incorrectpiece }
+        
+        switch _type {
+            
+        case .go: try Go.validateMove(s1, p1, grid, playerTurn)
+        case .tictactoe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
+        default: throw MoveError.incorrectpiece
+            
+        }
+        
+    }
+    
+    mutating func validateMove(_ s1: Square, _ s2: Square, _ hint: Bool = false) throws -> Piece? {
+        
+        guard grid.onBoard(s1, s2) else { throw MoveError.outofbounds }
+        
+        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.incorrectpiece }
+        guard let p2 = grid[s2.0,s2.1] as? Piece else { throw MoveError.incorrectpiece }
+        
+        guard validatePlayer(p1) else { throw MoveError.notyourturn }
+        _ = try validateNotFriendlyFire(p1, p2)
+        
+        switch _type {
+            
+        case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
+        case .chess: return try Chess.validateMove(s1, s2, p1, p2, grid, hint)
+        default: throw MoveError.incorrectpiece
             
         }
         

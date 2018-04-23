@@ -1,8 +1,8 @@
 import UIKit
 
-enum GoError: ErrorType {
+enum GoError: Error {
     
-    case OpenChain
+    case openchain
     
 }
 
@@ -12,11 +12,11 @@ public struct Go {
     
     public static let playerPieces = ["●","○"]
     
-    public static func checkCapture(s1: Square, _ p1: Piece, _ grid: Grid) {
+    public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: Grid) {
         
         let points = [ (-1,0),(0,1),(1,0),(0,-1) ]
         
-        func checkChain(s1: Square, _ chain: [Square]) throws -> [Square] {
+        func checkChain(_ s1: Square, _ chain: [Square]) throws -> [Square] {
             
             var chain = chain
             
@@ -27,8 +27,8 @@ public struct Go {
                 let s = (s1.0 + p.0, s1.1 + p.1)
                 guard !(chain.contains { $0.0 == s.0 && $0.1 == s.1 }) else { continue }
                 guard grid.onBoard(s) else { continue }
-                guard let a1 = grid[s.0,s.1] as? Piece where a1 != p1 else { continue }
-                guard a1 != "" else { throw GoError.OpenChain }
+                guard let a1 = grid[s.0,s.1] as? Piece, a1 != p1 else { continue }
+                guard a1 != "" else { throw GoError.openchain }
                 
                 chain.append(s)
                 
@@ -44,7 +44,7 @@ public struct Go {
             
             let s = (s1.0 + p.0, s1.1 + p.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = grid[s.0,s.1] as? Piece where a1 != "" && a1 != p1 else { continue }
+            guard let a1 = grid[s.0,s.1] as? Piece, a1 != "" && a1 != p1 else { continue }
             
             if let squares = try? checkChain(s, [s]) {
                 
@@ -56,9 +56,9 @@ public struct Go {
         
     }
     
-    public static func validateMove(s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
+    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
         
-        guard p1 == "" else { throw MoveError.InvalidMove }
+        guard p1 == "" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = playerPieces[player]
         

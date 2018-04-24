@@ -513,7 +513,7 @@ public class Grid {
                 
                 label.text = "\(item)"
                 label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - ("\(item)".count > 1 ? 13 : 5), weight: .black)
+                label.font = .systemFont(ofSize: (w + h) / ("\(item)".count > 1 ? 3 : 2) - 5, weight: .black)
                 label.textColor = piece?.textColor ?? boardColors.player1
                 label.backgroundColor = piece?.backgroundColor ?? boardColors.player2
                 label.layer.cornerRadius = 4

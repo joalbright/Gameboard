@@ -31,6 +31,52 @@ public struct Words {
         
     }
     
+    public enum Letter: String {
+        
+        static var all: [Letter] { return [.a,.b,.c,.d,.e,.f,.g,.h,.i,.j,.k,.l,.m,.n,.o,.p,.q,.r,.s,.t,.u,.v,.w,.x,.y,.z,.blank] }
+        
+        static var bag: [String] {
+
+            return all.reduce([]) { $0 + Array(repeating: $1.rawValue, count: $1.count) }.randomize().randomize()
+
+        }
+
+        case a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,blank = "_"
+        
+        var count: Int {
+            
+            switch self {
+            case .j, .k, .q, .x, .z: return 1
+            case .blank, .b, .c, .f, .m, .p, .v, .w, .y: return 2
+            case .g: return 3
+            case .h, .l, .u: return 4
+            case .d, .n, .s: return 5
+            case .r: return 6
+            case .t: return 7
+            case .i, .o: return 8
+            case .a: return 9
+            case .e: return 13
+            }
+            
+        }
+        
+        var point: Int {
+            
+            switch self {
+            case .blank: return 0
+            case .a, .e, .i, .o, .r, .s, .t: return 1
+            case .d, .l, .n, .u: return 2
+            case .g, .h, .y: return 3
+            case .b, .c, .f, .m, .p, .w: return 4
+            case .k, .v: return 5
+            case .x: return 8
+            case .j, .q, .z: return 10
+            }
+            
+        }
+        
+    }
+    
     public static var board: Grid {
         
         let grid = Grid([
@@ -46,7 +92,7 @@ public struct Words {
             ["TL"," "," "," ","DL"," "," "," "," "," ","DL"," "," "," ","TL"],
             [" ","DW"," "," "," ","TL"," "," "," ","TL"," "," "," ","DW"," "],
             [" "," ","DL"," "," "," ","DL"," ","DL"," "," "," ","DL"," "," "],
-            ["TW"," "," ","TL"," "," "," "," "," "," "," ","TL"," "," ","TW"],
+            ["TW"," "," ","TL"," "," "," ","DW"," "," "," ","TL"," "," ","TW"],
             [" ","DL"," "," ","DL"," "," "," "," "," ","DL"," "," ","DL"," "],
             [" "," ","DL"," "," ","DW"," "," "," ","DW"," "," ","DL"," "," "],
             [" "," "," ","TW"," "," ","TL"," ","TL"," "," ","TW"," "," "," "]
@@ -58,6 +104,6 @@ public struct Words {
         
     }
     
-    public static let playerPieces = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ","ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+    public static let playerPieces = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ_"]
 
 }

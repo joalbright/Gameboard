@@ -12,50 +12,30 @@ class BoardViewController: UIViewController {
     
     @IBOutlet weak var boardView: BoardView!
     @IBOutlet weak var playerLabel: UILabel!
-    @IBOutlet weak var difficultyControl: UISegmentedControl!
+    @IBOutlet weak var pieceHolders: [UIStackView]!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        boardView?.board?.playerChange = { p in
-         
-            self.playerLabel.text = "Player \(p)"
-            
-        }
-        
-        difficultyControl?.selectedSegmentIndex = boardView?.board?.difficulty.hashValue ?? 0
+        boardView?.board?.playerChange = { p in self.playerLabel.text = "Player \(p)" }
         
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         guard let touch = touches.first else { return }
-        
         guard let square = boardView?.coordinate(touch) else { return }
         
         boardView?.selectSquare(square)
         
     }
     
-    @IBAction func chooseMinesweeperMark(sender: UISegmentedControl) {
-        
-        boardView?.minesweeperGuess = sender.selectedSegmentIndex == 0
-        
-    }
-    
-
-    @IBAction func chooseSudokuNymber(sender: UISegmentedControl) {
-        
-        boardView?.sudokuNumber = "\(sender.selectedSegmentIndex + 1)"
-        
-    }
-    
-    @IBAction func chooseDifficulty(sender: UISegmentedControl) {
-        
-        boardView?.board?.difficulty = Difficulty(sender.selectedSegmentIndex)
-        boardView?.updateBoard()
-                
-    }
+//    @IBAction func chooseDifficulty(sender: UISegmentedControl) {
+//
+//        boardView?.board?.difficulty = Difficulty(sender.selectedSegmentIndex)
+//        boardView?.updateBoard()
+//
+//    }
     
     @IBAction func resetBoard(sender: Any) {
         
@@ -63,7 +43,6 @@ class BoardViewController: UIViewController {
         boardView?.updateBoard()
         
     }
-    
     
 }
 
@@ -97,9 +76,6 @@ class BoardViewController: UIViewController {
     
     var board: Gameboard!
     var boardView: UIView?
-    
-    var minesweeperGuess: Bool = true
-    var sudokuNumber: String = "1"
     
     @IBInspectable var bgColor: UIColor = .white
     @IBInspectable var fgColor: UIColor = .black
@@ -583,6 +559,8 @@ class BoardViewController: UIViewController {
 
 @IBDesignable class MinesweeperBoardView : BoardView {
     
+    var minesweeperGuess: Bool = true
+    
     override func prepareForInterfaceBuilder() {
         
         board = Gameboard(.minesweeper, testing: true)
@@ -626,8 +604,20 @@ class BoardViewController: UIViewController {
     
 }
 
-@IBDesignable class SudokuBoardView : BoardView {
+extension BoardViewController {
+    
+    @IBAction func chooseMinesweeperMark(sender: UISegmentedControl) {
         
+        (boardView as? MinesweeperBoardView)?.minesweeperGuess = sender.selectedSegmentIndex == 0
+        
+    }
+    
+}
+
+@IBDesignable class SudokuBoardView : BoardView {
+    
+    var sudokuNumber: String = "1"
+    
     override func prepareForInterfaceBuilder() {
         
         board = Gameboard(.sudoku, testing: true)
@@ -657,6 +647,16 @@ class BoardViewController: UIViewController {
         }
         
         updateBoard()
+        
+    }
+    
+}
+
+extension BoardViewController {
+    
+    @IBAction func chooseSudokuNymber(sender: UISegmentedControl) {
+        
+        (boardView as? SudokuBoardView)?.sudokuNumber = "\(sender.selectedSegmentIndex + 1)"
         
     }
     
@@ -694,40 +694,6 @@ class BoardViewController: UIViewController {
             print(error)
             
         }
-        
-        updateBoard()
-        
-    }
-    
-}
-
-@IBDesignable class WordsBoardView : BoardView {
-    
-    override func prepareForInterfaceBuilder() {
-        
-        board = Gameboard(.words)
-        super.prepareForInterfaceBuilder()
-        
-    }
-    
-    override func awakeFromNib() {
-        
-        board = Gameboard(.words)
-        super.awakeFromNib()
-        
-    }
-    
-    override func selectSquare(_ square: Square) {
-        
-//        do {
-//            
-//            try board.guess(toSquare: square, withGuess: sudokuNumber)
-//            
-//        } catch {
-//            
-//            print(error)
-//            
-//        }
         
         updateBoard()
         

@@ -10,14 +10,17 @@ import UIKit
 
 @IBDesignable class WordsBoardView : BoardView {
     
-    var bag: [String] = []
-    var rack: [String] = [] { didSet { updateRack() } }
+    var selectedTile: Words.Letter?
+    
+    var bag: [Words.Letter] = []
+    var rack: [Words.Letter] = [] { didSet { rackUpdated(rack) } }
+    
+    var rackUpdated: ([Words.Letter]) -> Void = { _ in }
     
     override func prepareForInterfaceBuilder() {
         
         board = Gameboard(.words)
         bag = Words.Letter.bag
-        fillRack()
         super.prepareForInterfaceBuilder()
         
     }
@@ -26,28 +29,47 @@ import UIKit
         
         board = Gameboard(.words)
         bag = Words.Letter.bag
-        fillRack()
         super.awakeFromNib()
         
     }
     
     override func selectSquare(_ square: Square) {
         
-        //        do {
-        //
-        //            try board.guess(toSquare: square, withGuess: sudokuNumber)
-        //
-        //        } catch {
-        //
-        //            print(error)
-        //
-        //        }
+        guard let tile = selectedTile else { return }
+        
+        do {
+
+            try board.place(tile: tile, at: square)
+            
+            if let index = rack.index(of: tile) {
+                
+                rack.remove(at: index)
+                rack.append(.none)
+                selectedTile = nil
+                
+            }
+
+        } catch {
+
+            print(error)
+
+        }
         
         updateBoard()
         
     }
     
-    func fillRack() {
+    func reset() {
+        
+        bag = Words.Letter.bag
+        rack = []
+        fillRack()
+        
+    }
+    
+    @IBAction func fillRack() {
+        
+        rack = rack.filter { $0 != .none }
         
         let tiles = 7 - rack.count
         
@@ -60,14 +82,55 @@ import UIKit
         
     }
     
-    func updateRack() {
-        
-        
-        
-    }
-    
 }
 
 class WordsBoardViewController: BoardViewController {
+    
+    @IBOutlet var rackHolder: UIStackView!
+    
+    var selected: Words.Letter?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        (boardView as? WordsBoardView)?.rackUpdated = { rack in
+            
+            for view in self.rackHolder.arrangedSubviews { self.rackHolder.removeArrangedSubview(view) }
+            
+            for tile in rack {
+                
+                let tileView = TileView()
+                tileView.tile = tile
+                tileView.color = self.boardView.player2Color
+                tileView.selectedColor = self.boardView.selectedColor
+                tileView.backgroundColor = .clear
+                tileView.letterLabel?.textColor = self.boardView.player1Color
+                tileView.valueLabel?.textColor = self.boardView.highlightColor
+                tileView.selected = { tile in
+                    
+                    (self.boardView as? WordsBoardView)?.selectedTile = tile
+                    for view in self.rackHolder.arrangedSubviews {
+                        guard let tileView = view as? TileView else { continue }
+                        tileView.color = self.boardView.player2Color
+                    }
+                    
+                }
+                
+                self.rackHolder.addArrangedSubview(tileView)
+                
+            }
+            
+        }
+        
+        (boardView as? WordsBoardView)?.fillRack()
+        
+    }
+    
+    @IBAction override func resetBoard(sender: Any) {
+        super.resetBoard(sender: sender)
+        
+        (boardView as? WordsBoardView)?.reset()
+        
+    }
     
 }

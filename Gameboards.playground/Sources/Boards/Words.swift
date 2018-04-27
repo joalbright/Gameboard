@@ -33,19 +33,20 @@ public struct Words {
     
     public enum Letter: String {
         
-        static var all: [Letter] { return [.a,.b,.c,.d,.e,.f,.g,.h,.i,.j,.k,.l,.m,.n,.o,.p,.q,.r,.s,.t,.u,.v,.w,.x,.y,.z,.blank] }
+        static var all: [Letter] { return [.a,.b,.c,.d,.e,.f,.g,.h,.i,.j,.k,.l,.m,.n,.o,.p,.q,.r,.s,.t,.u,.v,.w,.x,.y,.z,.blank,.none] }
         
-        static var bag: [String] {
+        static var bag: [Letter] {
 
-            return all.reduce([]) { $0 + Array(repeating: $1.rawValue, count: $1.count) }.randomize().randomize()
+            return all.reduce([]) { $0 + Array(repeating: $1, count: $1.count) }.randomize().randomize()
 
         }
 
-        case a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,blank = "_"
+        case a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,blank = "_",none = " "
         
         var count: Int {
             
             switch self {
+            case .none: return 0
             case .j, .k, .q, .x, .z: return 1
             case .blank, .b, .c, .f, .m, .p, .v, .w, .y: return 2
             case .g: return 3
@@ -63,7 +64,7 @@ public struct Words {
         var point: Int {
             
             switch self {
-            case .blank: return 0
+            case .blank, .none: return 0
             case .a, .e, .i, .o, .r, .s, .t: return 1
             case .d, .l, .n, .u: return 2
             case .g, .h, .y: return 3
@@ -105,5 +106,57 @@ public struct Words {
     }
     
     public static let playerPieces = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ_"]
+    
+    public static func validate(_ tile: Letter, _ s1: Square, _ grid: Grid) throws {
+        
+        guard let spot = grid[s1.0,s1.1] as? String else { throw MoveError.invalidmove }
+        guard PieceType(rawValue: spot) != nil else { throw MoveError.invalidmove }
+        
+        grid[s1.0,s1.1] = tile.rawValue.uppercased()
+        
+    }
 
+}
+
+extension Grid {
+    
+    public func words(_ rect: CGRect) -> UIView {
+        
+        let view = WordsView(frame: rect)
+        
+        view.p = padding
+        view.backgroundColor = colors.background
+        view.lineColor = colors.foreground
+        
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        let w = (rect.width - padding * 2) / content.count
+        let h = (rect.height - padding * 2) / content.count
+        
+        for (r,row) in content.enumerated() {
+            
+            for (c,item) in row.enumerated() {
+                
+                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h).insetBy(dx: 1, dy: 1))
+                let piece = Words.PieceType(rawValue: "\(item)")
+                
+                label.text = "\(item)"
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: (w + h) / ("\(item)".count > 1 ? 3 : 2) - 5, weight: .black)
+                label.textColor = piece?.textColor ?? colors.player1
+                label.backgroundColor = piece?.backgroundColor ?? colors.player2
+                label.layer.cornerRadius = 4
+                label.layer.masksToBounds = true
+                
+                view.addSubview(label)
+                
+            }
+            
+        }
+        
+        return view
+        
+    }
+    
 }

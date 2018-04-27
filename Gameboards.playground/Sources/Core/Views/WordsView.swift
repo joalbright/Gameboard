@@ -40,3 +40,67 @@ class WordsView: UIView {
     }
 
 }
+
+class TileView: UIView {
+    
+    var color: UIColor = .lightGray { didSet { setNeedsDisplay() } }
+    var selectedColor: UIColor = .lightGray
+    
+    var letterLabel: UILabel!
+    var valueLabel: UILabel!
+    
+    var tile: Words.Letter = .none {
+        
+        didSet {
+            
+            letterLabel?.removeFromSuperview()
+            valueLabel?.removeFromSuperview()
+            
+            guard tile != .none else { return }
+            
+            letterLabel = UILabel()
+            letterLabel.text = tile == .blank ? "" : tile.rawValue.uppercased()
+            letterLabel.textAlignment = .center
+            addSubview(letterLabel)
+            
+            valueLabel = UILabel()
+            valueLabel.text = tile.point == 0 ? "" : "\(tile.point)"
+            valueLabel.textAlignment = .right
+            valueLabel.font = .systemFont(ofSize: 10, weight: .heavy)
+            addSubview(valueLabel)
+            
+        }
+        
+    }
+    
+    var selected: (Words.Letter) -> Void = { _ in }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        letterLabel?.frame = rect
+        valueLabel?.frame = CGRect(x: 0, y: 4, width: frame.width - 4, height: 10)
+        
+        let context = UIGraphicsGetCurrentContext()
+        
+        context?.clear(rect)
+        
+        guard tile != .none else { return }
+        
+        color.set()
+        
+        context?.addPath(UIBezierPath(roundedRect: rect.insetBy(dx: 1, dy: 1), cornerRadius: 6).cgPath)
+        context?.fillPath()
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        guard tile != .none else { return }
+        
+        selected(tile)
+        color = selectedColor
+        
+    }
+    
+}

@@ -1,6 +1,6 @@
 import UIKit
 
-public struct Minesweeper {
+public struct Bombsweeper {
     
     public static var board: Grid {
 
@@ -11,7 +11,7 @@ public struct Minesweeper {
         for (r,_) in grid.content.enumerated() { grid[r,4] = "•" }
         for (r,row) in grid.content.enumerated() { grid[r] = row.randomize().randomize().randomize() }
 
-        return addMineCount(grid)
+        return addBombCount(grid)
 
     }
     
@@ -32,7 +32,7 @@ public struct Minesweeper {
 
         ])
 
-        return addMineCount(grid)
+        return addBombCount(grid)
         
     }
     
@@ -84,7 +84,7 @@ public struct Minesweeper {
         
     }
     
-    public static func addMineCount(_ grid: Grid) -> Grid {
+    public static func addBombCount(_ grid: Grid) -> Grid {
         
         for r in grid.rowRange {
             
@@ -93,9 +93,9 @@ public struct Minesweeper {
                 guard let g1 = grid[r,c] as? String else { continue }
                 guard g1 != "•" else { continue }
             
-                let mines = mineCount((r,c), grid)
+                let bombs = bombCount((r,c), grid)
                 
-                grid[r,c] = mines == 0 ? " " : "\(mines)"
+                grid[r,c] = bombs == 0 ? " " : "\(bombs)"
                 
             }
             
@@ -105,7 +105,7 @@ public struct Minesweeper {
         
     }
     
-    public static func mineCount(_ s1: Square, _ grid: Grid) -> Int {
+    public static func bombCount(_ s1: Square, _ grid: Grid) -> Int {
         
         var count = 0
         
@@ -121,6 +121,55 @@ public struct Minesweeper {
         }
         
         return count
+        
+    }
+    
+}
+
+extension Grid {
+    
+    public func bomb(_ rect: CGRect) -> UIView {
+        
+        let view = UIView(frame: rect)
+        
+        view.backgroundColor = colors.background
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        
+        let w = (rect.width - content.count + 1) / content.count
+        let h = (rect.height - content.count + 1) / content.count
+        
+        for (r,row) in content.enumerated() {
+            
+            for (c,item) in row.enumerated() {
+                
+                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+                let piece = "\(item)"
+                
+                label.text = piece
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)
+                
+                label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
+                label.backgroundColor = player(piece) == 1 ? colors.selected : colors.background
+                
+                if piece == "•" {
+                    
+                    label.textColor = colors.foreground
+                    label.backgroundColor = colors.foreground
+                    
+                }
+                
+                if let num = Int("\(item)"), num > 0 { label.textColor = colors.highlight }
+                
+                view.addSubview(label)
+                
+            }
+            
+        }
+        
+        return view
         
     }
     

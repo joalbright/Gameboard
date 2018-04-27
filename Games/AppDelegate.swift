@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
-        UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().barTintColor = UIColor(white: 1, alpha: 0.1)
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().titleTextAttributes = [ NSAttributedStringKey.foregroundColor : UIColor.darkGray ]

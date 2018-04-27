@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A90F209A2088CDDA00C3F6A4 /* Pilare.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20992088CDDA00C3F6A4 /* Pilare.swift */; };
 		A90F209C2088CE7200C3F6A4 /* Battleship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F209B2088CE7200C3F6A4 /* Battleship.swift */; };
-		A90F209E2088CE8000C3F6A4 /* ConnectFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F209D2088CE8000C3F6A4 /* ConnectFour.swift */; };
+		A90F209E2088CE8000C3F6A4 /* Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F209D2088CE8000C3F6A4 /* Four.swift */; };
 		A90F20A02088CEAE00C3F6A4 /* Dots.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F209F2088CEAE00C3F6A4 /* Dots.swift */; };
 		A90F20A22088CECF00C3F6A4 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20A12088CECF00C3F6A4 /* Memory.swift */; };
 		A90F20A42088CF4A00C3F6A4 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20A32088CF4A00C3F6A4 /* Words.swift */; };
@@ -24,6 +24,26 @@
 		A9DBACA2208CEB5D00C03C12 /* MancalaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA1208CEB5D00C03C12 /* MancalaView.swift */; };
 		A9DBACA4208E0EF200C03C12 /* WordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA3208E0EF200C03C12 /* WordsView.swift */; };
 		A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */; };
+		A9DBACCD2090AAEF00C03C12 /* Doubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACCC2090AAEF00C03C12 /* Doubles.swift */; };
+		A9DBACCF2090AAFA00C03C12 /* Trouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACCE2090AAFA00C03C12 /* Trouble.swift */; };
+		A9DBACD12090AB0400C03C12 /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD02090AB0400C03C12 /* Tetris.swift */; };
+		A9DBACD32090AE2D00C03C12 /* Pegs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD22090AE2D00C03C12 /* Pegs.swift */; };
+		A9DBACD52090B61100C03C12 /* PegsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD42090B61100C03C12 /* PegsView.swift */; };
+		A9DBACD72090BCFB00C03C12 /* BombsweeperBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */; };
+		A9DBACD92090BD4B00C03C12 /* MemoryBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD82090BD4B00C03C12 /* MemoryBoardView.swift */; };
+		A9DBACDB2090BD6E00C03C12 /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACDA2090BD6E00C03C12 /* ChessBoardView.swift */; };
+		A9DBACDD2090BD8A00C03C12 /* CheckersBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACDC2090BD8A00C03C12 /* CheckersBoardView.swift */; };
+		A9DBACDF2090BDB500C03C12 /* BackgammonBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACDE2090BDB500C03C12 /* BackgammonBoardView.swift */; };
+		A9DBACE12090BDD700C03C12 /* FourBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE02090BDD700C03C12 /* FourBoardView.swift */; };
+		A9DBACE32090BDFA00C03C12 /* TicTacToeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE22090BDFA00C03C12 /* TicTacToeBoardView.swift */; };
+		A9DBACE52090BE1500C03C12 /* SudokuBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE42090BE1500C03C12 /* SudokuBoardView.swift */; };
+		A9DBACE72090BE3800C03C12 /* DotsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE62090BE3800C03C12 /* DotsBoardView.swift */; };
+		A9DBACE92090BE5B00C03C12 /* GoBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE82090BE5B00C03C12 /* GoBoardView.swift */; };
+		A9DBACEB2090BE7700C03C12 /* MancalaBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACEA2090BE7700C03C12 /* MancalaBoardView.swift */; };
+		A9DBACED2090BE9A00C03C12 /* PegsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACEC2090BE9A00C03C12 /* PegsBoardView.swift */; };
+		A9DBACEF209363C000C03C12 /* Alquerque.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACEE209363C000C03C12 /* Alquerque.swift */; };
+		A9DBACF1209363D500C03C12 /* Ludo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACF0209363D500C03C12 /* Ludo.swift */; };
+		A9DBACF320936DA200C03C12 /* DoublesBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACF220936DA200C03C12 /* DoublesBoardView.swift */; };
 		A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740D1C62A34600219C78 /* AppDelegate.swift */; };
 		A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740F1C62A34600219C78 /* BoardViewController.swift */; };
 		A9DD74131C62A34600219C78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74111C62A34600219C78 /* Main.storyboard */; };
@@ -32,19 +52,18 @@
 		A9DD74351C62A35300219C78 /* Checkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74221C62A35300219C78 /* Checkers.swift */; };
 		A9DD74361C62A35300219C78 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74231C62A35300219C78 /* Chess.swift */; };
 		A9DD74371C62A35300219C78 /* Mancala.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74241C62A35300219C78 /* Mancala.swift */; };
-		A9DD74381C62A35300219C78 /* Minesweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74251C62A35300219C78 /* Minesweeper.swift */; };
+		A9DD74381C62A35300219C78 /* Bombsweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74251C62A35300219C78 /* Bombsweeper.swift */; };
 		A9DD74391C62A35300219C78 /* Sudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74261C62A35300219C78 /* Sudoku.swift */; };
 		A9DD743A1C62A35300219C78 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74271C62A35300219C78 /* TicTacToe.swift */; };
 		A9DD743B1C62A35300219C78 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74291C62A35300219C78 /* Extensions.swift */; };
 		A9DD743C1C62A35300219C78 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742A1C62A35300219C78 /* Grid.swift */; };
 		A9DD743D1C62A35300219C78 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742B1C62A35300219C78 /* Operators.swift */; };
-		A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742E1C62A35300219C78 /* MatrixView.swift */; };
+		A9DD743F1C62A35300219C78 /* CheckerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742E1C62A35300219C78 /* CheckerView.swift */; };
 		A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742F1C62A35300219C78 /* SudokuView.swift */; };
 		A9DD74411C62A35300219C78 /* TicTacToeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74301C62A35300219C78 /* TicTacToeView.swift */; };
 		A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74311C62A35300219C78 /* Gameboard.swift */; };
-		A9DD74431C62A35300219C78 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74321C62A35300219C78 /* Helper.swift */; };
 		A9DD74441C62A35300219C78 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74331C62A35300219C78 /* Validation.swift */; };
-		A9E2BE8C208C2BDF00AE7FB1 /* ConnectFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2BE8B208C2BDF00AE7FB1 /* ConnectFourView.swift */; };
+		A9E2BE8C208C2BDF00AE7FB1 /* FourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2BE8B208C2BDF00AE7FB1 /* FourView.swift */; };
 		A9E2BE8E208C713700AE7FB1 /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2BE8D208C713700AE7FB1 /* DotsView.swift */; };
 		A9EA60A3208AC3B400CDE60A /* BackgammonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EA60A2208AC3B400CDE60A /* BackgammonView.swift */; };
 /* End PBXBuildFile section */
@@ -52,7 +71,7 @@
 /* Begin PBXFileReference section */
 		A90F20992088CDDA00C3F6A4 /* Pilare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pilare.swift; sourceTree = "<group>"; };
 		A90F209B2088CE7200C3F6A4 /* Battleship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battleship.swift; sourceTree = "<group>"; };
-		A90F209D2088CE8000C3F6A4 /* ConnectFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFour.swift; sourceTree = "<group>"; };
+		A90F209D2088CE8000C3F6A4 /* Four.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Four.swift; sourceTree = "<group>"; };
 		A90F209F2088CEAE00C3F6A4 /* Dots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dots.swift; sourceTree = "<group>"; };
 		A90F20A12088CECF00C3F6A4 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		A90F20A32088CF4A00C3F6A4 /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
@@ -67,6 +86,26 @@
 		A9DBACA1208CEB5D00C03C12 /* MancalaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MancalaView.swift; sourceTree = "<group>"; };
 		A9DBACA3208E0EF200C03C12 /* WordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsView.swift; sourceTree = "<group>"; };
 		A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoardView.swift; sourceTree = "<group>"; };
+		A9DBACCC2090AAEF00C03C12 /* Doubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doubles.swift; sourceTree = "<group>"; };
+		A9DBACCE2090AAFA00C03C12 /* Trouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trouble.swift; sourceTree = "<group>"; };
+		A9DBACD02090AB0400C03C12 /* Tetris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetris.swift; sourceTree = "<group>"; };
+		A9DBACD22090AE2D00C03C12 /* Pegs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pegs.swift; sourceTree = "<group>"; };
+		A9DBACD42090B61100C03C12 /* PegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegsView.swift; sourceTree = "<group>"; };
+		A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombsweeperBoardView.swift; sourceTree = "<group>"; };
+		A9DBACD82090BD4B00C03C12 /* MemoryBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBoardView.swift; sourceTree = "<group>"; };
+		A9DBACDA2090BD6E00C03C12 /* ChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoardView.swift; sourceTree = "<group>"; };
+		A9DBACDC2090BD8A00C03C12 /* CheckersBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckersBoardView.swift; sourceTree = "<group>"; };
+		A9DBACDE2090BDB500C03C12 /* BackgammonBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgammonBoardView.swift; sourceTree = "<group>"; };
+		A9DBACE02090BDD700C03C12 /* FourBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourBoardView.swift; sourceTree = "<group>"; };
+		A9DBACE22090BDFA00C03C12 /* TicTacToeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeBoardView.swift; sourceTree = "<group>"; };
+		A9DBACE42090BE1500C03C12 /* SudokuBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBoardView.swift; sourceTree = "<group>"; };
+		A9DBACE62090BE3800C03C12 /* DotsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsBoardView.swift; sourceTree = "<group>"; };
+		A9DBACE82090BE5B00C03C12 /* GoBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoBoardView.swift; sourceTree = "<group>"; };
+		A9DBACEA2090BE7700C03C12 /* MancalaBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MancalaBoardView.swift; sourceTree = "<group>"; };
+		A9DBACEC2090BE9A00C03C12 /* PegsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegsBoardView.swift; sourceTree = "<group>"; };
+		A9DBACEE209363C000C03C12 /* Alquerque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alquerque.swift; sourceTree = "<group>"; };
+		A9DBACF0209363D500C03C12 /* Ludo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ludo.swift; sourceTree = "<group>"; };
+		A9DBACF220936DA200C03C12 /* DoublesBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublesBoardView.swift; sourceTree = "<group>"; };
 		A9DD740A1C62A34600219C78 /* Games.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Games.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DD740D1C62A34600219C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DD740F1C62A34600219C78 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -77,19 +116,18 @@
 		A9DD74221C62A35300219C78 /* Checkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkers.swift; sourceTree = "<group>"; };
 		A9DD74231C62A35300219C78 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chess.swift; sourceTree = "<group>"; };
 		A9DD74241C62A35300219C78 /* Mancala.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mancala.swift; sourceTree = "<group>"; };
-		A9DD74251C62A35300219C78 /* Minesweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Minesweeper.swift; sourceTree = "<group>"; };
+		A9DD74251C62A35300219C78 /* Bombsweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bombsweeper.swift; sourceTree = "<group>"; };
 		A9DD74261C62A35300219C78 /* Sudoku.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sudoku.swift; sourceTree = "<group>"; };
 		A9DD74271C62A35300219C78 /* TicTacToe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
 		A9DD74291C62A35300219C78 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A9DD742A1C62A35300219C78 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A9DD742B1C62A35300219C78 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		A9DD742E1C62A35300219C78 /* MatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
+		A9DD742E1C62A35300219C78 /* CheckerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckerView.swift; sourceTree = "<group>"; };
 		A9DD742F1C62A35300219C78 /* SudokuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
 		A9DD74301C62A35300219C78 /* TicTacToeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeView.swift; sourceTree = "<group>"; };
 		A9DD74311C62A35300219C78 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameboard.swift; sourceTree = "<group>"; };
-		A9DD74321C62A35300219C78 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A9DD74331C62A35300219C78 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
-		A9E2BE8B208C2BDF00AE7FB1 /* ConnectFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourView.swift; sourceTree = "<group>"; };
+		A9E2BE8B208C2BDF00AE7FB1 /* FourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourView.swift; sourceTree = "<group>"; };
 		A9E2BE8D208C713700AE7FB1 /* DotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		A9EA60A2208AC3B400CDE60A /* BackgammonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgammonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +150,8 @@
 				A90F209B2088CE7200C3F6A4 /* Battleship.swift */,
 				A90F20A52088D85300C3F6A4 /* Majong.swift */,
 				A90F20A72088D8F900C3F6A4 /* Dominos.swift */,
+				A9DBACCE2090AAFA00C03C12 /* Trouble.swift */,
+				A9DBACD02090AB0400C03C12 /* Tetris.swift */,
 			);
 			path = InProgress;
 			sourceTree = "<group>";
@@ -119,6 +159,19 @@
 		A9DBACA8208EDE2B00C03C12 /* BoardViews */ = {
 			isa = PBXGroup;
 			children = (
+				A9DBACDE2090BDB500C03C12 /* BackgammonBoardView.swift */,
+				A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */,
+				A9DBACDC2090BD8A00C03C12 /* CheckersBoardView.swift */,
+				A9DBACDA2090BD6E00C03C12 /* ChessBoardView.swift */,
+				A9DBACE62090BE3800C03C12 /* DotsBoardView.swift */,
+				A9DBACF220936DA200C03C12 /* DoublesBoardView.swift */,
+				A9DBACE02090BDD700C03C12 /* FourBoardView.swift */,
+				A9DBACE82090BE5B00C03C12 /* GoBoardView.swift */,
+				A9DBACEA2090BE7700C03C12 /* MancalaBoardView.swift */,
+				A9DBACD82090BD4B00C03C12 /* MemoryBoardView.swift */,
+				A9DBACEC2090BE9A00C03C12 /* PegsBoardView.swift */,
+				A9DBACE42090BE1500C03C12 /* SudokuBoardView.swift */,
+				A9DBACE22090BDFA00C03C12 /* TicTacToeBoardView.swift */,
 				A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */,
 			);
 			path = BoardViews;
@@ -180,7 +233,6 @@
 				A9DD74201C62A35300219C78 /* Boards */,
 				A9DD74281C62A35300219C78 /* Core */,
 				A9DD74311C62A35300219C78 /* Gameboard.swift */,
-				A9DD74321C62A35300219C78 /* Helper.swift */,
 				A9DD74331C62A35300219C78 /* Validation.swift */,
 			);
 			name = Gameboards;
@@ -190,15 +242,19 @@
 		A9DD74201C62A35300219C78 /* Boards */ = {
 			isa = PBXGroup;
 			children = (
+				A9DBACEE209363C000C03C12 /* Alquerque.swift */,
 				A90F20A92088E42900C3F6A4 /* Backgammon.swift */,
+				A9DD74251C62A35300219C78 /* Bombsweeper.swift */,
 				A9DD74221C62A35300219C78 /* Checkers.swift */,
 				A9DD74231C62A35300219C78 /* Chess.swift */,
-				A90F209D2088CE8000C3F6A4 /* ConnectFour.swift */,
 				A90F209F2088CEAE00C3F6A4 /* Dots.swift */,
+				A9DBACCC2090AAEF00C03C12 /* Doubles.swift */,
+				A90F209D2088CE8000C3F6A4 /* Four.swift */,
 				A99018311C62FC5100FFEBAF /* Go.swift */,
+				A9DBACF0209363D500C03C12 /* Ludo.swift */,
 				A9DD74241C62A35300219C78 /* Mancala.swift */,
 				A90F20A12088CECF00C3F6A4 /* Memory.swift */,
-				A9DD74251C62A35300219C78 /* Minesweeper.swift */,
+				A9DBACD22090AE2D00C03C12 /* Pegs.swift */,
 				A9DD74261C62A35300219C78 /* Sudoku.swift */,
 				A9DD74271C62A35300219C78 /* TicTacToe.swift */,
 				A90F20A32088CF4A00C3F6A4 /* Words.swift */,
@@ -222,11 +278,12 @@
 			isa = PBXGroup;
 			children = (
 				A9EA60A2208AC3B400CDE60A /* BackgammonView.swift */,
-				A9E2BE8B208C2BDF00AE7FB1 /* ConnectFourView.swift */,
 				A9E2BE8D208C713700AE7FB1 /* DotsView.swift */,
+				A9E2BE8B208C2BDF00AE7FB1 /* FourView.swift */,
 				A99018331C62FC6500FFEBAF /* GoView.swift */,
 				A9DBACA1208CEB5D00C03C12 /* MancalaView.swift */,
-				A9DD742E1C62A35300219C78 /* MatrixView.swift */,
+				A9DD742E1C62A35300219C78 /* CheckerView.swift */,
+				A9DBACD42090B61100C03C12 /* PegsView.swift */,
 				A9DD742F1C62A35300219C78 /* SudokuView.swift */,
 				A9DD74301C62A35300219C78 /* TicTacToeView.swift */,
 				A9DBACA3208E0EF200C03C12 /* WordsView.swift */,
@@ -309,38 +366,57 @@
 			buildActionMask = 2147483647;
 			files = (
 				A90F209C2088CE7200C3F6A4 /* Battleship.swift in Sources */,
+				A9DBACED2090BE9A00C03C12 /* PegsBoardView.swift in Sources */,
 				A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */,
 				A9DD743A1C62A35300219C78 /* TicTacToe.swift in Sources */,
+				A9DBACEB2090BE7700C03C12 /* MancalaBoardView.swift in Sources */,
+				A9DBACF1209363D500C03C12 /* Ludo.swift in Sources */,
 				A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */,
+				A9DBACD92090BD4B00C03C12 /* MemoryBoardView.swift in Sources */,
+				A9DBACDD2090BD8A00C03C12 /* CheckersBoardView.swift in Sources */,
 				A90F209A2088CDDA00C3F6A4 /* Pilare.swift in Sources */,
 				A9DD74351C62A35300219C78 /* Checkers.swift in Sources */,
 				A90F20AA2088E42900C3F6A4 /* Backgammon.swift in Sources */,
+				A9DBACF320936DA200C03C12 /* DoublesBoardView.swift in Sources */,
 				A9DBACA4208E0EF200C03C12 /* WordsView.swift in Sources */,
 				A9EA60A3208AC3B400CDE60A /* BackgammonView.swift in Sources */,
 				A9DD74391C62A35300219C78 /* Sudoku.swift in Sources */,
 				A99018341C62FC6500FFEBAF /* GoView.swift in Sources */,
-				A9DD74431C62A35300219C78 /* Helper.swift in Sources */,
+				A9DBACE52090BE1500C03C12 /* SudokuBoardView.swift in Sources */,
+				A9DBACD52090B61100C03C12 /* PegsView.swift in Sources */,
+				A9DBACE32090BDFA00C03C12 /* TicTacToeBoardView.swift in Sources */,
 				A90F20B1208A6D7200C3F6A4 /* MainViewController.swift in Sources */,
 				A9DD743C1C62A35300219C78 /* Grid.swift in Sources */,
-				A90F209E2088CE8000C3F6A4 /* ConnectFour.swift in Sources */,
+				A9DBACCF2090AAFA00C03C12 /* Trouble.swift in Sources */,
+				A9DBACE12090BDD700C03C12 /* FourBoardView.swift in Sources */,
+				A90F209E2088CE8000C3F6A4 /* Four.swift in Sources */,
+				A9DBACE72090BE3800C03C12 /* DotsBoardView.swift in Sources */,
 				A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */,
+				A9DBACCD2090AAEF00C03C12 /* Doubles.swift in Sources */,
+				A9DBACD12090AB0400C03C12 /* Tetris.swift in Sources */,
+				A9DBACEF209363C000C03C12 /* Alquerque.swift in Sources */,
 				A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */,
 				A9DBACA2208CEB5D00C03C12 /* MancalaView.swift in Sources */,
+				A9DBACD72090BCFB00C03C12 /* BombsweeperBoardView.swift in Sources */,
 				A9DD743D1C62A35300219C78 /* Operators.swift in Sources */,
 				A90F20A82088D8F900C3F6A4 /* Dominos.swift in Sources */,
 				A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */,
+				A9DBACDB2090BD6E00C03C12 /* ChessBoardView.swift in Sources */,
+				A9DBACE92090BE5B00C03C12 /* GoBoardView.swift in Sources */,
 				A9DD74411C62A35300219C78 /* TicTacToeView.swift in Sources */,
 				A9DD743B1C62A35300219C78 /* Extensions.swift in Sources */,
+				A9DBACDF2090BDB500C03C12 /* BackgammonBoardView.swift in Sources */,
 				A90F20A02088CEAE00C3F6A4 /* Dots.swift in Sources */,
 				A99018321C62FC5100FFEBAF /* Go.swift in Sources */,
 				A9DD74441C62A35300219C78 /* Validation.swift in Sources */,
 				A9DD74371C62A35300219C78 /* Mancala.swift in Sources */,
-				A9E2BE8C208C2BDF00AE7FB1 /* ConnectFourView.swift in Sources */,
+				A9E2BE8C208C2BDF00AE7FB1 /* FourView.swift in Sources */,
+				A9DBACD32090AE2D00C03C12 /* Pegs.swift in Sources */,
 				A9DD74361C62A35300219C78 /* Chess.swift in Sources */,
 				A90F20A42088CF4A00C3F6A4 /* Words.swift in Sources */,
-				A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */,
+				A9DD743F1C62A35300219C78 /* CheckerView.swift in Sources */,
 				A90F20A22088CECF00C3F6A4 /* Memory.swift in Sources */,
-				A9DD74381C62A35300219C78 /* Minesweeper.swift in Sources */,
+				A9DD74381C62A35300219C78 /* Bombsweeper.swift in Sources */,
 				A9E2BE8E208C713700AE7FB1 /* DotsView.swift in Sources */,
 				A90F20A62088D85300C3F6A4 /* Majong.swift in Sources */,
 			);
@@ -464,7 +540,7 @@
 				DEVELOPMENT_TEAM = 965FHW76SM;
 				INFOPLIST_FILE = Games/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.Games;
+				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,7 +554,7 @@
 				DEVELOPMENT_TEAM = 965FHW76SM;
 				INFOPLIST_FILE = Games/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.Games;
+				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

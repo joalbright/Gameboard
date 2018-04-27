@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -213,10 +213,10 @@
             </objects>
             <point key="canvasLocation" x="863" y="-215"/>
         </scene>
-        <!--Minesweeper-->
+        <!--Bombsweeper-->
         <scene sceneID="vzU-2J-1gG">
             <objects>
-                <viewController storyboardIdentifier="MinesweeperBoard" id="mKZ-W3-BsF" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BombsweeperBoard" id="mKZ-W3-BsF" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="15v-hZ-UTy"/>
                         <viewControllerLayoutGuide type="bottom" id="u21-rX-duw"/>
@@ -225,7 +225,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQh-QH-dj9" customClass="MinesweeperBoardView" customModule="Games" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQh-QH-dj9" customClass="BombsweeperBoardView" customModule="Games" customModuleProvider="target">
                                 <rect key="frame" x="30" y="176" width="315" height="315"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -261,7 +261,7 @@
                                 </segments>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="chooseMinesweeperMarkWithSender:" destination="mKZ-W3-BsF" eventType="valueChanged" id="9au-sN-Wla"/>
+                                    <action selector="chooseBombsweeperMarkWithSender:" destination="mKZ-W3-BsF" eventType="valueChanged" id="9au-sN-Wla"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
@@ -277,8 +277,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JoY-ga-UPv"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Mines" id="Poe-Kt-qrv"/>
-                    <navigationItem key="navigationItem" title="Minesweeper" id="lYI-Mf-oBq">
+                    <tabBarItem key="tabBarItem" title="Bombs" id="Poe-Kt-qrv"/>
+                    <navigationItem key="navigationItem" title="Bombsweeper" id="lYI-Mf-oBq">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="k0k-x1-emq">
                             <connections>
                                 <action selector="resetBoardWithSender:" destination="mKZ-W3-BsF" id="zMu-nI-1fP"/>
@@ -416,6 +416,9 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
                                         <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -457,7 +460,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RwY-G8-bLt" customClass="BackgammonBoardView" customModule="Games" customModuleProvider="target">
-                                <rect key="frame" x="30" y="189" width="315" height="290.5"/>
+                                <rect key="frame" x="30" y="188.5" width="315" height="290"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RwY-G8-bLt" secondAttribute="height" multiplier="13:12" id="AWQ-Cd-GeV"/>
@@ -478,7 +481,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Logic : Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3h7-t5-23g">
-                                <rect key="frame" x="47" y="499.5" width="280" height="30"/>
+                                <rect key="frame" x="47.5" y="498.5" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="6DI-4O-BRU"/>
                                     <constraint firstAttribute="height" constant="30" id="xhI-0Y-cRQ"/>
@@ -512,7 +515,7 @@
             </objects>
             <point key="canvasLocation" x="862" y="1209"/>
         </scene>
-        <!--Connect Four-->
+        <!--Four-->
         <scene sceneID="2U3-yr-Wv6">
             <objects>
                 <viewController storyboardIdentifier="Connect FourBoard" id="HT0-w1-aEX" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
@@ -520,8 +523,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Logic : Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-dc-c6H">
-                                <rect key="frame" x="47" y="511" width="280" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-dc-c6H">
+                                <rect key="frame" x="47.5" y="511" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="Ms9-RU-Qzt"/>
                                     <constraint firstAttribute="height" constant="30" id="hWg-ga-p2o"/>
@@ -530,7 +533,7 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F08-Xx-ANH" customClass="ConnectFourBoardView" customModule="Games" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F08-Xx-ANH" customClass="FourBoardView" customModule="Games" customModuleProvider="target">
                                 <rect key="frame" x="30" y="176" width="315" height="315"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -549,6 +552,9 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
                                         <color key="value" red="0.94695395611702127" green="0.84503667791321002" blue="0.024519923057701384" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -563,14 +569,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JUa-kw-vR0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Connect Four" id="NZe-aG-slK">
+                    <navigationItem key="navigationItem" title="Four" id="NZe-aG-slK">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="FAd-2m-fOU">
                             <connections>
-                                <action selector="resetBoardWithSender:" destination="SpV-JT-evY" id="36Q-ic-0hz"/>
+                                <action selector="resetBoardWithSender:" destination="HT0-w1-aEX" id="3Sv-Ca-h6f"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="F08-Xx-ANH" id="ory-eW-mUQ"/>
+                        <outlet property="playerLabel" destination="CmH-dc-c6H" id="1vx-aA-nyR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gc0-FM-P4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -748,6 +758,9 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
                                         <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxo-gr-3qN">
@@ -793,7 +806,7 @@
         <!--Words-->
         <scene sceneID="bk3-U8-oju">
             <objects>
-                <viewController storyboardIdentifier="WordsBoard" id="aZg-jO-qiJ" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WordsBoard" id="aZg-jO-qiJ" customClass="WordsBoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Srp-Zi-C5F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -817,42 +830,89 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
                                         <color key="value" red="0.92222222222222228" green="0.87791424554639652" blue="0.77996624228395073" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" red="0.76739004629629626" green="0.69168771416350172" blue="0.52433878915627141" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                        <color key="value" red="0.53723958333333333" green="0.50154108968220124" blue="0.42262536319685567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Logic : Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqB-Zk-Rax">
-                                <rect key="frame" x="47.5" y="511" width="280" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNi-cZ-J14" customClass="SimpleView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="28" y="509" width="319" height="49"/>
+                                <color key="backgroundColor" red="0.52994791669999997" green="0.45101102510000002" blue="0.32347370669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HPB-LX-vdH">
+                                <rect key="frame" x="30" y="511" width="315" height="45"/>
+                                <color key="backgroundColor" red="0.59166666670000001" green="0.50570995490000004" blue="0.31569251539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="Sqm-al-hKN"/>
-                                    <constraint firstAttribute="height" constant="30" id="gXV-Tl-ryo"/>
+                                    <constraint firstAttribute="width" secondItem="HPB-LX-vdH" secondAttribute="height" multiplier="7:1" id="Lkb-h1-uAo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9q-vq-n4F" customClass="SimpleButton" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="137" y="576" width="101" height="38"/>
+                                <color key="backgroundColor" red="0.52994791669999997" green="0.45101102510000002" blue="0.32347370669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.92222222220000005" green="0.87791424549999997" blue="0.7799662423" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                <state key="normal" title="Get Tiles"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="fillRack" destination="Wc3-ji-qpl" eventType="touchUpInside" id="srr-fu-018"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="centerX" secondItem="Srp-Zi-C5F" secondAttribute="centerX" id="02l-10-4WW"/>
+                            <constraint firstItem="RNi-cZ-J14" firstAttribute="trailing" secondItem="HPB-LX-vdH" secondAttribute="trailing" constant="2" id="Dfz-I9-6XP"/>
+                            <constraint firstItem="HPB-LX-vdH" firstAttribute="top" secondItem="Wc3-ji-qpl" secondAttribute="bottom" constant="20" id="Iz2-rf-OhQ"/>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SXE-Bd-BBO" secondAttribute="top" constant="100" id="Q9z-mx-r5Z"/>
+                            <constraint firstItem="RNi-cZ-J14" firstAttribute="top" secondItem="HPB-LX-vdH" secondAttribute="top" constant="-2" id="SQt-wm-m0a"/>
+                            <constraint firstItem="i9q-vq-n4F" firstAttribute="centerX" secondItem="Srp-Zi-C5F" secondAttribute="centerX" id="VwD-3Z-GnV"/>
+                            <constraint firstItem="i9q-vq-n4F" firstAttribute="top" secondItem="HPB-LX-vdH" secondAttribute="bottom" constant="20" id="W3N-Tt-GhU"/>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="centerY" secondItem="Srp-Zi-C5F" secondAttribute="centerY" id="bqG-ek-BVP"/>
+                            <constraint firstItem="HPB-LX-vdH" firstAttribute="leading" secondItem="SXE-Bd-BBO" secondAttribute="leading" constant="30" id="cu2-9d-zwq"/>
+                            <constraint firstItem="RNi-cZ-J14" firstAttribute="leading" secondItem="HPB-LX-vdH" secondAttribute="leading" constant="-2" id="iFf-4X-b5b"/>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="leading" secondItem="SXE-Bd-BBO" secondAttribute="leading" priority="750" constant="30" id="lDq-Vf-zZI"/>
-                            <constraint firstItem="FqB-Zk-Rax" firstAttribute="centerX" secondItem="Srp-Zi-C5F" secondAttribute="centerX" id="lEo-UY-2vK"/>
-                            <constraint firstItem="FqB-Zk-Rax" firstAttribute="top" secondItem="Wc3-ji-qpl" secondAttribute="bottom" constant="20" id="qpI-X3-d7d"/>
+                            <constraint firstItem="RNi-cZ-J14" firstAttribute="bottom" secondItem="HPB-LX-vdH" secondAttribute="bottom" constant="2" id="nbh-zz-nIp"/>
+                            <constraint firstItem="HPB-LX-vdH" firstAttribute="centerX" secondItem="Srp-Zi-C5F" secondAttribute="centerX" id="o8P-xq-Qj2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SXE-Bd-BBO"/>
                     </view>
                     <navigationItem key="navigationItem" title="Words" id="yYh-Re-saW">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="cAA-La-GS0">
                             <connections>
-                                <action selector="resetBoardWithSender:" destination="SpV-JT-evY" id="yrX-qu-KBZ"/>
+                                <action selector="resetBoardWithSender:" destination="aZg-jO-qiJ" id="Rxb-E2-MLO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="Wc3-ji-qpl" id="Mcz-uY-Hsb"/>
+                        <outlet property="rackHolder" destination="HPB-LX-vdH" id="hIp-at-ahV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uz5-Yk-kBm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2343" y="-215"/>
+            <point key="canvasLocation" x="2341.5999999999999" y="-215.44227886056973"/>
         </scene>
         <!--Dots-->
         <scene sceneID="69C-k4-9yF">
@@ -878,10 +938,13 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
                                         <color key="value" red="0.93731299867021278" green="0.095529291787324291" blue="0.28322202855214873" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Logic : Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfn-ap-krq">
-                                <rect key="frame" x="47" y="511" width="280" height="30"/>
+                                <rect key="frame" x="47.5" y="511" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8sQ-Qy-aXU"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="yUC-8H-XXV"/>
@@ -936,10 +999,13 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
                                         <color key="value" red="0.79130651595744683" green="0.71561907024572147" blue="0.5680277928004408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Logic : Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nak-BM-Owy">
-                                <rect key="frame" x="47" y="511" width="280" height="30"/>
+                                <rect key="frame" x="47.5" y="511" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="7tf-OJ-8eZ"/>
                                     <constraint firstAttribute="height" constant="30" id="eoh-xA-LZe"/>
@@ -972,6 +1038,149 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZU-FK-whr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2342" y="1209"/>
+        </scene>
+        <!--Pegs-->
+        <scene sceneID="Jdq-VH-JnC">
+            <objects>
+                <viewController storyboardIdentifier="PegsBoard" id="Koq-ec-I4f" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2go-fB-kxo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BDP-tQ-Ur5" customClass="PegsBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="30" y="176" width="315" height="315"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="BDP-tQ-Ur5" secondAttribute="height" multiplier="1:1" id="OPG-0F-JPg"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" red="0.59166666670000001" green="0.50570995490000004" blue="0.31569251539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
+                                        <color key="value" red="1" green="0.99996998520000002" blue="0.99996998520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BDP-tQ-Ur5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ehI-HF-Qbc" secondAttribute="top" constant="100" id="HPN-Om-HqK"/>
+                            <constraint firstItem="BDP-tQ-Ur5" firstAttribute="centerY" secondItem="2go-fB-kxo" secondAttribute="centerY" id="Lmo-zL-WTd"/>
+                            <constraint firstItem="BDP-tQ-Ur5" firstAttribute="centerX" secondItem="2go-fB-kxo" secondAttribute="centerX" id="i77-fI-WAJ"/>
+                            <constraint firstItem="BDP-tQ-Ur5" firstAttribute="leading" secondItem="ehI-HF-Qbc" secondAttribute="leading" priority="750" constant="30" id="mf7-Az-OGX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ehI-HF-Qbc"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pegs" id="dIj-uu-FLo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Rht-uU-ndR">
+                            <connections>
+                                <action selector="resetBoardWithSender:" destination="Koq-ec-I4f" id="Mbn-jZ-XhW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="BDP-tQ-Ur5" id="LZ7-GR-lxG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3wQ-WS-hH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3092" y="-215"/>
+        </scene>
+        <!--Doubles-->
+        <scene sceneID="tI1-5g-r6t">
+            <objects>
+                <viewController storyboardIdentifier="DoublesBoard" id="iUm-gh-8Eh" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="udY-UE-cYB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="142-j5-tfD" customClass="DoublesBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="30" y="176" width="315" height="315"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="142-j5-tfD" secondAttribute="height" multiplier="1:1" id="0VN-sW-cfZ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
+                                        <color key="value" red="1" green="0.99996998520000002" blue="0.99996998520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="142-j5-tfD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CMy-GU-6Fd" secondAttribute="top" constant="100" id="I6e-kl-yhu"/>
+                            <constraint firstItem="142-j5-tfD" firstAttribute="leading" secondItem="CMy-GU-6Fd" secondAttribute="leading" priority="750" constant="30" id="Sjm-x2-dhp"/>
+                            <constraint firstItem="142-j5-tfD" firstAttribute="centerX" secondItem="udY-UE-cYB" secondAttribute="centerX" id="ZZ6-aa-Z77"/>
+                            <constraint firstItem="142-j5-tfD" firstAttribute="centerY" secondItem="udY-UE-cYB" secondAttribute="centerY" id="kTE-1f-EtG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CMy-GU-6Fd"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jwn-fA-jj2" appends="YES" id="cIZ-qr-lmy"/>
+                            <outletCollection property="gestureRecognizers" destination="YV5-kp-ylg" appends="YES" id="6A2-t9-nsy"/>
+                            <outletCollection property="gestureRecognizers" destination="syo-mF-4d2" appends="YES" id="KqA-Wy-F9e"/>
+                            <outletCollection property="gestureRecognizers" destination="HRm-YG-ghq" appends="YES" id="iDO-Qm-IzG"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Doubles" id="LEQ-ss-xwB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ipi-4k-xFG">
+                            <connections>
+                                <action selector="resetBoardWithSender:" destination="iUm-gh-8Eh" id="pFp-6V-Mdo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="142-j5-tfD" id="8B0-tb-7lV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mty-of-nTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="jwn-fA-jj2">
+                    <connections>
+                        <action selector="swipe:" destination="iUm-gh-8Eh" id="CNp-TO-xfm"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="YV5-kp-ylg">
+                    <connections>
+                        <action selector="swipe:" destination="iUm-gh-8Eh" id="PWZ-c6-LH0"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="syo-mF-4d2">
+                    <connections>
+                        <action selector="swipe:" destination="iUm-gh-8Eh" id="ekP-cs-2NQ"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="HRm-YG-ghq">
+                    <connections>
+                        <action selector="swipe:" destination="iUm-gh-8Eh" id="TKG-r4-xZG"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3092" y="499"/>
         </scene>
     </scenes>
 </document>

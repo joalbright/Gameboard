@@ -1,5 +1,5 @@
 //
-//  ConnectFourView.swift
+//  FourView.swift
 //  Games
 //
 //  Created by Jo Albright on 4/21/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConnectFourView: UIView {
+class FourView: UIView {
     
     public var p: CGFloat = 15
     public var holeColor: UIColor = .white

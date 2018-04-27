@@ -114,7 +114,7 @@ public struct Chess {
         guard !hint else { return nil }
         
         let piece = grid[s2.0,s2.1]
-        
+
         grid[s2.0,s2.1] = p1 // place my piece in target square
         grid[s1.0,s1.1] = "" // remove my piece from original square
         

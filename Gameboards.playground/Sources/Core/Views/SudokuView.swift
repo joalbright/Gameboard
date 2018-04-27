@@ -6,10 +6,10 @@ public class SudokuView: UIView {
     
     public override func draw(_ rect: CGRect) {
         
-        let c = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()
         
-        c?.setLineCap(.round)
-        c?.setLineJoin(.round)
+        context?.setLineCap(.round)
+        context?.setLineJoin(.round)
         
         lineColor.set()
         
@@ -20,17 +20,17 @@ public class SudokuView: UIView {
             
             for col in 1...8 {
                 
-                c?.setLineWidth(col % 3 == 0 ? 3 : 1)
+                context?.setLineWidth(col % 3 == 0 ? 3 : 1)
 
-                c?.move(to: CGPoint(x: w9 * col, y: 0))
-                c?.addLine(to: CGPoint(x: w9 * col, y: rect.height))
-                c?.strokePath()
+                context?.move(to: CGPoint(x: w9 * col, y: 0))
+                context?.addLine(to: CGPoint(x: w9 * col, y: rect.height))
+                context?.strokePath()
                 
-                c?.setLineWidth(row % 3 == 0 ? 3 : 1)
+                context?.setLineWidth(row % 3 == 0 ? 3 : 1)
 
-                c?.move(to: CGPoint(x: 0, y: h9 * row))
-                c?.addLine(to: CGPoint(x: rect.width, y: h9 * row))
-                c?.strokePath()
+                context?.move(to: CGPoint(x: 0, y: h9 * row))
+                context?.addLine(to: CGPoint(x: rect.width, y: h9 * row))
+                context?.strokePath()
                 
             }
             

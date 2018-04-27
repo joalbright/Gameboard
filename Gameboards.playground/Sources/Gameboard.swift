@@ -30,22 +30,24 @@ public struct Gameboard {
     
     public enum BoardType: String {
         
-        case backgammon, checkers, chess, connectfour, dots, go, mancala, memory, minesweeper, sudoku, tictactoe, words
+        case backgammon, bombsweeper, checkers, chess, dots, doubles, four, go, mancala, memory, pegs, sudoku, tictactoe, words
         
-        static var playable: [BoardType] = [.backgammon,.checkers,.chess,.connectfour,.dots,.go,.mancala,.memory,.minesweeper,.sudoku,.tictactoe, .words]
+        static var playable: [BoardType] = [.backgammon,.bombsweeper,.checkers,.chess,.dots,.doubles,.four,.go,.memory,.pegs,.sudoku,.tictactoe, .words]
         
         public var name: String {
             
             switch self {
             case .backgammon: return "Backgammon"
+            case .bombsweeper: return "Bombsweeper"
             case .checkers: return "Checkers"
             case .chess: return "Chess"
-            case .connectfour: return "Connect Four"
             case .dots: return "Dots"
+            case .doubles: return "Doubles"
+            case .four: return "Four"
             case .go: return "Go"
             case .mancala: return "Mancala"
             case .memory: return "Memory"
-            case .minesweeper: return "Minesweeper"
+            case .pegs: return "Pegs"
             case .sudoku: return "Sudoku"
             case .tictactoe: return "Tic Tac Toe"
             case .words: return "Words"
@@ -57,14 +59,16 @@ public struct Gameboard {
             
             switch self {
             case .backgammon: return "⚄"
-            case .checkers: return "✜"
+            case .bombsweeper: return "⚑"
+            case .checkers: return "●"
             case .chess: return "♞"
-            case .connectfour: return "◉"
             case .dots: return "⦿"
+            case .doubles: return "⚭"
+            case .four: return "◉"
             case .go: return "●"
             case .mancala: return "✾"
             case .memory: return "🂠"
-            case .minesweeper: return "⚑"
+            case .pegs: return "✜"
             case .sudoku: return "9"
             case .tictactoe: return "⌗"
             case .words: return "☐"
@@ -81,13 +85,19 @@ public struct Gameboard {
         
     }
     
-    public var boardColors = BoardColors() { didSet { grid.boardColors = boardColors } }
+    public var padding: CGFloat = 0 { didSet { grid.padding = padding } }
+    public var colors = BoardColors() { didSet { grid.colors = colors } }
     
     var _type: BoardType
     
     var playerCount: Int = 2
     var playerTurn: Int = 0 { didSet { playerChange?(playerTurn + 1) } }
-    var playerPieces: [Piece] = [] { didSet { grid.playerPieces = playerPieces } }
+    var playerPieces: [Piece] = [] {
+        didSet {
+            grid.playerPieces = playerPieces
+            playerCount = playerPieces.count
+        }
+    }
     
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
     var solution: Grid = Grid(1 ✕ (1 ✕ ""))
@@ -127,6 +137,48 @@ public struct Gameboard {
         
     }
     
+    public mutating func showAvailable(_ s1: Square) {
+        
+        highlights = []
+        
+        switch _type {
+            
+        case .chess, .checkers, .pegs:
+            
+            selected = nil
+            
+            for r in grid.rowRange {
+                
+                for c in grid.colRange {
+                    
+                    guard let _ = try? validateMove(s1, (r,c), true) else { continue }
+                    selected = s1
+                    highlights.append((r,c))
+                    
+                }
+                
+            }
+            
+        default: break
+            
+        }
+        
+    }
+    
+    public mutating func showAvailable(_ s1: ChessSquare) {
+        
+        let cols: [String] = "abcdefgh".map { "\($0)" }
+        guard let c1 = cols.index(of: s1.0) else { return }
+        let r1 = 8 - s1.1
+        
+        showAvailable((r1,c1))
+        
+    }
+    
+    public mutating func drop(pieceAt s1: Square) throws { try validateDrop(s1) }
+    
+    public mutating func place(tile t1: Words.Letter, at s1: Square) throws { try validate(t1, s1)  }
+    
     public mutating func guess(toSquare s1: Square) throws { try validateGuess(s1) }
     
     public mutating func guess(toSquare s1: Square, withGuess g1: Guess) throws { try validateGuess(s1, g1) }
@@ -136,7 +188,6 @@ public struct Gameboard {
     public mutating func move(toSquare s1: Square) throws {
         
         try validateMove(s1)
-        
         changePlayer()
     
     }
@@ -144,9 +195,7 @@ public struct Gameboard {
     public mutating func move(pieceAt s1: Square, toSquare s2: Square) throws -> Piece? {
         
         let piece = try validateMove(s1,s2)
-        
         changePlayer()
-        
         return piece
     
     }
@@ -181,6 +230,17 @@ public struct Gameboard {
             grid = Backgammon.board
             playerPieces = Backgammon.playerPieces
             
+        case .bombsweeper:
+            
+            solution = Bombsweeper.board
+            grid = Bombsweeper.field
+            playerPieces = Bombsweeper.playerPieces
+            
+            guard testing else { break }
+            
+            solution = Bombsweeper.staticboard
+            playerPieces = Bombsweeper.playerPieces
+            
         case .checkers:
             
             grid = Checkers.board
@@ -191,16 +251,6 @@ public struct Gameboard {
             grid = Chess.board
             playerPieces = Chess.playerPieces
             
-        case .connectfour:
-            
-            grid = ConnectFour.board
-            playerPieces = ConnectFour.playerPieces
-            
-            guard testing else { break }
-            
-            grid = ConnectFour.staticboard
-            playerPieces = ConnectFour.playerPieces
-            
         case .dots:
             
             grid = Dots.board
@@ -210,6 +260,21 @@ public struct Gameboard {
             
             grid = Dots.staticboard
             playerPieces = Dots.playerPieces
+            
+        case .doubles:
+            
+            grid = Doubles.board
+            playerPieces = Doubles.playerPieces
+            
+        case .four:
+            
+            grid = Four.board
+            playerPieces = Four.playerPieces
+            
+            guard testing else { break }
+            
+            grid = Four.staticboard
+            playerPieces = Four.playerPieces
             
         case .go:
             
@@ -232,16 +297,10 @@ public struct Gameboard {
             grid = Memory.puzzle(difficulty)
             playerPieces = Memory.playerPieces
             
-        case .minesweeper:
+        case .pegs:
             
-            solution = Minesweeper.board
-            grid = Minesweeper.field
-            playerPieces = Minesweeper.playerPieces
-            
-            guard testing else { break }
-            
-            solution = Minesweeper.staticboard
-            playerPieces = Minesweeper.playerPieces
+            grid = Pegs.board
+            playerPieces = Pegs.playerPieces
             
         case .sudoku:
             
@@ -277,13 +336,15 @@ public struct Gameboard {
         switch _type {
             
         case .backgammon: return grid.backgammon(rect)
+        case .bombsweeper: return grid.bomb(rect)
         case .checkers, .chess: return grid.checker(rect, highlights: highlights, selected: selected)
-        case .connectfour: return grid.connectfour(rect)
+        case .four: return grid.four(rect)
         case .dots: return grid.dots(rect)
+        case .doubles: return grid.doubles(rect)
         case .go: return grid.go(rect)
         case .mancala: return grid.mancala(rect)
         case .memory: return grid.memory(rect)
-        case .minesweeper: return grid.mine(rect)
+        case .pegs: return grid.pegs(rect, highlights: highlights, selected: selected)
         case .sudoku: return grid.sudoku(rect, highlights: highlights)
         case .tictactoe: return grid.ttt(rect)
         case .words: return grid.words(rect)

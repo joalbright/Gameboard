@@ -165,3 +165,49 @@ public struct Sudoku {
     }
     
 }
+
+extension Grid {
+    
+    public func sudoku(_ rect: CGRect, highlights: [Square]) -> UIView {
+        
+        let view = SudokuView(frame: rect)
+        
+        view.backgroundColor = colors.background
+        view.lineColor = colors.foreground
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        
+        let w = rect.width / content.count
+        let h = rect.height / content.count
+        
+        for (r,row) in content.enumerated() {
+            
+            for (c,item) in row.enumerated() {
+                
+                let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                
+                label.text = "\(item)"
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)
+                label.textColor = colors.foreground
+                
+                for highlight in highlights {
+                    
+                    guard highlight.0 == r && highlight.1 == c else { continue }
+                    label.textColor = colors.highlight
+                    label.backgroundColor = colors.foreground
+                    
+                }
+                
+                view.addSubview(label)
+                
+            }
+            
+        }
+        
+        return view
+        
+    }
+    
+}

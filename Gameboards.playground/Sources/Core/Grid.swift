@@ -31,9 +31,9 @@ public class Grid {
         
     }
     
-    public func checker(_ rect: CGRect) -> UIView {
+    public func matrix(_ rect: CGRect) -> UIView {
         
-        let view = CheckerView(frame: rect)
+        let view = MatrixView(frame: rect)
         
         view.p = padding
         view.backgroundColor = colors.background

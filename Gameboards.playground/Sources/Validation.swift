@@ -69,6 +69,7 @@ extension Gameboard {
     
     func validatePlayer(_ piece: Piece) -> Bool {
         
+        guard playerPieces.count > 0 else { return true }
         return playerPieces[playerTurn].contains(piece)
         
     }
@@ -211,6 +212,7 @@ extension Gameboard {
             
         case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
         case .chess: return try Chess.validateMove(s1, s2, p1, p2, grid, hint)
+        case .doubles: return try Doubles.validateMove(s1, s2, p1, p2, grid)
         case .pegs: return try Pegs.validateMove(s1, s2, p1, p2, grid, hint)
         default: throw MoveError.incorrectpiece
             

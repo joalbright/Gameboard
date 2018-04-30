@@ -266,6 +266,14 @@ public struct Gameboard {
             grid = Doubles.board
             playerPieces = Doubles.playerPieces
             
+            let _ = Doubles.random(grid)
+            let _ = Doubles.random(grid)
+            
+            guard testing else { break }
+            
+            grid = Doubles.staticboard
+            playerPieces = Doubles.playerPieces
+            
         case .four:
             
             grid = Four.board

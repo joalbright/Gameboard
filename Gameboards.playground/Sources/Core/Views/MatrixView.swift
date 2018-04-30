@@ -1,6 +1,6 @@
 import UIKit
 
-public class CheckerView: UIView {
+public class MatrixView: UIView {
     
     public var p: CGFloat = 10
     

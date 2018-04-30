@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -518,7 +518,7 @@
         <!--Four-->
         <scene sceneID="2U3-yr-Wv6">
             <objects>
-                <viewController storyboardIdentifier="Connect FourBoard" id="HT0-w1-aEX" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FourBoard" id="HT0-w1-aEX" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8n0-jk-DOh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -882,6 +882,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="centerX" secondItem="Srp-Zi-C5F" secondAttribute="centerX" id="02l-10-4WW"/>
+                            <constraint firstItem="HPB-LX-vdH" firstAttribute="leading" secondItem="Wc3-ji-qpl" secondAttribute="leading" id="2gm-ik-6z9"/>
                             <constraint firstItem="RNi-cZ-J14" firstAttribute="trailing" secondItem="HPB-LX-vdH" secondAttribute="trailing" constant="2" id="Dfz-I9-6XP"/>
                             <constraint firstItem="HPB-LX-vdH" firstAttribute="top" secondItem="Wc3-ji-qpl" secondAttribute="bottom" constant="20" id="Iz2-rf-OhQ"/>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SXE-Bd-BBO" secondAttribute="top" constant="100" id="Q9z-mx-r5Z"/>
@@ -889,7 +890,6 @@
                             <constraint firstItem="i9q-vq-n4F" firstAttribute="centerX" secondItem="Srp-Zi-C5F" secondAttribute="centerX" id="VwD-3Z-GnV"/>
                             <constraint firstItem="i9q-vq-n4F" firstAttribute="top" secondItem="HPB-LX-vdH" secondAttribute="bottom" constant="20" id="W3N-Tt-GhU"/>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="centerY" secondItem="Srp-Zi-C5F" secondAttribute="centerY" id="bqG-ek-BVP"/>
-                            <constraint firstItem="HPB-LX-vdH" firstAttribute="leading" secondItem="SXE-Bd-BBO" secondAttribute="leading" constant="30" id="cu2-9d-zwq"/>
                             <constraint firstItem="RNi-cZ-J14" firstAttribute="leading" secondItem="HPB-LX-vdH" secondAttribute="leading" constant="-2" id="iFf-4X-b5b"/>
                             <constraint firstItem="Wc3-ji-qpl" firstAttribute="leading" secondItem="SXE-Bd-BBO" secondAttribute="leading" priority="750" constant="30" id="lDq-Vf-zZI"/>
                             <constraint firstItem="RNi-cZ-J14" firstAttribute="bottom" secondItem="HPB-LX-vdH" secondAttribute="bottom" constant="2" id="nbh-zz-nIp"/>
@@ -1113,19 +1113,19 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
-                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" red="0.60486111111111107" green="0.55288400225295675" blue="0.45152811937371395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
-                                        <color key="value" red="1" green="0.99996998520000002" blue="0.99996998520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                        <real key="value" value="40"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
                                         <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" red="0.53127893518518521" green="0.49464064386901818" blue="0.41364738391096539" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>

@@ -58,7 +58,7 @@
 		A9DD743B1C62A35300219C78 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74291C62A35300219C78 /* Extensions.swift */; };
 		A9DD743C1C62A35300219C78 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742A1C62A35300219C78 /* Grid.swift */; };
 		A9DD743D1C62A35300219C78 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742B1C62A35300219C78 /* Operators.swift */; };
-		A9DD743F1C62A35300219C78 /* CheckerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742E1C62A35300219C78 /* CheckerView.swift */; };
+		A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742E1C62A35300219C78 /* MatrixView.swift */; };
 		A9DD74401C62A35300219C78 /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD742F1C62A35300219C78 /* SudokuView.swift */; };
 		A9DD74411C62A35300219C78 /* TicTacToeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74301C62A35300219C78 /* TicTacToeView.swift */; };
 		A9DD74421C62A35300219C78 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD74311C62A35300219C78 /* Gameboard.swift */; };
@@ -122,7 +122,7 @@
 		A9DD74291C62A35300219C78 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A9DD742A1C62A35300219C78 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A9DD742B1C62A35300219C78 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		A9DD742E1C62A35300219C78 /* CheckerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckerView.swift; sourceTree = "<group>"; };
+		A9DD742E1C62A35300219C78 /* MatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
 		A9DD742F1C62A35300219C78 /* SudokuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
 		A9DD74301C62A35300219C78 /* TicTacToeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeView.swift; sourceTree = "<group>"; };
 		A9DD74311C62A35300219C78 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameboard.swift; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 				A9E2BE8B208C2BDF00AE7FB1 /* FourView.swift */,
 				A99018331C62FC6500FFEBAF /* GoView.swift */,
 				A9DBACA1208CEB5D00C03C12 /* MancalaView.swift */,
-				A9DD742E1C62A35300219C78 /* CheckerView.swift */,
+				A9DD742E1C62A35300219C78 /* MatrixView.swift */,
 				A9DBACD42090B61100C03C12 /* PegsView.swift */,
 				A9DD742F1C62A35300219C78 /* SudokuView.swift */,
 				A9DD74301C62A35300219C78 /* TicTacToeView.swift */,
@@ -414,7 +414,7 @@
 				A9DBACD32090AE2D00C03C12 /* Pegs.swift in Sources */,
 				A9DD74361C62A35300219C78 /* Chess.swift in Sources */,
 				A90F20A42088CF4A00C3F6A4 /* Words.swift in Sources */,
-				A9DD743F1C62A35300219C78 /* CheckerView.swift in Sources */,
+				A9DD743F1C62A35300219C78 /* MatrixView.swift in Sources */,
 				A90F20A22088CECF00C3F6A4 /* Memory.swift in Sources */,
 				A9DD74381C62A35300219C78 /* Bombsweeper.swift in Sources */,
 				A9E2BE8E208C713700AE7FB1 /* DotsView.swift in Sources */,

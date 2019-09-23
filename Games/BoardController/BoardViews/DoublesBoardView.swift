@@ -36,7 +36,7 @@ class DoublesBoardView: BoardView {
     func swipe(_ direction: Direction, _ loop: Int, _ changed: Bool = false, _ doubles: [[Bool]] = 4 ✕ (4 ✕ false)) {
         
         var moved: Bool = changed
-        var doubles: [[Bool]] = doubles
+        let doubles: [[Bool]] = doubles
         
         switch direction {
             

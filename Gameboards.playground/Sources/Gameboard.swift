@@ -168,7 +168,7 @@ public struct Gameboard {
     public mutating func showAvailable(_ s1: ChessSquare) {
         
         let cols: [String] = "abcdefgh".map { "\($0)" }
-        guard let c1 = cols.index(of: s1.0) else { return }
+        guard let c1 = cols.firstIndex(of: s1.0) else { return }
         let r1 = 8 - s1.1
         
         showAvailable((r1,c1))
@@ -203,7 +203,7 @@ public struct Gameboard {
     public mutating func move(pieceAt s1: ChessSquare, toSquare s2: ChessSquare) throws -> Piece? {
         
         let cols = "abcdefgh".array()
-        guard let c1 = cols.index(of: s1.0), let c2 = cols.index(of: s2.0) else { return nil }
+        guard let c1 = cols.firstIndex(of: s1.0), let c2 = cols.firstIndex(of: s2.0) else { return nil }
         let r1 = 8 - s1.1, r2 = 8 - s2.1
         
         let piece = try validateMove((r1,c1), (r2,c2))

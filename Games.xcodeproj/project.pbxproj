@@ -322,7 +322,6 @@
 				TargetAttributes = {
 					A9DD74091C62A34600219C78 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 965FHW76SM;
 					};
 				};
 			};
@@ -537,7 +536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 965FHW76SM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Games/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
@@ -551,7 +550,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 965FHW76SM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Games/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;

@@ -93,10 +93,14 @@ public struct Gameboard {
     var playerCount: Int = 2
     var playerTurn: Int = 0 { didSet { playerChange?(playerTurn + 1) } }
     var playerPieces: [Piece] = [] {
+
         didSet {
+
             grid.playerPieces = playerPieces
             playerCount = playerPieces.count
+            
         }
+
     }
     
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
@@ -107,7 +111,8 @@ public struct Gameboard {
     
     var _size: Int?
     
-    public var playerChange: ((Int) -> ())?
+    public var playerChange: ((Int) -> Void)?
+    public var showAlert: ((String, String) -> Void)?
     
     public init(_ type: BoardType) {
         

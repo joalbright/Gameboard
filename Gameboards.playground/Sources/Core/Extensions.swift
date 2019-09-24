@@ -31,7 +31,17 @@ extension Int {
         return self >= r.lowerBound && self < r.upperBound
         
     }
-    
+
+    public func set(_ advanced: Int, _ count: Int) -> [Int] {
+
+        var set: [Int] = []
+
+        for i in 0..<count { set += [advanced * i + self] }
+
+        return set
+
+    }
+
 }
 
 extension Array {

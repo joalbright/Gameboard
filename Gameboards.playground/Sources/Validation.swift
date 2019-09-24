@@ -157,7 +157,7 @@ extension Gameboard {
         
         if grid.onBoard(s1) { p1 = grid[s1.0][s1.1] as? Piece ?? p1 }
         
-        if s1.0 == -1 { changePlayer() }
+        if s1.0 == 0 { changePlayer() }
         
         switch _type {
             

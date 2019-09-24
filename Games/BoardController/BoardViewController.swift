@@ -36,7 +36,23 @@ class BoardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        boardView?.board?.playerChange = { p in self.playerLabel?.text = "Player \(p)" }
+        boardView?.board?.playerChange = { [weak self] player in self?.playerLabel?.text = "Player \(player)" }
+        boardView?.board?.showAlert = { [weak self] title, message in
+
+            let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let resetAction = UIAlertAction(title: "Reset", style: .default) { [weak self] _ in
+
+                self?.boardView?.board?.reset()
+                self?.boardView?.updateBoard()
+
+            }
+
+            alertVC.addAction(resetAction)
+
+            // present VC
+            self?.present(alertVC, animated: true)
+
+        }
 
     }
     
@@ -154,5 +170,6 @@ class BoardViewController: UIViewController {
     
     func selectSquare(_ square: Square) { }
     func swipe(_ direction: Direction) { }
+    func checkDone() { }
     
 }

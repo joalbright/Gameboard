@@ -30,6 +30,13 @@ public class Grid {
         set { content[c] = newValue }
         
     }
+
+    public subscript(c: Int) -> Any {
+
+        get { return content[c / colRange.endIndex][c % colRange.endIndex] }
+        set { content[c / colRange.endIndex][c % colRange.endIndex] = newValue }
+
+    }
     
     public func matrix(_ rect: CGRect) -> UIView {
         

@@ -26,15 +26,15 @@ import UIKit
     
     override func selectSquare(_ square: Square) {
         
-//        do {
-//
-//            try board.move(toSquare: square)
-//
-//        } catch {
-//
-//            print(error)
-//
-//        }
+        do {
+
+            try board.move(toSquare: square)
+
+        } catch {
+
+            print(error)
+
+        }
         
         updateBoard()
         
@@ -42,7 +42,7 @@ import UIKit
 
 //    override func coordinate(_ touch: UITouch) -> Square {
 //
-//        let p = 30
+//        let p = 10
 //        let w = (frame.width - p * 2) / (board.gridSize - 1)
 //        let h = (frame.height - p * 2) / (board.gridSize - 1)
 //
@@ -54,5 +54,5 @@ import UIKit
 //        return (r,c)
 //
 //    }
-    
+
 }

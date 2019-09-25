@@ -99,9 +99,9 @@ public struct Bombsweeper {
     
     public static func checkAdjacent(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
-        let adjacent2 = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
+        let adjacent = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
         
-        for a in adjacent2 {
+        for a in adjacent {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }
@@ -142,9 +142,9 @@ public struct Bombsweeper {
         
         var count = 0
         
-        let adjacent2 = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
+        let adjacent = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
         
-        for a in adjacent2 {
+        for a in adjacent {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }

@@ -52,14 +52,26 @@ import UIKit
         }
         
         updateBoard()
+        checkDone()
         
     }
 
     override func checkDone() {
 
-//        board?.showAlert?("Game Over", "You flagged all mines.")
-//
-//        board?.showAlert?("Game Over", "You stepped on a mine.")
+        guard let board = board else { return }
+
+        let noMoves = !(board.grid.content.reduce([]) { $0 + $1 }.compactMap { $0 as? String }.contains("•"))
+        let boom = (board.grid.content.reduce([]) { $0 + $1 }.compactMap { $0 as? String }.contains("✘"))
+
+        if boom {
+
+            board.showAlert?("Game Over", "You stepped on a mine.")
+
+        } else if noMoves {
+
+            board.showAlert?("Game Over", "You flagged all mines.")
+
+        }
 
     }
     

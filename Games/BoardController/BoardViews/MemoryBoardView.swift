@@ -79,16 +79,14 @@ import UIKit
                 _ = try board.match(cardAt: square, withCard: selected)
                 clean()
                 
+            } catch MemoryError.badmatch {
+
+                clean()
+                
             } catch {
-                
+
                 print(error)
-                
-                if let error = error as? MemoryError, case error = MemoryError.badmatch {
-                    
-                    clean()
-                    
-                }
-                
+
             }
             
         } else {

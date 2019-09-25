@@ -1,5 +1,39 @@
 import UIKit
 
+extension Difficulty {
+
+    var bombFlags: Int {
+
+        switch self {
+        case .easy: return 20
+        case .medium: return 20
+        case .hard: return 20
+        }
+
+    }
+
+    var bombs: Int {
+
+        switch self {
+        case .easy: return 10
+        case .medium: return 15
+        case .hard: return 20
+        }
+
+    }
+
+    var bombsize: Int {
+
+        switch self {
+        case .easy: return 10
+        case .medium: return 15
+        case .hard: return 20
+        }
+
+    }
+
+}
+
 public struct Bombsweeper {
     
     public static var board: Grid {
@@ -57,10 +91,9 @@ public struct Bombsweeper {
     public static func validateMark(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
         guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
+        guard ["⚑","•"].contains(g1) else { throw MoveError.invalidmove }
         
-        guard !["⚑","⚐"].contains(g1) else { return grid[s1.0,s1.1] = g1 == "⚑" ? "•" : " " }
-        
-        grid[s1.0,s1.1] = g1 == "•" ? "⚑" : "⚐"
+        grid[s1.0,s1.1] = g1 == "•" ? "⚑" : "•"
         
     }
     

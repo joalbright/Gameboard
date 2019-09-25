@@ -54,6 +54,14 @@ import UIKit
         updateBoard()
         
     }
+
+    override func checkDone() {
+
+//        board?.showAlert?("Game Over", "You flagged all mines.")
+//
+//        board?.showAlert?("Game Over", "You stepped on a mine.")
+
+    }
     
 }
 

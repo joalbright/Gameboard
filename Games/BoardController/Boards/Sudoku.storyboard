@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="60s-hz-M6U">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sudoku-->
+        <scene sceneID="VLT-Wa-ZyG">
+            <objects>
+                <viewController storyboardIdentifier="SudokuBoard" id="60s-hz-M6U" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j3Y-qH-iJ2"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xbu-bd-ocO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zkz-fa-ZXR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjE-ob-kEu" customClass="SudokuBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="30" y="271" width="354" height="354"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QjE-ob-kEu" secondAttribute="height" multiplier="1:1" id="Cal-oD-gad"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                        <color key="value" red="0.0" green="0.63921568630000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hCF-Vv-Tie">
+                                <rect key="frame" x="30" y="645" width="354" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fW7-cW-GHx"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="1"/>
+                                    <segment title="2"/>
+                                    <segment title="3"/>
+                                    <segment title="4"/>
+                                    <segment title="5"/>
+                                    <segment title="6"/>
+                                    <segment title="7"/>
+                                    <segment title="8"/>
+                                    <segment title="9"/>
+                                </segments>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="chooseSudokuNymberWithSender:" destination="60s-hz-M6U" eventType="valueChanged" id="zKQ-PQ-q0C"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QjE-ob-kEu" firstAttribute="leading" secondItem="zkz-fa-ZXR" secondAttribute="leading" priority="750" constant="30" id="Dr9-cE-xDH"/>
+                            <constraint firstItem="hCF-Vv-Tie" firstAttribute="centerX" secondItem="zkz-fa-ZXR" secondAttribute="centerX" id="KQe-wa-bRm"/>
+                            <constraint firstItem="hCF-Vv-Tie" firstAttribute="top" secondItem="QjE-ob-kEu" secondAttribute="bottom" constant="20" id="O37-ag-QWn"/>
+                            <constraint firstItem="QjE-ob-kEu" firstAttribute="centerY" secondItem="zkz-fa-ZXR" secondAttribute="centerY" id="gcr-fR-DbD"/>
+                            <constraint firstItem="hCF-Vv-Tie" firstAttribute="leading" secondItem="QjE-ob-kEu" secondAttribute="leading" id="gxL-K8-NbR"/>
+                            <constraint firstItem="QjE-ob-kEu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j3Y-qH-iJ2" secondAttribute="bottom" constant="100" id="m1u-2M-xPk"/>
+                            <constraint firstItem="QjE-ob-kEu" firstAttribute="centerX" secondItem="zkz-fa-ZXR" secondAttribute="centerX" id="td5-5N-3Fn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6hJ-Q7-CkE"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Sudoku" id="Zb9-5T-cj6"/>
+                    <navigationItem key="navigationItem" title="Sudoku" id="zbo-R8-AJG">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="i8F-8f-LvE">
+                            <connections>
+                                <action selector="resetBoardWithSender:" destination="60s-hz-M6U" id="D7d-va-Vzn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="QjE-ob-kEu" id="eJL-oc-cyn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pkr-Al-xEY" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1598" y="499"/>
+        </scene>
+    </scenes>
+</document>

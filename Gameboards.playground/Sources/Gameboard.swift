@@ -78,7 +78,7 @@ public struct Gameboard {
         
         var controller: UINavigationController? {
             
-            guard let vc = UIStoryboard(name: "Boards", bundle: nil).instantiateViewController(withIdentifier: "\(name)Board") as? BoardViewController else { return nil }
+            guard let vc = UIStoryboard(name: name.replacingOccurrences(of: " ", with: ""), bundle: nil).instantiateInitialViewController() as? BoardViewController else { return nil }
             return UINavigationController(rootViewController: vc)
             
         }

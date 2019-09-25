@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E6C166E233B98B1003DE849 /* Bombsweeper.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C166D233B98B1003DE849 /* Bombsweeper.storyboard */; };
+		0E6C1670233B98F3003DE849 /* Chess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C166F233B98F3003DE849 /* Chess.storyboard */; };
+		0E6C1672233B98FC003DE849 /* Checkers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1671233B98FC003DE849 /* Checkers.storyboard */; };
+		0E6C1674233B9AA0003DE849 /* Sudoku.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1673233B9AA0003DE849 /* Sudoku.storyboard */; };
+		0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1675233B9AAD003DE849 /* Words.storyboard */; };
+		0E6C1678233B9AB7003DE849 /* TicTacToe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1677233B9AB7003DE849 /* TicTacToe.storyboard */; };
+		0E6C167A233B9ACB003DE849 /* Four.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1679233B9ACB003DE849 /* Four.storyboard */; };
+		0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167B233B9E82003DE849 /* Mancala.storyboard */; };
+		0E6C167E233B9E8F003DE849 /* Dots.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167D233B9E8F003DE849 /* Dots.storyboard */; };
+		0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167F233B9EA0003DE849 /* Pegs.storyboard */; };
+		0E6C1682233BA8B0003DE849 /* Go.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1681233BA8B0003DE849 /* Go.storyboard */; };
+		0E6C1684233BA8C1003DE849 /* Memory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1683233BA8C1003DE849 /* Memory.storyboard */; };
+		0E6C1686233BA8D0003DE849 /* Doubles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1685233BA8D0003DE849 /* Doubles.storyboard */; };
+		0E6C1688233BA8E7003DE849 /* Backgammon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1687233BA8E7003DE849 /* Backgammon.storyboard */; };
 		0E96540923390BA40075BF13 /* Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540023390BA30075BF13 /* Four.swift */; };
 		0E96540A23390BA40075BF13 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540123390BA30075BF13 /* Chess.swift */; };
 		0E96540B23390BA40075BF13 /* Dots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540223390BA40075BF13 /* Dots.swift */; };
@@ -45,7 +59,6 @@
 		0E96544823390C470075BF13 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96544623390C470075BF13 /* Gameboard.swift */; };
 		0E96544923390C470075BF13 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96544723390C470075BF13 /* Validation.swift */; };
 		A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */; };
-		A90F20AF208A621400C3F6A4 /* Boards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A90F20AD208A621400C3F6A4 /* Boards.storyboard */; };
 		A90F20B1208A6D7200C3F6A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */; };
 		A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */; };
 		A9DBACD72090BCFB00C03C12 /* BombsweeperBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */; };
@@ -69,6 +82,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E6C166D233B98B1003DE849 /* Bombsweeper.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bombsweeper.storyboard; sourceTree = "<group>"; };
+		0E6C166F233B98F3003DE849 /* Chess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chess.storyboard; sourceTree = "<group>"; };
+		0E6C1671233B98FC003DE849 /* Checkers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkers.storyboard; sourceTree = "<group>"; };
+		0E6C1673233B9AA0003DE849 /* Sudoku.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sudoku.storyboard; sourceTree = "<group>"; };
+		0E6C1675233B9AAD003DE849 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
+		0E6C1677233B9AB7003DE849 /* TicTacToe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TicTacToe.storyboard; sourceTree = "<group>"; };
+		0E6C1679233B9ACB003DE849 /* Four.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Four.storyboard; sourceTree = "<group>"; };
+		0E6C167B233B9E82003DE849 /* Mancala.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mancala.storyboard; sourceTree = "<group>"; };
+		0E6C167D233B9E8F003DE849 /* Dots.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dots.storyboard; sourceTree = "<group>"; };
+		0E6C167F233B9EA0003DE849 /* Pegs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pegs.storyboard; sourceTree = "<group>"; };
+		0E6C1681233BA8B0003DE849 /* Go.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Go.storyboard; sourceTree = "<group>"; };
+		0E6C1683233BA8C1003DE849 /* Memory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Memory.storyboard; sourceTree = "<group>"; };
+		0E6C1685233BA8D0003DE849 /* Doubles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Doubles.storyboard; sourceTree = "<group>"; };
+		0E6C1687233BA8E7003DE849 /* Backgammon.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Backgammon.storyboard; sourceTree = "<group>"; };
 		0E96540023390BA30075BF13 /* Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Four.swift; path = Gameboards.playground/Sources/Boards/Four.swift; sourceTree = SOURCE_ROOT; };
 		0E96540123390BA30075BF13 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chess.swift; path = Gameboards.playground/Sources/Boards/Chess.swift; sourceTree = SOURCE_ROOT; };
 		0E96540223390BA40075BF13 /* Dots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dots.swift; path = Gameboards.playground/Sources/Boards/Dots.swift; sourceTree = SOURCE_ROOT; };
@@ -107,7 +134,6 @@
 		0E96544623390C470075BF13 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gameboard.swift; path = Gameboards.playground/Sources/Gameboard.swift; sourceTree = SOURCE_ROOT; };
 		0E96544723390C470075BF13 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Gameboards.playground/Sources/Validation.swift; sourceTree = SOURCE_ROOT; };
 		A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
-		A90F20AE208A621400C3F6A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Boards.storyboard; sourceTree = "<group>"; };
 		A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoardView.swift; sourceTree = "<group>"; };
 		A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombsweeperBoardView.swift; sourceTree = "<group>"; };
@@ -143,6 +169,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E6C166C233B989C003DE849 /* Boards */ = {
+			isa = PBXGroup;
+			children = (
+				0E6C1687233BA8E7003DE849 /* Backgammon.storyboard */,
+				0E6C166D233B98B1003DE849 /* Bombsweeper.storyboard */,
+				0E6C166F233B98F3003DE849 /* Chess.storyboard */,
+				0E6C1671233B98FC003DE849 /* Checkers.storyboard */,
+				0E6C167D233B9E8F003DE849 /* Dots.storyboard */,
+				0E6C1685233BA8D0003DE849 /* Doubles.storyboard */,
+				0E6C1679233B9ACB003DE849 /* Four.storyboard */,
+				0E6C1681233BA8B0003DE849 /* Go.storyboard */,
+				0E6C167B233B9E82003DE849 /* Mancala.storyboard */,
+				0E6C1683233BA8C1003DE849 /* Memory.storyboard */,
+				0E6C167F233B9EA0003DE849 /* Pegs.storyboard */,
+				0E6C1673233B9AA0003DE849 /* Sudoku.storyboard */,
+				0E6C1677233B9AB7003DE849 /* TicTacToe.storyboard */,
+				0E6C1675233B9AAD003DE849 /* Words.storyboard */,
+			);
+			path = Boards;
+			sourceTree = "<group>";
+		};
 		A9DBACA5208EADE500C03C12 /* InProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +227,7 @@
 		A9DBACA9208EDE3D00C03C12 /* BoardController */ = {
 			isa = PBXGroup;
 			children = (
-				A90F20AD208A621400C3F6A4 /* Boards.storyboard */,
+				0E6C166C233B989C003DE849 /* Boards */,
 				A9DD740F1C62A34600219C78 /* BoardViewController.swift */,
 				A9DBACA8208EDE2B00C03C12 /* BoardViews */,
 			);
@@ -349,11 +396,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A90F20AF208A621400C3F6A4 /* Boards.storyboard in Resources */,
+				0E6C167E233B9E8F003DE849 /* Dots.storyboard in Resources */,
+				0E6C1688233BA8E7003DE849 /* Backgammon.storyboard in Resources */,
+				0E6C166E233B98B1003DE849 /* Bombsweeper.storyboard in Resources */,
+				0E6C1678233B9AB7003DE849 /* TicTacToe.storyboard in Resources */,
+				0E6C1672233B98FC003DE849 /* Checkers.storyboard in Resources */,
 				A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */,
+				0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */,
 				A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */,
+				0E6C1674233B9AA0003DE849 /* Sudoku.storyboard in Resources */,
+				0E6C1670233B98F3003DE849 /* Chess.storyboard in Resources */,
+				0E6C1682233BA8B0003DE849 /* Go.storyboard in Resources */,
 				A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */,
+				0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */,
+				0E6C1686233BA8D0003DE849 /* Doubles.storyboard in Resources */,
+				0E6C167A233B9ACB003DE849 /* Four.storyboard in Resources */,
 				A9DD74131C62A34600219C78 /* Main.storyboard in Resources */,
+				0E6C1684233BA8C1003DE849 /* Memory.storyboard in Resources */,
+				0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,14 +484,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A90F20AD208A621400C3F6A4 /* Boards.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A90F20AE208A621400C3F6A4 /* Base */,
-			);
-			name = Boards.storyboard;
-			sourceTree = "<group>";
-		};
 		A9DD74111C62A34600219C78 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

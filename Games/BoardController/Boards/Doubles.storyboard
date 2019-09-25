@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8fi-JS-szg">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Doubles-->
+        <scene sceneID="KCI-nk-Ege">
+            <objects>
+                <viewController storyboardIdentifier="DoublesBoard" id="8fi-JS-szg" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3UK-45-SgQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goq-Uz-3Bk" customClass="DoublesBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="30" y="271" width="354" height="354"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="goq-Uz-3Bk" secondAttribute="height" multiplier="1:1" id="ycU-7e-cyl"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
+                                        <color key="value" red="0.60486111109999996" green="0.55288400230000001" blue="0.45152811939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" red="0.53127893520000002" green="0.49464064390000001" blue="0.4136473839" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="goq-Uz-3Bk" firstAttribute="centerY" secondItem="3UK-45-SgQ" secondAttribute="centerY" id="1kT-vQ-8a0"/>
+                            <constraint firstItem="goq-Uz-3Bk" firstAttribute="leading" secondItem="MaO-Gi-W4f" secondAttribute="leading" priority="750" constant="30" id="L4S-UJ-Klq"/>
+                            <constraint firstItem="goq-Uz-3Bk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MaO-Gi-W4f" secondAttribute="top" constant="100" id="dzx-CT-fMS"/>
+                            <constraint firstItem="goq-Uz-3Bk" firstAttribute="centerX" secondItem="3UK-45-SgQ" secondAttribute="centerX" id="te6-Ca-WnI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MaO-Gi-W4f"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="YGk-Ko-wQl" appends="YES" id="mf1-rd-hmn"/>
+                            <outletCollection property="gestureRecognizers" destination="kT0-56-i1H" appends="YES" id="Nd1-Kf-zg6"/>
+                            <outletCollection property="gestureRecognizers" destination="JCE-Xf-Z5I" appends="YES" id="XMO-mq-Nkm"/>
+                            <outletCollection property="gestureRecognizers" destination="BO9-4F-Qff" appends="YES" id="VHt-ls-ju9"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Doubles" id="Djd-Ra-YLL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="E4t-tO-PLt">
+                            <connections>
+                                <action selector="resetBoardWithSender:" destination="8fi-JS-szg" id="nCZ-Le-v2k"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="goq-Uz-3Bk" id="tey-d4-wf2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6hH-8H-kCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="YGk-Ko-wQl">
+                    <connections>
+                        <action selector="swipe:" destination="8fi-JS-szg" id="wXT-54-zYb"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="kT0-56-i1H">
+                    <connections>
+                        <action selector="swipe:" destination="8fi-JS-szg" id="Wzv-LL-jqw"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="JCE-Xf-Z5I">
+                    <connections>
+                        <action selector="swipe:" destination="8fi-JS-szg" id="VKX-q5-qoV"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="BO9-4F-Qff">
+                    <connections>
+                        <action selector="swipe:" destination="8fi-JS-szg" id="G8H-7I-p3s"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3092" y="499"/>
+        </scene>
+    </scenes>
+</document>

@@ -38,7 +38,7 @@ public struct Bombsweeper {
     
     public static var field: Grid { return Grid(10 ✕ (10 ✕ "•")) }
     
-    public static let playerPieces = ["⚑","✘"]
+    public static let playerPieces = ["⚑","✘","⚐"]
     
     public static func validateGuess(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
@@ -58,9 +58,9 @@ public struct Bombsweeper {
         
         guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
         
-        guard g1 != "⚑" else { return grid[s1.0,s1.1] = "•" }
+        guard !["⚑","⚐"].contains(g1) else { return grid[s1.0,s1.1] = g1 == "⚑" ? "•" : " " }
         
-        grid[s1.0,s1.1] = "⚑"
+        grid[s1.0,s1.1] = g1 == "•" ? "⚑" : "⚐"
         
     }
     
@@ -147,11 +147,11 @@ extension Grid {
                 let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
                 let piece = "\(item)"
                 
-                label.text = piece
+                label.text = player(piece) == 2 ? playerPieces[0] : piece
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)
                 
-                label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
+                label.textColor = [0,2].contains(player(piece)) ? colors.player1 : colors.player2
                 label.backgroundColor = player(piece) == 1 ? colors.selected : colors.background
                 
                 if piece == "•" {

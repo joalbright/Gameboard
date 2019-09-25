@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOT-Kh-qbK" customClass="CheckersBoardView" customModule="Games" customModuleProvider="target">
-                                <rect key="frame" x="30" y="248.66666666666663" width="315" height="315"/>
+                                <rect key="frame" x="30" y="271" width="354" height="354"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TOT-Kh-qbK" secondAttribute="height" multiplier="1:1" id="jaY-Eb-ONb"/>
@@ -50,7 +50,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feG-A9-xD8">
-                                <rect key="frame" x="47.666666666666657" y="583.66666666666663" width="280" height="30"/>
+                                <rect key="frame" x="67" y="645" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="Fae-Ot-bfp"/>
                                     <constraint firstAttribute="height" constant="30" id="vNj-OA-1fr"/>

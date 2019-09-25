@@ -261,11 +261,6 @@ public struct Gameboard {
             grid = Dots.board
             playerPieces = Dots.playerPieces
             
-            guard testing else { break }
-            
-            grid = Dots.staticboard
-            playerPieces = Dots.playerPieces
-            
         case .doubles:
             
             grid = Doubles.board

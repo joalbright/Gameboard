@@ -191,6 +191,7 @@ extension Gameboard {
             
         case .go: try Go.validateMove(s1, p1, grid, playerTurn)
         case .tictactoe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
+        case .dots: try Dots.validateMove(s1, p1, grid, playerTurn)
         default: throw MoveError.incorrectpiece
             
         }

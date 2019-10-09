@@ -21,9 +21,9 @@ class PegsView: UIView {
         context?.setLineCap(.round)
         context?.setLineJoin(.round)
         context?.setLineWidth(p)
-        
-        UIColor.white.set()
-        
+
+        backgroundColor?.set()
+
         context?.fill(rect)
         
         let w = (rect.width - p * 2) / 7

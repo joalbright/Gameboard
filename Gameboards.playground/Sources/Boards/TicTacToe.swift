@@ -24,6 +24,7 @@ extension Grid {
         
         view.p = padding
         view.backgroundColor = colors.background
+        view.lineColor = colors.foreground
         
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true

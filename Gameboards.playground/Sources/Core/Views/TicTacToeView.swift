@@ -3,6 +3,7 @@ import UIKit
 public class TicTacToeView: UIView {
     
     public var p: CGFloat = 10
+    public var lineColor: UIColor = .black
     
     public override func draw(_ rect: CGRect) {
         
@@ -11,6 +12,8 @@ public class TicTacToeView: UIView {
         context?.setLineCap(.round)
         context?.setLineJoin(.round)
         context?.setLineWidth(2)
+
+        lineColor.set()
         
         let w = (rect.width - p * 2) / 3
         let h = (rect.height - p * 2) / 3

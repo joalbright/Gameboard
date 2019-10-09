@@ -125,8 +125,8 @@ class BoardViewController: UIViewController {
     @IBInspectable var bgColor: UIColor = .white
     @IBInspectable var fgColor: UIColor = .black
     
-    @IBInspectable var player1Color: UIColor = .red
-    @IBInspectable var player2Color: UIColor = .blue
+    @IBInspectable var player1Color: UIColor = .systemRed
+    @IBInspectable var player2Color: UIColor = .systemBlue
     
     @IBInspectable var selectedColor: UIColor = .white
     @IBInspectable var highlightColor: UIColor = .white

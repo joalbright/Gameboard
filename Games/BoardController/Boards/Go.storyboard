@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3PA-gK-8ew">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3PA-gK-8ew">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTW-WR-TTh" customClass="GoBoardView" customModule="Games" customModuleProvider="target">
-                                <rect key="frame" x="30" y="271" width="354" height="354"/>
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RTW-WR-TTh" secondAttribute="height" multiplier="1:1" id="eVi-Us-Fti"/>
@@ -47,24 +46,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOe-tr-PDk">
-                                <rect key="frame" x="67" y="645" width="280" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="McX-Pt-bOA"/>
-                                    <constraint firstAttribute="height" constant="30" id="en0-Wt-s23"/>
-                                </constraints>
+                                <rect key="frame" x="168.5" y="623" width="77" height="239"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="l2O-q6-w3U" secondAttribute="bottom" constant="100" id="1OP-EM-oEW"/>
                             <constraint firstItem="jOe-tr-PDk" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="ElV-Ca-a0x"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="centerY" secondItem="sjA-qr-eX3" secondAttribute="centerY" id="Eoe-6b-FJD"/>
-                            <constraint firstItem="jOe-tr-PDk" firstAttribute="top" secondItem="RTW-WR-TTh" secondAttribute="bottom" constant="20" id="iVs-2R-5uX"/>
+                            <constraint firstItem="jOe-tr-PDk" firstAttribute="top" secondItem="RTW-WR-TTh" secondAttribute="bottom" id="iVs-2R-5uX"/>
+                            <constraint firstItem="z64-pZ-zZm" firstAttribute="bottom" secondItem="jOe-tr-PDk" secondAttribute="bottom" id="jEX-q2-r8m"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="p19-uJ-Qra"/>
-                            <constraint firstItem="RTW-WR-TTh" firstAttribute="leading" secondItem="sjA-qr-eX3" secondAttribute="leading" priority="750" constant="30" id="ucL-vj-eK5"/>
+                            <constraint firstItem="RTW-WR-TTh" firstAttribute="leading" secondItem="sjA-qr-eX3" secondAttribute="leading" priority="750" constant="32" id="ucL-vj-eK5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z64-pZ-zZm"/>
                     </view>
@@ -87,4 +83,12 @@
             <point key="canvasLocation" x="1598" y="-214"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

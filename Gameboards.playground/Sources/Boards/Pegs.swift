@@ -61,10 +61,11 @@ extension Grid {
     public func pegs(_ rect: CGRect, highlights: [Square], selected: Square?) -> UIView {
         
         let view = PegsView(frame: rect)
-        
+
+        view.backgroundColor = colors.background
         view.p = padding
-        view.color = colors.background
-        view.lineColor = colors.foreground
+        view.color = colors.foreground
+        view.lineColor = colors.player2
         
         let w = (rect.width - padding * 2) / content.count
         let h = (rect.height - padding * 2) / content.count
@@ -81,9 +82,12 @@ extension Grid {
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)
                 label.textColor = colors.player1
+                label.highlightColor = colors.highlight
                 
                 if let selected = selected, selected.0 == r && selected.1 == c { label.textColor = colors.selected }
+
                 for highlight in highlights { label.highlight = label.highlight ? true : highlight.0 == r && highlight.1 == c }
+
                 
                 view.addSubview(label)
                 

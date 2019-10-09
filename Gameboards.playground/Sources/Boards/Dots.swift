@@ -82,9 +82,9 @@ extension Grid {
 
                 if (r + c) % 2 == 0 {
 
-                    // Space
+                    /// Space
 
-                    let dotView = DotsSquareView(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h).insetBy(dx: -5, dy: -5))
+                    let dotView = DotsSquareView(frame: CGRect(x: c * w - padding / 2, y: r * h - padding / 2, width: w, height: h).insetBy(dx: -5, dy: -5))
 
                     dotView.backgroundColor = .clear
                     dotView.playerColor = player == "1" ? colors.player1 : colors.player2
@@ -93,7 +93,7 @@ extension Grid {
 
                 } else {
 
-                    // Line
+                    /// Line
 
 //                    let (dx,dy) = sp[s]
 //

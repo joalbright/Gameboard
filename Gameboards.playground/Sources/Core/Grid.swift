@@ -101,7 +101,7 @@ public class Grid {
 class HintLabel: UILabel {
     
     var highlight: Bool = false { didSet { setNeedsDisplay() } }
-    var highlightColor: UIColor = .red
+    var highlightColor: UIColor = .systemRed
     
     override func drawText(in rect: CGRect) {
         

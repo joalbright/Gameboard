@@ -61,6 +61,7 @@ class TileView: UIView {
             letterLabel = UILabel()
             letterLabel.text = tile == .blank ? "" : tile.rawValue.uppercased()
             letterLabel.textAlignment = .center
+            letterLabel.font = .systemFont(ofSize: 18, weight: .heavy)
             addSubview(letterLabel)
             
             valueLabel = UILabel()

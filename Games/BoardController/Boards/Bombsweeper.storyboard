@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N0G-Yg-5c6">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N0G-Yg-5c6">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,11 +22,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9a-d5-akx" customClass="BombsweeperBoardView" customModule="Games" customModuleProvider="target">
-                                <rect key="frame" x="30" y="271" width="354" height="354"/>
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
-                                        <color key="value" red="0.89999997620000005" green="0.89999997620000005" blue="0.89999997620000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" name="Accent"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
                                         <color key="value" red="0.99609655139999997" green="0.74099564770000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,38 +38,49 @@
                                         <color key="value" red="0.74601978059999996" green="0.18476429580000001" blue="0.1849055439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                        <color key="value" red="0.33333334329999997" green="0.33333334329999997" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" name="Text"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="Background"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oRc-AV-ax9">
-                                <rect key="frame" x="137" y="645" width="140" height="31"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M55-xK-WZt">
+                                <rect key="frame" x="127" y="623" width="160" height="239"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oRc-AV-ax9">
+                                        <rect key="frame" x="0.0" y="104" width="160" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="rHt-S6-WWJ"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="●"/>
+                                            <segment title="⚑"/>
+                                        </segments>
+                                        <color key="tintColor" name="Text"/>
+                                        <connections>
+                                            <action selector="chooseBombsweeperMarkWithSender:" destination="N0G-Yg-5c6" eventType="valueChanged" id="dv6-cC-fY3"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="UrE-mu-Mde"/>
-                                    <constraint firstAttribute="height" constant="30" id="cO1-1w-0Q2"/>
+                                    <constraint firstAttribute="trailing" secondItem="oRc-AV-ax9" secondAttribute="trailing" id="UO2-Gk-uUI"/>
+                                    <constraint firstItem="oRc-AV-ax9" firstAttribute="centerY" secondItem="M55-xK-WZt" secondAttribute="centerY" id="Uwf-qb-d0Y"/>
+                                    <constraint firstItem="oRc-AV-ax9" firstAttribute="leading" secondItem="M55-xK-WZt" secondAttribute="leading" id="gWO-ma-mrJ"/>
                                 </constraints>
-                                <segments>
-                                    <segment title="●"/>
-                                    <segment title="⚑"/>
-                                </segments>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="chooseBombsweeperMarkWithSender:" destination="N0G-Yg-5c6" eventType="valueChanged" id="dv6-cC-fY3"/>
-                                </connections>
-                            </segmentedControl>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="o9a-d5-akx" firstAttribute="centerY" secondItem="FjI-6p-UOS" secondAttribute="centerY" id="HcM-dz-lrI"/>
-                            <constraint firstItem="o9a-d5-akx" firstAttribute="leading" secondItem="FjI-6p-UOS" secondAttribute="leading" priority="750" constant="30" id="MUO-BL-aeI"/>
-                            <constraint firstItem="oRc-AV-ax9" firstAttribute="centerX" secondItem="FjI-6p-UOS" secondAttribute="centerX" id="NkB-Hn-g2e"/>
-                            <constraint firstItem="oRc-AV-ax9" firstAttribute="top" secondItem="o9a-d5-akx" secondAttribute="bottom" constant="20" id="OP9-cY-1Ha"/>
+                            <constraint firstItem="o9a-d5-akx" firstAttribute="leading" secondItem="FjI-6p-UOS" secondAttribute="leading" priority="750" constant="32" id="MUO-BL-aeI"/>
+                            <constraint firstItem="6mm-r9-T1J" firstAttribute="top" secondItem="M55-xK-WZt" secondAttribute="bottom" id="Znl-qi-Bgf"/>
                             <constraint firstItem="o9a-d5-akx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wne-sw-N8L" secondAttribute="bottom" constant="100" id="cKr-NJ-Ttz"/>
                             <constraint firstItem="o9a-d5-akx" firstAttribute="centerX" secondItem="FjI-6p-UOS" secondAttribute="centerX" id="f8F-Lk-zKX"/>
                             <constraint firstItem="o9a-d5-akx" firstAttribute="width" secondItem="o9a-d5-akx" secondAttribute="height" multiplier="1:1" id="ntQ-jp-Jir"/>
+                            <constraint firstItem="M55-xK-WZt" firstAttribute="centerX" secondItem="FjI-6p-UOS" secondAttribute="centerX" id="rU2-NQ-cJV"/>
+                            <constraint firstItem="M55-xK-WZt" firstAttribute="top" secondItem="o9a-d5-akx" secondAttribute="bottom" id="tPa-Xr-5RY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tGk-Xa-V4S"/>
                     </view>
@@ -92,4 +102,15 @@
             <point key="canvasLocation" x="264" y="165"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Accent">
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

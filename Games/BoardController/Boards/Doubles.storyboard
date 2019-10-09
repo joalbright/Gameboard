@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8fi-JS-szg">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8fi-JS-szg">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,35 +18,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goq-Uz-3Bk" customClass="DoublesBoardView" customModule="Games" customModuleProvider="target">
-                                <rect key="frame" x="30" y="271" width="354" height="354"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="goq-Uz-3Bk" secondAttribute="height" multiplier="1:1" id="ycU-7e-cyl"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
-                                        <color key="value" red="0.60486111109999996" green="0.55288400230000001" blue="0.45152811939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" name="Accent"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
-                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
-                                        <color key="value" white="0.31125578700000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.53127893520000002" green="0.49464064390000001" blue="0.4136473839" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" name="Background"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="Background"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="goq-Uz-3Bk" firstAttribute="centerY" secondItem="3UK-45-SgQ" secondAttribute="centerY" id="1kT-vQ-8a0"/>
-                            <constraint firstItem="goq-Uz-3Bk" firstAttribute="leading" secondItem="MaO-Gi-W4f" secondAttribute="leading" priority="750" constant="30" id="L4S-UJ-Klq"/>
+                            <constraint firstItem="goq-Uz-3Bk" firstAttribute="leading" secondItem="MaO-Gi-W4f" secondAttribute="leading" priority="750" constant="32" id="L4S-UJ-Klq"/>
                             <constraint firstItem="goq-Uz-3Bk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MaO-Gi-W4f" secondAttribute="top" constant="100" id="dzx-CT-fMS"/>
                             <constraint firstItem="goq-Uz-3Bk" firstAttribute="centerX" secondItem="3UK-45-SgQ" secondAttribute="centerX" id="te6-Ca-WnI"/>
                         </constraints>
@@ -96,4 +95,12 @@
             <point key="canvasLocation" x="3092" y="499"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Accent">
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

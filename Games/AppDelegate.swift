@@ -12,15 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    func applicationDidFinishLaunching(_ application: UIApplication) {
-        
-        UINavigationBar.appearance().barTintColor = UIColor(white: 1, alpha: 0.1)
-        UINavigationBar.appearance().isTranslucent = true
-        UINavigationBar.appearance().titleTextAttributes = [ NSAttributedStringKey.foregroundColor : UIColor.darkGray ]
-        UINavigationBar.appearance().tintColor = .lightGray
-
-    }
 
 }
 

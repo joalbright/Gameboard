@@ -32,7 +32,7 @@ public struct Gameboard {
         
         case backgammon, bombsweeper, checkers, chess, dots, doubles, four, go, mancala, memory, pegs, sudoku, tictactoe, words
         
-        static var playable: [BoardType] = [.backgammon,.bombsweeper,.checkers,.chess,.dots,.doubles,.four,.go,.memory,.pegs,.sudoku,.tictactoe, .words]
+        static var playable: [BoardType] = [ .backgammon, .bombsweeper, .checkers, .chess, .dots, .doubles, .four, .go, .memory, .pegs, .sudoku, .tictactoe, .words ]
         
         public var name: String {
             
@@ -365,14 +365,14 @@ public struct Gameboard {
 
 public struct BoardColors {
     
-    public var background: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    public var foreground: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    public var background: UIColor = .white
+    public var foreground: UIColor = .black
     
-    public var player1: UIColor = .red
-    public var player2: UIColor = .blue
+    public var player1: UIColor = .systemRed
+    public var player2: UIColor = .systemBlue
     
-    public var highlight: UIColor = .green
-    public var selected: UIColor = .green
+    public var highlight: UIColor = .systemGreen
+    public var selected: UIColor = .systemGreen
     
     public init() { }
     

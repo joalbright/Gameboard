@@ -42,7 +42,9 @@ extension Grid {
         let w = (rect.width - padding * 2) / 7
         let h = (rect.height - padding * 2) / 7
         
-        view.backgroundColor = colors.background
+        view.backgroundColor = colors.foreground
+        view.holeColor = colors.background
+        view.spotColor = colors.selected
         
         view.p = padding
         view.layer.cornerRadius = 10

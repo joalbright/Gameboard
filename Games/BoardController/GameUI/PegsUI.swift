@@ -1,12 +1,71 @@
 //
-//  PegsView.swift
+//  PegsUI.swift
 //  Games
 //
-//  Created by Jo Albright on 4/25/18.
-//  Copyright © 2018 Jo Albright. All rights reserved.
+//  Created by Jo Albright on 4/15/21.
+//  Copyright © 2021 Jo Albright. All rights reserved.
 //
 
 import UIKit
+import SwiftUI
+
+struct PegsBoardUI: View {
+
+    var body: some View {
+
+        GeometryReader { g in
+
+        }
+        .cornerRadius(10)
+        .aspectRatio(1.0, contentMode: .fit)
+
+    }
+
+}
+
+struct PegsPiecesUI: View {
+
+    var grid: Grid
+
+    var body: some View {
+
+        GeometryReader { g in
+
+        }
+        .cornerRadius(10)
+        .aspectRatio(1.0, contentMode: .fit)
+
+    }
+
+}
+
+struct PegsUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        ZStack {
+
+            Color("Background")
+
+            VStack {
+
+                ZStack {
+
+                    PegsBoardUI()
+
+                    PegsPiecesUI(grid: Grid([], playerPieces: ["◉","◎"]))
+
+                }
+                .padding(32)
+                .preferredColorScheme(.dark)
+
+            }
+
+        }
+
+    }
+
+}
 
 class PegsView: UIView {
     

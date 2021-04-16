@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="juB-no-UMs">
-    <device id="retina4_7" orientation="portrait" appearance="dark"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mz6-gM-0lb">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Games-->
         <scene sceneID="YGs-fQ-K8c">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="46n-er-ZX8" customClass="MainViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xsY-Ns-WVS"/>
-                        <viewControllerLayoutGuide type="bottom" id="v6Y-kV-MId"/>
-                    </layoutGuides>
+                <viewController id="46n-er-ZX8" customClass="MainViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NPR-U0-s2j">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uDv-h5-uCf">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uDv-h5-uCf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <color key="separatorColor" name="Accent"/>
                                 <inset key="separatorInset" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GameCell" id="YsV-KJ-ifM" customClass="GameCell" customModule="Games" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GameCell" rowHeight="60" id="YsV-KJ-ifM" customClass="GameCell" customModule="Games" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YsV-KJ-ifM" id="oFF-8F-Wd1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chess" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpK-ws-RF2">
-                                                    <rect key="frame" x="50" y="19.5" width="305" height="21.5"/>
+                                                    <rect key="frame" x="50" y="19.5" width="344" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
                                                     <color key="textColor" name="Text"/>
                                                     <nil key="highlightedColor"/>
@@ -70,12 +67,13 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="svw-aX-IyX"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="uDv-h5-uCf" firstAttribute="leading" secondItem="NPR-U0-s2j" secondAttribute="leading" id="33z-hv-0Ed"/>
-                            <constraint firstAttribute="bottom" secondItem="uDv-h5-uCf" secondAttribute="bottom" id="Agx-bO-Dxe"/>
-                            <constraint firstItem="uDv-h5-uCf" firstAttribute="top" secondItem="xsY-Ns-WVS" secondAttribute="bottom" id="ZMH-40-2EG"/>
-                            <constraint firstAttribute="trailing" secondItem="uDv-h5-uCf" secondAttribute="trailing" id="zei-um-rHR"/>
+                            <constraint firstItem="uDv-h5-uCf" firstAttribute="leading" secondItem="svw-aX-IyX" secondAttribute="leading" id="33z-hv-0Ed"/>
+                            <constraint firstItem="svw-aX-IyX" firstAttribute="bottom" secondItem="uDv-h5-uCf" secondAttribute="bottom" id="Agx-bO-Dxe"/>
+                            <constraint firstItem="uDv-h5-uCf" firstAttribute="top" secondItem="svw-aX-IyX" secondAttribute="top" id="pjV-qA-5JX"/>
+                            <constraint firstItem="svw-aX-IyX" firstAttribute="trailing" secondItem="uDv-h5-uCf" secondAttribute="trailing" id="zei-um-rHR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Games" id="vvu-dp-mjV"/>
@@ -85,60 +83,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYr-Ge-4kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1938.4000000000001" y="-216.34182908545728"/>
-        </scene>
-        <!--Split View Controller-->
-        <scene sceneID="nAC-Z0-sX5">
-            <objects>
-                <splitViewController id="juB-no-UMs" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="Shv-Tj-LcY" kind="relationship" relationship="masterViewController" id="wCZ-YH-izo"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aQN-4X-cDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3487" y="-216"/>
+            <point key="canvasLocation" x="-1120" y="-218"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="iwJ-jH-Atn">
+        <scene sceneID="Sge-H2-4IO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Shv-Tj-LcY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mz6-gM-0lb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yx3-5Q-5Mk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yId-KG-Vhd">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="Background"/>
-                        <color key="tintColor" name="Text"/>
-                        <color key="barTintColor" name="Background"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" name="Text"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" name="Text"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="46n-er-ZX8" kind="relationship" relationship="rootViewController" id="CuE-R3-QbA"/>
+                        <segue destination="46n-er-ZX8" kind="relationship" relationship="rootViewController" id="hkC-hw-sFU"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cPC-MF-oNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GlP-7e-v39" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2713" y="-215"/>
+            <point key="canvasLocation" x="-1897" y="-217"/>
         </scene>
     </scenes>
     <resources>
         <namedColor name="Accent">
-            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Text">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Text">
+        <namedColor name="Background">
             <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

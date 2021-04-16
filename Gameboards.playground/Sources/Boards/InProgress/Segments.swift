@@ -1,5 +1,5 @@
 //
-//  Tetris.swift
+//  Segments.swift
 //  Games
 //
 //  Created by Jo Albright on 4/25/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Tetris: UIView {
+class Segments: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.

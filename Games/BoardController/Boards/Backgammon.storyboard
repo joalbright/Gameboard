@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NKc-XK-NCZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NKc-XK-NCZ">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.40340342420000003" green="0.33316692120000002" blue="0.19125256039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.40392156862745099" green="0.33316692120000002" blue="0.19125256039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
                                         <color key="value" red="0.71556712960000002" green="0.6420300176" blue="0.52321705340000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,12 +39,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Logic : Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqY-NG-dKN">
-                                <rect key="frame" x="77" y="609.5" width="260" height="252.5"/>
+                                <rect key="frame" x="78" y="609.5" width="258" height="252.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                 <color key="textColor" name="Accent"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="oVX-bc-ojb"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="vqY-NG-dKN" firstAttribute="top" secondItem="ccH-iz-vSZ" secondAttribute="bottom" id="Mhv-jI-ccv"/>
@@ -55,7 +56,6 @@
                             <constraint firstItem="ccH-iz-vSZ" firstAttribute="centerY" secondItem="e0z-ug-iQe" secondAttribute="centerY" id="vZr-Gm-1jW"/>
                             <constraint firstItem="ccH-iz-vSZ" firstAttribute="leading" secondItem="oVX-bc-ojb" secondAttribute="leading" priority="750" constant="32" id="vyq-9G-1ha"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="oVX-bc-ojb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Backgammon" id="QBH-qI-nBP">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="QBm-2U-W7J"/>
@@ -69,10 +69,10 @@
     </scenes>
     <resources>
         <namedColor name="Accent">
-            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

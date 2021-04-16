@@ -343,19 +343,15 @@ public struct Gameboard {
         
         switch _type {
             
-        case .backgammon: return grid.backgammon(rect)
         case .bombsweeper: return grid.bomb(rect)
         case .checkers, .chess: return grid.checker(rect, highlights: highlights, selected: selected)
-        case .four: return grid.four(rect)
-        case .dots: return grid.dots(rect)
         case .doubles: return grid.doubles(rect)
-        case .go: return grid.go(rect)
         case .mancala: return grid.mancala(rect)
         case .memory: return grid.memory(rect)
         case .pegs: return grid.pegs(rect, highlights: highlights, selected: selected)
         case .sudoku: return grid.sudoku(rect, highlights: highlights)
-        case .tictactoe: return grid.ttt(rect)
         case .words: return grid.words(rect)
+        default: return UIView()
             
         }
         

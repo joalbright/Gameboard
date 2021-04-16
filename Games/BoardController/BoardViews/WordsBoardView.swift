@@ -41,7 +41,7 @@ import UIKit
 
             try board.place(tile: tile, at: square)
             
-            if let index = rack.index(of: tile) {
+            if let index = rack.firstIndex(of: tile) {
                 
                 rack.remove(at: index)
                 rack.append(.none)

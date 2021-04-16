@@ -136,7 +136,7 @@ extension Grid {
                 
                 if player(piece) == 1 {
                     
-                    if let index = playerPieces[1].array().index(of: piece) { piece = playerPieces[0].array()[index] }
+                    if let index = playerPieces[1].array().firstIndex(of: piece) { piece = playerPieces[0].array()[index] }
                     
                 }
                 
@@ -145,7 +145,7 @@ extension Grid {
                 
                 label.text = piece
                 label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)
+                label.font = UIFont(name: "Apple Symbols", size: (w + h) / 2 - 10)
                 
                 view.addSubview(label)
                 

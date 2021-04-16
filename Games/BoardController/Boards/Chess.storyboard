@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sor-ud-rWl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sor-ud-rWl">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +49,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29G-Ib-F4a">
-                                <rect key="frame" x="168.5" y="623" width="77" height="239"/>
+                                <rect key="frame" x="169" y="623" width="76.5" height="239"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                 <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
@@ -267,6 +267,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="zQx-oq-k13"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="vBk-IJ-bTm" firstAttribute="top" secondItem="fNc-VK-RLG" secondAttribute="bottom" id="1aH-mf-bGP"/>
@@ -274,7 +275,7 @@
                             <constraint firstItem="PNf-Zj-C2a" firstAttribute="top" secondItem="fNc-VK-RLG" secondAttribute="top" id="6ot-S9-3IV"/>
                             <constraint firstItem="fNc-VK-RLG" firstAttribute="centerX" secondItem="uqf-IK-afK" secondAttribute="centerX" id="A2Z-4d-cVG"/>
                             <constraint firstItem="PNf-Zj-C2a" firstAttribute="width" secondItem="fNc-VK-RLG" secondAttribute="height" multiplier="1:10" id="CP5-0U-klj"/>
-                            <constraint firstItem="fNc-VK-RLG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="emD-eU-xyj" secondAttribute="bottom" constant="100" id="Clo-HA-HT8"/>
+                            <constraint firstItem="fNc-VK-RLG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zQx-oq-k13" secondAttribute="top" constant="100" id="Clo-HA-HT8"/>
                             <constraint firstItem="zQx-oq-k13" firstAttribute="bottom" secondItem="29G-Ib-F4a" secondAttribute="bottom" id="E4U-nc-CED"/>
                             <constraint firstItem="fNc-VK-RLG" firstAttribute="top" secondItem="YoN-k0-dAd" secondAttribute="bottom" id="EGY-AL-UxU"/>
                             <constraint firstItem="fNc-VK-RLG" firstAttribute="leading" secondItem="PNf-Zj-C2a" secondAttribute="trailing" id="JCS-Ww-5kL"/>
@@ -293,7 +294,6 @@
                             <constraint firstItem="eVg-aQ-jkQ" firstAttribute="leading" secondItem="fNc-VK-RLG" secondAttribute="trailing" id="ykN-nP-cWK"/>
                             <constraint firstItem="vBk-IJ-bTm" firstAttribute="trailing" secondItem="fNc-VK-RLG" secondAttribute="trailing" id="zvZ-O8-SIF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="zQx-oq-k13"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chess" id="cbR-mQ-9BE"/>
                     <navigationItem key="navigationItem" title="Chess" id="u5c-ij-Ec7">
@@ -316,13 +316,13 @@
     </scenes>
     <resources>
         <namedColor name="Accent">
-            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
-            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

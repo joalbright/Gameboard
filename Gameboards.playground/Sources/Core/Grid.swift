@@ -1,6 +1,22 @@
 import UIKit
 
 public class Grid {
+
+    struct Row: Identifiable {
+
+        var id: Int
+        var piece: String
+
+    }
+
+    struct Col: Identifiable {
+
+        var id: Int
+        var rows: [Row]
+        
+    }
+
+    var cols: [Col] { return content.enumerated().map { Col(id: $0.offset, rows: $0.element.enumerated().map { Row(id: $0.offset, piece: $0.element as? String ?? "") }) } }
     
     public var content: [[Any]]
     
@@ -11,9 +27,10 @@ public class Grid {
     public var colors = BoardColors()
     public var playerPieces: [Piece] = []
     
-    public init(_ content: [[Any]]) {
+    public init(_ content: [[Any]], playerPieces: [Piece] = []) {
         
         self.content = content
+        self.playerPieces = playerPieces
         
     }
     
@@ -38,39 +55,39 @@ public class Grid {
 
     }
     
-    public func matrix(_ rect: CGRect) -> UIView {
-        
-        let view = MatrixView(frame: rect)
-        
-        view.p = padding
-        view.backgroundColor = colors.background
-        view.lineColor = colors.foreground
-        
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
-        let w = (rect.width - padding * 2) / content.count
-        let h = (rect.height - padding * 2) / content.count
-        
-        for (c,col) in content.enumerated() {
-            
-            for (r,item) in col.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
-                
-                label.text = "\(item)"
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)
-                
-                view.addSubview(label)
-                
-            }
-            
-        }
-        
-        return view
-        
-    }
+//    public func matrix(_ rect: CGRect) -> UIView {
+//        
+//        let view = MatrixView(frame: rect)
+//        
+//        view.p = padding
+//        view.backgroundColor = colors.background
+//        view.lineColor = colors.foreground
+//        
+//        view.layer.cornerRadius = 10
+//        view.layer.masksToBounds = true
+//        
+//        let w = (rect.width - padding * 2) / content.count
+//        let h = (rect.height - padding * 2) / content.count
+//        
+//        for (c,col) in content.enumerated() {
+//            
+//            for (r,item) in col.enumerated() {
+//                
+//                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
+//                
+//                label.text = "\(item)"
+//                label.textAlignment = .center
+//                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)
+//                
+//                view.addSubview(label)
+//                
+//            }
+//            
+//        }
+//        
+//        return view
+//        
+//    }
     
     public func onBoard(_ s1: Square, _ s2: Square) -> Bool {
         

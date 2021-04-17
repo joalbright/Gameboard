@@ -6,7 +6,6 @@
 //  Copyright © 2021 Jo Albright. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
 struct BackgammonBoardUI: View {
@@ -94,9 +93,9 @@ struct BackgammonPiecesUI: View {
 
                             if row.id == 6 { Text("").frame(minWidth: 20, maxWidth: 20, minHeight: h, maxHeight: h) }
 
-                            let player = grid.player(row.piece)
+                            let player = grid.player(row.piece) == 0
 
-                            Text(player == -1 ? "" : "●").foregroundColor(player == 0 ? Color(#colorLiteral(red: 0.1978587963, green: 0.1978587963, blue: 0.1978587963, alpha: 1)) : Color(#colorLiteral(red: 1, green: 0.9999699852, blue: 0.9999699852, alpha: 1)))
+                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(#colorLiteral(red: 0.1978587963, green: 0.1978587963, blue: 0.1978587963, alpha: 1)) : Color(#colorLiteral(red: 1, green: 0.9999699852, blue: 0.9999699852, alpha: 1)))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                 .font(Font(UIFont.systemFont(ofSize: (w + h) / 2, weight: .regular)))
 
@@ -122,14 +121,14 @@ struct BackgammonUI_Previews: PreviewProvider {
 
         ZStack {
 
-            Color("Background")
+            Color("Background").edgesIgnoringSafeArea(.bottom)
 
             VStack {
 
                 ZStack {
 
                     BackgammonBoardUI()
-                    
+
                     BackgammonPiecesUI(grid: Grid([
 
                         "●   ○ ○    ●".array(),
@@ -144,7 +143,7 @@ struct BackgammonUI_Previews: PreviewProvider {
                         "○   ● ●    ○".array()
 
                     ], playerPieces: ["●","○"]))
-                    
+
                 }
                 .padding(32)
                 .preferredColorScheme(.dark)
@@ -152,7 +151,6 @@ struct BackgammonUI_Previews: PreviewProvider {
                 Text("Game Logic : Coming Soon").opacity(0.3)
 
             }
-
 
         }
 

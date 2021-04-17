@@ -11,8 +11,10 @@ import SwiftUI
 struct Index: Identifiable {
 
     static func count(_ to: Int) -> [Index] { return (0..<to).map { Index(id:$0) } }
+    static func value(_ values: [String]) -> [Index] { return values.enumerated().map { Index(id:$0.offset, value: $0.element) } }
 
     var id: Int
+    var value: String = ""
 
 }
 

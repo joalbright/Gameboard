@@ -6,7 +6,6 @@
 //  Copyright © 2021 Jo Albright. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
 struct GoBoardUI: View {
@@ -100,7 +99,7 @@ struct GoUI_Previews: PreviewProvider {
 
         ZStack {
 
-            Color("Background")
+            Color("Background").edgesIgnoringSafeArea(.bottom)
 
             VStack {
 

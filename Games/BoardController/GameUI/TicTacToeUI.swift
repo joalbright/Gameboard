@@ -6,7 +6,6 @@
 //  Copyright © 2021 Jo Albright. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
 struct TicTacToeBoardUI: View {
@@ -65,9 +64,9 @@ struct TicTacToePiecesUI: View {
 
                         ForEach(col.rows) { row in
 
-                            let player = grid.player(row.piece)
+                            let player = grid.player(row.piece) == 0
 
-                            Text(row.piece).foregroundColor(player == 0 ? Color(#colorLiteral(red: 0, green: 1, blue: 0.8018556993, alpha: 1)) : Color(#colorLiteral(red: 0.9529920136, green: 0.06885367923, blue: 0.2083834405, alpha: 1)))
+                            Text(row.piece).foregroundColor(player ? Color(#colorLiteral(red: 0, green: 1, blue: 0.8018556993, alpha: 1)) : Color(#colorLiteral(red: 0.9529920136, green: 0.06885367923, blue: 0.2083834405, alpha: 1)))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                 .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - p, weight: .thin)))
 
@@ -93,7 +92,7 @@ struct TicTacToeUI_Previews: PreviewProvider {
 
         ZStack {
 
-            Color("Background")
+            Color("Background").edgesIgnoringSafeArea(.bottom)
 
             VStack {
 

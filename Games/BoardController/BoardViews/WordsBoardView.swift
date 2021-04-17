@@ -93,36 +93,36 @@ class WordsBoardViewController: BoardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        (boardView as? WordsBoardView)?.rackUpdated = { rack in
-            
-            for view in self.rackHolder.arrangedSubviews { self.rackHolder.removeArrangedSubview(view) }
-            
-            for tile in rack {
-                
-                let tileView = TileView()
-                tileView.tile = tile
-                tileView.color = self.boardView.player2Color
-                tileView.selectedColor = self.boardView.selectedColor
-                tileView.backgroundColor = .clear
-                tileView.letterLabel?.textColor = self.boardView.player1Color
-                tileView.valueLabel?.textColor = self.boardView.highlightColor
-                tileView.selected = { tile in
-                    
-                    (self.boardView as? WordsBoardView)?.selectedTile = tile
-                    for view in self.rackHolder.arrangedSubviews {
-                        guard let tileView = view as? TileView else { continue }
-                        tileView.color = self.boardView.player2Color
-                    }
-                    
-                }
-                
-                self.rackHolder.addArrangedSubview(tileView)
-                
-            }
-            
-        }
-        
-        (boardView as? WordsBoardView)?.fillRack()
+//        (boardView as? WordsBoardView)?.rackUpdated = { rack in
+//
+//            for view in self.rackHolder.arrangedSubviews { self.rackHolder.removeArrangedSubview(view) }
+//
+//            for tile in rack {
+//
+//                let tileView = TileView()
+//                tileView.tile = tile
+//                tileView.color = self.boardView.player2Color
+//                tileView.selectedColor = self.boardView.selectedColor
+//                tileView.backgroundColor = .clear
+//                tileView.letterLabel?.textColor = self.boardView.player1Color
+//                tileView.valueLabel?.textColor = self.boardView.highlightColor
+//                tileView.selected = { tile in
+//
+//                    (self.boardView as? WordsBoardView)?.selectedTile = tile
+//                    for view in self.rackHolder.arrangedSubviews {
+//                        guard let tileView = view as? TileView else { continue }
+//                        tileView.color = self.boardView.player2Color
+//                    }
+//
+//                }
+//
+//                self.rackHolder.addArrangedSubview(tileView)
+//
+//            }
+//
+//        }
+//
+//        (boardView as? WordsBoardView)?.fillRack()
         
     }
     

@@ -6,7 +6,6 @@
 //  Copyright © 2021 Jo Albright. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
 struct FourBoardUI: View {
@@ -17,20 +16,12 @@ struct FourBoardUI: View {
         
         GeometryReader { g in
 
-            let w = (g.rect.width - p * 2) / 7
-            let h = (g.rect.height - p * 2) / 7
-
-            Color(#colorLiteral(red: 0.03473516487, green: 0.6306997018, blue: 0.827976048, alpha: 1))
+            let w = (g.size.width - p * 2) / 7
+            let h = (g.size.height - p * 2) / 7
 
             Path { path in
 
-                path.addRect(CGRect(x: 0, y: 0, width: g.rect.width, height: h + 10))
-
-            }.fill(Color("Background"))
-
-            Path { path in
-
-                path.addPath(Path(UIBezierPath(roundedRect: CGRect(x: 0, y: h, width: g.rect.width, height: 20), cornerRadius: 10).cgPath))
+                path.addPath(Path(UIBezierPath(roundedRect: CGRect(x: 0, y: h, width: g.size.width, height: g.size.height - h), cornerRadius: 10).cgPath))
 
             }.fill(Color(#colorLiteral(red: 0.03473516487, green: 0.6306997018, blue: 0.827976048, alpha: 1)))
 
@@ -58,15 +49,9 @@ struct FourBoardUI: View {
 
                 Path { path in
 
-                    path.addEllipse(in: CGRect(x: w * c + p, y: 0, width: w, height: h).insetBy(dx: 15, dy: 15))
-
-                }.fill(Color("Accent"))
-
-                Path { path in
-
                     path.addEllipse(in: CGRect(x: w * c + p, y: 0, width: w, height: h).insetBy(dx: 10, dy: 10))
 
-                }.stroke(Color("Accent"), lineWidth: 2)
+                }.fill(Color("Accent"))
 
             }
             
@@ -99,11 +84,11 @@ struct FourPiecesUI: View {
 
                         ForEach(col.rows) { row in
 
-                            let player = grid.player(row.piece)
+                            let player = grid.player(row.piece) == 0
 
-                            Text(player == -1 ? "" : "●").foregroundColor(player == 0 ? Color(#colorLiteral(red: 0.8924742354, green: 0, blue: 0.2215340148, alpha: 1)) : Color(#colorLiteral(red: 0.9469539561, green: 0.8450366779, blue: 0.02451992306, alpha: 1)))
+                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(#colorLiteral(red: 0.8924742354, green: 0, blue: 0.2215340148, alpha: 1)) : Color(#colorLiteral(red: 0.9469539561, green: 0.8450366779, blue: 0.02451992306, alpha: 1)))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - p, weight: .regular)))
+                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - 4, weight: .regular)))
 
                         }
 
@@ -127,7 +112,7 @@ struct FourUI_Previews: PreviewProvider {
 
         ZStack {
 
-            Color("Background")
+            Color("Background").edgesIgnoringSafeArea(.bottom)
 
             VStack {
 
@@ -139,12 +124,12 @@ struct FourUI_Previews: PreviewProvider {
 
                         7 ✕ " ",
                         7 ✕ " ",
-                        "     ◎ ".array(),
-                        "     ◉ ".array(),
-                        "    ◎◉ ".array(),
-                        "   ◎◉◉ ".array()
+                        "     ○ ".array(),
+                        "     ● ".array(),
+                        "    ○● ".array(),
+                        "   ○●● ".array()
 
-                    ], playerPieces: ["◉","◎"]))
+                    ], playerPieces: ["●","○"]))
 
                 }
                 .padding(32)

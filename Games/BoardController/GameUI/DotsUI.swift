@@ -53,7 +53,7 @@ struct DotsUI_Previews: PreviewProvider {
 
         ZStack {
 
-            Color("Background")
+            Color("Background").edgesIgnoringSafeArea(.bottom)
 
             VStack {
 
@@ -64,7 +64,6 @@ struct DotsUI_Previews: PreviewProvider {
                 Text("Game Logic : Coming Soon").opacity(0.3)
 
             }
-
 
         }
 

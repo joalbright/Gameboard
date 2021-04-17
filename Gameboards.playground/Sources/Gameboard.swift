@@ -339,23 +339,7 @@ public struct Gameboard {
     public var highlights: [Square] = []
     public var selected: Square?
     
-    public func visualize(_ rect: CGRect = CGRect(x: 0, y: 0, width: 200, height: 200)) -> UIView {
-        
-        switch _type {
-            
-        case .bombsweeper: return grid.bomb(rect)
-        case .checkers, .chess: return grid.checker(rect, highlights: highlights, selected: selected)
-        case .doubles: return grid.doubles(rect)
-        case .mancala: return grid.mancala(rect)
-        case .memory: return grid.memory(rect)
-        case .pegs: return grid.pegs(rect, highlights: highlights, selected: selected)
-        case .sudoku: return grid.sudoku(rect, highlights: highlights)
-        case .words: return grid.words(rect)
-        default: return UIView()
-            
-        }
-        
-    }
+    public func visualize(_ rect: CGRect = CGRect(x: 0, y: 0, width: 200, height: 200)) -> UIView { return UIView() }
     
 }
 

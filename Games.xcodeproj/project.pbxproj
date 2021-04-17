@@ -7,20 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E6C166E233B98B1003DE849 /* Bombsweeper.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C166D233B98B1003DE849 /* Bombsweeper.storyboard */; };
-		0E6C1670233B98F3003DE849 /* Chess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C166F233B98F3003DE849 /* Chess.storyboard */; };
-		0E6C1672233B98FC003DE849 /* Checkers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1671233B98FC003DE849 /* Checkers.storyboard */; };
-		0E6C1674233B9AA0003DE849 /* Sudoku.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1673233B9AA0003DE849 /* Sudoku.storyboard */; };
 		0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1675233B9AAD003DE849 /* Words.storyboard */; };
-		0E6C1678233B9AB7003DE849 /* TicTacToe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1677233B9AB7003DE849 /* TicTacToe.storyboard */; };
-		0E6C167A233B9ACB003DE849 /* Four.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1679233B9ACB003DE849 /* Four.storyboard */; };
 		0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167B233B9E82003DE849 /* Mancala.storyboard */; };
-		0E6C167E233B9E8F003DE849 /* Dots.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167D233B9E8F003DE849 /* Dots.storyboard */; };
 		0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167F233B9EA0003DE849 /* Pegs.storyboard */; };
-		0E6C1682233BA8B0003DE849 /* Go.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1681233BA8B0003DE849 /* Go.storyboard */; };
 		0E6C1684233BA8C1003DE849 /* Memory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1683233BA8C1003DE849 /* Memory.storyboard */; };
 		0E6C1686233BA8D0003DE849 /* Doubles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1685233BA8D0003DE849 /* Doubles.storyboard */; };
-		0E6C1688233BA8E7003DE849 /* Backgammon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1687233BA8E7003DE849 /* Backgammon.storyboard */; };
 		0E96540923390BA40075BF13 /* Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540023390BA30075BF13 /* Four.swift */; };
 		0E96540A23390BA40075BF13 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540123390BA30075BF13 /* Chess.swift */; };
 		0E96540B23390BA40075BF13 /* Dots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540223390BA40075BF13 /* Dots.swift */; };
@@ -56,9 +47,13 @@
 		0EE6B61526293371001C835E /* FourUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B61026293371001C835E /* FourUI.swift */; };
 		0EE6B61626293371001C835E /* WordsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B61126293371001C835E /* WordsUI.swift */; };
 		0EE6B61726293371001C835E /* SudokuUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B60C26293370001C835E /* SudokuUI.swift */; };
-		0EE6B61826293371001C835E /* MatrixUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B60F26293371001C835E /* MatrixUI.swift */; };
 		0EE6B61926293371001C835E /* MancalaUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B60926293370001C835E /* MancalaUI.swift */; };
 		0EE6B61A26293371001C835E /* PegsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B60E26293371001C835E /* PegsUI.swift */; };
+		0EE6B62F2629C7EB001C835E /* MemoryUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B62E2629C7EB001C835E /* MemoryUI.swift */; };
+		0EE6B6322629C804001C835E /* BombsweeperUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6312629C804001C835E /* BombsweeperUI.swift */; };
+		0EE6B6352629C815001C835E /* CheckersUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6342629C815001C835E /* CheckersUI.swift */; };
+		0EE6B6382629C81D001C835E /* ChessUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6372629C81D001C835E /* ChessUI.swift */; };
+		0EE6B63B2629DA8F001C835E /* DoublesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B63A2629DA8F001C835E /* DoublesUI.swift */; };
 		A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */; };
 		A90F20B1208A6D7200C3F6A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */; };
 		A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */; };
@@ -83,20 +78,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E6C166D233B98B1003DE849 /* Bombsweeper.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bombsweeper.storyboard; sourceTree = "<group>"; };
-		0E6C166F233B98F3003DE849 /* Chess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chess.storyboard; sourceTree = "<group>"; };
-		0E6C1671233B98FC003DE849 /* Checkers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkers.storyboard; sourceTree = "<group>"; };
-		0E6C1673233B9AA0003DE849 /* Sudoku.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sudoku.storyboard; sourceTree = "<group>"; };
 		0E6C1675233B9AAD003DE849 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
-		0E6C1677233B9AB7003DE849 /* TicTacToe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TicTacToe.storyboard; sourceTree = "<group>"; };
-		0E6C1679233B9ACB003DE849 /* Four.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Four.storyboard; sourceTree = "<group>"; };
 		0E6C167B233B9E82003DE849 /* Mancala.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mancala.storyboard; sourceTree = "<group>"; };
-		0E6C167D233B9E8F003DE849 /* Dots.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dots.storyboard; sourceTree = "<group>"; };
 		0E6C167F233B9EA0003DE849 /* Pegs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pegs.storyboard; sourceTree = "<group>"; };
-		0E6C1681233BA8B0003DE849 /* Go.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Go.storyboard; sourceTree = "<group>"; };
 		0E6C1683233BA8C1003DE849 /* Memory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Memory.storyboard; sourceTree = "<group>"; };
 		0E6C1685233BA8D0003DE849 /* Doubles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Doubles.storyboard; sourceTree = "<group>"; };
-		0E6C1687233BA8E7003DE849 /* Backgammon.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Backgammon.storyboard; sourceTree = "<group>"; };
 		0E96540023390BA30075BF13 /* Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Four.swift; path = Gameboards.playground/Sources/Boards/Four.swift; sourceTree = SOURCE_ROOT; };
 		0E96540123390BA30075BF13 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chess.swift; path = Gameboards.playground/Sources/Boards/Chess.swift; sourceTree = SOURCE_ROOT; };
 		0E96540223390BA40075BF13 /* Dots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dots.swift; path = Gameboards.playground/Sources/Boards/Dots.swift; sourceTree = SOURCE_ROOT; };
@@ -132,9 +118,13 @@
 		0EE6B60C26293370001C835E /* SudokuUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuUI.swift; sourceTree = "<group>"; };
 		0EE6B60D26293370001C835E /* DotsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsUI.swift; sourceTree = "<group>"; };
 		0EE6B60E26293371001C835E /* PegsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegsUI.swift; sourceTree = "<group>"; };
-		0EE6B60F26293371001C835E /* MatrixUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixUI.swift; sourceTree = "<group>"; };
 		0EE6B61026293371001C835E /* FourUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourUI.swift; sourceTree = "<group>"; };
 		0EE6B61126293371001C835E /* WordsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsUI.swift; sourceTree = "<group>"; };
+		0EE6B62E2629C7EB001C835E /* MemoryUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUI.swift; sourceTree = "<group>"; };
+		0EE6B6312629C804001C835E /* BombsweeperUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombsweeperUI.swift; sourceTree = "<group>"; };
+		0EE6B6342629C815001C835E /* CheckersUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckersUI.swift; sourceTree = "<group>"; };
+		0EE6B6372629C81D001C835E /* ChessUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessUI.swift; sourceTree = "<group>"; };
+		0EE6B63A2629DA8F001C835E /* DoublesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublesUI.swift; sourceTree = "<group>"; };
 		A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
 		A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoardView.swift; sourceTree = "<group>"; };
@@ -174,19 +164,10 @@
 		0E6C166C233B989C003DE849 /* Boards */ = {
 			isa = PBXGroup;
 			children = (
-				0E6C1687233BA8E7003DE849 /* Backgammon.storyboard */,
-				0E6C166D233B98B1003DE849 /* Bombsweeper.storyboard */,
-				0E6C166F233B98F3003DE849 /* Chess.storyboard */,
-				0E6C1671233B98FC003DE849 /* Checkers.storyboard */,
-				0E6C167D233B9E8F003DE849 /* Dots.storyboard */,
 				0E6C1685233BA8D0003DE849 /* Doubles.storyboard */,
-				0E6C1679233B9ACB003DE849 /* Four.storyboard */,
-				0E6C1681233BA8B0003DE849 /* Go.storyboard */,
 				0E6C167B233B9E82003DE849 /* Mancala.storyboard */,
 				0E6C1683233BA8C1003DE849 /* Memory.storyboard */,
 				0E6C167F233B9EA0003DE849 /* Pegs.storyboard */,
-				0E6C1673233B9AA0003DE849 /* Sudoku.storyboard */,
-				0E6C1677233B9AB7003DE849 /* TicTacToe.storyboard */,
 				0E6C1675233B9AAD003DE849 /* Words.storyboard */,
 			);
 			path = Boards;
@@ -196,11 +177,15 @@
 			isa = PBXGroup;
 			children = (
 				0EE6B60226291AB9001C835E /* BackgammonUI.swift */,
+				0EE6B6312629C804001C835E /* BombsweeperUI.swift */,
+				0EE6B6342629C815001C835E /* CheckersUI.swift */,
+				0EE6B6372629C81D001C835E /* ChessUI.swift */,
 				0EE6B60D26293370001C835E /* DotsUI.swift */,
+				0EE6B63A2629DA8F001C835E /* DoublesUI.swift */,
 				0EE6B61026293371001C835E /* FourUI.swift */,
 				0EE6B60B26293370001C835E /* GoUI.swift */,
 				0EE6B60926293370001C835E /* MancalaUI.swift */,
-				0EE6B60F26293371001C835E /* MatrixUI.swift */,
+				0EE6B62E2629C7EB001C835E /* MemoryUI.swift */,
 				0EE6B60E26293371001C835E /* PegsUI.swift */,
 				0EE6B60C26293370001C835E /* SudokuUI.swift */,
 				0EE6B60A26293370001C835E /* TicTacToeUI.swift */,
@@ -400,21 +385,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6C167E233B9E8F003DE849 /* Dots.storyboard in Resources */,
-				0E6C1688233BA8E7003DE849 /* Backgammon.storyboard in Resources */,
-				0E6C166E233B98B1003DE849 /* Bombsweeper.storyboard in Resources */,
-				0E6C1678233B9AB7003DE849 /* TicTacToe.storyboard in Resources */,
-				0E6C1672233B98FC003DE849 /* Checkers.storyboard in Resources */,
 				A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */,
 				0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */,
 				A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */,
-				0E6C1674233B9AA0003DE849 /* Sudoku.storyboard in Resources */,
-				0E6C1670233B98F3003DE849 /* Chess.storyboard in Resources */,
-				0E6C1682233BA8B0003DE849 /* Go.storyboard in Resources */,
 				A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */,
 				0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */,
 				0E6C1686233BA8D0003DE849 /* Doubles.storyboard in Resources */,
-				0E6C167A233B9ACB003DE849 /* Four.storyboard in Resources */,
 				A9DD74131C62A34600219C78 /* Main.storyboard in Resources */,
 				0E6C1684233BA8C1003DE849 /* Memory.storyboard in Resources */,
 				0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */,
@@ -434,6 +410,7 @@
 				A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */,
 				0E96544923390C470075BF13 /* Validation.swift in Sources */,
 				A9DBACEB2090BE7700C03C12 /* MancalaBoardView.swift in Sources */,
+				0EE6B6382629C81D001C835E /* ChessUI.swift in Sources */,
 				0EE6B60726293085001C835E /* HelperUI.swift in Sources */,
 				0EE6B61326293371001C835E /* DotsUI.swift in Sources */,
 				0E96541E23390BFD0075BF13 /* Ludo.swift in Sources */,
@@ -459,6 +436,7 @@
 				0E96544823390C470075BF13 /* Gameboard.swift in Sources */,
 				0EE6B60326291AB9001C835E /* BackgammonUI.swift in Sources */,
 				A9DBACE12090BDD700C03C12 /* FourBoardView.swift in Sources */,
+				0EE6B6322629C804001C835E /* BombsweeperUI.swift in Sources */,
 				A9DBACE72090BE3800C03C12 /* DotsBoardView.swift in Sources */,
 				0E96540923390BA40075BF13 /* Four.swift in Sources */,
 				0E96540A23390BA40075BF13 /* Chess.swift in Sources */,
@@ -467,14 +445,16 @@
 				0E96542623390C0E0075BF13 /* Pilare.swift in Sources */,
 				A9DBACD72090BCFB00C03C12 /* BombsweeperBoardView.swift in Sources */,
 				A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */,
+				0EE6B63B2629DA8F001C835E /* DoublesUI.swift in Sources */,
 				0E96542823390C0E0075BF13 /* Trouble.swift in Sources */,
+				0EE6B62F2629C7EB001C835E /* MemoryUI.swift in Sources */,
 				A9DBACDB2090BD6E00C03C12 /* ChessBoardView.swift in Sources */,
 				0E96542923390C0E0075BF13 /* Dominos.swift in Sources */,
+				0EE6B6352629C815001C835E /* CheckersUI.swift in Sources */,
 				A9DBACE92090BE5B00C03C12 /* GoBoardView.swift in Sources */,
 				0E96542B23390C0E0075BF13 /* Battleship.swift in Sources */,
 				0EE6B61926293371001C835E /* MancalaUI.swift in Sources */,
 				0E96541A23390BFD0075BF13 /* Sudoku.swift in Sources */,
-				0EE6B61826293371001C835E /* MatrixUI.swift in Sources */,
 				0EE6B61726293371001C835E /* SudokuUI.swift in Sources */,
 				0EE6B61A26293371001C835E /* PegsUI.swift in Sources */,
 				0EE6B61226293371001C835E /* TicTacToeUI.swift in Sources */,

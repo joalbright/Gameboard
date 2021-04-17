@@ -81,9 +81,11 @@ struct WordsPiecesUI: View {
 
 }
 
-struct WordsUI_Previews: PreviewProvider {
+struct WordsLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -95,16 +97,30 @@ struct WordsUI_Previews: PreviewProvider {
 
                     WordsBoardUI()
 
-                    WordsPiecesUI(grid: Grid([], playerPieces: ["◉","◎"]))
+                    WordsPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
             }
 
+        }
+        .navigationTitle("Words")
+
+    }
+
+}
+
+struct WordsUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            WordsLayoutUI(grid: Grid([], playerPieces: ["◉","◎"]))
 
         }
+        .preferredColorScheme(.dark)
 
     }
 

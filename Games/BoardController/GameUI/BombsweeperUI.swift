@@ -81,9 +81,9 @@ struct BombsweeperLayoutUI: View {
 
                 Picker("", selection: $piece) {
 
-                    ForEach(Index.value("●⚑".array())) { index in
+                    ForEach(Value<String>.array("●⚑".array())) { item in
 
-                        Text(index.value).tag(index.id)
+                        Text(item.value).tag(item.id)
 
                     }
 

@@ -58,9 +58,11 @@ struct CheckersPiecesUI: View {
 
 }
 
-struct CheckersUI_Previews: PreviewProvider {
+struct CheckersLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -70,26 +72,41 @@ struct CheckersUI_Previews: PreviewProvider {
 
                 ZStack {
 
-                    CheckersPiecesUI(grid: Grid([
-
-                        8 ✕ ("" %% "●"),
-                        8 ✕ ("●" %% ""),
-                        8 ✕ ("" %% "●"),
-                        8 ✕ "",
-                        8 ✕ "",
-                        8 ✕ ("○" %% ""),
-                        8 ✕ ("" %% "○"),
-                        8 ✕ ("○" %% "")
-
-                    ], playerPieces: ["●◉","○◎"]))
+                    CheckersPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
             }
 
         }
+        .navigationTitle("Checkers")
+
+    }
+
+}
+
+struct CheckersUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            CheckersLayoutUI(grid: Grid([
+
+                8 ✕ ("" %% "●"),
+                8 ✕ ("●" %% ""),
+                8 ✕ ("" %% "●"),
+                8 ✕ "",
+                8 ✕ "",
+                8 ✕ ("○" %% ""),
+                8 ✕ ("" %% "○"),
+                8 ✕ ("○" %% "")
+
+            ], playerPieces: ["●◉","○◎"]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

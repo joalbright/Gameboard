@@ -93,9 +93,11 @@ struct GoPiecesUI: View {
 
 }
 
-struct GoUI_Previews: PreviewProvider {
+struct GoLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -107,29 +109,44 @@ struct GoUI_Previews: PreviewProvider {
 
                     GoBoardUI()
 
-                    GoPiecesUI(grid: Grid([
-
-                        9 ✕ " ",
-                        9 ✕ " ",
-                        [" "," ","●","●"," "," "," "," "," "],
-                        [" "," ","○"," "," "," "," "," "," "],
-                        [" ","●","○","●"," "," "," "," "," "],
-                        [" "," "," ","●","○"," "," "," "," "],
-                        [" "," "," ","○"," "," "," "," "," "],
-                        9 ✕ "",
-                        9 ✕ ""
-
-                    ], playerPieces: ["●","○"]))
+                    GoPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
                 Text("Game Logic : Coming Soon").opacity(0.3)
 
             }
 
         }
+        .navigationTitle("Go")
+
+    }
+
+}
+
+struct GoUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            GoLayoutUI(grid: Grid([
+
+                9 ✕ " ",
+                9 ✕ " ",
+                [" "," ","●","●"," "," "," "," "," "],
+                [" "," ","○"," "," "," "," "," "," "],
+                [" ","●","○","●"," "," "," "," "," "],
+                [" "," "," ","●","○"," "," "," "," "],
+                [" "," "," ","○"," "," "," "," "," "],
+                9 ✕ "",
+                9 ✕ ""
+
+            ], playerPieces: ["●","○"]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

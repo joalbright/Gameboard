@@ -124,7 +124,7 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
 
                 Rectangle().fill(Color.clear).frame(width: p, height: p)
 
-                ForEach(Index.value("ABCDEFGH".array())) { letter in
+                ForEach(Value<String>.array("ABCDEFGH".array())) { letter in
 
                     Text(letter.value)
                         .foregroundColor(Color("Accent"))
@@ -149,7 +149,7 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
 
             VStack(spacing: 0) {
 
-                ForEach(Index.value("12345678".array())) { letter in
+                ForEach(Value<String>.array("12345678".array())) { letter in
 
                     Text(letter.value)
                         .foregroundColor(Color("Accent"))
@@ -165,9 +165,11 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
 
 }
 
-struct ChessUI_Previews: PreviewProvider {
+struct ChessLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -179,27 +181,42 @@ struct ChessUI_Previews: PreviewProvider {
 
                     ChessCoordinatesUI {
 
-                        ChessPiecesUI(grid: Grid([
-
-                            "♜♞♝♛♚♝♞♜".array(),
-                            8 ✕ "♟",
-                            8 ✕ "",
-                            8 ✕ "",
-                            8 ✕ "",
-                            8 ✕ "",
-                            8 ✕ "♙",
-                            "♖♘♗♕♔♗♘♖".array()
-
-                        ], playerPieces: ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]))
+                        ChessPiecesUI(grid: grid)
 
                     }
 
                 }
-                .preferredColorScheme(.dark)
 
             }
 
         }
+        .navigationTitle("Chess")
+
+    }
+
+}
+
+struct ChessUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            ChessLayoutUI(grid: Grid([
+
+                "♜♞♝♛♚♝♞♜".array(),
+                8 ✕ "♟",
+                8 ✕ "",
+                8 ✕ "",
+                8 ✕ "",
+                8 ✕ "",
+                8 ✕ "♙",
+                "♖♘♗♕♔♗♘♖".array()
+
+            ], playerPieces: ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

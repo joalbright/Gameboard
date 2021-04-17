@@ -10,8 +10,6 @@
 		0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1675233B9AAD003DE849 /* Words.storyboard */; };
 		0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167B233B9E82003DE849 /* Mancala.storyboard */; };
 		0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167F233B9EA0003DE849 /* Pegs.storyboard */; };
-		0E6C1684233BA8C1003DE849 /* Memory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1683233BA8C1003DE849 /* Memory.storyboard */; };
-		0E6C1686233BA8D0003DE849 /* Doubles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1685233BA8D0003DE849 /* Doubles.storyboard */; };
 		0E96540923390BA40075BF13 /* Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540023390BA30075BF13 /* Four.swift */; };
 		0E96540A23390BA40075BF13 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540123390BA30075BF13 /* Chess.swift */; };
 		0E96540B23390BA40075BF13 /* Dots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540223390BA40075BF13 /* Dots.swift */; };
@@ -81,8 +79,6 @@
 		0E6C1675233B9AAD003DE849 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		0E6C167B233B9E82003DE849 /* Mancala.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mancala.storyboard; sourceTree = "<group>"; };
 		0E6C167F233B9EA0003DE849 /* Pegs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pegs.storyboard; sourceTree = "<group>"; };
-		0E6C1683233BA8C1003DE849 /* Memory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Memory.storyboard; sourceTree = "<group>"; };
-		0E6C1685233BA8D0003DE849 /* Doubles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Doubles.storyboard; sourceTree = "<group>"; };
 		0E96540023390BA30075BF13 /* Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Four.swift; path = Gameboards.playground/Sources/Boards/Four.swift; sourceTree = SOURCE_ROOT; };
 		0E96540123390BA30075BF13 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chess.swift; path = Gameboards.playground/Sources/Boards/Chess.swift; sourceTree = SOURCE_ROOT; };
 		0E96540223390BA40075BF13 /* Dots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dots.swift; path = Gameboards.playground/Sources/Boards/Dots.swift; sourceTree = SOURCE_ROOT; };
@@ -164,9 +160,7 @@
 		0E6C166C233B989C003DE849 /* Boards */ = {
 			isa = PBXGroup;
 			children = (
-				0E6C1685233BA8D0003DE849 /* Doubles.storyboard */,
 				0E6C167B233B9E82003DE849 /* Mancala.storyboard */,
-				0E6C1683233BA8C1003DE849 /* Memory.storyboard */,
 				0E6C167F233B9EA0003DE849 /* Pegs.storyboard */,
 				0E6C1675233B9AAD003DE849 /* Words.storyboard */,
 			);
@@ -390,9 +384,7 @@
 				A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */,
 				A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */,
 				0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */,
-				0E6C1686233BA8D0003DE849 /* Doubles.storyboard in Resources */,
 				A9DD74131C62A34600219C78 /* Main.storyboard in Resources */,
-				0E6C1684233BA8C1003DE849 /* Memory.storyboard in Resources */,
 				0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -47,9 +47,11 @@ struct DotsBoardUI: View {
 
 }
 
-struct DotsUI_Previews: PreviewProvider {
+struct DotsLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -57,15 +59,29 @@ struct DotsUI_Previews: PreviewProvider {
 
             VStack {
 
-                DotsBoardUI()
-                    .padding(32)
-                    .preferredColorScheme(.dark)
+                DotsBoardUI().padding(32)
 
                 Text("Game Logic : Coming Soon").opacity(0.3)
 
             }
 
         }
+        .navigationTitle("Dots")
+
+    }
+
+}
+
+struct DotsUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            DotsLayoutUI(grid: Grid([]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

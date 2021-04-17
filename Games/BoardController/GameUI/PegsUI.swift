@@ -12,10 +12,59 @@ struct PegsBoardUI: View {
 
     var body: some View {
 
+        let p: CGFloat = 20
+
         GeometryReader { g in
 
+            let w = (g.size.width - p * 5) / 7
+            let h = (g.size.height - p * 5) / 7
+
+            Path { path in
+
+                path.move(to: CGPoint(x: g.size.width / 2, y: p / 2))
+                path.addLine(to: CGPoint(x: g.size.width - p / 2, y: g.size.height / 2))
+                path.addLine(to: CGPoint(x: g.size.width / 2, y: g.size.height - p / 2))
+                path.addLine(to: CGPoint(x: p / 2, y: g.size.height / 2))
+
+            }.fill(Color("Accent"))
+
+            Path { path in
+
+                path.move(to: CGPoint(x: g.size.width / 2, y: p / 2))
+                path.addLine(to: CGPoint(x: g.size.width - p / 2, y: g.size.height / 2))
+                path.addLine(to: CGPoint(x: g.size.width / 2, y: g.size.height - p / 2))
+                path.addLine(to: CGPoint(x: p / 2, y: g.size.height / 2))
+                path.closeSubpath()
+
+            }.stroke(Color("Accent"), style: StrokeStyle(lineWidth: p, lineCap: .round, lineJoin: .round))
+
+            let holes: [(Int,Int)] = [
+
+                            (0,2),(0,3),(0,4),
+                            (1,2),(1,3),(1,4),
+                (2,0),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),
+                (3,0),(3,1),(3,2),(3,3),(3,4),(3,5),(3,6),
+                (4,0),(4,1),(4,2),(4,3),(4,4),(4,5),(4,6),
+                            (5,2),(5,3),(5,4),
+                            (6,2),(6,3),(6,4)
+
+            ]
+
+            ForEach(Value<(Int,Int)>.array(holes)) { hole in
+
+                let r = CGFloat(hole.value.0)
+                let c = CGFloat(hole.value.1)
+
+                Path { path in
+
+                    path.move(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
+                    path.addLine(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
+
+                }.stroke(Color("Text"), style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+
+            }
+
         }
-        .cornerRadius(10)
         .aspectRatio(1.0, contentMode: .fit)
 
     }
@@ -28,52 +77,35 @@ struct PegsPiecesUI: View {
 
     var body: some View {
 
+        let p: CGFloat = 20
+
         GeometryReader { g in
 
-//            extension Grid {
-//
-//                public func pegs(_ rect: CGRect, highlights: [Square], selected: Square?) -> UIView {
-//
-//                    let view = PegsView(frame: rect)
-//
-//                    view.backgroundColor = colors.background
-//                    view.p = padding
-//                    view.color = colors.foreground
-//                    view.lineColor = colors.player2
-//
-//                    let w = (rect.width - padding * 2) / content.count
-//                    let h = (rect.height - padding * 2) / content.count
-//
-//                    for (r,row) in content.enumerated() {
-//
-//                        for (c,item) in row.enumerated() {
-//
-//                            guard "\(item)" != "!" else { continue }
-//
-//                            let label = HintLabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
-//
-//                            label.text = "\(item)"
-//                            label.textAlignment = .center
-//                            label.font = .systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)
-//                            label.textColor = colors.player1
-//                            label.highlightColor = colors.highlight
-//
-//                            if let selected = selected, selected.0 == r && selected.1 == c { label.textColor = colors.selected }
-//
-//                            for highlight in highlights { label.highlight = label.highlight ? true : highlight.0 == r && highlight.1 == c }
-//
-//
-//                            view.addSubview(label)
-//
-//                        }
-//
-//                    }
-//
-//                    return view
-//
-//                }
-//
-//            }
+            let w = (g.size.width - p * 5) / 7
+            let h = (g.size.height - p * 5) / 7
+
+            ForEach(grid.cols) { col in
+
+                let c = CGFloat(col.id)
+
+                ForEach(col.rows) { row in
+
+                    let r = CGFloat(row.id)
+
+                    if grid.player(row.piece) == 0 {
+
+                        Path { path in
+
+                            path.move(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
+                            path.addLine(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
+
+                        }.stroke(Color("Text"), style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
+
+                    }
+
+                }
+
+            }
 
         }
         .cornerRadius(10)
@@ -83,9 +115,11 @@ struct PegsPiecesUI: View {
 
 }
 
-struct PegsUI_Previews: PreviewProvider {
+struct PegsLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -97,78 +131,41 @@ struct PegsUI_Previews: PreviewProvider {
 
                     PegsBoardUI()
 
-                    PegsPiecesUI(grid: Grid([], playerPieces: ["◉","◎"]))
+                    PegsPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
             }
 
         }
+        .navigationTitle("Pegs")
 
     }
 
 }
 
-//class PegsView: UIView {
-//    
-//    var p: CGFloat = 20
-//    var color: UIColor = .lightGray
-//    var lineColor: UIColor = .black
-//    
-//    public override func draw(_ rect: CGRect) {
-//        
-//        let context = UIGraphicsGetCurrentContext()
-//        
-//        context?.setLineCap(.round)
-//        context?.setLineJoin(.round)
-//        context?.setLineWidth(p)
-//
-//        backgroundColor?.set()
-//
-//        context?.fill(rect)
-//        
-//        let w = (rect.width - p * 2) / 7
-//        let h = (rect.height - p * 2) / 7
-//        
-//        color.set()
-//        
-//        context?.move(to: CGPoint(x: rect.width / 2, y: p / 2))
-//        context?.addLine(to: CGPoint(x: rect.width - p / 2, y: rect.height / 2))
-//        context?.addLine(to: CGPoint(x: rect.width / 2, y: rect.height - p / 2))
-//        context?.addLine(to: CGPoint(x: p / 2, y: rect.height / 2))
-//        
-//        context?.fillPath()
-//        
-//        context?.move(to: CGPoint(x: rect.width / 2, y: p / 2))
-//        context?.addLine(to: CGPoint(x: rect.width - p / 2, y: rect.height / 2))
-//        context?.addLine(to: CGPoint(x: rect.width / 2, y: rect.height - p / 2))
-//        context?.addLine(to: CGPoint(x: p / 2, y: rect.height / 2))
-//        context?.closePath()
-//        
-//        context?.strokePath()
-//
-//        lineColor.set()
-//        
-//        context?.setLineWidth(6)
-//        
-//        let skip: [(Int,Int)] = [(0,0),(0,1),(1,0),(1,1),(5,0),(5,1),(6,0),(6,1),(0,5),(1,5),(0,6),(1,6),(5,5),(5,6),(6,5),(6,6)]
-//        
-//        for r in 0..<7 {
-//            
-//            for c in 0..<7 {
-//                
-//                guard !(skip.contains { $0.0 == c && $0.1 == r }) else { continue }
-//                
-//                context?.move(to: CGPoint(x: w * c + w / 2 + p, y: h * r + h / 2 + p))
-//                context?.addLine(to: CGPoint(x: w * c + w / 2 + p, y: h * r + h / 2 + p))
-//                context?.strokePath()
-//                
-//            }
-//            
-//        }
-//        
-//    }
-//
-//}
+struct PegsUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            PegsLayoutUI(grid: Grid([
+
+                "!!●●●!!".array(),
+                "!!●●●!!".array(),
+                "●●●●●●●".array(),
+                "●●● ●●●".array(),
+                "●●●●●●●".array(),
+                "!!●●●!!".array(),
+                "!!●●●!!".array()
+
+            ], playerPieces: ["●"]))
+
+        }
+        .preferredColorScheme(.dark)
+
+    }
+
+}

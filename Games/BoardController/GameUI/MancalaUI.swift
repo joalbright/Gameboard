@@ -79,9 +79,11 @@ struct MancalaPiecesUI: View {
 
 }
 
-struct MancalaUI_Previews: PreviewProvider {
+struct MancalaLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -93,11 +95,10 @@ struct MancalaUI_Previews: PreviewProvider {
 
                     MancalaBoardUI()
 
-                    MancalaPiecesUI(grid: Grid([[]], playerPieces: ["◉","◎"]))
+                    MancalaPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
                 Text("Game Logic : Coming Soon").opacity(0.3)
 
@@ -105,6 +106,22 @@ struct MancalaUI_Previews: PreviewProvider {
 
 
         }
+        .navigationTitle("Mancala")
+
+    }
+
+}
+
+struct MancalaUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            MancalaLayoutUI(grid: Grid([[]], playerPieces: ["◉","◎"]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

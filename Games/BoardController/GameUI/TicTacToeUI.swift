@@ -19,7 +19,7 @@ struct TicTacToeBoardUI: View {
             let w = (g.rect.width - p * 2) / 3
             let h = (g.rect.height - p * 2) / 3
 
-            ForEach(Index.count(2)) { index in
+            ForEach(Index.range(1...2)) { index in
 
                 let i = CGFloat(index.id + 1)
 
@@ -86,9 +86,11 @@ struct TicTacToePiecesUI: View {
 
 }
 
-struct TicTacToeUI_Previews: PreviewProvider {
+struct TicTacToeLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -100,23 +102,38 @@ struct TicTacToeUI_Previews: PreviewProvider {
 
                     TicTacToeBoardUI()
 
-                    TicTacToePiecesUI(grid: Grid([
-
-                        [" ", " ", " "],
-                        ["✕", "○", "○"],
-                        [" ", " ", "✕"]
-
-                    ], playerPieces: ["○","✕"]))
+                    TicTacToePiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
                 Text("Player 1")
 
             }
 
         }
+        .navigationTitle("TicTacToe")
+
+    }
+
+}
+
+struct TicTacToeUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            TicTacToeLayoutUI(grid: Grid([
+
+                [" ", " ", " "],
+                ["✕", "○", "○"],
+                [" ", " ", "✕"]
+
+            ], playerPieces: ["○","✕"]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

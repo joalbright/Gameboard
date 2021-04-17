@@ -106,9 +106,11 @@ struct FourPiecesUI: View {
 
 }
 
-struct FourUI_Previews: PreviewProvider {
+struct FourLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -120,27 +122,41 @@ struct FourUI_Previews: PreviewProvider {
 
                     FourBoardUI()
 
-                    FourPiecesUI(grid: Grid([
-
-                        7 ✕ " ",
-                        7 ✕ " ",
-                        "     ○ ".array(),
-                        "     ● ".array(),
-                        "    ○● ".array(),
-                        "   ○●● ".array()
-
-                    ], playerPieces: ["●","○"]))
+                    FourPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
                 Text("Player 1")
 
             }
 
+        }
+        .navigationTitle("Four")
+
+    }
+
+}
+
+struct FourUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            FourLayoutUI(grid: Grid([
+
+                7 ✕ " ",
+                7 ✕ " ",
+                "     ○ ".array(),
+                "     ● ".array(),
+                "    ○● ".array(),
+                "   ○●● ".array()
+
+            ], playerPieces: ["●","○"]))
 
         }
+        .preferredColorScheme(.dark)
 
     }
 

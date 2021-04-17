@@ -115,9 +115,11 @@ struct BackgammonPiecesUI: View {
 
 }
 
-struct BackgammonUI_Previews: PreviewProvider {
+struct BackgammonLayoutUI: View {
 
-    static var previews: some View {
+    var grid: Grid
+
+    var body: some View {
 
         ZStack {
 
@@ -129,30 +131,45 @@ struct BackgammonUI_Previews: PreviewProvider {
 
                     BackgammonBoardUI()
 
-                    BackgammonPiecesUI(grid: Grid([
-
-                        "●   ○ ○    ●".array(),
-                        "●   ○ ○    ●".array(),
-                        "●   ○ ○     ".array(),
-                        "●     ○     ".array(),
-                        "●     ○     ".array(),
-                        "○     ●     ".array(),
-                        "○     ●     ".array(),
-                        "○   ● ●     ".array(),
-                        "○   ● ●    ○".array(),
-                        "○   ● ●    ○".array()
-
-                    ], playerPieces: ["●","○"]))
+                    BackgammonPiecesUI(grid: grid)
 
                 }
                 .padding(32)
-                .preferredColorScheme(.dark)
 
                 Text("Game Logic : Coming Soon").opacity(0.3)
 
             }
 
         }
+        .navigationTitle("Backgammon")
+
+    }
+
+}
+
+struct BackgammonUI_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        NavigationView {
+
+            BackgammonLayoutUI(grid: Grid([
+
+                "●   ○ ○    ●".array(),
+                "●   ○ ○    ●".array(),
+                "●   ○ ○     ".array(),
+                "●     ○     ".array(),
+                "●     ○     ".array(),
+                "○     ●     ".array(),
+                "○     ●     ".array(),
+                "○   ● ●     ".array(),
+                "○   ● ●    ○".array(),
+                "○   ● ●    ○".array()
+
+            ], playerPieces: ["●","○"]))
+
+        }
+        .preferredColorScheme(.dark)
 
     }
 

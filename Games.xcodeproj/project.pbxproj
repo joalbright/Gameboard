@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1675233B9AAD003DE849 /* Words.storyboard */; };
 		0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167B233B9E82003DE849 /* Mancala.storyboard */; };
-		0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167F233B9EA0003DE849 /* Pegs.storyboard */; };
 		0E96540923390BA40075BF13 /* Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540023390BA30075BF13 /* Four.swift */; };
 		0E96540A23390BA40075BF13 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540123390BA30075BF13 /* Chess.swift */; };
 		0E96540B23390BA40075BF13 /* Dots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540223390BA40075BF13 /* Dots.swift */; };
@@ -52,6 +51,7 @@
 		0EE6B6352629C815001C835E /* CheckersUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6342629C815001C835E /* CheckersUI.swift */; };
 		0EE6B6382629C81D001C835E /* ChessUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6372629C81D001C835E /* ChessUI.swift */; };
 		0EE6B63B2629DA8F001C835E /* DoublesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B63A2629DA8F001C835E /* DoublesUI.swift */; };
+		0EE6B64C262C5EAB001C835E /* TouchModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B64B262C5EAB001C835E /* TouchModifier.swift */; };
 		A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */; };
 		A90F20B1208A6D7200C3F6A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */; };
 		A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */; };
@@ -78,7 +78,6 @@
 /* Begin PBXFileReference section */
 		0E6C1675233B9AAD003DE849 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		0E6C167B233B9E82003DE849 /* Mancala.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mancala.storyboard; sourceTree = "<group>"; };
-		0E6C167F233B9EA0003DE849 /* Pegs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pegs.storyboard; sourceTree = "<group>"; };
 		0E96540023390BA30075BF13 /* Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Four.swift; path = Gameboards.playground/Sources/Boards/Four.swift; sourceTree = SOURCE_ROOT; };
 		0E96540123390BA30075BF13 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chess.swift; path = Gameboards.playground/Sources/Boards/Chess.swift; sourceTree = SOURCE_ROOT; };
 		0E96540223390BA40075BF13 /* Dots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dots.swift; path = Gameboards.playground/Sources/Boards/Dots.swift; sourceTree = SOURCE_ROOT; };
@@ -121,6 +120,7 @@
 		0EE6B6342629C815001C835E /* CheckersUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckersUI.swift; sourceTree = "<group>"; };
 		0EE6B6372629C81D001C835E /* ChessUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessUI.swift; sourceTree = "<group>"; };
 		0EE6B63A2629DA8F001C835E /* DoublesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublesUI.swift; sourceTree = "<group>"; };
+		0EE6B64B262C5EAB001C835E /* TouchModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchModifier.swift; sourceTree = "<group>"; };
 		A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
 		A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoardView.swift; sourceTree = "<group>"; };
@@ -161,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				0E6C167B233B9E82003DE849 /* Mancala.storyboard */,
-				0E6C167F233B9EA0003DE849 /* Pegs.storyboard */,
 				0E6C1675233B9AAD003DE849 /* Words.storyboard */,
 			);
 			path = Boards;
@@ -184,9 +183,18 @@
 				0EE6B60C26293370001C835E /* SudokuUI.swift */,
 				0EE6B60A26293370001C835E /* TicTacToeUI.swift */,
 				0EE6B61126293371001C835E /* WordsUI.swift */,
-				0EE6B60626293085001C835E /* HelperUI.swift */,
+				0EE6B649262C5E90001C835E /* Helpers */,
 			);
 			path = GameUI;
+			sourceTree = "<group>";
+		};
+		0EE6B649262C5E90001C835E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0EE6B60626293085001C835E /* HelperUI.swift */,
+				0EE6B64B262C5EAB001C835E /* TouchModifier.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		A9DBACA5208EADE500C03C12 /* InProgress */ = {
@@ -385,7 +393,6 @@
 				A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */,
 				0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */,
 				A9DD74131C62A34600219C78 /* Main.storyboard in Resources */,
-				0E6C1680233B9EA0003DE849 /* Pegs.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +455,7 @@
 				0EE6B61926293371001C835E /* MancalaUI.swift in Sources */,
 				0E96541A23390BFD0075BF13 /* Sudoku.swift in Sources */,
 				0EE6B61726293371001C835E /* SudokuUI.swift in Sources */,
+				0EE6B64C262C5EAB001C835E /* TouchModifier.swift in Sources */,
 				0EE6B61A26293371001C835E /* PegsUI.swift in Sources */,
 				0EE6B61226293371001C835E /* TicTacToeUI.swift in Sources */,
 				0EE6B61426293371001C835E /* GoUI.swift in Sources */,

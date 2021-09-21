@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qfk-HP-Trs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qfk-HP-Trs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,17 +52,17 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="xjE-Kh-mtj"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="Uyg-Fw-EFW" firstAttribute="top" secondItem="6MD-zm-yMA" secondAttribute="bottom" id="2jm-Ky-OHU"/>
-                            <constraint firstItem="xjE-Kh-mtj" firstAttribute="bottom" secondItem="Uyg-Fw-EFW" secondAttribute="bottom" id="7gb-fj-CgX"/>
                             <constraint firstItem="Uyg-Fw-EFW" firstAttribute="centerX" secondItem="cgy-Wv-eBk" secondAttribute="centerX" id="K0H-3v-DLL"/>
-                            <constraint firstItem="6MD-zm-yMA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QuX-oX-8Co" secondAttribute="bottom" constant="100" id="Kdh-kp-iZK"/>
+                            <constraint firstItem="6MD-zm-yMA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xjE-Kh-mtj" secondAttribute="top" constant="100" id="Kdh-kp-iZK"/>
                             <constraint firstItem="6MD-zm-yMA" firstAttribute="centerX" secondItem="cgy-Wv-eBk" secondAttribute="centerX" id="chh-4H-UgC"/>
                             <constraint firstItem="6MD-zm-yMA" firstAttribute="centerY" secondItem="cgy-Wv-eBk" secondAttribute="centerY" id="eUp-A3-0ww"/>
                             <constraint firstItem="6MD-zm-yMA" firstAttribute="leading" secondItem="cgy-Wv-eBk" secondAttribute="leading" priority="750" constant="32" id="i5g-IV-xe8"/>
+                            <constraint firstItem="xjE-Kh-mtj" firstAttribute="bottom" secondItem="Uyg-Fw-EFW" secondAttribute="bottom" id="t7k-0y-vci"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="xjE-Kh-mtj"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="TicTacTie" id="K1H-2h-EwI"/>
                     <navigationItem key="navigationItem" title="Tic Tac Toe" id="VYs-xD-Z0s">
@@ -85,10 +85,10 @@
     </scenes>
     <resources>
         <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
-            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

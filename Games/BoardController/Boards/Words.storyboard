@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KCu-nr-Ye3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KCu-nr-Ye3">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,7 +38,7 @@
                                         <color key="value" red="0.92222222220000005" green="0.87791424549999997" blue="0.7799662423" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
-                                        <color key="value" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemBrownColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
                                         <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -80,7 +81,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68V-d1-gKx" customClass="SimpleButton" customModule="Games" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68V-d1-gKx" customClass="SimpleButton" customModule="Games" customModuleProvider="target">
                                         <rect key="frame" x="118.5" y="136" width="113" height="37"/>
                                         <color key="backgroundColor" name="Accent"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
@@ -107,6 +108,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="wwL-SP-eR2"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="bKH-DY-Ycx" firstAttribute="leading" secondItem="WGD-TC-4rO" secondAttribute="leading" id="3x0-a9-tDF"/>
@@ -118,7 +120,6 @@
                             <constraint firstItem="WGD-TC-4rO" firstAttribute="leading" secondItem="wwL-SP-eR2" secondAttribute="leading" priority="750" constant="32" id="fX1-n9-SRR"/>
                             <constraint firstItem="WGD-TC-4rO" firstAttribute="centerY" secondItem="D8i-qi-0F5" secondAttribute="centerY" id="ksA-A5-cHN"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="wwL-SP-eR2"/>
                     </view>
                     <navigationItem key="navigationItem" title="Words" id="RI4-kJ-FK3">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Rs4-3P-aba">
@@ -138,15 +139,23 @@
             <point key="canvasLocation" x="2341.5999999999999" y="-215.44227886056973"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="68V-d1-gKx">
+            <size key="intrinsicContentSize" width="113" height="37"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="Accent">
-            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Text">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Background">
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

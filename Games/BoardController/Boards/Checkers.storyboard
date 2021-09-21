@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cgA-mw-r8l">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cgA-mw-r8l">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,17 +55,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="j4b-lN-HhH"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="feG-A9-xD8" firstAttribute="centerX" secondItem="Yij-Jk-BQ3" secondAttribute="centerX" id="3G1-oa-rNS"/>
                             <constraint firstItem="TOT-Kh-qbK" firstAttribute="centerY" secondItem="Yij-Jk-BQ3" secondAttribute="centerY" id="HFZ-cD-dJb"/>
                             <constraint firstItem="feG-A9-xD8" firstAttribute="top" secondItem="TOT-Kh-qbK" secondAttribute="bottom" id="QkP-gR-PfG"/>
                             <constraint firstItem="j4b-lN-HhH" firstAttribute="bottom" secondItem="feG-A9-xD8" secondAttribute="bottom" id="VzE-pb-w3W"/>
-                            <constraint firstItem="TOT-Kh-qbK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="p1z-su-fxg" secondAttribute="bottom" constant="100" id="Wnm-EX-HCL"/>
+                            <constraint firstItem="TOT-Kh-qbK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j4b-lN-HhH" secondAttribute="top" constant="100" id="Wnm-EX-HCL"/>
                             <constraint firstItem="TOT-Kh-qbK" firstAttribute="leading" secondItem="Yij-Jk-BQ3" secondAttribute="leading" priority="750" constant="32" id="bah-ff-MWA"/>
                             <constraint firstItem="TOT-Kh-qbK" firstAttribute="centerX" secondItem="Yij-Jk-BQ3" secondAttribute="centerX" id="jF6-I3-fEh"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="j4b-lN-HhH"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chess" id="PQc-cK-CMu"/>
                     <navigationItem key="navigationItem" title="Checkers" id="Szf-EI-EPb">
@@ -88,13 +88,13 @@
     </scenes>
     <resources>
         <namedColor name="Accent">
-            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
-            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

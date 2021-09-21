@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3PA-gK-8ew">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3PA-gK-8ew">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,9 +52,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="z64-pZ-zZm"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="RTW-WR-TTh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="l2O-q6-w3U" secondAttribute="bottom" constant="100" id="1OP-EM-oEW"/>
+                            <constraint firstItem="RTW-WR-TTh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="z64-pZ-zZm" secondAttribute="top" constant="100" id="1OP-EM-oEW"/>
                             <constraint firstItem="jOe-tr-PDk" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="ElV-Ca-a0x"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="centerY" secondItem="sjA-qr-eX3" secondAttribute="centerY" id="Eoe-6b-FJD"/>
                             <constraint firstItem="jOe-tr-PDk" firstAttribute="top" secondItem="RTW-WR-TTh" secondAttribute="bottom" id="iVs-2R-5uX"/>
@@ -62,7 +63,6 @@
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="p19-uJ-Qra"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="leading" secondItem="sjA-qr-eX3" secondAttribute="leading" priority="750" constant="32" id="ucL-vj-eK5"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="z64-pZ-zZm"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chess" id="DPE-bD-JQh"/>
                     <navigationItem key="navigationItem" title="Go" id="NNU-um-tuZ">
@@ -85,10 +85,10 @@
     </scenes>
     <resources>
         <namedColor name="Background">
-            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
-            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

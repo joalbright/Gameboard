@@ -47,9 +47,9 @@ extension Grid {
                 let y = r > 4 ? 95 : 15
                 let x = c > 5 ? 35 : 15
 
-                let label = UILabel(frame: CGRect(x: c * w + x, y: r * h + y, width: w, height: h))
                 var piece = "\(item)"
 
+                let label = UILabel(frame: CGRect(x: c * w + x, y: r * h + y, width: w, height: h))
                 label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
 
                 if player(piece) == 1 {

@@ -35,10 +35,10 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
+
                 let piece = "\(item)"
-                
+
+                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
                 label.text = piece
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)

@@ -137,19 +137,23 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h).insetBy(dx: 1, dy: 1))
+
                 let piece = Words.PieceType(rawValue: "\(item)")
-                
+
+                let holder = UIView(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h).insetBy(dx: 1, dy: 1))
+                holder.backgroundColor = piece?.backgroundColor ?? colors.player2
+                holder.layer.cornerRadius = 4
+                holder.layer.masksToBounds = true
+
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: w - 2, height: h - 2))
                 label.text = "\(item)"
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / ("\(item)".count > 1 ? 3 : 2) - 5, weight: .black)
                 label.textColor = piece?.textColor ?? colors.player1
-                label.backgroundColor = piece?.backgroundColor ?? colors.player2
-                label.layer.cornerRadius = 4
-                label.layer.masksToBounds = true
+                label.backgroundColor = .clear
                 
-                view.addSubview(label)
+                holder.addSubview(label)
+                view.addSubview(holder)
                 
             }
             

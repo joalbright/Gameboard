@@ -23,7 +23,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOT-Kh-qbK" customClass="CheckersBoardView" customModule="Games" customModuleProvider="target">
                                 <rect key="frame" x="32" y="273" width="350" height="350"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TOT-Kh-qbK" secondAttribute="height" multiplier="1:1" id="jaY-Eb-ONb"/>
                                 </constraints>
@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3Q-U4-9mj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="-214"/>
+            <point key="canvasLocation" x="672" y="-229"/>
         </scene>
     </scenes>
     <resources>

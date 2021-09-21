@@ -193,8 +193,10 @@
 		A9DBACA5208EADE500C03C12 /* InProgress */ = {
 			isa = PBXGroup;
 			children = (
+				0E96540423390BA40075BF13 /* Alquerque.swift */,
 				0E96542523390C0E0075BF13 /* Battleship.swift */,
 				0E96542323390C0E0075BF13 /* Dominos.swift */,
+				0E96541723390BFC0075BF13 /* Ludo.swift */,
 				0E96542423390C0E0075BF13 /* Majong.swift */,
 				0E96542023390C0E0075BF13 /* Pilare.swift */,
 				0E96542123390C0E0075BF13 /* Tetris.swift */,
@@ -288,7 +290,6 @@
 		A9DD74201C62A35300219C78 /* Boards */ = {
 			isa = PBXGroup;
 			children = (
-				0E96540423390BA40075BF13 /* Alquerque.swift */,
 				0E96540323390BA40075BF13 /* Backgammon.swift */,
 				0E96540623390BA40075BF13 /* Bombsweeper.swift */,
 				0E96540823390BA40075BF13 /* Checkers.swift */,
@@ -297,7 +298,6 @@
 				0E96540523390BA40075BF13 /* Doubles.swift */,
 				0E96540023390BA30075BF13 /* Four.swift */,
 				0E96540723390BA40075BF13 /* Go.swift */,
-				0E96541723390BFC0075BF13 /* Ludo.swift */,
 				0E96541423390BFC0075BF13 /* Mancala.swift */,
 				0E96541223390BFC0075BF13 /* Memory.swift */,
 				0E96541523390BFC0075BF13 /* Pegs.swift */,
@@ -592,6 +592,7 @@
 				DEVELOPMENT_TEAM = 965FHW76SM;
 				INFOPLIST_FILE = Games/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -606,6 +607,7 @@
 				DEVELOPMENT_TEAM = 965FHW76SM;
 				INFOPLIST_FILE = Games/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

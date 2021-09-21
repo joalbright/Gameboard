@@ -184,9 +184,9 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
-                
+
+                let holder = UIView(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: w, height: h))
                 label.text = "\(item)"
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)
@@ -196,11 +196,12 @@ extension Grid {
                     
                     guard highlight.0 == r && highlight.1 == c else { continue }
                     label.textColor = colors.highlight
-                    label.backgroundColor = colors.foreground
+                    holder.backgroundColor = colors.foreground
                     
                 }
                 
-                view.addSubview(label)
+                holder.addSubview(label)
+                view.addSubview(holder)
                 
             }
             

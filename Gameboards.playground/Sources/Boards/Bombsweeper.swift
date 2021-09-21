@@ -176,16 +176,18 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+
                 let piece = "\(item)"
+
+                let holder = UIView(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+                holder.backgroundColor = player(piece) == 1 ? colors.selected : colors.background
                 
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: w, height: h))
                 label.text = player(piece) == 2 ? playerPieces[0] : piece
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)
-                
                 label.textColor = [0,2].contains(player(piece)) ? colors.player1 : colors.player2
-                label.backgroundColor = player(piece) == 1 ? colors.selected : colors.background
+                label.backgroundColor = .clear
                 
                 if piece == "•" {
                     
@@ -196,7 +198,8 @@ extension Grid {
                 
                 if let num = Int("\(item)"), num > 0 { label.textColor = colors.highlight }
                 
-                view.addSubview(label)
+                holder.addSubview(label)
+                view.addSubview(holder)
                 
             }
             

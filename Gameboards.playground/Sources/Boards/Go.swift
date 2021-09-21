@@ -87,10 +87,10 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + padding - w / 2, y: r * h + padding - h / 2, width: w, height: h))
+
                 var piece = "\(item)"
-                
+
+                let label = UILabel(frame: CGRect(x: c * w + padding - w / 2, y: r * h + padding - h / 2, width: w, height: h))
                 label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
                 
                 if player(piece) == 1 {

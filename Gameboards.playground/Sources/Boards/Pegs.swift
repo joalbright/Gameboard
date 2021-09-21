@@ -77,7 +77,6 @@ extension Grid {
                 guard "\(item)" != "!" else { continue }
                 
                 let label = HintLabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
-                
                 label.text = "\(item)"
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)
@@ -88,7 +87,6 @@ extension Grid {
 
                 for highlight in highlights { label.highlight = label.highlight ? true : highlight.0 == r && highlight.1 == c }
 
-                
                 view.addSubview(label)
                 
             }

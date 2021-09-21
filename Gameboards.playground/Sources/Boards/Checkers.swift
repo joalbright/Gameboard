@@ -126,14 +126,17 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = HintLabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+
                 var piece = "\(item)"
                 
-                label.backgroundColor = (c + r) % 2 == 0 ? colors.background : colors.foreground
+                let holder = UIView(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                holder.backgroundColor = (c + r) % 2 == 0 ? colors.background : colors.foreground
+
+                let label = HintLabel(frame: CGRect(x: 0, y: 0, width: w, height: h))
+                label.backgroundColor = .clear
                 label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
                 label.highlightColor = colors.highlight
-                
+
                 if player(piece) == 1 {
                     
                     if let index = playerPieces[1].array().index(of: piece) { piece = playerPieces[0].array()[index] }
@@ -145,9 +148,10 @@ extension Grid {
                 
                 label.text = piece
                 label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)
-                
-                view.addSubview(label)
+                label.font = UIFont(name: "Apple Symbols", size: (w + h) / 2 - 10)
+
+                holder.addSubview(label)
+                view.addSubview(holder)
                 
             }
             

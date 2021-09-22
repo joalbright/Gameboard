@@ -33,22 +33,22 @@ class Pegs: NSObject {
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
         
-        guard p1 == "●" && p2 == " " else { throw MoveError.invalidmove }
+        guard p1 == "●" && p2 == EmptyPiece else { throw MoveError.invalidmove }
         
         guard (abs(m1) == 2 && abs(m2) == 0) || (abs(m1) == 0 && abs(m2) == 2) else { throw MoveError.invalidmove }
         
         let e1 = s1.0 + m1 / 2
         let e2 = s1.1 + m2 / 2
         
-        let piece = grid[e1,e2] as? Piece
+        let piece = grid[e1,e2]
         
         guard piece == "●" else { throw MoveError.invalidmove }
         
         guard !hint else { return nil }
         
         grid[s2.0,s2.1] = p1
-        grid[s1.0,s1.1] = " " // remove initial piece
-        grid[e1,e2] = " " // remove jumped piece
+        grid[s1.0,s1.1] = EmptyPiece // remove initial piece
+        grid[e1,e2] = EmptyPiece // remove jumped piece
         
         return piece
         

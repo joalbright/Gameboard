@@ -4,7 +4,7 @@ public struct Checkers {
     
     public enum PieceType: String {
         
-        case none = ""
+        case none = " "
         case checker1 = "●"
         case checker2 = "○"
         
@@ -17,14 +17,14 @@ public struct Checkers {
         
         return Grid([
             
-            8 ✕ ("" %% "●"),
-            8 ✕ ("●" %% ""),
-            8 ✕ ("" %% "●"),
-            8 ✕ "",
-            8 ✕ "",
-            8 ✕ ("○" %% ""),
-            8 ✕ ("" %% "○"),
-            8 ✕ ("○" %% "")
+            8 ✕ (EmptyPiece %% "●"),
+            8 ✕ ("●" %% EmptyPiece),
+            8 ✕ (EmptyPiece %% "●"),
+            8 ✕ EmptyPiece,
+            8 ✕ EmptyPiece,
+            8 ✕ ("○" %% EmptyPiece),
+            8 ✕ (EmptyPiece %% "○"),
+            8 ✕ ("○" %% EmptyPiece)
             
         ])
         
@@ -40,7 +40,7 @@ public struct Checkers {
         let e1 = s1.0 + m1 / 2
         let e2 = s1.1 + m2 / 2
 
-        guard let jumpedPieceType: PieceType = PieceType(rawValue: grid[e1,e2] as? String ?? ""), jumpedPieceType != .none else { return false }
+        guard let jumpedPieceType: PieceType = PieceType(rawValue: grid[e1,e2]), jumpedPieceType != .none else { return false }
         
         switch PieceType(rawValue: p1) ?? .none {
             
@@ -70,7 +70,7 @@ public struct Checkers {
         
         guard !hint else { return true }
         
-        grid[e1,e2] = "" // remove other player piece
+        grid[e1,e2] = EmptyPiece // remove other player piece
         
         return true
         
@@ -83,7 +83,7 @@ public struct Checkers {
 
         var kingPiece: PieceType?
         
-        guard p2 == "" else { throw MoveError.invalidmove }
+        guard p2 == EmptyPiece else { throw MoveError.invalidmove }
         
         switch PieceType(rawValue: p1) ?? .none {
          
@@ -113,9 +113,9 @@ public struct Checkers {
         let piece = grid[s2.0,s2.1]
         
         grid[s2.0,s2.1] = kingPiece?.rawValue ?? p1 // place my piece in target square
-        grid[s1.0,s1.1] = "" // remove my piece from original square
+        grid[s1.0,s1.1] = EmptyPiece // remove my piece from original square
         
-        return piece as? Piece
+        return piece
         
     }
     

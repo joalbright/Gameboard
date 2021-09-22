@@ -26,15 +26,15 @@ import UIKit
     
     override func selectSquare(_ square: Square) {
         
-        //        do {
-        //
-        //            try board.move(toSquare: square)
-        //
-        //        } catch {
-        //
-        //            print(error)
-        //
-        //        }
+//        do {
+//
+//            try board.move(toSquare: square)
+//
+//        } catch {
+//
+//            print(error)
+//
+//        }
         
         updateBoard()
         

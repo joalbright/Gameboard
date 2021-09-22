@@ -60,13 +60,8 @@ public struct Sudoku {
     
     public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
         
-        guard g1 != "" else { throw MoveError.invalidmove }
-        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
-        
-        print(a1)
-        print(g1)
-        
-        guard a1 == g1 else { throw MoveError.incorrectguess }
+        guard g1 != EmptyPiece else { throw MoveError.invalidmove }        
+        guard g1 == solution[s1.0,s1.1] else { throw MoveError.incorrectguess }
         
         grid[s1.0,s1.1] = g1
         
@@ -78,9 +73,9 @@ public struct Sudoku {
         
         for _ in 0...2 {
             
-            let g1 = [grid[0],grid[1],grid[2]].randomize()
-            let g2 = [grid[3],grid[4],grid[5]].randomize()
-            let g3 = [grid[6],grid[7],grid[8]].randomize()
+            let g1: [[String]] = [grid[0],grid[1],grid[2]].randomize()
+            let g2: [[String]] = [grid[3],grid[4],grid[5]].randomize()
+            let g3: [[String]] = [grid[6],grid[7],grid[8]].randomize()
             
             grid = Grid([ g1[0], g1[1], g1[2], g2[0], g2[1], g2[2], g3[0], g3[1], g3[2] ])
             
@@ -94,7 +89,7 @@ public struct Sudoku {
     
     static func flipGrid(_ grid: Grid) -> Grid {
         
-        let newGrid = Grid(9 ✕ (9 ✕ ""))
+        let newGrid = Grid(9 ✕ (9 ✕ EmptyPiece))
         
         for r in newGrid.rowRange {
             
@@ -122,7 +117,7 @@ public struct Sudoku {
             
             for c in cols {
                 
-                grid[r,c] = ""
+                grid[r,c] = EmptyPiece
                 
             }
             
@@ -154,7 +149,7 @@ public struct Sudoku {
             
             for c in row {
                 
-                grid[r,c] = ""
+                grid[r,c] = EmptyPiece
                 
             }
             

@@ -2,7 +2,7 @@ import UIKit
 
 public struct Dots {
 
-    public static var board: Grid { return Grid(17 ✕ (17 ✕ ("●" %% "0") %% 17 ✕ ("0" %% " "))) }
+    public static var board: Grid { return Grid(17 ✕ (17 ✕ ("●" %% "0") %% 17 ✕ ("0" %% EmptyPiece))) }
     
 //    public static var board: Grid { return Grid(8 ✕ (8 ✕ "00000")) }
 
@@ -26,8 +26,7 @@ public struct Dots {
 
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = grid[s.0,s.1] as? String else { continue }
-            guard a1 == " ", checkClosed(s, grid) else { continue }
+            guard grid[s.0,s.1] == EmptyPiece, checkClosed(s, grid) else { continue }
 
             grid[s.0,s.1] = playerPieces[player]
 
@@ -45,8 +44,7 @@ public struct Dots {
 
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = grid[s.0,s.1] as? String else { continue }
-            if a1 != "0" { count += 1 }
+            if grid[s.0,s.1] != "0" { count += 1 }
 
         }
 

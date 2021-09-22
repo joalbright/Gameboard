@@ -103,10 +103,11 @@ public struct Gameboard {
 
     }
     
-    var grid: Grid = Grid(1 ✕ (1 ✕ ""))
-    var solution: Grid = Grid(1 ✕ (1 ✕ ""))
+    var grid: Grid = Grid(1 ✕ (1 ✕ EmptyPiece))
+    var solution: Grid = Grid(1 ✕ (1 ✕ EmptyPiece))
     
     var gridSize: Int { return grid.content.count }
+    var totalSpaces: Int { return grid.content.count == 0 ? 0 : grid.content.count * grid.content[0].count }
     var difficulty: Difficulty = .easy { didSet { reset() } }
     
     var _size: Int?

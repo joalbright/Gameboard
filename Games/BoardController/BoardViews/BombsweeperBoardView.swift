@@ -60,8 +60,8 @@ import UIKit
 
         guard let board = board else { return }
 
-        let noMoves = !(board.grid.content.reduce([]) { $0 + $1 }.compactMap { $0 as? String }.contains("•"))
-        let boom = (board.grid.content.reduce([]) { $0 + $1 }.compactMap { $0 as? String }.contains("✘"))
+        let noMoves = !(board.grid.content.reduce([]) { $0 + $1 }.contains("•"))
+        let boom = (board.grid.content.reduce([]) { $0 + $1 }.contains("✘"))
 
         if boom {
 

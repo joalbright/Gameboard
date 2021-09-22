@@ -130,20 +130,16 @@ import UIKit
 
     private func checkWin(indexes: [Int]) -> (Int?,Bool) {
 
-        let piece1: Any = board.grid[indexes[0] - 1]
-        let piece2: Any = board.grid[indexes[1] - 1]
-        let piece3: Any = board.grid[indexes[2] - 1]
-        let piece4: Any = board.grid[indexes[3] - 1]
+        let p1: String = board.grid[indexes[0] - 1]
+        let p2: String = board.grid[indexes[1] - 1]
+        let p3: String = board.grid[indexes[2] - 1]
+        let p4: String = board.grid[indexes[3] - 1]
 
-        if let p1 = piece1 as? String, let p2 = piece2 as? String, let p3 = piece3 as? String, let p4 = piece4 as? String {
+        if p1 == p2, p2 == p3, p3 == p4, p1 != EmptyPiece {
 
-            if p1 == p2, p2 == p3, p3 == p4, p1 != "" {
+            guard let index = board?.playerPieces.firstIndex(of: p1) else { return (nil,false) }
 
-                guard let index = board?.playerPieces.firstIndex(of: p1) else { return (nil,false) }
-
-                return (index + 1,true)
-
-            }
+            return (index + 1,true)
 
         }
 

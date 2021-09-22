@@ -41,7 +41,9 @@ public struct Words {
 
         }
 
-        case a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,blank = "_",none = " "
+        case a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z
+        case blank = "_"
+        case none = " "
         
         var count: Int {
             
@@ -109,8 +111,7 @@ public struct Words {
     
     public static func validate(_ tile: Letter, _ s1: Square, _ grid: Grid) throws {
         
-        guard let spot = grid[s1.0,s1.1] as? String else { throw MoveError.invalidmove }
-        guard PieceType(rawValue: spot) != nil else { throw MoveError.invalidmove }
+        guard PieceType(rawValue: grid[s1.0,s1.1]) != nil else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = tile.rawValue.uppercased()
         

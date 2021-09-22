@@ -40,7 +40,7 @@ public struct Bombsweeper {
 
         // randomize play area
         
-        let grid = Grid(10 ✕ (10 ✕ " "))
+        let grid = Grid(10 ✕ (10 ✕ EmptyPiece))
         
         for (r,_) in grid.content.enumerated() { grid[r,4] = "•" }
         for (r,row) in grid.content.enumerated() { grid[r] = row.randomize().randomize().randomize() }
@@ -75,22 +75,24 @@ public struct Bombsweeper {
     public static let playerPieces = ["⚑","✘","⚐"]
     
     public static func validateGuess(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
-        
-        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
+
+        let a1 = solution[s1.0,s1.1]
+
         guard a1 != "⚑" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = a1
         
         guard a1 != "•" else { grid[s1.0,s1.1] = "✘"; throw GameStatus.gameover }
-        guard a1 == " " else { return }
+        guard a1 == EmptyPiece else { return }
                 
         try checkAdjacent(s1, grid, solution)
         
     }
     
     public static func validateMark(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
-        
-        guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
+
+        let g1 = grid[s1.0,s1.1]
+
         guard ["⚑","•"].contains(g1) else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = g1 == "•" ? "⚑" : "•"
@@ -104,12 +106,16 @@ public struct Bombsweeper {
         for a in adjacent {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
+
             guard grid.onBoard(s) else { continue }
-            guard let a1 = solution[s.0,s.1] as? String, let g1 = grid[s.0,s.1] as? String, g1 != a1 else { continue }
+
+            let a1 = solution[s.0,s.1]
+
+            guard a1 != grid[s.0,s.1] else { continue }
             
             grid[s.0,s.1] = a1
             
-            guard a1 == " " else { continue }
+            guard a1 == EmptyPiece else { continue }
             
             try checkAdjacent(s, grid, solution)
             
@@ -123,12 +129,11 @@ public struct Bombsweeper {
             
             for c in grid.colRange {
                 
-                guard let g1 = grid[r,c] as? String else { continue }
-                guard g1 != "•" else { continue }
+                guard grid[r,c] != "•" else { continue }
             
                 let bombs = bombCount((r,c), grid)
                 
-                grid[r,c] = bombs == 0 ? " " : "\(bombs)"
+                grid[r,c] = bombs == 0 ? EmptyPiece : "\(bombs)"
                 
             }
             
@@ -148,8 +153,7 @@ public struct Bombsweeper {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = grid[s.0,s.1] as? String else { continue }
-            if a1 == "•" { count += 1 }
+            if grid[s.0,s.1] == "•" { count += 1 }
         
         }
         

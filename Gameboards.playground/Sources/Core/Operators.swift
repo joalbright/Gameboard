@@ -52,9 +52,9 @@ public func - (lhs: Int, rhs: CGFloat) -> CGFloat {
 
 infix operator ✕: AdditionPrecedence
 
-public func ✕ <T: Any>(lhs: Int, rhs: (Int) -> T) -> [T] {
+public func ✕ (lhs: Int, rhs: (Int) -> String) -> [String] {
     
-    var a: [T] = []
+    var a: [String] = []
     
     for i in 0..<lhs { let r = rhs(i); a.append(r) }
     
@@ -62,9 +62,9 @@ public func ✕ <T: Any>(lhs: Int, rhs: (Int) -> T) -> [T] {
     
 }
 
-public func ✕ <T: Any>(lhs: Int, rhs: (Int) -> [T]) -> [[T]] {
+public func ✕ (lhs: Int, rhs: (Int) -> [String]) -> [[String]] {
 
-    var a: [[T]] = []
+    var a: [[String]] = []
 
     for i in 0..<lhs { let r = rhs(i); a.append(r) }
 
@@ -72,33 +72,27 @@ public func ✕ <T: Any>(lhs: Int, rhs: (Int) -> [T]) -> [[T]] {
 
 }
 
-public func ✕ <T: Any>(lhs: Int, rhs: T) -> [T] {
+public func ✕ (lhs: Int, rhs: String) -> [String] {
     
-    return [T](repeating: rhs, count: lhs)
-    
-}
-
-public func ✕ <T: Any>(lhs: Int, rhs: [T]) -> [[T]] {
-    
-    return [[T]](repeating: rhs, count: lhs)
+    return [String](repeating: rhs, count: lhs)
     
 }
 
-public func ✕ <T: Any>(lhs: Int, rhs: T.Type) -> [T?] {
+public func ✕ (lhs: Int, rhs: [String]) -> [[String]] {
     
-    return [T?](repeating: nil, count: lhs)
+    return [[String]](repeating: rhs, count: lhs)
     
 }
 
 infix operator %% : AssignmentPrecedence
 
-public func %% <T: Any>(lhs: T, rhs: T) -> (Int) -> Any {
+public func %% (lhs: String, rhs: String) -> (Int) -> String {
     
     return { $0 % 2 == 0 ? lhs : rhs }
     
 }
 
-public func %% <T: Any>(lhs: [T], rhs: [T]) -> (Int) -> [T] {
+public func %% (lhs: [String], rhs: [String]) -> (Int) -> [String] {
 
     return { $0 % 2 == 0 ? lhs : rhs }
 

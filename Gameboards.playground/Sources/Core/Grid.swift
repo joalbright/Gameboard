@@ -1,8 +1,10 @@
 import UIKit
 
+let EmptyPiece: String = " "
+
 public class Grid {
     
-    public var content: [[Any]]
+    public var content: [[String]]
     
     public var rowRange: CountableRange<Int> { return 0..<content.count }
     public var colRange: CountableRange<Int> { return content.count > 0 ? 0..<content[0].count : 0..<0 }
@@ -11,27 +13,27 @@ public class Grid {
     public var colors = BoardColors()
     public var playerPieces: [Piece] = []
     
-    public init(_ content: [[Any]]) {
+    public init(_ content: [[String]]) {
         
         self.content = content
         
     }
     
-    public subscript(c: Int, r: Int) -> Any {
+    public subscript(c: Int, r: Int) -> String {
         
         get { return content[c][r] }
         set { content[c][r] = newValue }
         
     }
     
-    public subscript(c: Int) -> [Any] {
+    public subscript(c: Int) -> [String] {
         
         get { return content[c] }
         set { content[c] = newValue }
         
     }
 
-    public subscript(c: Int) -> Any {
+    public subscript(c: Int) -> String {
 
         get { return content[c / colRange.endIndex][c % colRange.endIndex] }
         set { content[c / colRange.endIndex][c % colRange.endIndex] = newValue }
@@ -94,6 +96,12 @@ public class Grid {
         
         return -1
         
+    }
+
+    public func piecesOnBoard() -> [Piece] {
+
+        return content.reduce([]) { $0 + $1 }.filter { $0 != EmptyPiece }
+
     }
     
 }

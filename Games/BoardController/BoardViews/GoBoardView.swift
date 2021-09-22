@@ -73,7 +73,16 @@ import UIKit
         let pieces1 = board.grid.piecesOnBoard().filter { board.playerPieces[0].contains($0) }
         let pieces2 = board.grid.piecesOnBoard().filter { board.playerPieces[1].contains($0) }
 
-        board?.showAlert?("Game Over", "Player \(pieces1.count > pieces2.count ? 1 : 2) Wins")
+        if pieces1.count == pieces2.count {
+
+            board?.showAlert?("Game Over", "Stalemate")
+
+        } else {
+
+            board?.showAlert?("Game Over", "Player \(pieces1.count > pieces2.count ? 1 : 2) Wins")
+            
+        }
+
         passes = 0
 
     }

@@ -289,6 +289,7 @@ public struct Gameboard {
             
             grid = Go.board
             playerPieces = Go.playerPieces
+            playerTurn = 0
             
         case .mancala:
             

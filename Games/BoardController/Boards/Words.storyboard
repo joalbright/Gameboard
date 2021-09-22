@@ -82,11 +82,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68V-d1-gKx" customClass="SimpleButton" customModule="Games" customModuleProvider="target">
-                                        <rect key="frame" x="118.5" y="136" width="113" height="37"/>
+                                        <rect key="frame" x="115" y="136" width="120" height="40"/>
                                         <color key="backgroundColor" name="Accent"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="JfY-Eb-30H"/>
+                                            <constraint firstAttribute="width" constant="120" id="n5Z-B5-8rg"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                         <color key="tintColor" name="Text"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                         <state key="normal" title="GET TILES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -141,7 +144,7 @@
     </scenes>
     <designables>
         <designable name="68V-d1-gKx">
-            <size key="intrinsicContentSize" width="113" height="37"/>
+            <size key="intrinsicContentSize" width="73" height="29"/>
         </designable>
     </designables>
     <resources>

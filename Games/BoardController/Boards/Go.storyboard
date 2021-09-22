@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3PA-gK-8ew">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -35,31 +35,67 @@
                                         <color key="value" red="0.15056303139999999" green="0.15055377780000001" blue="0.15055915710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
-                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOe-tr-PDk">
-                                <rect key="frame" x="168.5" y="623" width="77" height="239"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                <color key="textColor" name="Text"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jn7-zf-u4A">
+                                <rect key="frame" x="147" y="623" width="120" height="239"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vTu-xE-jus">
+                                        <rect key="frame" x="0.0" y="79.5" width="120" height="80"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9l-CR-0Vv" customClass="SimpleButton" customModule="Games" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
+                                                <color key="backgroundColor" name="Accent"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="DDd-ig-qQh"/>
+                                                    <constraint firstAttribute="width" constant="120" id="VEk-vj-5TQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                                <color key="tintColor" name="Text"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="PASS TURN"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="pass" destination="RTW-WR-TTh" eventType="touchUpInside" id="ESc-gj-pIA"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOe-tr-PDk">
+                                                <rect key="frame" x="22" y="56" width="76.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                <color key="textColor" name="Text"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="vTu-xE-jus" firstAttribute="centerY" secondItem="Jn7-zf-u4A" secondAttribute="centerY" id="4Ha-ze-8a9"/>
+                                    <constraint firstItem="vTu-xE-jus" firstAttribute="leading" secondItem="Jn7-zf-u4A" secondAttribute="leading" id="HYX-LG-KGK"/>
+                                    <constraint firstAttribute="trailing" secondItem="vTu-xE-jus" secondAttribute="trailing" id="Szq-4M-d5p"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="z64-pZ-zZm"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
+                            <constraint firstItem="Jn7-zf-u4A" firstAttribute="top" secondItem="RTW-WR-TTh" secondAttribute="bottom" id="0ow-xM-MAd"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="z64-pZ-zZm" secondAttribute="top" constant="100" id="1OP-EM-oEW"/>
-                            <constraint firstItem="jOe-tr-PDk" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="ElV-Ca-a0x"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="centerY" secondItem="sjA-qr-eX3" secondAttribute="centerY" id="Eoe-6b-FJD"/>
-                            <constraint firstItem="jOe-tr-PDk" firstAttribute="top" secondItem="RTW-WR-TTh" secondAttribute="bottom" constant="100" id="iVs-2R-5uX"/>
-                            <constraint firstItem="z64-pZ-zZm" firstAttribute="bottom" secondItem="jOe-tr-PDk" secondAttribute="bottom" id="jEX-q2-r8m"/>
+                            <constraint firstItem="Jn7-zf-u4A" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="M5c-qI-sbt"/>
+                            <constraint firstItem="z64-pZ-zZm" firstAttribute="bottom" secondItem="Jn7-zf-u4A" secondAttribute="bottom" id="lkd-80-Xkz"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="centerX" secondItem="sjA-qr-eX3" secondAttribute="centerX" id="p19-uJ-Qra"/>
                             <constraint firstItem="RTW-WR-TTh" firstAttribute="leading" secondItem="sjA-qr-eX3" secondAttribute="leading" priority="750" constant="32" id="ucL-vj-eK5"/>
                         </constraints>
@@ -83,7 +119,15 @@
             <point key="canvasLocation" x="1598" y="-214"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="v9l-CR-0Vv">
+            <size key="intrinsicContentSize" width="83" height="29"/>
+        </designable>
+    </designables>
     <resources>
+        <namedColor name="Accent">
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Background">
             <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -121,7 +121,7 @@ extension Gameboard {
         
         guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
-        guard let c1 = solution[s1.0,s1.1] as? Card else { throw MoveError.incorrectpiece }
+        let c1 = solution[s1.0,s1.1]
         
         switch _type {
             
@@ -136,8 +136,8 @@ extension Gameboard {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.outofbounds }
         
-        guard let c1 = solution[s1.0,s1.1] as? Card else { throw MoveError.incorrectpiece }
-        guard let c2 = solution[s2.0,s2.1] as? Card else { throw MoveError.incorrectpiece }
+        let c1 = solution[s1.0,s1.1]
+        let c2 = solution[s2.0,s2.1]
         
         switch _type {
             
@@ -155,9 +155,9 @@ extension Gameboard {
         
         var p1 = playerPieces[playerTurn]
         
-        if grid.onBoard(s1) { p1 = grid[s1.0][s1.1] as? Piece ?? p1 }
+        if grid.onBoard(s1) { p1 = grid[s1.0][s1.1] }
         
-        if s1.0 == -1 { changePlayer() }
+        if s1.0 == 0 { changePlayer() }
         
         switch _type {
             
@@ -185,12 +185,13 @@ extension Gameboard {
         
         guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
-        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.incorrectpiece }
+        let p1 = grid[s1.0,s1.1]
         
         switch _type {
             
         case .go: try Go.validateMove(s1, p1, grid, playerTurn)
         case .tictactoe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
+        case .dots: try Dots.validateMove(s1, p1, grid, playerTurn)
         default: throw MoveError.incorrectpiece
             
         }
@@ -201,8 +202,8 @@ extension Gameboard {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.outofbounds }
         
-        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.incorrectpiece }
-        guard let p2 = grid[s2.0,s2.1] as? Piece else { throw MoveError.incorrectpiece }
+        let p1 = grid[s1.0,s1.1]
+        let p2 = grid[s2.0,s2.1]
         
         guard validatePlayer(p1) else { throw MoveError.notyourturn }
         

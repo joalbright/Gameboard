@@ -8,7 +8,7 @@ public typealias Guess = String
 public typealias Card = String
 
 
-public extension String {
+extension String {
     
     public func array() -> [String] {
         
@@ -24,17 +24,27 @@ public extension String {
     
 }
 
-public extension Int {
+extension Int {
     
     public func within(_ r: CountableRange<Int>) -> Bool {
         
         return self >= r.lowerBound && self < r.upperBound
         
     }
-    
+
+    public func set(_ advanced: Int, _ count: Int) -> [Int] {
+
+        var set: [Int] = []
+
+        for i in 0..<count { set += [advanced * i + self] }
+
+        return set
+
+    }
+
 }
 
-public extension Array {
+extension Array {
     
     public func randomize() -> [Element] {
     

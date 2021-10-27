@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KCu-nr-Ye3">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Words-->
+        <scene sceneID="n0v-Uf-pna">
+            <objects>
+                <viewController storyboardIdentifier="WordsBoard" id="KCu-nr-Ye3" customClass="WordsBoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D8i-qi-0F5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGD-TC-4rO" customClass="WordsBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WGD-TC-4rO" secondAttribute="height" multiplier="1:1" id="jVu-3J-7Ym"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" name="Accent"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
+                                        <color key="value" name="Background"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
+                                        <color key="value" red="0.92222222220000005" green="0.87791424549999997" blue="0.7799662423" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" systemColor="systemBrownColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKH-DY-Ycx">
+                                <rect key="frame" x="32" y="623" width="350" height="239"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVv-tA-H7R" customClass="SimpleView" customModule="Games" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="63" width="350" height="53"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gWc-5Y-5Yp">
+                                                <rect key="frame" x="2" y="2" width="346" height="49"/>
+                                                <color key="backgroundColor" name="Accent"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="gWc-5Y-5Yp" secondAttribute="height" multiplier="7:1" id="0t1-om-cE9"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Accent"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="gWc-5Y-5Yp" secondAttribute="trailing" constant="2" id="7LB-J5-l5u"/>
+                                            <constraint firstAttribute="bottom" secondItem="gWc-5Y-5Yp" secondAttribute="bottom" constant="2" id="KNl-hk-NyM"/>
+                                            <constraint firstItem="gWc-5Y-5Yp" firstAttribute="leading" secondItem="fVv-tA-H7R" secondAttribute="leading" constant="2" id="UUi-xC-8s6"/>
+                                            <constraint firstItem="gWc-5Y-5Yp" firstAttribute="top" secondItem="fVv-tA-H7R" secondAttribute="top" constant="2" id="dIB-tG-sTC"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68V-d1-gKx" customClass="SimpleButton" customModule="Games" customModuleProvider="target">
+                                        <rect key="frame" x="115" y="136" width="120" height="40"/>
+                                        <color key="backgroundColor" name="Accent"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="JfY-Eb-30H"/>
+                                            <constraint firstAttribute="width" constant="120" id="n5Z-B5-8rg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                        <color key="tintColor" name="Text"/>
+                                        <state key="normal" title="GET TILES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="fillRack" destination="WGD-TC-4rO" eventType="touchUpInside" id="d4E-l8-8NN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstItem="68V-d1-gKx" firstAttribute="top" secondItem="fVv-tA-H7R" secondAttribute="bottom" constant="20" id="0jA-aR-SYE"/>
+                                    <constraint firstItem="fVv-tA-H7R" firstAttribute="centerY" secondItem="bKH-DY-Ycx" secondAttribute="centerY" constant="-30" id="U83-Fl-XOg"/>
+                                    <constraint firstAttribute="trailing" secondItem="fVv-tA-H7R" secondAttribute="trailing" id="aaH-UF-KKu"/>
+                                    <constraint firstItem="fVv-tA-H7R" firstAttribute="leading" secondItem="bKH-DY-Ycx" secondAttribute="leading" id="rib-1a-qCT"/>
+                                    <constraint firstItem="68V-d1-gKx" firstAttribute="centerX" secondItem="bKH-DY-Ycx" secondAttribute="centerX" id="yZV-S6-68Q"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wwL-SP-eR2"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="bKH-DY-Ycx" firstAttribute="leading" secondItem="WGD-TC-4rO" secondAttribute="leading" id="3x0-a9-tDF"/>
+                            <constraint firstItem="bKH-DY-Ycx" firstAttribute="trailing" secondItem="WGD-TC-4rO" secondAttribute="trailing" id="5be-jz-gwm"/>
+                            <constraint firstItem="wwL-SP-eR2" firstAttribute="bottom" secondItem="bKH-DY-Ycx" secondAttribute="bottom" id="GRW-sL-S2c"/>
+                            <constraint firstItem="WGD-TC-4rO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="wwL-SP-eR2" secondAttribute="top" constant="100" id="Seh-Z7-XSc"/>
+                            <constraint firstItem="bKH-DY-Ycx" firstAttribute="top" secondItem="WGD-TC-4rO" secondAttribute="bottom" id="e9q-L0-uG9"/>
+                            <constraint firstItem="WGD-TC-4rO" firstAttribute="centerX" secondItem="D8i-qi-0F5" secondAttribute="centerX" id="eNv-vx-LDv"/>
+                            <constraint firstItem="WGD-TC-4rO" firstAttribute="leading" secondItem="wwL-SP-eR2" secondAttribute="leading" priority="750" constant="32" id="fX1-n9-SRR"/>
+                            <constraint firstItem="WGD-TC-4rO" firstAttribute="centerY" secondItem="D8i-qi-0F5" secondAttribute="centerY" id="ksA-A5-cHN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Words" id="RI4-kJ-FK3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Rs4-3P-aba">
+                            <connections>
+                                <action selector="resetBoardWithSender:" destination="KCu-nr-Ye3" id="zr6-jt-5El"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="WGD-TC-4rO" id="Dh6-Ku-oNs"/>
+                        <outlet property="rackHolder" destination="gWc-5Y-5Yp" id="7U1-gh-YmY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jm8-QK-kFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2341.5999999999999" y="-215.44227886056973"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="68V-d1-gKx">
+            <size key="intrinsicContentSize" width="73" height="29"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="Accent">
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

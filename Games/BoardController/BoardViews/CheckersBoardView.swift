@@ -49,9 +49,30 @@ import UIKit
             board.showAvailable(square)
             
         }
-        
+
         updateBoard()
+        checkDone()
         
+    }
+
+    override func checkDone() {
+
+        if checkLost(player: 0) {
+
+            board?.showAlert?("Game Over", "Player 2 Wins")
+
+        } else if checkLost(player: 1) {
+
+            board?.showAlert?("Game Over", "Player 1 Wins")
+
+        }
+
+    }
+
+    private func checkLost(player: Int) -> Bool {
+
+        return board.grid.piecesOnBoard().filter({ board.playerPieces[player].contains($0) }).isEmpty
+
     }
     
 }

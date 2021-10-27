@@ -109,7 +109,7 @@ class MancalaSpotView: UILabel {
         didSet {
             
             setNeedsDisplay()
-//            text = stones == 0 ? "" : "\(stones)"
+//            text = stones == 0 ? EmptyPiece : "\(stones)"
             
         }
         

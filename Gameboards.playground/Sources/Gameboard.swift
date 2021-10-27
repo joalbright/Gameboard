@@ -32,7 +32,7 @@ public struct Gameboard {
         
         case backgammon, bombsweeper, checkers, chess, dots, doubles, four, go, mancala, memory, pegs, sudoku, tictactoe, words
         
-        static var playable: [BoardType] = [.backgammon,.bombsweeper,.checkers,.chess,.dots,.doubles,.four,.go,.memory,.pegs,.sudoku,.tictactoe, .words]
+        static var playable: [BoardType] = [ .backgammon, .bombsweeper, .checkers, .chess, .dots, .doubles, .four, .go, .memory, .pegs, .sudoku, .tictactoe, .words ]
         
         public var name: String {
             
@@ -78,7 +78,7 @@ public struct Gameboard {
         
         var controller: UINavigationController? {
             
-            guard let vc = UIStoryboard(name: "Boards", bundle: nil).instantiateViewController(withIdentifier: "\(name)Board") as? BoardViewController else { return nil }
+            guard let vc = UIStoryboard(name: name.replacingOccurrences(of: " ", with: ""), bundle: nil).instantiateInitialViewController() as? BoardViewController else { return nil }
             return UINavigationController(rootViewController: vc)
             
         }
@@ -93,21 +93,27 @@ public struct Gameboard {
     var playerCount: Int = 2
     var playerTurn: Int = 0 { didSet { playerChange?(playerTurn + 1) } }
     var playerPieces: [Piece] = [] {
+
         didSet {
+
             grid.playerPieces = playerPieces
             playerCount = playerPieces.count
+            
         }
+
     }
     
-    var grid: Grid = Grid(1 ✕ (1 ✕ ""))
-    var solution: Grid = Grid(1 ✕ (1 ✕ ""))
+    var grid: Grid = Grid(1 ✕ (1 ✕ EmptyPiece))
+    var solution: Grid = Grid(1 ✕ (1 ✕ EmptyPiece))
     
     var gridSize: Int { return grid.content.count }
+    var totalSpaces: Int { return grid.content.count == 0 ? 0 : grid.content.count * grid.content[0].count }
     var difficulty: Difficulty = .easy { didSet { reset() } }
     
     var _size: Int?
     
-    public var playerChange: ((Int) -> ())?
+    public var playerChange: ((Int) -> Void)?
+    public var showAlert: ((String, String) -> Void)?
     
     public init(_ type: BoardType) {
         
@@ -168,7 +174,7 @@ public struct Gameboard {
     public mutating func showAvailable(_ s1: ChessSquare) {
         
         let cols: [String] = "abcdefgh".map { "\($0)" }
-        guard let c1 = cols.index(of: s1.0) else { return }
+        guard let c1 = cols.firstIndex(of: s1.0) else { return }
         let r1 = 8 - s1.1
         
         showAvailable((r1,c1))
@@ -203,7 +209,7 @@ public struct Gameboard {
     public mutating func move(pieceAt s1: ChessSquare, toSquare s2: ChessSquare) throws -> Piece? {
         
         let cols = "abcdefgh".array()
-        guard let c1 = cols.index(of: s1.0), let c2 = cols.index(of: s2.0) else { return nil }
+        guard let c1 = cols.firstIndex(of: s1.0), let c2 = cols.firstIndex(of: s2.0) else { return nil }
         let r1 = 8 - s1.1, r2 = 8 - s2.1
         
         let piece = try validateMove((r1,c1), (r2,c2))
@@ -256,11 +262,6 @@ public struct Gameboard {
             grid = Dots.board
             playerPieces = Dots.playerPieces
             
-            guard testing else { break }
-            
-            grid = Dots.staticboard
-            playerPieces = Dots.playerPieces
-            
         case .doubles:
             
             grid = Doubles.board
@@ -288,6 +289,7 @@ public struct Gameboard {
             
             grid = Go.board
             playerPieces = Go.playerPieces
+            playerTurn = 0
             
         case .mancala:
             
@@ -365,14 +367,14 @@ public struct Gameboard {
 
 public struct BoardColors {
     
-    public var background: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    public var foreground: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    public var background: UIColor = .white
+    public var foreground: UIColor = .black
     
-    public var player1: UIColor = .red
-    public var player2: UIColor = .blue
+    public var player1: UIColor = .systemRed
+    public var player2: UIColor = .systemBlue
     
-    public var highlight: UIColor = .green
-    public var selected: UIColor = .green
+    public var highlight: UIColor = .systemGreen
+    public var selected: UIColor = .systemGreen
     
     public init() { }
     

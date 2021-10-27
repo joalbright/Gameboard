@@ -59,7 +59,6 @@ extension Grid {
             for (c,item) in row.enumerated() {
                 
                 let label = MancalaSpotView(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
-                
                 label.stones = Int("\(item)") ?? 0
                 label.textColor = colors.foreground
                 label.textAlignment = .center

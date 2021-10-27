@@ -59,12 +59,13 @@ class TileView: UIView {
             guard tile != .none else { return }
             
             letterLabel = UILabel()
-            letterLabel.text = tile == .blank ? "" : tile.rawValue.uppercased()
+            letterLabel.text = tile == .blank ? EmptyPiece : tile.rawValue.uppercased()
             letterLabel.textAlignment = .center
+            letterLabel.font = .systemFont(ofSize: 18, weight: .heavy)
             addSubview(letterLabel)
             
             valueLabel = UILabel()
-            valueLabel.text = tile.point == 0 ? "" : "\(tile.point)"
+            valueLabel.text = tile.point == 0 ? EmptyPiece : "\(tile.point)"
             valueLabel.textAlignment = .right
             valueLabel.font = .systemFont(ofSize: 10, weight: .heavy)
             addSubview(valueLabel)

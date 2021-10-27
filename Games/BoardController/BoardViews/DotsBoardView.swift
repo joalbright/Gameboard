@@ -13,6 +13,9 @@ import UIKit
     override func prepareForInterfaceBuilder() {
         
         board = Gameboard(.dots, testing: true)
+        _ = try? board.move(toSquare: (3,6))
+        _ = try? board.move(toSquare: (2,5))
+        _ = try? board.move(toSquare: (2,7))
         super.prepareForInterfaceBuilder()
         
     }
@@ -26,33 +29,18 @@ import UIKit
     
     override func selectSquare(_ square: Square) {
         
-//        do {
-//
-//            try board.move(toSquare: square)
-//
-//        } catch {
-//
-//            print(error)
-//
-//        }
+        do {
+
+            try board.move(toSquare: square)
+
+        } catch {
+
+            print(error)
+
+        }
         
         updateBoard()
         
     }
 
-//    override func coordinate(_ touch: UITouch) -> Square {
-//
-//        let p = 30
-//        let w = (frame.width - p * 2) / (board.gridSize - 1)
-//        let h = (frame.height - p * 2) / (board.gridSize - 1)
-//
-//        let loc = touch.location(in: self)
-//
-//        let c = Int((loc.x - (w / 2)) / w)
-//        let r = Int((loc.y - (w / 2)) / h)
-//
-//        return (r,c)
-//
-//    }
-    
 }

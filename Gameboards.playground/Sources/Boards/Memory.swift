@@ -60,8 +60,8 @@ extension String {
         
         switch self {
             
-        case "🂡","🂢","🂣","🂤","🂥","🂦","🂧","🂨","🂩","🂪","🂫","🂬","🂭","🂮","🃑","🃒","🃓","🃔","🃕","🃖","🃗","🃘","🃙","🃚","🃛","🃜","🃝","🃞": return .black
-        case "🂱","🂲","🂳","🂴","🂵","🂶","🂷","🂸","🂹","🂺","🂻","🂼","🂽","🂾","🃁","🃂","🃃","🃄","🃅","🃆","🃇","🃈","🃉","🃊","🃋","🃌","🃍","🃎": return .red
+        case "🂡","🂢","🂣","🂤","🂥","🂦","🂧","🂨","🂩","🂪","🂫","🂬","🂭","🂮","🃑","🃒","🃓","🃔","🃕","🃖","🃗","🃘","🃙","🃚","🃛","🃜","🃝","🃞": return .darkText
+        case "🂱","🂲","🂳","🂴","🂵","🂶","🂷","🂸","🂹","🂺","🂻","🂼","🂽","🂾","🃁","🃂","🃃","🃄","🃅","🃆","🃇","🃈","🃉","🃊","🃋","🃌","🃍","🃎": return .systemRed
         case "🃟": return .orange
         default: return .clear
             
@@ -102,7 +102,7 @@ public struct Memory {
     
     public static func validateSelection(_ s1: Square, _ c1: Card, _ grid: Grid) throws {
         
-        guard let card = grid[s1.0,s1.1] as? Card, card != "" else { throw MoveError.invalidmove }
+        guard grid[s1.0,s1.1] != EmptyPiece else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = c1
         
@@ -112,14 +112,14 @@ public struct Memory {
         
         if reset {
         
-            let card = c1 == c2 ? "" : "🂠"
+            let card = c1 == c2 ? EmptyPiece : "🂠"
             
             grid[s1.0][s1.1] = card
             grid[s2.0][s2.1] = card
             
         } else {
             
-            guard let card = grid[s1.0,s1.1] as? Card, card != "" else { throw MemoryError.nocard }
+            guard grid[s1.0,s1.1] != EmptyPiece else { throw MemoryError.nocard }
             
             grid[s1.0,s1.1] = c1
             
@@ -151,10 +151,10 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+
                 let piece = "\(item)"
                 
+                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
                 label.text = piece
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)

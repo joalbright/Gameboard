@@ -11,6 +11,8 @@ import UIKit
 
 
 @IBDesignable class MemoryBoardView : BoardView {
+
+    var guesses: Int = 0
     
     override func prepareForInterfaceBuilder() {
         
@@ -35,61 +37,39 @@ import UIKit
             self.board.highlights = [self.board.selected, square].compactMap { $0 }
             self.board.selected = nil
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
                 
-                guard self.board.highlights.count > 1 else { return }
+                guard let highlights = self?.board.highlights, highlights.count > 1 else { return }
+
                 
-                _ = try? self.board.match(cardAt: self.board.highlights[1], withCard: self.board.highlights[0], reset: true)
-                self.board.highlights = []
-                self.updateBoard()
-                
-                let cardCount = self.board.grid.content.reduce(0) {
-                    
-                    $0 + $1.reduce(0) { $0 + (($1 as! String) != "" ? 1 : 0) }
-                    
-                }
-                
-                if cardCount == 0 {
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        
-                        self.board.reset()
-                        self.updateBoard()
-                        
-                    }
-                    
-                }
+                _ = try? self?.board.match(cardAt: highlights[1], withCard: highlights[0], reset: true)
+                self?.board.highlights = []
+
+                self?.updateBoard()
+                self?.checkDone()
                 
             }
             
         }
         
         if board.highlights.count > 1 {
-            
-            _ = try? self.board.match(cardAt: self.board.highlights[1], withCard: self.board.highlights[0], reset: true)
-            self.board.highlights = []
-            
-            guard let _ = try? board.select(cardAt: square) else { return }
-            board.selected = square
+
+            return
             
         } else if let selected = board.selected {
-            
+
+            guesses += 1
+
             do {
                 
                 _ = try board.match(cardAt: square, withCard: selected)
                 clean()
                 
-            } catch {
+            } catch MemoryError.badmatch {
+
+                clean()
                 
-                print(error)
-                
-                if let error = error as? MemoryError, case error = MemoryError.badmatch {
-                    
-                    clean()
-                    
-                }
-                
-            }
+            } catch { }
             
         } else {
             
@@ -100,6 +80,23 @@ import UIKit
         
         updateBoard()
         
+    }
+
+    override func checkDone() {
+
+        let cardCount = board.grid.content.reduce(0) {
+
+            $0 + $1.reduce(0) { $0 + ($1 != EmptyPiece ? 1 : 0) }
+
+        }
+
+        if cardCount == 0 {
+
+            board?.showAlert?("Game Over", "It took \(guesses) Guesses")
+            guesses = 0
+
+        }
+
     }
     
 }

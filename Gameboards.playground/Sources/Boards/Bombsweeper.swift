@@ -1,12 +1,46 @@
 import UIKit
 
+extension Difficulty {
+
+    var bombFlags: Int {
+
+        switch self {
+        case .easy: return 20
+        case .medium: return 20
+        case .hard: return 20
+        }
+
+    }
+
+    var bombs: Int {
+
+        switch self {
+        case .easy: return 10
+        case .medium: return 15
+        case .hard: return 20
+        }
+
+    }
+
+    var bombsize: Int {
+
+        switch self {
+        case .easy: return 10
+        case .medium: return 15
+        case .hard: return 20
+        }
+
+    }
+
+}
+
 public struct Bombsweeper {
     
     public static var board: Grid {
 
         // randomize play area
         
-        let grid = Grid(10 ✕ (10 ✕ " "))
+        let grid = Grid(10 ✕ (10 ✕ EmptyPiece))
         
         for (r,_) in grid.content.enumerated() { grid[r,4] = "•" }
         for (r,row) in grid.content.enumerated() { grid[r] = row.randomize().randomize().randomize() }
@@ -38,45 +72,50 @@ public struct Bombsweeper {
     
     public static var field: Grid { return Grid(10 ✕ (10 ✕ "•")) }
     
-    public static let playerPieces = ["⚑","✘"]
+    public static let playerPieces = ["⚑","✘","⚐"]
     
     public static func validateGuess(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
-        
-        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
+
+        let a1 = solution[s1.0,s1.1]
+
         guard a1 != "⚑" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = a1
         
         guard a1 != "•" else { grid[s1.0,s1.1] = "✘"; throw GameStatus.gameover }
-        guard a1 == " " else { return }
+        guard a1 == EmptyPiece else { return }
                 
         try checkAdjacent(s1, grid, solution)
         
     }
     
     public static func validateMark(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
+
+        let g1 = grid[s1.0,s1.1]
+
+        guard ["⚑","•"].contains(g1) else { throw MoveError.invalidmove }
         
-        guard let g1 = grid[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
-        
-        guard g1 != "⚑" else { return grid[s1.0,s1.1] = "•" }
-        
-        grid[s1.0,s1.1] = "⚑"
+        grid[s1.0,s1.1] = g1 == "•" ? "⚑" : "•"
         
     }
     
     public static func checkAdjacent(_ s1: Square, _ grid: Grid, _ solution: Grid) throws {
         
-        let adjacent2 = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
+        let adjacent = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
         
-        for a in adjacent2 {
+        for a in adjacent {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
+
             guard grid.onBoard(s) else { continue }
-            guard let a1 = solution[s.0,s.1] as? String, let g1 = grid[s.0,s.1] as? String, g1 != a1 else { continue }
+
+            let a1 = solution[s.0,s.1]
+
+            guard a1 != grid[s.0,s.1] else { continue }
             
             grid[s.0,s.1] = a1
             
-            guard a1 == " " else { continue }
+            guard a1 == EmptyPiece else { continue }
             
             try checkAdjacent(s, grid, solution)
             
@@ -90,12 +129,11 @@ public struct Bombsweeper {
             
             for c in grid.colRange {
                 
-                guard let g1 = grid[r,c] as? String else { continue }
-                guard g1 != "•" else { continue }
+                guard grid[r,c] != "•" else { continue }
             
                 let bombs = bombCount((r,c), grid)
                 
-                grid[r,c] = bombs == 0 ? " " : "\(bombs)"
+                grid[r,c] = bombs == 0 ? EmptyPiece : "\(bombs)"
                 
             }
             
@@ -109,14 +147,13 @@ public struct Bombsweeper {
         
         var count = 0
         
-        let adjacent2 = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
+        let adjacent = [ (-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1) ]
         
-        for a in adjacent2 {
+        for a in adjacent {
             
             let s = (s1.0 + a.0, s1.1 + a.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = grid[s.0,s.1] as? String else { continue }
-            if a1 == "•" { count += 1 }
+            if grid[s.0,s.1] == "•" { count += 1 }
         
         }
         
@@ -143,16 +180,18 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+
                 let piece = "\(item)"
+
+                let holder = UIView(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
+                holder.backgroundColor = player(piece) == 1 ? colors.selected : colors.background
                 
-                label.text = piece
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: w, height: h))
+                label.text = player(piece) == 2 ? playerPieces[0] : piece
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)
-                
-                label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
-                label.backgroundColor = player(piece) == 1 ? colors.selected : colors.background
+                label.textColor = [0,2].contains(player(piece)) ? colors.player1 : colors.player2
+                label.backgroundColor = .clear
                 
                 if piece == "•" {
                     
@@ -163,7 +202,8 @@ extension Grid {
                 
                 if let num = Int("\(item)"), num > 0 { label.textColor = colors.highlight }
                 
-                view.addSubview(label)
+                holder.addSubview(label)
+                view.addSubview(holder)
                 
             }
             

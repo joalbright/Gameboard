@@ -28,15 +28,14 @@ class DoublesBoardView: BoardView {
 
     override func swipe(_ direction: Direction) {
         
-        initialgrid = board.grid.content as? [[String]] ?? []
+        initialgrid = board.grid.content
         swipe(direction, 0)
         
     }
     
-    func swipe(_ direction: Direction, _ loop: Int, _ changed: Bool = false, _ doubles: [[Bool]] = 4 ✕ (4 ✕ false)) {
+    func swipe(_ direction: Direction, _ loop: Int, _ changed: Bool = false) {
         
         var moved: Bool = changed
-        var doubles: [[Bool]] = doubles
         
         switch direction {
             
@@ -45,10 +44,6 @@ class DoublesBoardView: BoardView {
             for r in board.grid.colRange {
                 
                 for c in board.grid.rowRange {
-                    
-//                    guard !doubles[c][r] else { continue }
-                    
-                    // move from (c,r) to (c,r-1)
                     
                     do {
                         
@@ -77,10 +72,6 @@ class DoublesBoardView: BoardView {
                 
                 for c in board.grid.colRange {
                     
-//                    guard !doubles[c][r] else { continue }
-                    
-                    // move from (c,row) to (c,row+1)
-                    
                     do {
                        
                         _ = try board.move(pieceAt: (c,row), toSquare: (c,row+1))
@@ -102,10 +93,6 @@ class DoublesBoardView: BoardView {
             for c in board.grid.colRange {
                 
                 for r in board.grid.rowRange {
-                    
-//                    guard !doubles[c][r] else { continue }
-                    
-                    // move from (c,r) to (c-1,r)
                     
                     do {
                         
@@ -133,10 +120,6 @@ class DoublesBoardView: BoardView {
                 
                 for r in board.grid.rowRange {
                     
-//                    guard !doubles[c][r] else { continue }
-                    
-                    // move from (col,r) to (col+1,r)
-                    
                     do {
                     
                         _ = try board.move(pieceAt: (col,r), toSquare: (col+1,r))
@@ -161,7 +144,7 @@ class DoublesBoardView: BoardView {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
                 
-                self.swipe(direction, loop + 1, moved, doubles)
+                self.swipe(direction, loop + 1, moved)
                 
             }
             

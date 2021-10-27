@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MqC-OW-gaC">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pegs-->
+        <scene sceneID="yaN-31-FbU">
+            <objects>
+                <viewController storyboardIdentifier="PegsBoard" id="MqC-OW-gaC" customClass="BoardViewController" customModule="Games" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dZD-uZ-NTX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCn-jf-gTl" customClass="PegsBoardView" customModule="Games" customModuleProvider="target">
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mCn-jf-gTl" secondAttribute="height" multiplier="1:1" id="kMB-BB-Fuu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" name="Background"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fgColor">
+                                        <color key="value" name="Accent"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player1Color">
+                                        <color key="value" name="Text"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="player2Color">
+                                        <color key="value" name="Text"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                        <color key="value" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="mCn-jf-gTl" firstAttribute="centerX" secondItem="dZD-uZ-NTX" secondAttribute="centerX" id="49v-5e-GIy"/>
+                            <constraint firstItem="mCn-jf-gTl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vrd-2Z-JtH" secondAttribute="top" constant="100" id="c2Z-S5-KHV"/>
+                            <constraint firstItem="mCn-jf-gTl" firstAttribute="leading" secondItem="vrd-2Z-JtH" secondAttribute="leading" priority="750" constant="32" id="k6b-m9-WOm"/>
+                            <constraint firstItem="mCn-jf-gTl" firstAttribute="centerY" secondItem="dZD-uZ-NTX" secondAttribute="centerY" id="qfg-vI-8g0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vrd-2Z-JtH"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pegs" id="0U3-Ix-0cQ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="5qo-w5-bCK">
+                            <connections>
+                                <action selector="resetBoardWithSender:" destination="MqC-OW-gaC" id="FbN-wf-YZj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="boardView" destination="mCn-jf-gTl" id="W62-Jm-5gt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="crL-v9-jth" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3092" y="-215"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Accent">
+            <color red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

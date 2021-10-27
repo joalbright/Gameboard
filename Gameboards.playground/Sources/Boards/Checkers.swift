@@ -4,7 +4,7 @@ public struct Checkers {
     
     public enum PieceType: String {
         
-        case none = ""
+        case none = " "
         case checker1 = "●"
         case checker2 = "○"
         
@@ -17,14 +17,14 @@ public struct Checkers {
         
         return Grid([
             
-            8 ✕ ("" %% "●"),
-            8 ✕ ("●" %% ""),
-            8 ✕ ("" %% "●"),
-            8 ✕ "",
-            8 ✕ "",
-            8 ✕ ("○" %% ""),
-            8 ✕ ("" %% "○"),
-            8 ✕ ("○" %% "")
+            8 ✕ (EmptyPiece %% "●"),
+            8 ✕ ("●" %% EmptyPiece),
+            8 ✕ (EmptyPiece %% "●"),
+            8 ✕ EmptyPiece,
+            8 ✕ EmptyPiece,
+            8 ✕ ("○" %% EmptyPiece),
+            8 ✕ (EmptyPiece %% "○"),
+            8 ✕ ("○" %% EmptyPiece)
             
         ])
         
@@ -39,33 +39,38 @@ public struct Checkers {
         
         let e1 = s1.0 + m1 / 2
         let e2 = s1.1 + m2 / 2
-        
+
+        guard let jumpedPieceType: PieceType = PieceType(rawValue: grid[e1,e2]), jumpedPieceType != .none else { return false }
         
         switch PieceType(rawValue: p1) ?? .none {
             
         case .checker1:
             
             guard m1 == 2 && abs(m2) == 2 else { return false }
+            guard jumpedPieceType != .checker1, jumpedPieceType != .king1 else { return false }
             
         case .checker2:
             
             guard m1 == -2 && abs(m2) == 2 else { return false }
+            guard jumpedPieceType != .checker2, jumpedPieceType != .king2 else { return false }
             
-        case .king1, .king2:
+        case .king1:
+
+            guard abs(m1) == 2 && abs(m2) == 2 else { return false }
+            guard jumpedPieceType != .checker1, jumpedPieceType != .king1 else { return false }
+
+        case .king2:
             
             guard abs(m1) == 2 && abs(m2) == 2 else { return false }
+            guard jumpedPieceType != .checker2, jumpedPieceType != .king2 else { return false }
             
         case .none: return false
             
         }
         
-        guard let piece1 = grid[s1.0,s1.1] as? String else { return false }
-        guard let piece2 = grid[e1,e2] as? String else { return false }
-        guard piece2 != "" && piece1 != piece2 else { return false }
-        
         guard !hint else { return true }
         
-        grid[e1,e2] = "" // remove other player piece
+        grid[e1,e2] = EmptyPiece // remove other player piece
         
         return true
         
@@ -75,23 +80,30 @@ public struct Checkers {
         
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
+
+        var kingPiece: PieceType?
         
-        guard p2 == "" else { throw MoveError.invalidmove }
+        guard p2 == EmptyPiece else { throw MoveError.invalidmove }
         
         switch PieceType(rawValue: p1) ?? .none {
          
         case .checker1:
             
             guard (m1 == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.invalidmove }
+
+            if s2.c == grid.content.count - 1 { kingPiece = .king1 }
             
         case .checker2:
             
             guard (m1 == -1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.invalidmove }
+
+
+            if s2.c == 0 { kingPiece = .king2 }
             
         case .king1, .king2:
             
             guard (abs(m1) == 1 && abs(m2) == 1) || validateJump(s1, s2, p1, p2, grid, hint) else { throw MoveError.invalidmove }
-            
+
         case .none: throw MoveError.incorrectpiece
 
         }
@@ -100,10 +112,10 @@ public struct Checkers {
         
         let piece = grid[s2.0,s2.1]
         
-        grid[s2.0,s2.1] = p1 // place my piece in target square
-        grid[s1.0,s1.1] = "" // remove my piece from original square
+        grid[s2.0,s2.1] = kingPiece?.rawValue ?? p1 // place my piece in target square
+        grid[s1.0,s1.1] = EmptyPiece // remove my piece from original square
         
-        return piece as? Piece
+        return piece
         
     }
     
@@ -126,14 +138,17 @@ extension Grid {
         for (r,row) in content.enumerated() {
             
             for (c,item) in row.enumerated() {
-                
-                let label = HintLabel(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+
                 var piece = "\(item)"
                 
-                label.backgroundColor = (c + r) % 2 == 0 ? colors.background : colors.foreground
+                let holder = UIView(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
+                holder.backgroundColor = (c + r) % 2 == 0 ? colors.background : colors.foreground
+
+                let label = HintLabel(frame: CGRect(x: 0, y: 0, width: w, height: h))
+                label.backgroundColor = .clear
                 label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
                 label.highlightColor = colors.highlight
-                
+
                 if player(piece) == 1 {
                     
                     if let index = playerPieces[1].array().index(of: piece) { piece = playerPieces[0].array()[index] }
@@ -145,9 +160,10 @@ extension Grid {
                 
                 label.text = piece
                 label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)
-                
-                view.addSubview(label)
+                label.font = UIFont(name: "Apple Symbols", size: (w + h) / 2 - 10)
+
+                holder.addSubview(label)
+                view.addSubview(holder)
                 
             }
             

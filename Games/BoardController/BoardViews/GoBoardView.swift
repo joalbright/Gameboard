@@ -9,6 +9,8 @@
 import UIKit
 
 @IBDesignable class GoBoardView : BoardView {
+
+    var passes: Int = 0
     
     override func prepareForInterfaceBuilder() {
         
@@ -21,7 +23,15 @@ import UIKit
         
         board = Gameboard(.go)
         super.awakeFromNib()
-        
+
+    }
+
+    @IBAction func pass() {
+
+        passes += 1
+        board.changePlayer()
+        checkDone()
+
     }
     
     override func selectSquare(_ square: Square) {
@@ -37,6 +47,7 @@ import UIKit
         }
         
         updateBoard()
+        checkDone()
         
     }
     
@@ -53,6 +64,27 @@ import UIKit
         
         return (r,c)
         
+    }
+
+    override func checkDone() {
+
+        guard board.grid.piecesOnBoard().count == board.totalSpaces || passes == 2 else { return }
+
+        let pieces1 = board.grid.piecesOnBoard().filter { board.playerPieces[0].contains($0) }
+        let pieces2 = board.grid.piecesOnBoard().filter { board.playerPieces[1].contains($0) }
+
+        if pieces1.count == pieces2.count {
+
+            board?.showAlert?("Game Over", "Stalemate")
+
+        } else {
+
+            board?.showAlert?("Game Over", "Player \(pieces1.count > pieces2.count ? 1 : 2) Wins")
+            
+        }
+
+        passes = 0
+
     }
     
 }

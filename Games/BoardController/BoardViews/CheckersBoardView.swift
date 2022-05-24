@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 @IBDesignable class CheckersBoardView : BoardView {
     
@@ -54,4 +55,30 @@ import UIKit
         
     }
     
+}
+
+struct CheckersPreview: PreviewProvider {
+
+    static var previews: some View {
+
+        VStack {
+
+            Spacer()
+
+            NewBoardView(boardType: .checkers) {
+
+                $0.bgColor = .accent
+                $0.fgColor = .offset
+                $0.updateBoard()
+
+            }
+            .aspectRatio(1, contentMode: .fit)
+
+            Spacer()
+
+        }
+        .padding(32)
+
+    }
+
 }

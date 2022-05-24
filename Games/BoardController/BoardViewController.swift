@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 enum Direction: UInt {
     
@@ -113,6 +114,27 @@ class BoardViewController: UIViewController {
         
     }
     
+}
+
+struct NewBoardView: UIViewRepresentable {
+
+    var boardType: Gameboard.BoardType
+    var setup: (BoardView) -> Void
+
+    func updateUIView(_ view: BoardView, context: Context) { }
+
+    func makeUIView(context: Context) -> BoardView {
+
+        let view = BoardView()
+
+        view.board = Gameboard(boardType)
+
+        setup(view)
+
+        return view
+
+    }
+
 }
 
 @IBDesignable class BoardView : UIView {

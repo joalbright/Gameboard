@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 public typealias Square = (c: Int, r: Int)
 public typealias ChessSquare = (c: String, r: Int)
@@ -60,4 +61,22 @@ extension Array {
         
     }
     
+}
+
+extension Color {
+
+    static var accent: Color { return Color("Accent") }
+    static var background: Color { return Color("Background") }
+    static var offset: Color { return Color("Offset") }
+    static var text: Color { return Color("Text") }
+
+}
+
+extension UIColor {
+
+    static var accent: UIColor { return UIColor(named: "Accent") ?? .black }
+    static var background: UIColor { return UIColor(named: "Background") ?? .black }
+    static var offset: UIColor { return UIColor(named: "Offset") ?? .black }
+    static var text: UIColor { return UIColor(named: "Text") ?? .black }
+
 }

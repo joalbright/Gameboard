@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 @IBDesignable class ChessBoardView : BoardView {
     
@@ -54,4 +55,32 @@ import UIKit
         
     }
     
+}
+
+struct ChessPreview: PreviewProvider {
+
+    static var previews: some View {
+
+        VStack {
+
+            Spacer()
+
+            NewBoardView(boardType: .chess) {
+
+                $0.bgColor = .accent
+                $0.fgColor = .offset
+                $0.player1Color = .black
+                $0.player2Color = .white
+                $0.updateBoard()
+
+            }
+            .aspectRatio(1, contentMode: .fit)
+
+            Spacer()
+
+        }
+        .padding(32)
+
+    }
+
 }

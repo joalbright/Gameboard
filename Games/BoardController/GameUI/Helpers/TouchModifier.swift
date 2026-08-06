@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-struct TouchModifier: ViewModifier {
-
+//struct TouchModifier: ViewModifier {
 
 //    public func body(content: Content) -> some View {
 //
@@ -34,4 +33,4 @@ struct TouchModifier: ViewModifier {
 //
 //    }
 
-}
+//}

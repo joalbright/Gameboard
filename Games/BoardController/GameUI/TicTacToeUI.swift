@@ -19,7 +19,7 @@ struct TicTacToeBoardUI: View {
             let w = (g.rect.width - p * 2) / 3
             let h = (g.rect.height - p * 2) / 3
 
-            ForEach(Index.range(1...2)) { index in
+            ForEach(Index.range(0...1)) { index in
 
                 let i = CGFloat(index.id + 1)
 

@@ -17,9 +17,9 @@ struct Index: Identifiable {
 
 }
 
-struct Value<T>: Identifiable {
+struct Value<T: Any>: Identifiable {
 
-    static func array<T: Any>(_ array: [T]) -> [Value<T>] { return array.enumerated().map { Value<T>(id:$0.offset, value: $0.element) } }
+    static func array(_ array: [T]) -> [Value<T>] { return array.enumerated().map { Value<T>(id:$0.offset, value: $0.element) } }
 
     var id: Int
     var value: T

@@ -198,7 +198,7 @@ private struct GameDestinationView: View {
 
     NavigationStack {
 
-        GameDestinationView(game: .sudoku)
+        GameDestinationView(game: .words)
 
     }
 

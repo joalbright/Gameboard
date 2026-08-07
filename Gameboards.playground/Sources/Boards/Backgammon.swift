@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 public struct Backgammon {
     
@@ -22,5 +22,6 @@ public struct Backgammon {
     }
     
     public static let playerPieces = ["●","○"]
+    public static let playerColors = [Color.white, Color.black]
     
 }

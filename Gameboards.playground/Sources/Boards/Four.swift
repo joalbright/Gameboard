@@ -1,10 +1,11 @@
-import Foundation
+import SwiftUI
 
 public struct Four {
     
     public static var board: Grid { return Grid(6 ✕ (7 ✕ " ")) }
     
     public static let playerPieces = ["◉","◎"]
+    public static let playerColors = [Color(red: 0.892, green: 0, blue: 0.222), Color(red: 0.947, green: 0.845, blue: 0.025)]
 
     public static var staticboard: Grid {
         

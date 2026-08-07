@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 enum Difficulty {
     
@@ -95,33 +95,14 @@ public struct Gameboard {
             
         }
         
-        public var isMultiPlayer: Bool {
-            
-            switch self {
-            
-            case .bombsweeper, .doubles, .memory, .pegs, .sudoku: return false
-            default: return true
-                
-            }
-            
-        }
-        
     }
     
     var _type: BoardType
     
-    var playerCount: Int = 2
+    var playerCount: Int = 1
     var playerTurn: Int = 0
-    var playerPieces: [Piece] = [] {
-
-        didSet {
-
-            grid.playerPieces = playerPieces
-            playerCount = playerPieces.count
-            
-        }
-
-    }
+    var playerPieces: [Piece] = []
+    var playerColors: [Color] = [.accent]
     
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
     var solution: Grid = Grid(1 ✕ (1 ✕ ""))
@@ -259,6 +240,7 @@ public struct Gameboard {
             
             grid = Backgammon.board
             playerPieces = Backgammon.playerPieces
+            playerColors = Backgammon.playerColors
             
         case .bombsweeper:
             
@@ -275,16 +257,19 @@ public struct Gameboard {
             
             grid = Checkers.board
             playerPieces = Checkers.playerPieces
+            playerColors = Checkers.playerColors
             
         case .chess:
             
             grid = Chess.board
             playerPieces = Chess.playerPieces
+            playerColors = Chess.playerColors
             
         case .dots:
             
             grid = Dots.board
             playerPieces = Dots.playerPieces
+            playerColors = Dots.playerColors
             
         case .doubles:
             
@@ -303,6 +288,7 @@ public struct Gameboard {
             
             grid = Four.board
             playerPieces = Four.playerPieces
+            playerColors = Four.playerColors
             
             guard testing else { break }
             
@@ -313,6 +299,7 @@ public struct Gameboard {
             
             grid = Go.board
             playerPieces = Go.playerPieces
+            playerColors = Go.playerColors
             
         case .mancala:
             
@@ -351,6 +338,7 @@ public struct Gameboard {
             
             grid = TicTacToe.board
             playerPieces = TicTacToe.playerPieces
+            playerColors = TicTacToe.playerColors
             
         case .words:
             
@@ -358,6 +346,9 @@ public struct Gameboard {
             playerPieces = Words.playerPieces
             
         }
+        
+        grid.playerPieces = playerPieces
+        playerCount = playerColors.count
         
     }
     

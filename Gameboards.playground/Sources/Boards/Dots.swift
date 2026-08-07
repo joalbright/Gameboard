@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 public struct Dots {
 
@@ -7,6 +7,7 @@ public struct Dots {
 //    public static var board: Grid { return Grid(8 ✕ (8 ✕ "00000")) }
 
     public static let playerPieces = ["1","2"]
+    public static let playerColors = [Color.cyan, Color.pink]
 
     public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws -> Bool {
 

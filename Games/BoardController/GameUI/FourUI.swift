@@ -86,7 +86,7 @@ struct FourPiecesUI: View {
 
                             let player = grid.player(row.piece) == 0
 
-                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(red: 0.892, green: 0, blue: 0.222) : Color(red: 0.947, green: 0.845, blue: 0.025))
+                            Text(grid.solid(row.piece)).foregroundColor(player ? Four.playerColors[0] : Four.playerColors[1])
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                 .font(.system(size: (w + h) / 3, weight: .regular))
 

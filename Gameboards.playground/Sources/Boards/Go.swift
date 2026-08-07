@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 enum GoError: Error {
     
@@ -11,6 +11,7 @@ public struct Go {
     public static var board: Grid { return Grid(9 ✕ (9 ✕ "")) }
     
     public static let playerPieces = ["●","○"]
+    public static let playerColors = [Color.white, Color.black]
     
     public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: Grid) {
         

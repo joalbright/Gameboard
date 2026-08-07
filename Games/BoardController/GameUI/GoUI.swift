@@ -72,7 +72,7 @@ struct GoPiecesUI: View {
                     if player >= 0 {
 
                         Text("●")
-                            .foregroundColor(player == 0 ? .white : .black)
+                            .foregroundColor(player == 0 ? Go.playerColors[0] : Go.playerColors[1])
                             .font(.system(size: min(w, h), weight: .thin))
                             .position(x: p + w * CGFloat(column.index), y: p + h * CGFloat(row.id))
 

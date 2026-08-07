@@ -1,10 +1,11 @@
-import Foundation
+import SwiftUI
 
 public struct TicTacToe {
     
     public static var board: Grid { return Grid(3 ✕ (3 ✕ "")) }
     
     public static let playerPieces = ["○","✕"]
+    public static let playerColors = [Color(red: 0, green: 1, blue: 0.802), Color(red: 0.953, green: 0.069, blue: 0.208)]
     
     public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
         

@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 extension Difficulty {
     
@@ -57,6 +57,7 @@ public struct Sudoku {
     }
     
     public static let playerPieces = ["123456789"]
+    public static let playerColors = [Color.blue]
     
     public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
         

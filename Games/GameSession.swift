@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import Observation
 
 enum GameSwipeDirection {
@@ -54,6 +54,24 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         _ = revision
         return game.playerTurn + 1
+
+    }
+    var playerColor: Color {
+
+        _ = revision
+        return game.playerColors[game.playerTurn]
+
+    }
+    var playerCount: Int {
+
+        _ = revision
+        return game.playerCount
+
+    }
+    var isMultiplayer: Bool {
+
+        _ = revision
+        return game.playerCount > 1
 
     }
     var grid: Grid {

@@ -11,14 +11,23 @@ struct GameSceneUI<Content: View>: View {
         content
             .safeAreaInset(edge: .bottom) {
 
-                if readiness == .ready && session.boardType.isMultiPlayer {
+                if readiness == .ready && session.isMultiplayer {
 
                     HStack {
                         
                         Spacer()
                         
-                        Label("Player \(session.playerNumber)", systemImage: "person.fill")
-                            .font(.subheadline.weight(.semibold))
+                        ForEach(0..<session.playerCount, id: \.self) { player in
+                        
+                            let isCurrentPlayer = session.playerNumber == player + 1
+                            let diameter: CGFloat = isCurrentPlayer ? 50 : 40
+                            
+                            Text("\(player + 1)")
+                                .foregroundStyle(isCurrentPlayer ? Color.background : .text)
+                                .background(Circle().fill(isCurrentPlayer ? session.playerColor : .gray).frame(width: diameter, height: diameter))
+                                .frame(width: 40, height: 40)
+                            
+                        }
 
                         Spacer()
 

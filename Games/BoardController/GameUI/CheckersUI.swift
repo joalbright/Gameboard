@@ -35,7 +35,7 @@ struct CheckersPiecesUI: View {
                             ZStack {
 
                                 Text(grid.solid(row.piece))
-                                    .foregroundColor(player ? Color(red: 0.864, green: 0.052, blue: 0.022) : Color(red: 0.577, green: 0.139, blue: 0.146))
+                                    .foregroundColor(player ? Checkers.playerColors[0] : Checkers.playerColors[1])
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                     .font(.system(size: (w + h) / 2 - 15, weight: .regular))
 

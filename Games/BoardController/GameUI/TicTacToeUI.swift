@@ -66,7 +66,7 @@ struct TicTacToePiecesUI: View {
 
                             let player = grid.player(row.piece) == 0
 
-                            Text(row.piece).foregroundColor(player ? Color(red: 0, green: 1, blue: 0.802) : Color(red: 0.953, green: 0.069, blue: 0.208))
+                            Text(row.piece).foregroundColor(player ? TicTacToe.playerColors[0] : TicTacToe.playerColors[1])
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                 .font(.system(size: (w + h) / 2 - p, weight: .thin))
 

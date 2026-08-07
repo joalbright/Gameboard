@@ -146,7 +146,7 @@ private struct DotsPiecesUI: View {
                         ForEach(row.rows) { cell in
 
                             let owned = ["1", "2"].contains(cell.piece)
-                            let playerColor = cell.piece == "1" ? Color.cyan : Color.pink
+                            let playerColor = cell.piece == "1" ? Dots.playerColors[0] : Dots.playerColors[1]
 
                             ZStack {
 

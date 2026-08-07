@@ -1,10 +1,18 @@
-import UIKit
+import Foundation
 
-public class Grid {
+public final class Grid {
+
+    struct CellID: Hashable {
+
+        var row: Int
+        var column: Int
+
+    }
 
     struct Row: Identifiable {
 
-        var id: Int
+        var id: CellID
+        var index: Int
         var piece: String
 
     }
@@ -16,15 +24,21 @@ public class Grid {
         
     }
 
-    var cols: [Col] { return content.enumerated().map { Col(id: $0.offset, rows: $0.element.enumerated().map { Row(id: $0.offset, piece: $0.element as? String ?? "") }) } }
+    var cols: [Col] {
+
+        return content.enumerated().map { row, content in
+
+            Col(id: row, rows: content.enumerated().map { column, piece in Row(id: CellID(row: row, column: column), index: column, piece: piece as? String ?? "") })
+
+        }
+
+    }
     
     public var content: [[Any]]
     
     public var rowRange: CountableRange<Int> { return 0..<content.count }
     public var colRange: CountableRange<Int> { return content.count > 0 ? 0..<content[0].count : 0..<0 }
     
-    public var padding: CGFloat = 0
-    public var colors = BoardColors()
     public var playerPieces: [Piece] = []
     
     public init(_ content: [[Any]], playerPieces: [Piece] = []) {
@@ -85,29 +99,6 @@ public class Grid {
         guard let index = playerPieces[1].array().firstIndex(of: piece) else { return piece }
         return playerPieces[0].array()[index]
 
-    }
-    
-}
-
-class HintLabel: UILabel {
-    
-    var highlight: Bool = false { didSet { setNeedsDisplay() } }
-    var highlightColor: UIColor = .systemRed
-    
-    override func drawText(in rect: CGRect) {
-        
-        guard highlight else { return super.drawText(in: rect) }
-        
-        let c = UIGraphicsGetCurrentContext()
-        
-        highlightColor.set()
-        
-        c?.setLineJoin(.round)
-        c?.setLineWidth(1)
-        c?.stroke(rect.insetBy(dx: 3, dy: 3))
-        
-        super.drawText(in: rect)
-        
     }
     
 }

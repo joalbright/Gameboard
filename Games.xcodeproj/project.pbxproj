@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C1675233B9AAD003DE849 /* Words.storyboard */; };
-		0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6C167B233B9E82003DE849 /* Mancala.storyboard */; };
+		C0DE00000000000000000001 /* GameboardCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000002 /* GameboardCatalogTests.swift */; };
+		C0DE00000000000000000014 /* GameboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000016 /* GameboardApp.swift */; };
+		C0DE00000000000000000015 /* GameLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000017 /* GameLibraryView.swift */; };
+		C0DE00000000000000000018 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000019 /* GameSession.swift */; };
+		C0DE0000000000000000001A /* GameSceneUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE0000000000000000001B /* GameSceneUI.swift */; };
 		0E96540923390BA40075BF13 /* Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540023390BA30075BF13 /* Four.swift */; };
 		0E96540A23390BA40075BF13 /* Chess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540123390BA30075BF13 /* Chess.swift */; };
 		0E96540B23390BA40075BF13 /* Dots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540223390BA40075BF13 /* Dots.swift */; };
 		0E96540C23390BA40075BF13 /* Backgammon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540323390BA40075BF13 /* Backgammon.swift */; };
-		0E96540D23390BA40075BF13 /* Alquerque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540423390BA40075BF13 /* Alquerque.swift */; };
 		0E96540E23390BA40075BF13 /* Doubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540523390BA40075BF13 /* Doubles.swift */; };
 		0E96540F23390BA40075BF13 /* Bombsweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540623390BA40075BF13 /* Bombsweeper.swift */; };
 		0E96541023390BA40075BF13 /* Go.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96540723390BA40075BF13 /* Go.swift */; };
@@ -23,14 +25,7 @@
 		0E96541B23390BFD0075BF13 /* Mancala.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96541423390BFC0075BF13 /* Mancala.swift */; };
 		0E96541C23390BFD0075BF13 /* Pegs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96541523390BFC0075BF13 /* Pegs.swift */; };
 		0E96541D23390BFD0075BF13 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96541623390BFC0075BF13 /* TicTacToe.swift */; };
-		0E96541E23390BFD0075BF13 /* Ludo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96541723390BFC0075BF13 /* Ludo.swift */; };
 		0E96541F23390BFD0075BF13 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96541823390BFC0075BF13 /* Words.swift */; };
-		0E96542623390C0E0075BF13 /* Pilare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96542023390C0E0075BF13 /* Pilare.swift */; };
-		0E96542723390C0E0075BF13 /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96542123390C0E0075BF13 /* Segments.swift */; };
-		0E96542823390C0E0075BF13 /* Trouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96542223390C0E0075BF13 /* Trouble.swift */; };
-		0E96542923390C0E0075BF13 /* Dominos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96542323390C0E0075BF13 /* Dominos.swift */; };
-		0E96542A23390C0E0075BF13 /* Majong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96542423390C0E0075BF13 /* Majong.swift */; };
-		0E96542B23390C0E0075BF13 /* Battleship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96542523390C0E0075BF13 /* Battleship.swift */; };
 		0E96544323390C360075BF13 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96544023390C360075BF13 /* Grid.swift */; };
 		0E96544423390C360075BF13 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96544123390C360075BF13 /* Extensions.swift */; };
 		0E96544523390C360075BF13 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96544223390C360075BF13 /* Operators.swift */; };
@@ -51,33 +46,26 @@
 		0EE6B6352629C815001C835E /* CheckersUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6342629C815001C835E /* CheckersUI.swift */; };
 		0EE6B6382629C81D001C835E /* ChessUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B6372629C81D001C835E /* ChessUI.swift */; };
 		0EE6B63B2629DA8F001C835E /* DoublesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B63A2629DA8F001C835E /* DoublesUI.swift */; };
-		0EE6B64C262C5EAB001C835E /* TouchModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE6B64B262C5EAB001C835E /* TouchModifier.swift */; };
-		A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */; };
-		A90F20B1208A6D7200C3F6A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */; };
-		A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */; };
-		A9DBACD72090BCFB00C03C12 /* BombsweeperBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */; };
-		A9DBACD92090BD4B00C03C12 /* MemoryBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACD82090BD4B00C03C12 /* MemoryBoardView.swift */; };
-		A9DBACDB2090BD6E00C03C12 /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACDA2090BD6E00C03C12 /* ChessBoardView.swift */; };
-		A9DBACDD2090BD8A00C03C12 /* CheckersBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACDC2090BD8A00C03C12 /* CheckersBoardView.swift */; };
-		A9DBACDF2090BDB500C03C12 /* BackgammonBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACDE2090BDB500C03C12 /* BackgammonBoardView.swift */; };
-		A9DBACE12090BDD700C03C12 /* FourBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE02090BDD700C03C12 /* FourBoardView.swift */; };
-		A9DBACE32090BDFA00C03C12 /* TicTacToeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE22090BDFA00C03C12 /* TicTacToeBoardView.swift */; };
-		A9DBACE52090BE1500C03C12 /* SudokuBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE42090BE1500C03C12 /* SudokuBoardView.swift */; };
-		A9DBACE72090BE3800C03C12 /* DotsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE62090BE3800C03C12 /* DotsBoardView.swift */; };
-		A9DBACE92090BE5B00C03C12 /* GoBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACE82090BE5B00C03C12 /* GoBoardView.swift */; };
-		A9DBACEB2090BE7700C03C12 /* MancalaBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACEA2090BE7700C03C12 /* MancalaBoardView.swift */; };
-		A9DBACED2090BE9A00C03C12 /* PegsBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACEC2090BE9A00C03C12 /* PegsBoardView.swift */; };
-		A9DBACF320936DA200C03C12 /* DoublesBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DBACF220936DA200C03C12 /* DoublesBoardView.swift */; };
-		A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740D1C62A34600219C78 /* AppDelegate.swift */; };
-		A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DD740F1C62A34600219C78 /* BoardViewController.swift */; };
-		A9DD74131C62A34600219C78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74111C62A34600219C78 /* Main.storyboard */; };
 		A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74141C62A34600219C78 /* Assets.xcassets */; };
-		A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C0DE00000000000000000009 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9DD74021C62A34600219C78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9DD74091C62A34600219C78;
+			remoteInfo = Games;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		0E6C1675233B9AAD003DE849 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
-		0E6C167B233B9E82003DE849 /* Mancala.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mancala.storyboard; sourceTree = "<group>"; };
+		C0DE00000000000000000002 /* GameboardCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardCatalogTests.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000003 /* GamesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GamesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0DE00000000000000000016 /* GameboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardApp.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000017 /* GameLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLibraryView.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000019 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
+		C0DE0000000000000000001B /* GameSceneUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneUI.swift; sourceTree = "<group>"; };
 		0E96540023390BA30075BF13 /* Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Four.swift; path = Gameboards.playground/Sources/Boards/Four.swift; sourceTree = SOURCE_ROOT; };
 		0E96540123390BA30075BF13 /* Chess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chess.swift; path = Gameboards.playground/Sources/Boards/Chess.swift; sourceTree = SOURCE_ROOT; };
 		0E96540223390BA40075BF13 /* Dots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dots.swift; path = Gameboards.playground/Sources/Boards/Dots.swift; sourceTree = SOURCE_ROOT; };
@@ -120,33 +108,19 @@
 		0EE6B6342629C815001C835E /* CheckersUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckersUI.swift; sourceTree = "<group>"; };
 		0EE6B6372629C81D001C835E /* ChessUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessUI.swift; sourceTree = "<group>"; };
 		0EE6B63A2629DA8F001C835E /* DoublesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublesUI.swift; sourceTree = "<group>"; };
-		0EE6B64B262C5EAB001C835E /* TouchModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchModifier.swift; sourceTree = "<group>"; };
-		A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
-		A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoardView.swift; sourceTree = "<group>"; };
-		A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombsweeperBoardView.swift; sourceTree = "<group>"; };
-		A9DBACD82090BD4B00C03C12 /* MemoryBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBoardView.swift; sourceTree = "<group>"; };
-		A9DBACDA2090BD6E00C03C12 /* ChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoardView.swift; sourceTree = "<group>"; };
-		A9DBACDC2090BD8A00C03C12 /* CheckersBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckersBoardView.swift; sourceTree = "<group>"; };
-		A9DBACDE2090BDB500C03C12 /* BackgammonBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgammonBoardView.swift; sourceTree = "<group>"; };
-		A9DBACE02090BDD700C03C12 /* FourBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourBoardView.swift; sourceTree = "<group>"; };
-		A9DBACE22090BDFA00C03C12 /* TicTacToeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeBoardView.swift; sourceTree = "<group>"; };
-		A9DBACE42090BE1500C03C12 /* SudokuBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBoardView.swift; sourceTree = "<group>"; };
-		A9DBACE62090BE3800C03C12 /* DotsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsBoardView.swift; sourceTree = "<group>"; };
-		A9DBACE82090BE5B00C03C12 /* GoBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoBoardView.swift; sourceTree = "<group>"; };
-		A9DBACEA2090BE7700C03C12 /* MancalaBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MancalaBoardView.swift; sourceTree = "<group>"; };
-		A9DBACEC2090BE9A00C03C12 /* PegsBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegsBoardView.swift; sourceTree = "<group>"; };
-		A9DBACF220936DA200C03C12 /* DoublesBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublesBoardView.swift; sourceTree = "<group>"; };
 		A9DD740A1C62A34600219C78 /* Games.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Games.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9DD740D1C62A34600219C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A9DD740F1C62A34600219C78 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
-		A9DD74121C62A34600219C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9DD74141C62A34600219C78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A9DD74171C62A34600219C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9DD74191C62A34600219C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C0DE00000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A9DD74071C62A34600219C78 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,13 +131,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E6C166C233B989C003DE849 /* Boards */ = {
+		C0DE00000000000000000004 /* GamesTests */ = {
 			isa = PBXGroup;
 			children = (
-				0E6C167B233B9E82003DE849 /* Mancala.storyboard */,
-				0E6C1675233B9AAD003DE849 /* Words.storyboard */,
+				C0DE00000000000000000002 /* GameboardCatalogTests.swift */,
 			);
-			path = Boards;
+			path = GamesTests;
 			sourceTree = "<group>";
 		};
 		0EE6B60126291A97001C835E /* GameUI */ = {
@@ -192,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				0EE6B60626293085001C835E /* HelperUI.swift */,
-				0EE6B64B262C5EAB001C835E /* TouchModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -210,34 +182,10 @@
 			name = InProgress;
 			sourceTree = "<group>";
 		};
-		A9DBACA8208EDE2B00C03C12 /* BoardViews */ = {
-			isa = PBXGroup;
-			children = (
-				A9DBACDE2090BDB500C03C12 /* BackgammonBoardView.swift */,
-				A9DBACD62090BCFB00C03C12 /* BombsweeperBoardView.swift */,
-				A9DBACDC2090BD8A00C03C12 /* CheckersBoardView.swift */,
-				A9DBACDA2090BD6E00C03C12 /* ChessBoardView.swift */,
-				A9DBACE62090BE3800C03C12 /* DotsBoardView.swift */,
-				A9DBACF220936DA200C03C12 /* DoublesBoardView.swift */,
-				A9DBACE02090BDD700C03C12 /* FourBoardView.swift */,
-				A9DBACE82090BE5B00C03C12 /* GoBoardView.swift */,
-				A9DBACEA2090BE7700C03C12 /* MancalaBoardView.swift */,
-				A9DBACD82090BD4B00C03C12 /* MemoryBoardView.swift */,
-				A9DBACEC2090BE9A00C03C12 /* PegsBoardView.swift */,
-				A9DBACE42090BE1500C03C12 /* SudokuBoardView.swift */,
-				A9DBACE22090BDFA00C03C12 /* TicTacToeBoardView.swift */,
-				A9DBACA6208EDE2600C03C12 /* WordsBoardView.swift */,
-			);
-			path = BoardViews;
-			sourceTree = "<group>";
-		};
 		A9DBACA9208EDE3D00C03C12 /* BoardController */ = {
 			isa = PBXGroup;
 			children = (
-				0E6C166C233B989C003DE849 /* Boards */,
-				A9DD740F1C62A34600219C78 /* BoardViewController.swift */,
 				0EE6B60126291A97001C835E /* GameUI */,
-				A9DBACA8208EDE2B00C03C12 /* BoardViews */,
 			);
 			path = BoardController;
 			sourceTree = "<group>";
@@ -245,10 +193,8 @@
 		A9DC4FA81C62B89700E7920E /* System */ = {
 			isa = PBXGroup;
 			children = (
-				A90F20AB2089229C00C3F6A4 /* Apple Symbols.ttf */,
-				A9DD740D1C62A34600219C78 /* AppDelegate.swift */,
+				C0DE00000000000000000016 /* GameboardApp.swift */,
 				A9DD74141C62A34600219C78 /* Assets.xcassets */,
-				A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */,
 				A9DD74191C62A34600219C78 /* Info.plist */,
 			);
 			name = System;
@@ -258,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				A9DD740C1C62A34600219C78 /* Games */,
+				C0DE00000000000000000004 /* GamesTests */,
 				A9DD740B1C62A34600219C78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -266,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				A9DD740A1C62A34600219C78 /* Games.app */,
+				C0DE00000000000000000003 /* GamesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,9 +221,10 @@
 		A9DD740C1C62A34600219C78 /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE00000000000000000017 /* GameLibraryView.swift */,
+				C0DE0000000000000000001B /* GameSceneUI.swift */,
+				C0DE00000000000000000019 /* GameSession.swift */,
 				A9DD741F1C62A35300219C78 /* Gameboards */,
-				A9DD74111C62A34600219C78 /* Main.storyboard */,
-				A90F20B0208A6D7200C3F6A4 /* MainViewController.swift */,
 				A9DBACA9208EDE3D00C03C12 /* BoardController */,
 				A9DC4FA81C62B89700E7920E /* System */,
 			);
@@ -330,6 +279,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C0DE00000000000000000007 /* GamesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0DE0000000000000000000C /* Build configuration list for PBXNativeTarget "GamesTests" */;
+			buildPhases = (
+				C0DE00000000000000000006 /* Sources */,
+				C0DE00000000000000000005 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C0DE00000000000000000008 /* PBXTargetDependency */,
+			);
+			name = GamesTests;
+			productName = GamesTests;
+			productReference = C0DE00000000000000000003 /* GamesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A9DD74091C62A34600219C78 /* Games */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9DD741C1C62A34600219C78 /* Build configuration list for PBXNativeTarget "Games" */;
@@ -357,6 +323,10 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Jo Albright";
 				TargetAttributes = {
+					C0DE00000000000000000007 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A9DD74091C62A34600219C78;
+					};
 					A9DD74091C62A34600219C78 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 965FHW76SM;
@@ -378,6 +348,7 @@
 			projectRoot = "";
 			targets = (
 				A9DD74091C62A34600219C78 /* Games */,
+				C0DE00000000000000000007 /* GamesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -387,79 +358,60 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A90F20AC2089229C00C3F6A4 /* Apple Symbols.ttf in Resources */,
-				0E6C167C233B9E82003DE849 /* Mancala.storyboard in Resources */,
-				A9DD74181C62A34600219C78 /* LaunchScreen.storyboard in Resources */,
 				A9DD74151C62A34600219C78 /* Assets.xcassets in Resources */,
-				0E6C1676233B9AAD003DE849 /* Words.storyboard in Resources */,
-				A9DD74131C62A34600219C78 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C0DE00000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0DE00000000000000000001 /* GameboardCatalogTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A9DD74061C62A34600219C78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DE00000000000000000014 /* GameboardApp.swift in Sources */,
+				C0DE00000000000000000015 /* GameLibraryView.swift in Sources */,
+				C0DE00000000000000000018 /* GameSession.swift in Sources */,
+				C0DE0000000000000000001A /* GameSceneUI.swift in Sources */,
 				0EE6B61526293371001C835E /* FourUI.swift in Sources */,
 				0E96541923390BFD0075BF13 /* Memory.swift in Sources */,
-				A9DBACED2090BE9A00C03C12 /* PegsBoardView.swift in Sources */,
-				A9DD74101C62A34600219C78 /* BoardViewController.swift in Sources */,
 				0E96544923390C470075BF13 /* Validation.swift in Sources */,
-				A9DBACEB2090BE7700C03C12 /* MancalaBoardView.swift in Sources */,
 				0EE6B6382629C81D001C835E /* ChessUI.swift in Sources */,
 				0EE6B60726293085001C835E /* HelperUI.swift in Sources */,
 				0EE6B61326293371001C835E /* DotsUI.swift in Sources */,
-				0E96541E23390BFD0075BF13 /* Ludo.swift in Sources */,
 				0E96544323390C360075BF13 /* Grid.swift in Sources */,
 				0E96541B23390BFD0075BF13 /* Mancala.swift in Sources */,
-				A9DBACA7208EDE2600C03C12 /* WordsBoardView.swift in Sources */,
-				A9DBACD92090BD4B00C03C12 /* MemoryBoardView.swift in Sources */,
 				0E96541F23390BFD0075BF13 /* Words.swift in Sources */,
-				A9DBACDD2090BD8A00C03C12 /* CheckersBoardView.swift in Sources */,
 				0E96541123390BA40075BF13 /* Checkers.swift in Sources */,
-				A9DBACF320936DA200C03C12 /* DoublesBoardView.swift in Sources */,
-				0E96542723390C0E0075BF13 /* Segments.swift in Sources */,
 				0E96544523390C360075BF13 /* Operators.swift in Sources */,
 				0E96541D23390BFD0075BF13 /* TicTacToe.swift in Sources */,
 				0E96540F23390BA40075BF13 /* Bombsweeper.swift in Sources */,
-				0E96542A23390C0E0075BF13 /* Majong.swift in Sources */,
 				0E96541C23390BFD0075BF13 /* Pegs.swift in Sources */,
-				0E96540D23390BA40075BF13 /* Alquerque.swift in Sources */,
-				A9DBACE52090BE1500C03C12 /* SudokuBoardView.swift in Sources */,
 				0E96540B23390BA40075BF13 /* Dots.swift in Sources */,
-				A9DBACE32090BDFA00C03C12 /* TicTacToeBoardView.swift in Sources */,
-				A90F20B1208A6D7200C3F6A4 /* MainViewController.swift in Sources */,
 				0E96544823390C470075BF13 /* Gameboard.swift in Sources */,
 				0EE6B60326291AB9001C835E /* BackgammonUI.swift in Sources */,
-				A9DBACE12090BDD700C03C12 /* FourBoardView.swift in Sources */,
 				0EE6B6322629C804001C835E /* BombsweeperUI.swift in Sources */,
-				A9DBACE72090BE3800C03C12 /* DotsBoardView.swift in Sources */,
 				0E96540923390BA40075BF13 /* Four.swift in Sources */,
 				0E96540A23390BA40075BF13 /* Chess.swift in Sources */,
 				0E96541023390BA40075BF13 /* Go.swift in Sources */,
 				0E96540E23390BA40075BF13 /* Doubles.swift in Sources */,
-				0E96542623390C0E0075BF13 /* Pilare.swift in Sources */,
-				A9DBACD72090BCFB00C03C12 /* BombsweeperBoardView.swift in Sources */,
-				A9DD740E1C62A34600219C78 /* AppDelegate.swift in Sources */,
 				0EE6B63B2629DA8F001C835E /* DoublesUI.swift in Sources */,
-				0E96542823390C0E0075BF13 /* Trouble.swift in Sources */,
 				0EE6B62F2629C7EB001C835E /* MemoryUI.swift in Sources */,
-				A9DBACDB2090BD6E00C03C12 /* ChessBoardView.swift in Sources */,
-				0E96542923390C0E0075BF13 /* Dominos.swift in Sources */,
 				0EE6B6352629C815001C835E /* CheckersUI.swift in Sources */,
-				A9DBACE92090BE5B00C03C12 /* GoBoardView.swift in Sources */,
-				0E96542B23390C0E0075BF13 /* Battleship.swift in Sources */,
 				0EE6B61926293371001C835E /* MancalaUI.swift in Sources */,
 				0E96541A23390BFD0075BF13 /* Sudoku.swift in Sources */,
 				0EE6B61726293371001C835E /* SudokuUI.swift in Sources */,
-				0EE6B64C262C5EAB001C835E /* TouchModifier.swift in Sources */,
 				0EE6B61A26293371001C835E /* PegsUI.swift in Sources */,
 				0EE6B61226293371001C835E /* TicTacToeUI.swift in Sources */,
 				0EE6B61426293371001C835E /* GoUI.swift in Sources */,
-				A9DBACDF2090BDB500C03C12 /* BackgammonBoardView.swift in Sources */,
 				0E96544423390C360075BF13 /* Extensions.swift in Sources */,
 				0EE6B61626293371001C835E /* WordsUI.swift in Sources */,
 				0E96540C23390BA40075BF13 /* Backgammon.swift in Sources */,
@@ -468,26 +420,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		A9DD74111C62A34600219C78 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A9DD74121C62A34600219C78 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		C0DE00000000000000000008 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9DD74091C62A34600219C78 /* Games */;
+			targetProxy = C0DE00000000000000000009 /* PBXContainerItemProxy */;
 		};
-		A9DD74161C62A34600219C78 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A9DD74171C62A34600219C78 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		C0DE0000000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Games.app/Games";
+			};
+			name = Debug;
+		};
+		C0DE0000000000000000000B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Games.app/Games";
+			};
+			name = Release;
+		};
 		A9DD741A1C62A34600219C78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -524,7 +501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -562,7 +539,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -575,13 +552,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 965FHW76SM;
 				INFOPLIST_FILE = Games/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -591,19 +568,28 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 965FHW76SM;
 				INFOPLIST_FILE = Games/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.jo2.boards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C0DE0000000000000000000C /* Build configuration list for PBXNativeTarget "GamesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0DE0000000000000000000A /* Debug */,
+				C0DE0000000000000000000B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A9DD74051C62A34600219C78 /* Build configuration list for PBXProject "Games" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

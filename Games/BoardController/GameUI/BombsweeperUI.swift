@@ -32,15 +32,15 @@ struct BombsweeperPiecesUI: View {
 
                             ZStack {
 
-                                let color = row.piece == "•" ? Color("Accent") : player == 1 ? Color.white : player == 0 ? Color(#colorLiteral(red: 0.9960965514, green: 0.7409956477, blue: 0, alpha: 1)) : Color("Text")
+                                let color = row.piece == "•" ? Color("Accent") : player == 1 ? Color.white : player == 0 ? Color(red: 0.996, green: 0.741, blue: 0) : Color("Text")
 
                                 Text(row.piece)
                                     .foregroundColor(color)
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)))
+                                    .font(.system(size: (w + h) / 2 - 10, weight: .regular))
 
                             }
-                            .background(row.piece == "•" ? Color("Accent") : player == 1 ? Color(#colorLiteral(red: 0.7460197806, green: 0.1847642958, blue: 0.1849055439, alpha: 1)) : Color("Background"))
+                            .background(row.piece == "•" ? Color("Accent") : player == 1 ? Color(red: 0.746, green: 0.185, blue: 0.185) : Color("Background"))
 
                         }
 
@@ -63,18 +63,25 @@ struct BombsweeperLayoutUI: View {
     @State private var piece = 0
 
     var grid: Grid
+    var onSelect: (Square, Bool) -> Void = { _,_ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
                 ZStack {
 
                     BombsweeperPiecesUI(grid: grid)
+
+                    BoardInteractionGrid(rows: 10, columns: 10, grid: grid, selected: nil, highlights: []) { square in
+
+                        onSelect(square, piece == 0)
+
+                    }
 
                 }
                 .padding(32)
@@ -89,7 +96,8 @@ struct BombsweeperLayoutUI: View {
 
                 }
                 .frame(width: 140, height: 40, alignment: .center)
-                .pickerStyle(SegmentedPickerStyle())
+                .pickerStyle(.segmented)
+                .accessibilityLabel("Action")
 
             }
 
@@ -104,7 +112,7 @@ struct BombsweeperUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             BombsweeperLayoutUI(grid: Grid([
 

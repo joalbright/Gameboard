@@ -6,7 +6,7 @@
 //  Copyright © 2018 Jo Albright. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Pegs: NSObject {
     

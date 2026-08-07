@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 enum Difficulty {
     
@@ -28,11 +28,30 @@ enum Difficulty {
 
 public struct Gameboard {
     
-    public enum BoardType: String {
+    public enum BoardType: String, CaseIterable, Identifiable {
+
+        public enum Readiness: String {
+
+            case ready
+            case comingSoon
+
+        }
         
         case backgammon, bombsweeper, checkers, chess, dots, doubles, four, go, mancala, memory, pegs, sudoku, tictactoe, words
         
-        static var playable: [BoardType] = [ .backgammon, .bombsweeper, .checkers, .chess, .dots, .doubles, .four, .go, .memory, .pegs, .sudoku, .tictactoe, .words ]
+        public var id: Self { self }
+
+        static var catalog: [BoardType] { allCases }
+        static var playable: [BoardType] { allCases.filter { $0.readiness == .ready } }
+
+        public var readiness: Readiness {
+
+            switch self {
+            case .backgammon, .mancala: return .comingSoon
+            default: return .ready
+            }
+
+        }
         
         public var name: String {
             
@@ -76,22 +95,12 @@ public struct Gameboard {
             
         }
         
-        var controller: UINavigationController? {
-            
-            guard let vc = UIStoryboard(name: name.replacingOccurrences(of: " ", with: ""), bundle: nil).instantiateInitialViewController() as? BoardViewController else { return nil }
-            return UINavigationController(rootViewController: vc)
-            
-        }
-        
     }
-    
-    public var padding: CGFloat = 0 { didSet { grid.padding = padding } }
-    public var colors = BoardColors() { didSet { grid.colors = colors } }
     
     var _type: BoardType
     
     var playerCount: Int = 2
-    var playerTurn: Int = 0 { didSet { playerChange?(playerTurn + 1) } }
+    var playerTurn: Int = 0
     var playerPieces: [Piece] = [] {
 
         didSet {
@@ -110,9 +119,6 @@ public struct Gameboard {
     var difficulty: Difficulty = .easy { didSet { reset() } }
     
     var _size: Int?
-    
-    public var playerChange: ((Int) -> Void)?
-    public var showAlert: ((String, String) -> Void)?
     
     public init(_ type: BoardType) {
         
@@ -155,10 +161,18 @@ public struct Gameboard {
             for r in grid.rowRange {
                 
                 for c in grid.colRange {
-                    
-                    guard let _ = try? validateMove(s1, (r,c), true) else { continue }
-                    selected = s1
-                    highlights.append((r,c))
+
+                    do {
+
+                        _ = try validateMove(s1, (r,c), true)
+                        selected = s1
+                        highlights.append((r,c))
+
+                    } catch {
+
+                        continue
+
+                    }
                     
                 }
                 
@@ -339,22 +353,4 @@ public struct Gameboard {
     public var highlights: [Square] = []
     public var selected: Square?
     
-    public func visualize(_ rect: CGRect = CGRect(x: 0, y: 0, width: 200, height: 200)) -> UIView { return UIView() }
-    
 }
-
-public struct BoardColors {
-    
-    public var background: UIColor = .white
-    public var foreground: UIColor = .black
-    
-    public var player1: UIColor = .systemRed
-    public var player2: UIColor = .systemBlue
-    
-    public var highlight: UIColor = .systemGreen
-    public var selected: UIColor = .systemGreen
-    
-    public init() { }
-    
-}
-

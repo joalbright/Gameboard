@@ -19,7 +19,7 @@ struct ChessPiecesUI: View {
             let w = g.size.width / 8
             let h = g.size.height / 8
 
-            Color(#colorLiteral(red: 0.6139756944, green: 0.5195682041, blue: 0.3670352386, alpha: 1))
+            Color(red: 0.614, green: 0.520, blue: 0.367)
 
             VStack(spacing: 0) {
 
@@ -30,17 +30,17 @@ struct ChessPiecesUI: View {
                         ForEach(col.rows) { row in
 
                             let player = grid.player(row.piece) == 0
-                            let di = (col.id + row.id) % 2 == 0
+                            let di = (col.id + row.index) % 2 == 0
 
                             ZStack {
 
                                 Text(grid.solid(row.piece))
-                                    .foregroundColor(player ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)) : Color(#colorLiteral(red: 0.1978587963, green: 0.1978587963, blue: 0.1978587963, alpha: 1)))
+                                    .foregroundColor(player ? .white : Color(white: 0.198))
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(Font(UIFont(name: "Apple Symbols", size: (w + h) / 2 - 10)!))
+                                    .font(.system(size: (w + h) / 2 - 10))
 
                             }
-                            .background(di ? Color(#colorLiteral(red: 0.6139756944, green: 0.5195682041, blue: 0.3670352386, alpha: 1)) : Color(#colorLiteral(red: 0.5299479167, green: 0.4510110251, blue: 0.3234737067, alpha: 1)))
+                            .background(di ? Color(red: 0.614, green: 0.520, blue: 0.367) : Color(red: 0.530, green: 0.451, blue: 0.323))
 
                         }
 
@@ -49,12 +49,6 @@ struct ChessPiecesUI: View {
                 }
 
             }
-
-            //                label.highlightColor = colors.highlight
-            //
-            //                if let selected = selected, selected.0 == r && selected.1 == c { label.textColor = colors.selected }
-            //                for highlight in highlights { label.highlight = label.highlight ? true : highlight.0 == r && highlight.1 == c }
-
         }
         .cornerRadius(10)
         .aspectRatio(1.0, contentMode: .fit)
@@ -168,12 +162,15 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
 struct ChessLayoutUI: View {
 
     var grid: Grid
+    var selected: Square? = nil
+    var highlights: [Square] = []
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -182,6 +179,8 @@ struct ChessLayoutUI: View {
                     ChessCoordinatesUI {
 
                         ChessPiecesUI(grid: grid)
+
+                        BoardInteractionGrid(rows: 8, columns: 8, grid: grid, selected: selected, highlights: highlights, action: onSelect)
 
                     }
 
@@ -200,7 +199,7 @@ struct ChessUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             ChessLayoutUI(grid: Grid([
 

@@ -81,25 +81,13 @@ struct PegsPiecesUI: View {
 
         GeometryReader { g in
 
-            let w = (g.size.width - p * 5) / 7
-            let h = (g.size.height - p * 5) / 7
-
             ForEach(grid.cols) { col in
-
-                let c = CGFloat(col.id)
 
                 ForEach(col.rows) { row in
 
-                    let r = CGFloat(row.id)
-
                     if grid.player(row.piece) == 0 {
 
-                        Path { path in
-
-                            path.move(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
-                            path.addLine(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
-
-                        }.stroke(Color("Text"), style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
+                        PegUI(row: col.id, column: row.index, size: g.size, padding: p)
 
                     }
 
@@ -113,17 +101,45 @@ struct PegsPiecesUI: View {
 
     }
 
+    private struct PegUI: View {
+
+        var row: Int
+        var column: Int
+        var size: CGSize
+        var padding: CGFloat
+
+        var body: some View {
+
+            let width = (size.width - padding * 5) / 7
+            let height = (size.height - padding * 5) / 7
+            let x = width * CGFloat(column) + width / 2 + 2.5 * padding
+            let y = height * CGFloat(row) + height / 2 + 2.5 * padding
+
+            Path { path in
+
+                path.move(to: CGPoint(x: x, y: y))
+                path.addLine(to: CGPoint(x: x, y: y))
+
+            }.stroke(Color("Text"), style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
+
+        }
+
+    }
+
 }
 
 struct PegsLayoutUI: View {
 
     var grid: Grid
+    var selected: Square? = nil
+    var highlights: [Square] = []
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -133,7 +149,11 @@ struct PegsLayoutUI: View {
 
                     PegsPiecesUI(grid: grid)
 
+                    BoardInteractionGrid(rows: 7, columns: 7, grid: grid, selected: selected, highlights: highlights, action: onSelect)
+                        .padding(50)
+
                 }
+                .aspectRatio(1.0, contentMode: .fit)
                 .padding(32)
 
             }
@@ -149,7 +169,7 @@ struct PegsUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             PegsLayoutUI(grid: Grid([
 

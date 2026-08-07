@@ -50,18 +50,24 @@ struct DotsBoardUI: View {
 struct DotsLayoutUI: View {
 
     var grid: Grid
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
-                DotsBoardUI().padding(32)
+                ZStack {
 
-                Text("Game Logic : Coming Soon").opacity(0.3)
+                    DotsPiecesUI(grid: grid)
+
+                    BoardInteractionGrid(rows: 17, columns: 17, grid: grid, selected: nil, highlights: [], action: onSelect)
+
+                }
+                .padding(32)
 
             }
 
@@ -72,11 +78,72 @@ struct DotsLayoutUI: View {
 
 }
 
+private struct DotsPiecesUI: View {
+
+    var grid: Grid
+
+    var body: some View {
+
+        GeometryReader { geometry in
+
+            let width = geometry.size.width / 17
+            let height = geometry.size.height / 17
+
+            VStack(spacing: 0) {
+
+                ForEach(grid.cols) { row in
+
+                    HStack(spacing: 0) {
+
+                        ForEach(row.rows) { cell in
+
+                            let owned = ["1", "2"].contains(cell.piece)
+                            let playerColor = cell.piece == "1" ? Color.cyan : Color.pink
+
+                            ZStack {
+
+                                if row.id % 2 == 0, cell.index % 2 == 0 {
+
+                                    Circle()
+                                        .fill(Color("Text"))
+                                        .frame(width: min(width, height) * 0.55)
+
+                                } else if owned, row.id % 2 == 1, cell.index % 2 == 1 {
+
+                                    Rectangle()
+                                        .fill(playerColor.opacity(0.25))
+
+                                } else if owned {
+
+                                    Rectangle()
+                                        .fill(playerColor)
+                                        .frame(width: cell.index % 2 == 0 ? 3 : width, height: row.id % 2 == 0 ? 3 : height)
+
+                                }
+
+                            }
+                            .frame(width: width, height: height)
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+        .aspectRatio(1, contentMode: .fit)
+
+    }
+
+}
+
 struct DotsUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             DotsLayoutUI(grid: Grid([]))
 
@@ -87,55 +154,3 @@ struct DotsUI_Previews: PreviewProvider {
 
 }
 
-//class DotsLineView: UIView {
-//
-//    public var playerColor: UIColor = .white
-//    public var lineColor: UIColor = .black
-//
-//    override func draw(_ rect: CGRect) {
-//
-//        let context = UIGraphicsGetCurrentContext()
-//
-//        context?.setLineCap(.round)
-//        context?.setLineJoin(.round)
-//        context?.setLineWidth(1)
-//
-//        lineColor.set()
-//
-//        let h: Bool = rect.width > rect.height
-//        let p: CGFloat = 2
-//        let d: CGFloat = h ? rect.height - p * 2 : rect.width - p * 2
-//
-//        context?.strokeEllipse(in: CGRect(x: p, y: p, width: d, height: d))
-//        context?.strokeEllipse(in: CGRect(x: rect.width - (d + p), y: rect.height - (d + p), width: d, height: d))
-//
-//        let x = h ? d + 7 : d / 2 + p
-//        let y = h ? d / 2 + p : d + 7
-//
-//        context?.setLineWidth(2)
-//        context?.setLineDash(phase: 0, lengths: [0,4])
-//
-//        context?.move(to: CGPoint(x: x, y: y))
-//        context?.addLine(to: CGPoint(x: rect.width - x, y: rect.height - y))
-//
-//        context?.strokePath()
-//
-//    }
-//
-//}
-//
-//class DotsSquareView: UIView {
-//
-//    public var playerColor: UIColor = .white
-//
-//    override func draw(_ rect: CGRect) {
-//
-//        let context = UIGraphicsGetCurrentContext()
-//
-//        playerColor.set()
-//
-//        context?.fillEllipse(in: rect.insetBy(dx: 5, dy: 5))
-//
-//    }
-//
-//}

@@ -19,7 +19,7 @@ struct GoBoardUI: View {
             let w = (g.rect.width - p * 2) / 8
             let h = (g.rect.height - p * 2) / 8
 
-            Color(#colorLiteral(red: 0.6296006944, green: 0.5495509649, blue: 0.3840564236, alpha: 1))
+            Color(red: 0.630, green: 0.550, blue: 0.384)
 
             ForEach(Index.count(9)) { row in
 
@@ -36,7 +36,7 @@ struct GoBoardUI: View {
                         path.move(to: CGPoint(x: p, y: h * r + p))
                         path.addLine(to: CGPoint(x: g.rect.width - p, y: h * r + p))
 
-                    }.stroke(Color(#colorLiteral(red: 0.1505630314, green: 0.1505537778, blue: 0.1505591571, alpha: 1)), lineWidth: 1)
+                    }.stroke(Color(white: 0.151), lineWidth: 1)
 
                 }
 
@@ -63,27 +63,24 @@ struct GoPiecesUI: View {
             let w = (g.rect.width - p * 2) / 8
             let h = (g.rect.height - p * 2) / 8
 
-            VStack(spacing: 0) {
+            ForEach(grid.cols) { row in
 
-                ForEach(grid.cols) { col in
+                ForEach(row.rows) { column in
 
-                    HStack(spacing: 0) {
+                    let player = grid.player(column.piece)
 
-                        ForEach(col.rows) { row in
+                    if player >= 0 {
 
-                            let player = grid.player(row.piece)
+                        Text("●")
+                            .foregroundColor(player == 0 ? .white : .black)
+                            .font(.system(size: min(w, h), weight: .thin))
+                            .position(x: p + w * CGFloat(column.index), y: p + h * CGFloat(row.id))
 
-                            Text(player == -1 ? "" : "●").foregroundColor(player == 0 ? Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)) : Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                                .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2, weight: .thin)))
-
-                        }
-
-                    }.padding(0)
+                    }
 
                 }
 
-            }.padding(5)
+            }
 
         }
         .cornerRadius(10)
@@ -93,15 +90,63 @@ struct GoPiecesUI: View {
 
 }
 
+private struct GoInteractionGrid: View {
+
+    var grid: Grid
+    var action: (Square) -> Void
+
+    var body: some View {
+
+        let inset: CGFloat = 25
+
+        GeometryReader { geometry in
+
+            let width = (geometry.size.width - inset * 2) / 8
+            let height = (geometry.size.height - inset * 2) / 8
+
+            ForEach(0..<9, id: \.self) { row in
+
+                ForEach(0..<9, id: \.self) { column in
+
+                    Button {
+
+                        action((row, column))
+
+                    } label: {
+
+                        Rectangle()
+                            .fill(.clear)
+                            .contentShape(Rectangle())
+                            .frame(width: width, height: height)
+
+                    }
+                    .buttonStyle(.plain)
+                    .position(x: inset + width * CGFloat(column), y: inset + height * CGFloat(row))
+                    .accessibilityLabel("Row \(row + 1), column \(column + 1)")
+                    .accessibilityValue(grid[row, column] as? String ?? "")
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
 struct GoLayoutUI: View {
 
     var grid: Grid
+    var selected: Square? = nil
+    var highlights: [Square] = []
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -111,10 +156,11 @@ struct GoLayoutUI: View {
 
                     GoPiecesUI(grid: grid)
 
-                }
-                .padding(32)
+                    GoInteractionGrid(grid: grid, action: onSelect)
 
-                Text("Game Logic : Coming Soon").opacity(0.3)
+                }
+                .aspectRatio(1.0, contentMode: .fit)
+                .padding(32)
 
             }
 
@@ -129,7 +175,7 @@ struct GoUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             GoLayoutUI(grid: Grid([
 

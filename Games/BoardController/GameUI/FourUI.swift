@@ -21,9 +21,9 @@ struct FourBoardUI: View {
 
             Path { path in
 
-                path.addPath(Path(UIBezierPath(roundedRect: CGRect(x: 0, y: h, width: g.size.width, height: g.size.height - h), cornerRadius: 10).cgPath))
+                path.addRoundedRect(in: CGRect(x: 0, y: h, width: g.size.width, height: g.size.height - h), cornerSize: CGSize(width: 10, height: 10))
 
-            }.fill(Color(#colorLiteral(red: 0.03473516487, green: 0.6306997018, blue: 0.827976048, alpha: 1)))
+            }.fill(Color(red: 0.035, green: 0.631, blue: 0.828))
 
             ForEach(Index.count(7)) { col in
 
@@ -31,7 +31,7 @@ struct FourBoardUI: View {
 
                 Path { path in
 
-                    path.addPath(Path(UIBezierPath(roundedRect: CGRect(x: w * c + p + 5, y: 10, width: w - 10, height: h), cornerRadius: 10).cgPath))
+                    path.addRoundedRect(in: CGRect(x: w * c + p + 5, y: 10, width: w - 10, height: h), cornerSize: CGSize(width: 10, height: 10))
 
                 }.fill(Color("Background"))
 
@@ -86,9 +86,9 @@ struct FourPiecesUI: View {
 
                             let player = grid.player(row.piece) == 0
 
-                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(#colorLiteral(red: 0.8924742354, green: 0, blue: 0.2215340148, alpha: 1)) : Color(#colorLiteral(red: 0.9469539561, green: 0.8450366779, blue: 0.02451992306, alpha: 1)))
+                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(red: 0.892, green: 0, blue: 0.222) : Color(red: 0.947, green: 0.845, blue: 0.025))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - 4, weight: .regular)))
+                                .font(.system(size: (w + h) / 2 - 4, weight: .regular))
 
                         }
 
@@ -109,12 +109,13 @@ struct FourPiecesUI: View {
 struct FourLayoutUI: View {
 
     var grid: Grid
+    var onSelectColumn: (Int) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -124,10 +125,14 @@ struct FourLayoutUI: View {
 
                     FourPiecesUI(grid: grid)
 
+                    BoardInteractionGrid(rows: 1, columns: 7, selected: nil, highlights: []) { square in
+
+                        onSelectColumn(square.r)
+
+                    }
+
                 }
                 .padding(32)
-
-                Text("Player 1")
 
             }
 
@@ -142,7 +147,7 @@ struct FourUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             FourLayoutUI(grid: Grid([
 

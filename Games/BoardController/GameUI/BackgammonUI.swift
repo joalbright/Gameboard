@@ -19,19 +19,19 @@ struct BackgammonBoardUI: View {
             let vG: CGFloat = 20
             let hG: CGFloat = 50
             
-            Color(#colorLiteral(red: 0.4039215686, green: 0.3331669212, blue: 0.1912525604, alpha: 1))
+            Color(red: 0.404, green: 0.333, blue: 0.191)
 
             Path { path in
 
-                path.addPath(Path(UIBezierPath(roundedRect: g.rect.insetBy(dx: p, dy: p), cornerRadius: 0).cgPath))
+                path.addRect(g.rect.insetBy(dx: p, dy: p))
 
-            }.fill(Color(#colorLiteral(red: 0.7155671296, green: 0.6420300176, blue: 0.5232170534, alpha: 1)))
+            }.fill(Color(red: 0.716, green: 0.642, blue: 0.523))
 
             Path { path in
 
                 path.addRect(CGRect(x: g.rect.midX - vG / 2, y: 0, width: vG, height: g.rect.height))
 
-            }.fill(Color(#colorLiteral(red: 0.4039215686, green: 0.3331669212, blue: 0.1912525604, alpha: 1)))
+            }.fill(Color(red: 0.404, green: 0.333, blue: 0.191))
 
             let w = (g.rect.width - p * 2 - vG) / 12
             let h = (g.rect.height - p * 2 - hG) / 10
@@ -49,7 +49,7 @@ struct BackgammonBoardUI: View {
                     path.addLine(to: CGPoint(x: w * i + x + w / 2, y: h * 5 + 15))
                     path.closeSubpath()
 
-                }.fill(Color((eo ? #colorLiteral(red: 0.7155671296, green: 0.6420300176, blue: 0.5232170534, alpha: 1) : #colorLiteral(red: 0.4039215686, green: 0.3331669212, blue: 0.1912525604, alpha: 1)))).blendMode(.multiply).opacity(0.5)
+                }.fill(eo ? Color(red: 0.716, green: 0.642, blue: 0.523) : Color(red: 0.404, green: 0.333, blue: 0.191)).blendMode(.multiply).opacity(0.5)
 
                 Path { path in
 
@@ -58,7 +58,7 @@ struct BackgammonBoardUI: View {
                     path.addLine(to: CGPoint(x: w * i + x + w / 2, y: h * 5 + 65))
                     path.closeSubpath()
 
-                }.fill(Color((eo ? #colorLiteral(red: 0.4039215686, green: 0.3331669212, blue: 0.1912525604, alpha: 1) : #colorLiteral(red: 0.7155671296, green: 0.6420300176, blue: 0.5232170534, alpha: 1)))).blendMode(.multiply).opacity(0.5)
+                }.fill(eo ? Color(red: 0.404, green: 0.333, blue: 0.191) : Color(red: 0.716, green: 0.642, blue: 0.523)).blendMode(.multiply).opacity(0.5)
 
             }
 
@@ -91,13 +91,13 @@ struct BackgammonPiecesUI: View {
 
                         ForEach(col.rows) { row in
 
-                            if row.id == 6 { Text("").frame(minWidth: 20, maxWidth: 20, minHeight: h, maxHeight: h) }
+                            if row.index == 6 { Text("").frame(minWidth: 20, maxWidth: 20, minHeight: h, maxHeight: h) }
 
                             let player = grid.player(row.piece) == 0
 
-                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(#colorLiteral(red: 0.1978587963, green: 0.1978587963, blue: 0.1978587963, alpha: 1)) : Color(#colorLiteral(red: 1, green: 0.9999699852, blue: 0.9999699852, alpha: 1)))
+                            Text(grid.solid(row.piece)).foregroundColor(player ? Color(white: 0.198) : .white)
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2, weight: .regular)))
+                                .font(.system(size: (w + h) / 2, weight: .regular))
 
                         }
 
@@ -123,7 +123,7 @@ struct BackgammonLayoutUI: View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -135,8 +135,6 @@ struct BackgammonLayoutUI: View {
 
                 }
                 .padding(32)
-
-                Text("Game Logic : Coming Soon").opacity(0.3)
 
             }
 
@@ -151,22 +149,9 @@ struct BackgammonUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
-            BackgammonLayoutUI(grid: Grid([
-
-                "●   ○ ○    ●".array(),
-                "●   ○ ○    ●".array(),
-                "●   ○ ○     ".array(),
-                "●     ○     ".array(),
-                "●     ○     ".array(),
-                "○     ●     ".array(),
-                "○     ●     ".array(),
-                "○   ● ●     ".array(),
-                "○   ● ●    ○".array(),
-                "○   ● ●    ○".array()
-
-            ], playerPieces: ["●","○"]))
+            BackgammonLayoutUI(grid: Grid(Backgammon.board.content, playerPieces: ["●","○"]))
 
         }
         .preferredColorScheme(.dark)

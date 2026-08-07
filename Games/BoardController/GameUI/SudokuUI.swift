@@ -19,32 +19,24 @@ struct SudokuBoardUI: View {
 
             Color("Text")
 
-            ForEach(Index.count(8)) { row in
+            ForEach(1..<9, id: \.self) { index in
 
-                let r = CGFloat(row.id + 1)
-                let r3 = row.id % 3 == 0
+                let offset = CGFloat(index)
+                let major = index % 3 == 0
 
-                ForEach(Index.count(8)) { col in
+                Path { path in
 
-                    let c = CGFloat(col.id + 1)
-                    let c3 = col.id % 3 == 0
+                    path.move(to: CGPoint(x: w * offset, y: 0))
+                    path.addLine(to: CGPoint(x: w * offset, y: g.rect.height))
 
-                    Path { path in
+                }.stroke(Color("Background"), lineWidth: major ? 3 : 1)
 
-                        path.move(to: CGPoint(x: w * c, y: 0))
-                        path.addLine(to: CGPoint(x: w * c, y: g.rect.height))
+                Path { path in
 
-                    }.stroke(Color("Background"), lineWidth: c3 ? 3 : 1)
+                    path.move(to: CGPoint(x: 0, y: h * offset))
+                    path.addLine(to: CGPoint(x: g.rect.width, y: h * offset))
 
-                    Path { path in
-
-
-                        path.move(to: CGPoint(x: 0, y: h * r))
-                        path.addLine(to: CGPoint(x: g.rect.width, y: h * r))
-
-                    }.stroke(Color("Background"), lineWidth: r3 ? 3 : 1)
-
-                }
+                }.stroke(Color("Background"), lineWidth: major ? 3 : 1)
 
             }
 
@@ -78,7 +70,7 @@ struct SudokuPiecesUI: View {
 
                             Text(row.piece).foregroundColor(Color("Background"))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)))
+                                .font(.system(size: (w + h) / 2 - 15, weight: .regular))
 
                         }
 
@@ -101,12 +93,14 @@ struct SudokuLayoutUI: View {
     @State private var number = 0
 
     var grid: Grid
+    var highlights: [Square] = []
+    var onSelect: (Square, String) -> Void = { _,_ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -116,20 +110,28 @@ struct SudokuLayoutUI: View {
 
                     SudokuPiecesUI(grid: grid)
 
+                    BoardInteractionGrid(rows: 9, columns: 9, grid: grid, selected: nil, highlights: highlights) { square in
+
+                        onSelect(square, "\(number + 1)")
+
+                    }
+
                 }
+                .aspectRatio(1.0, contentMode: .fit)
                 .padding(32)
 
                 Picker("", selection: $number) {
 
                     ForEach(Index.count(9)) { index in
 
-                        Text("\(index.id + 1)")
+                        Text("\(index.id + 1)").tag(index.id)
 
                     }
 
                 }
                 .padding(EdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32))
-                .pickerStyle(SegmentedPickerStyle())
+                .pickerStyle(.segmented)
+                .accessibilityLabel("Number")
 
             }
 
@@ -140,28 +142,24 @@ struct SudokuLayoutUI: View {
 
 }
 
-struct SudokuUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationView {
+        SudokuLayoutUI(grid: Grid([
 
-            SudokuLayoutUI(grid: Grid([
+            "   4    9".array(),
+            "4     1  ".array(),
+            " 8       ".array(),
+            "     7   ".array(),
+            "5       4".array(),
+            "    3    ".array(),
+            "         ".array(),
+            "6        ".array(),
+            "       7 ".array()
 
-                "   4    9".array(),
-                "4     1  ".array(),
-                " 8       ".array(),
-                "     7   ".array(),
-                "5       4".array(),
-                "    3    ".array(),
-                "         ".array(),
-                "6        ".array(),
-                "       7 ".array()
-
-            ], playerPieces: ["123456789"]))
-                .preferredColorScheme(.light)
-
-        }
+        ], playerPieces: ["123456789"]))
+            .preferredColorScheme(.light)
 
     }
 

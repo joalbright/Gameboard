@@ -20,7 +20,7 @@ struct MemoryPiecesUI: View {
             let w = g.size.width / c
             let h = g.size.height / c
 
-            VStack(spacing: 16 / c) {
+            VStack(spacing: 0) {
 
                 ForEach(grid.cols) { col in
 
@@ -33,9 +33,10 @@ struct MemoryPiecesUI: View {
                             ZStack {
 
                                 Text(row.piece)
-                                    .foregroundColor(player == 0 ? Color(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)) : row.piece.memoryColor)
+                                    .foregroundColor(player == 0 ? Color(red: 0, green: 0.478, blue: 1) : row.piece.memoryColor)
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(Font(UIFont.systemFont(ofSize: (w + h) / 2, weight: .heavy)))
+                                    .font(.system(size: (w + h) / 2, weight: .heavy))
+                                    .offset(y: -3)
 
                             }
                             .cornerRadius(4)
@@ -58,12 +59,15 @@ struct MemoryPiecesUI: View {
 struct MemoryLayoutUI: View {
 
     var grid: Grid
+    var selected: Square? = nil
+    var highlights: [Square] = []
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -71,7 +75,10 @@ struct MemoryLayoutUI: View {
 
                     MemoryPiecesUI(grid: grid)
 
+                    BoardInteractionGrid(rows: grid.content.count, columns: grid.content.first?.count ?? 0, grid: grid, selected: selected, highlights: highlights, action: onSelect)
+
                 }
+                .aspectRatio(1.0, contentMode: .fit)
                 .padding(32)
 
             }
@@ -88,7 +95,7 @@ struct MemoryUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             MemoryLayoutUI(grid: Grid([
 

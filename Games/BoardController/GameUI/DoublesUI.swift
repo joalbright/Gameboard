@@ -32,7 +32,7 @@ struct DoublesPiecesUI: View {
                                 Text(row.piece)
                                     .foregroundColor(Color(.sRGB, white: 0.1, opacity: 1))
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(Font(UIFont.systemFont(ofSize: (w + h) / 3.5, weight: .heavy)))
+                                    .font(.system(size: (w + h) / 3.5, weight: .heavy))
                                     .minimumScaleFactor(0.01)
                                     .lineLimit(1)
                                     .padding(8)
@@ -60,12 +60,13 @@ struct DoublesPiecesUI: View {
 struct DoublesLayoutUI: View {
 
     var grid: Grid
+    var onSwipe: (GameSwipeDirection) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -75,6 +76,26 @@ struct DoublesLayoutUI: View {
 
                 }
                 .padding(32)
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 20).onEnded { value in
+
+                    let horizontal = abs(value.translation.width) > abs(value.translation.height)
+
+                    if horizontal {
+
+                        onSwipe(value.translation.width < 0 ? .left : .right)
+
+                    } else {
+
+                        onSwipe(value.translation.height < 0 ? .up : .down)
+
+                    }
+
+                })
+                .accessibilityAction(named: "Swipe Up") { onSwipe(.up) }
+                .accessibilityAction(named: "Swipe Down") { onSwipe(.down) }
+                .accessibilityAction(named: "Swipe Left") { onSwipe(.left) }
+                .accessibilityAction(named: "Swipe Right") { onSwipe(.right) }
 
             }
 
@@ -89,7 +110,7 @@ struct DoublesUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             DoublesLayoutUI(grid: Grid([
 
@@ -113,18 +134,18 @@ extension String {
 
         switch self {
 
-        case "2": return Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1))
-        case "4": return Color(#colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1))
-        case "8": return Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-        case "16": return Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
-        case "32": return Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
-        case "64": return Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
-        case "128": return Color(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1))
-        case "256": return Color(#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1))
-        case "512": return Color(#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1))
-        case "1024": return Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))
-        case "2048": return Color(#colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1))
-        case "4096": return Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
+        case "2": return Color(red: 0.722, green: 0.886, blue: 0.592)
+        case "4": return Color(red: 0.584, green: 0.824, blue: 0.420)
+        case "8": return Color(red: 0.467, green: 0.765, blue: 0.267)
+        case "16": return Color(red: 0.976, green: 0.851, blue: 0.549)
+        case "32": return Color(red: 0.969, green: 0.780, blue: 0.345)
+        case "64": return Color(red: 0.961, green: 0.706, blue: 0.200)
+        case "128": return Color(red: 0.957, green: 0.659, blue: 0.545)
+        case "256": return Color(red: 0.941, green: 0.498, blue: 0.353)
+        case "512": return Color(red: 0.937, green: 0.349, blue: 0.192)
+        case "1024": return Color(red: 0.910, green: 0.478, blue: 0.643)
+        case "2048": return Color(red: 0.855, green: 0.251, blue: 0.478)
+        case "4096": return Color(red: 0.808, green: 0.027, blue: 0.333)
         default: return Color("Text").opacity(0.2)
 
         }

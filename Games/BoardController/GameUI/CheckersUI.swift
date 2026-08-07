@@ -30,14 +30,14 @@ struct CheckersPiecesUI: View {
                         ForEach(col.rows) { row in
 
                             let player = grid.player(row.piece) == 0
-                            let di = (col.id + row.id) % 2 == 0
+                            let di = (col.id + row.index) % 2 == 0
 
                             ZStack {
 
                                 Text(grid.solid(row.piece))
-                                    .foregroundColor(player ? Color(#colorLiteral(red: 0.8636881113, green: 0.0521483086, blue: 0.02170978114, alpha: 1)) : Color(#colorLiteral(red: 0.5774884259, green: 0.1385148753, blue: 0.1458311012, alpha: 1)))
+                                    .foregroundColor(player ? Color(red: 0.864, green: 0.052, blue: 0.022) : Color(red: 0.577, green: 0.139, blue: 0.146))
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)))
+                                    .font(.system(size: (w + h) / 2 - 15, weight: .regular))
 
                             }
                             .background(di ? Color("Accent") : Color("Text"))
@@ -61,12 +61,15 @@ struct CheckersPiecesUI: View {
 struct CheckersLayoutUI: View {
 
     var grid: Grid
+    var selected: Square? = nil
+    var highlights: [Square] = []
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -74,7 +77,10 @@ struct CheckersLayoutUI: View {
 
                     CheckersPiecesUI(grid: grid)
 
+                    BoardInteractionGrid(rows: 8, columns: 8, grid: grid, selected: selected, highlights: highlights, action: onSelect)
+
                 }
+                .aspectRatio(1.0, contentMode: .fit)
                 .padding(32)
 
             }
@@ -90,7 +96,7 @@ struct CheckersUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             CheckersLayoutUI(grid: Grid([
 
@@ -111,16 +117,3 @@ struct CheckersUI_Previews: PreviewProvider {
     }
 
 }
-
-//extension Grid {
-//
-//    public func checker(_ rect: CGRect, highlights: [Square], selected: Square?) -> UIView {
-//
-//        let view = UIView(frame: rect)
-//
-//
-//        return view
-//
-//    }
-//
-//}

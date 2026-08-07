@@ -66,9 +66,9 @@ struct TicTacToePiecesUI: View {
 
                             let player = grid.player(row.piece) == 0
 
-                            Text(row.piece).foregroundColor(player ? Color(#colorLiteral(red: 0, green: 1, blue: 0.8018556993, alpha: 1)) : Color(#colorLiteral(red: 0.9529920136, green: 0.06885367923, blue: 0.2083834405, alpha: 1)))
+                            Text(row.piece).foregroundColor(player ? Color(red: 0, green: 1, blue: 0.802) : Color(red: 0.953, green: 0.069, blue: 0.208))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(Font(UIFont.systemFont(ofSize: (w + h) / 2 - p, weight: .thin)))
+                                .font(.system(size: (w + h) / 2 - p, weight: .thin))
 
                         }
 
@@ -89,12 +89,15 @@ struct TicTacToePiecesUI: View {
 struct TicTacToeLayoutUI: View {
 
     var grid: Grid
+    var selected: Square? = nil
+    var highlights: [Square] = []
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
         ZStack {
 
-            Color("Background").edgesIgnoringSafeArea(.bottom)
+            Color("Background").ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -104,10 +107,10 @@ struct TicTacToeLayoutUI: View {
 
                     TicTacToePiecesUI(grid: grid)
 
+                    BoardInteractionGrid(rows: 3, columns: 3, grid: grid, selected: selected, highlights: highlights, action: onSelect)
+
                 }
                 .padding(32)
-
-                Text("Player 1")
 
             }
 
@@ -122,7 +125,7 @@ struct TicTacToeUI_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        NavigationView {
+        NavigationStack {
 
             TicTacToeLayoutUI(grid: Grid([
 

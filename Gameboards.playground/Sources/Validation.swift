@@ -1,6 +1,6 @@
-import UIKit
+import Foundation
 
-public enum MoveError: Error {
+public enum MoveError: Error, Equatable {
     
     /// Good try. Need a hint?
     case incorrectguess

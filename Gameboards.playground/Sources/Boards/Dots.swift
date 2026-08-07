@@ -8,19 +8,26 @@ public struct Dots {
 
     public static let playerPieces = ["1","2"]
 
-    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
+    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws -> Bool {
 
         guard p1 == "0" else { throw MoveError.invalidmove }
 
         grid[s1.0,s1.1] = playerPieces[player]
 
-        checkSpaces(s1, grid, player: player)
+        return checkSpaces(s1, grid, player: player)
 
     }
 
-    public static func checkSpaces(_ s1: Square, _ grid: Grid, player: Int) {
+    public static func isSegment(_ square: Square) -> Bool {
+
+        return square.0.isMultiple(of: 2) != square.1.isMultiple(of: 2)
+
+    }
+
+    @discardableResult public static func checkSpaces(_ s1: Square, _ grid: Grid, player: Int) -> Bool {
 
         let adjacent2 = [ (-1,0),(0,1),(1,0),(0,-1) ]
+        var completedSquare = false
 
         for a in adjacent2 {
 
@@ -30,8 +37,11 @@ public struct Dots {
             guard a1 == " ", checkClosed(s, grid) else { continue }
 
             grid[s.0,s.1] = playerPieces[player]
+            completedSquare = true
 
         }
+
+        return completedSquare
 
     }
 

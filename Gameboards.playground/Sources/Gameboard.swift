@@ -95,6 +95,17 @@ public struct Gameboard {
             
         }
         
+        public var isMultiPlayer: Bool {
+            
+            switch self {
+            
+            case .bombsweeper, .doubles, .memory, .pegs, .sudoku: return false
+            default: return true
+                
+            }
+            
+        }
+        
     }
     
     var _type: BoardType
@@ -206,8 +217,8 @@ public struct Gameboard {
     
     public mutating func move(toSquare s1: Square) throws {
         
-        try validateMove(s1)
-        changePlayer()
+        let retainsTurn = try validateMove(s1)
+        if !retainsTurn { changePlayer() }
     
     }
     

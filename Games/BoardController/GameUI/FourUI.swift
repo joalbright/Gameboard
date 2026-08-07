@@ -33,7 +33,7 @@ struct FourBoardUI: View {
 
                     path.addRoundedRect(in: CGRect(x: w * c + p + 5, y: 10, width: w - 10, height: h), cornerSize: CGSize(width: 10, height: 10))
 
-                }.fill(Color("Background"))
+                }.fill(Color.background)
 
                 ForEach(Index.count(6)) { row in
 
@@ -43,7 +43,7 @@ struct FourBoardUI: View {
 
                         path.addEllipse(in: CGRect(x: w * c + p, y: h * r + p + h, width: w, height: h).insetBy(dx: 5, dy: 5))
 
-                    }.fill(Color("Background"))
+                    }.fill(Color.background)
 
                 }
 
@@ -51,7 +51,7 @@ struct FourBoardUI: View {
 
                     path.addEllipse(in: CGRect(x: w * c + p, y: 0, width: w, height: h).insetBy(dx: 10, dy: 10))
 
-                }.fill(Color("Accent"))
+                }.fill(Color.accent)
 
             }
             
@@ -88,7 +88,7 @@ struct FourPiecesUI: View {
 
                             Text(grid.solid(row.piece)).foregroundColor(player ? Color(red: 0.892, green: 0, blue: 0.222) : Color(red: 0.947, green: 0.845, blue: 0.025))
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(.system(size: (w + h) / 2 - 4, weight: .regular))
+                                .font(.system(size: (w + h) / 3, weight: .regular))
 
                         }
 
@@ -115,7 +115,7 @@ struct FourLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -143,25 +143,20 @@ struct FourLayoutUI: View {
 
 }
 
-struct FourUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        FourLayoutUI(grid: Grid([
 
-            FourLayoutUI(grid: Grid([
+            7 ✕ " ",
+            7 ✕ " ",
+            "     ○ ".array(),
+            "     ● ".array(),
+            "    ○● ".array(),
+            "   ○●● ".array()
 
-                7 ✕ " ",
-                7 ✕ " ",
-                "     ○ ".array(),
-                "     ● ".array(),
-                "    ○● ".array(),
-                "   ○●● ".array()
-
-            ], playerPieces: ["●","○"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["●","○"]))
 
     }
 

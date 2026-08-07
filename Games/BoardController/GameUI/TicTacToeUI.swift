@@ -31,7 +31,7 @@ struct TicTacToeBoardUI: View {
                     path.move(to: CGPoint(x: p, y: h * i + p))
                     path.addLine(to: CGPoint(x: g.rect.width - p, y: h * i + p))
 
-                }.stroke(Color("Accent"), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+                }.stroke(Color.accent, style: StrokeStyle(lineWidth: 2, lineCap: .round))
 
             }
 
@@ -97,7 +97,7 @@ struct TicTacToeLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -121,22 +121,17 @@ struct TicTacToeLayoutUI: View {
 
 }
 
-struct TicTacToeUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        TicTacToeLayoutUI(grid: Grid([
 
-            TicTacToeLayoutUI(grid: Grid([
+            [" ", " ", " "],
+            ["✕", "○", "○"],
+            [" ", " ", "✕"]
 
-                [" ", " ", " "],
-                ["✕", "○", "○"],
-                [" ", " ", "✕"]
-
-            ], playerPieces: ["○","✕"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["○","✕"]))
 
     }
 

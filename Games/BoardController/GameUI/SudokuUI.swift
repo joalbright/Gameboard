@@ -17,7 +17,7 @@ struct SudokuBoardUI: View {
             let w = g.rect.width / 9
             let h = g.rect.height / 9
 
-            Color("Text")
+            Color.text
 
             ForEach(1..<9, id: \.self) { index in
 
@@ -29,14 +29,14 @@ struct SudokuBoardUI: View {
                     path.move(to: CGPoint(x: w * offset, y: 0))
                     path.addLine(to: CGPoint(x: w * offset, y: g.rect.height))
 
-                }.stroke(Color("Background"), lineWidth: major ? 3 : 1)
+                }.stroke(Color.background, lineWidth: major ? 3 : 1)
 
                 Path { path in
 
                     path.move(to: CGPoint(x: 0, y: h * offset))
                     path.addLine(to: CGPoint(x: g.rect.width, y: h * offset))
 
-                }.stroke(Color("Background"), lineWidth: major ? 3 : 1)
+                }.stroke(Color.background, lineWidth: major ? 3 : 1)
 
             }
 
@@ -68,7 +68,7 @@ struct SudokuPiecesUI: View {
 
                         ForEach(col.rows) { row in
 
-                            Text(row.piece).foregroundColor(Color("Background"))
+                            Text(row.piece).foregroundColor(Color.background)
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                 .font(.system(size: (w + h) / 2 - 15, weight: .regular))
 
@@ -100,7 +100,7 @@ struct SudokuLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -159,7 +159,6 @@ struct SudokuLayoutUI: View {
             "       7 ".array()
 
         ], playerPieces: ["123456789"]))
-            .preferredColorScheme(.light)
 
     }
 

@@ -65,8 +65,10 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
 
         GeometryReader { g in
 
-            let w = (g.size.width - 64) / 8
-            let h = (g.size.height - 64) / 8
+            let boardWidth = g.size.width.isFinite ? max(g.size.width - 64, 0) : 0
+            let boardHeight = g.size.height.isFinite ? max(g.size.height - 64, 0) : 0
+            let w = boardWidth / 8
+            let h = boardHeight / 8
 
             ZStack {
 
@@ -80,7 +82,7 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
 
                         ForEach(Index.count(8)) { letter in
 
-                            Rectangle().fill(Color.clear).frame(width: w, height: g.size.height - 64)
+                            Rectangle().fill(Color.clear).frame(width: w, height: boardHeight)
 
                         }
 
@@ -121,7 +123,7 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
                 ForEach(Value<String>.array("ABCDEFGH".array())) { letter in
 
                     Text(letter.value)
-                        .foregroundColor(Color("Accent"))
+                        .foregroundColor(Color.accent)
                         .frame(minWidth: w, maxWidth: w, minHeight: p, maxHeight: p)
 
                 }
@@ -146,7 +148,7 @@ struct ChessCoordinatesUI<Content>: View where Content : View {
                 ForEach(Value<String>.array("12345678".array())) { letter in
 
                     Text(letter.value)
-                        .foregroundColor(Color("Accent"))
+                        .foregroundColor(Color.accent)
                         .frame(minWidth: p, maxWidth: p, minHeight: h, maxHeight: h)
 
                 }
@@ -170,7 +172,7 @@ struct ChessLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -195,27 +197,22 @@ struct ChessLayoutUI: View {
 
 }
 
-struct ChessUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        ChessLayoutUI(grid: Grid([
 
-            ChessLayoutUI(grid: Grid([
+            "♜♞♝♛♚♝♞♜".array(),
+            8 ✕ "♟",
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ "♙",
+            "♖♘♗♕♔♗♘♖".array()
 
-                "♜♞♝♛♚♝♞♜".array(),
-                8 ✕ "♟",
-                8 ✕ "",
-                8 ✕ "",
-                8 ✕ "",
-                8 ✕ "",
-                8 ✕ "♙",
-                "♖♘♗♕♔♗♘♖".array()
-
-            ], playerPieces: ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]))
 
     }
 

@@ -112,6 +112,39 @@ final class GameboardCatalogTests: XCTestCase {
 
     }
 
+    @MainActor func testDotsCompletedSquareRetainsCurrentPlayer() {
+
+        let session = GameSession(.dots)
+
+        session.move(to: (0, 1))
+        session.move(to: (1, 0))
+        session.move(to: (1, 2))
+
+        XCTAssertEqual(session.playerNumber, 2)
+
+        session.move(to: (2, 1))
+
+        XCTAssertEqual(session.grid[1, 1] as? String, Dots.playerPieces[1])
+        XCTAssertEqual(session.playerNumber, 2)
+
+    }
+
+    func testDotsSegmentsMatchOpenLineCoordinates() {
+
+        let grid = Dots.board
+
+        for row in grid.rowRange {
+
+            for column in grid.colRange {
+
+                XCTAssertEqual(Dots.isSegment((row, column)), grid[row, column] as? String == "0")
+
+            }
+
+        }
+
+    }
+
     @MainActor func testFourSessionDropsPiecesByColumn() async {
 
         let session = GameSession(.four, fourDropInterval: .zero)

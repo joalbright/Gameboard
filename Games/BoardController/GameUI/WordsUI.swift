@@ -15,7 +15,7 @@ struct WordsBoardUI: View {
         GeometryReader { g in
 
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color("Text").opacity(0.2))
+                .fill(Color.text.opacity(0.2))
 
         }
         .cornerRadius(10)
@@ -80,7 +80,7 @@ struct WordsLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -115,7 +115,7 @@ struct WordsLayoutUI: View {
 
                             }
                             .frame(maxWidth: .infinity, minHeight: 48)
-                            .background(selectedTile == item.value ? Color.accentColor : Color("Text").opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
+                            .background(selectedTile == item.value ? Color.accentColor : Color.text.opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
 
                         }
                         .buttonStyle(.plain)
@@ -147,23 +147,18 @@ private extension String {
         case .tripleletter: return Color(red: 0.20, green: 0.72, blue: 0.38)
         case .doubleword: return Color(red: 0.80, green: 0, blue: 0.27)
         case .tripleword: return Color(red: 0.97, green: 0.60, blue: 0.27)
-        case .empty, .none: return Color("Text").opacity(0.16)
+        case .empty, .none: return Color.text.opacity(0.16)
         }
 
     }
 
 }
 
-struct WordsUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
-
-            WordsLayoutUI(grid: Grid(Words.board.content, playerPieces: ["◉","◎"]))
-
-        }
-        .preferredColorScheme(.dark)
+        WordsLayoutUI(grid: Grid(Words.board.content, playerPieces: ["◉","◎"]))
 
     }
 

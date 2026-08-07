@@ -146,7 +146,7 @@ struct GoLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -171,28 +171,23 @@ struct GoLayoutUI: View {
 
 }
 
-struct GoUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        GoLayoutUI(grid: Grid([
 
-            GoLayoutUI(grid: Grid([
+            9 ✕ " ",
+            9 ✕ " ",
+            [" "," ","●","●"," "," "," "," "," "],
+            [" "," ","○"," "," "," "," "," "," "],
+            [" ","●","○","●"," "," "," "," "," "],
+            [" "," "," ","●","○"," "," "," "," "],
+            [" "," "," ","○"," "," "," "," "," "],
+            9 ✕ "",
+            9 ✕ ""
 
-                9 ✕ " ",
-                9 ✕ " ",
-                [" "," ","●","●"," "," "," "," "," "],
-                [" "," ","○"," "," "," "," "," "," "],
-                [" ","●","○","●"," "," "," "," "," "],
-                [" "," "," ","●","○"," "," "," "," "],
-                [" "," "," ","○"," "," "," "," "," "],
-                9 ✕ "",
-                9 ✕ ""
-
-            ], playerPieces: ["●","○"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["●","○"]))
 
     }
 

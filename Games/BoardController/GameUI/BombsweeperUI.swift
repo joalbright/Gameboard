@@ -32,7 +32,7 @@ struct BombsweeperPiecesUI: View {
 
                             ZStack {
 
-                                let color = row.piece == "•" ? Color("Accent") : player == 1 ? Color.white : player == 0 ? Color(red: 0.996, green: 0.741, blue: 0) : Color("Text")
+                                let color = row.piece == "•" ? Color.accent : player == 1 ? Color.white : player == 0 ? Color(red: 0.996, green: 0.741, blue: 0) : Color.text
 
                                 Text(row.piece)
                                     .foregroundColor(color)
@@ -40,7 +40,7 @@ struct BombsweeperPiecesUI: View {
                                     .font(.system(size: (w + h) / 2 - 10, weight: .regular))
 
                             }
-                            .background(row.piece == "•" ? Color("Accent") : player == 1 ? Color(red: 0.746, green: 0.185, blue: 0.185) : Color("Background"))
+                            .background(row.piece == "•" ? Color.accent : player == 1 ? Color(red: 0.746, green: 0.185, blue: 0.185) : Color.background)
 
                         }
 
@@ -69,7 +69,7 @@ struct BombsweeperLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -108,29 +108,24 @@ struct BombsweeperLayoutUI: View {
 
 }
 
-struct BombsweeperUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        BombsweeperLayoutUI(grid: Grid([
 
-            BombsweeperLayoutUI(grid: Grid([
+            "•••••••1  ".array(),
+            "••••••⚑1  ".array(),
+            "••••••2   ".array(),
+            "•••••••111".array(),
+            "••✘•••••••".array(),
+            "••••••••••".array(),
+            "••••••••••".array(),
+            "13⚑•••••••".array(),
+            "  2⚑••••••".array(),
+            "  2⚑••••••".array()
 
-                "•••••••1  ".array(),
-                "••••••⚑1  ".array(),
-                "••••••2   ".array(),
-                "•••••••111".array(),
-                "••✘•••••••".array(),
-                "••••••••••".array(),
-                "••••••••••".array(),
-                "13⚑•••••••".array(),
-                "  2⚑••••••".array(),
-                "  2⚑••••••".array()
-
-            ], playerPieces: ["⚑","✘"]))
-                .preferredColorScheme(.dark)
-
-        }
+        ], playerPieces: ["⚑","✘"]))
 
     }
 

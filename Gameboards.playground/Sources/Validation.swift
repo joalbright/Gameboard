@@ -181,7 +181,7 @@ extension Gameboard {
         
     }
     
-    mutating func validateMove(_ s1: Square) throws {
+    mutating func validateMove(_ s1: Square) throws -> Bool {
         
         guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
@@ -189,9 +189,17 @@ extension Gameboard {
         
         switch _type {
             
-        case .go: try Go.validateMove(s1, p1, grid, playerTurn)
-        case .tictactoe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
-        case .dots: try Dots.validateMove(s1, p1, grid, playerTurn)
+        case .go:
+
+            try Go.validateMove(s1, p1, grid, playerTurn)
+            return false
+
+        case .tictactoe:
+
+            try TicTacToe.validateMove(s1, p1, grid, playerTurn)
+            return false
+
+        case .dots: return try Dots.validateMove(s1, p1, grid, playerTurn)
         default: throw MoveError.incorrectpiece
             
         }

@@ -11,23 +11,20 @@ struct GameSceneUI<Content: View>: View {
         content
             .safeAreaInset(edge: .bottom) {
 
-                if readiness == .ready {
+                if readiness == .ready && session.boardType.isMultiPlayer {
 
                     HStack {
-
+                        
+                        Spacer()
+                        
                         Label("Player \(session.playerNumber)", systemImage: "person.fill")
                             .font(.subheadline.weight(.semibold))
 
                         Spacer()
 
-                        Text("Ready")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 10)
-                    .background(.bar)
 
                 }
 

@@ -46,7 +46,7 @@ struct MancalaLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -69,16 +69,11 @@ struct MancalaLayoutUI: View {
 
 }
 
-struct MancalaUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
-
-            MancalaLayoutUI(grid: Grid([[]], playerPieces: ["◉","◎"]))
-
-        }
-        .preferredColorScheme(.dark)
+        MancalaLayoutUI(grid: Grid([[]], playerPieces: ["◉","◎"]))
 
     }
 

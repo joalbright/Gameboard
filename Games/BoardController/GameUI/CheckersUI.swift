@@ -19,7 +19,7 @@ struct CheckersPiecesUI: View {
             let w = g.size.width / 8
             let h = g.size.height / 8
 
-            Color("Accent")
+            Color.accent
 
             VStack(spacing: 0) {
 
@@ -40,7 +40,7 @@ struct CheckersPiecesUI: View {
                                     .font(.system(size: (w + h) / 2 - 15, weight: .regular))
 
                             }
-                            .background(di ? Color("Accent") : Color("Text"))
+                            .background(di ? Color.accent : Color.text)
 
                         }
 
@@ -69,7 +69,7 @@ struct CheckersLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -92,27 +92,22 @@ struct CheckersLayoutUI: View {
 
 }
 
-struct CheckersUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        CheckersLayoutUI(grid: Grid([
 
-            CheckersLayoutUI(grid: Grid([
+            8 ✕ ("" %% "●"),
+            8 ✕ ("●" %% ""),
+            8 ✕ ("" %% "●"),
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ ("○" %% ""),
+            8 ✕ ("" %% "○"),
+            8 ✕ ("○" %% "")
 
-                8 ✕ ("" %% "●"),
-                8 ✕ ("●" %% ""),
-                8 ✕ ("" %% "●"),
-                8 ✕ "",
-                8 ✕ "",
-                8 ✕ ("○" %% ""),
-                8 ✕ ("" %% "○"),
-                8 ✕ ("○" %% "")
-
-            ], playerPieces: ["●◉","○◎"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["●◉","○◎"]))
 
     }
 

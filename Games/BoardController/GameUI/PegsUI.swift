@@ -26,7 +26,7 @@ struct PegsBoardUI: View {
                 path.addLine(to: CGPoint(x: g.size.width / 2, y: g.size.height - p / 2))
                 path.addLine(to: CGPoint(x: p / 2, y: g.size.height / 2))
 
-            }.fill(Color("Accent"))
+            }.fill(Color.accent)
 
             Path { path in
 
@@ -36,7 +36,7 @@ struct PegsBoardUI: View {
                 path.addLine(to: CGPoint(x: p / 2, y: g.size.height / 2))
                 path.closeSubpath()
 
-            }.stroke(Color("Accent"), style: StrokeStyle(lineWidth: p, lineCap: .round, lineJoin: .round))
+            }.stroke(Color.accent, style: StrokeStyle(lineWidth: p, lineCap: .round, lineJoin: .round))
 
             let holes: [(Int,Int)] = [
 
@@ -60,7 +60,7 @@ struct PegsBoardUI: View {
                     path.move(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
                     path.addLine(to: CGPoint(x: w * c + w / 2 + 2.5 * p, y: h * r + h / 2 + 2.5 * p))
 
-                }.stroke(Color("Text"), style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+                }.stroke(Color.text, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
 
             }
 
@@ -120,7 +120,7 @@ struct PegsPiecesUI: View {
                 path.move(to: CGPoint(x: x, y: y))
                 path.addLine(to: CGPoint(x: x, y: y))
 
-            }.stroke(Color("Text"), style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
+            }.stroke(Color.text, style: StrokeStyle(lineWidth: 12, lineCap: .round, lineJoin: .round))
 
         }
 
@@ -139,7 +139,7 @@ struct PegsLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -165,26 +165,21 @@ struct PegsLayoutUI: View {
 
 }
 
-struct PegsUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        PegsLayoutUI(grid: Grid([
 
-            PegsLayoutUI(grid: Grid([
+            "!!●●●!!".array(),
+            "!!●●●!!".array(),
+            "●●●●●●●".array(),
+            "●●● ●●●".array(),
+            "●●●●●●●".array(),
+            "!!●●●!!".array(),
+            "!!●●●!!".array()
 
-                "!!●●●!!".array(),
-                "!!●●●!!".array(),
-                "●●●●●●●".array(),
-                "●●● ●●●".array(),
-                "●●●●●●●".array(),
-                "!!●●●!!".array(),
-                "!!●●●!!".array()
-
-            ], playerPieces: ["●"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["●"]))
 
     }
 

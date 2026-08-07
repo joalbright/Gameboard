@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 public typealias Square = (c: Int, r: Int)
 public typealias ChessSquare = (c: String, r: Int)
@@ -6,6 +7,15 @@ public typealias ChessSquare = (c: String, r: Int)
 public typealias Piece = String
 public typealias Guess = String
 public typealias Card = String
+
+extension Color {
+
+    static var accent: Color { return Color("Accent") }
+    static var background: Color { return Color("Background") }
+    static var offset: Color { return Color("Offset") }
+    static var text: Color { return Color("Text") }
+
+}
 
 
 extension String {

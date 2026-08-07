@@ -66,7 +66,7 @@ struct DoublesLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -106,23 +106,18 @@ struct DoublesLayoutUI: View {
 
 }
 
-struct DoublesUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        DoublesLayoutUI(grid: Grid([
 
-            DoublesLayoutUI(grid: Grid([
+            "  2 ".array(),
+            "    ".array(),
+            "   8".array(),
+            [" "," ","16","2048"]
 
-                "  2 ".array(),
-                "    ".array(),
-                "   8".array(),
-                [" "," ","16","2048"]
-
-            ], playerPieces: ["◉","◎"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["◉","◎"]))
 
     }
 
@@ -146,7 +141,7 @@ extension String {
         case "1024": return Color(red: 0.910, green: 0.478, blue: 0.643)
         case "2048": return Color(red: 0.855, green: 0.251, blue: 0.478)
         case "4096": return Color(red: 0.808, green: 0.027, blue: 0.333)
-        default: return Color("Text").opacity(0.2)
+        default: return Color.text.opacity(0.2)
 
         }
 

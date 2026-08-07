@@ -123,7 +123,7 @@ struct BackgammonLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -145,16 +145,11 @@ struct BackgammonLayoutUI: View {
 
 }
 
-struct BackgammonUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
-
-            BackgammonLayoutUI(grid: Grid(Backgammon.board.content, playerPieces: ["●","○"]))
-
-        }
-        .preferredColorScheme(.dark)
+        BackgammonLayoutUI(grid: Grid(Backgammon.board.content, playerPieces: ["●","○"]))
 
     }
 

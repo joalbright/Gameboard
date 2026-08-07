@@ -67,7 +67,7 @@ struct MemoryLayoutUI: View {
 
         ZStack {
 
-            Color("Background").ignoresSafeArea(edges: .bottom)
+            Color.background.ignoresSafeArea(edges: .bottom)
 
             VStack {
 
@@ -91,25 +91,20 @@ struct MemoryLayoutUI: View {
 
 }
 
-struct MemoryUI_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
+    NavigationStack {
 
-        NavigationStack {
+        MemoryLayoutUI(grid: Grid([
 
-            MemoryLayoutUI(grid: Grid([
+            6 ✕ "🂠",
+            6 ✕ "🂠",
+            6 ✕ "🂠",
+            "🂠🂠🃑🂠🂠🂠".array(),
+            "🂠🂠🂠🂠🂠🃅".array(),
+            6 ✕ "🂠",
 
-                6 ✕ "🂠",
-                6 ✕ "🂠",
-                6 ✕ "🂠",
-                "🂠🂠🃑🂠🂠🂠".array(),
-                "🂠🂠🂠🂠🂠🃅".array(),
-                6 ✕ "🂠",
-
-            ], playerPieces: ["🂠"]))
-
-        }
-        .preferredColorScheme(.dark)
+        ], playerPieces: ["🂠"]))
 
     }
 
@@ -121,7 +116,7 @@ extension String {
 
         switch self {
 
-        case "🂡","🂢","🂣","🂤","🂥","🂦","🂧","🂨","🂩","🂪","🂫","🂬","🂭","🂮","🃑","🃒","🃓","🃔","🃕","🃖","🃗","🃘","🃙","🃚","🃛","🃜","🃝","🃞": return Color("Text")
+        case "🂡","🂢","🂣","🂤","🂥","🂦","🂧","🂨","🂩","🂪","🂫","🂬","🂭","🂮","🃑","🃒","🃓","🃔","🃕","🃖","🃗","🃘","🃙","🃚","🃛","🃜","🃝","🃞": return Color.text
         case "🂱","🂲","🂳","🂴","🂵","🂶","🂷","🂸","🂹","🂺","🂻","🂼","🂽","🂾","🃁","🃂","🃃","🃄","🃅","🃆","🃇","🃈","🃉","🃊","🃋","🃌","🃍","🃎": return Color.red
         case "🃟": return Color.orange
         default: return Color.clear

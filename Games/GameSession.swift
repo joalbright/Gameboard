@@ -43,11 +43,15 @@ enum GameSessionEvent: Equatable, Identifiable {
     private var wordsBag: [Words.Letter] = []
     private var fourDropID = 0
     private let fourDropInterval: Duration
+    private var doublesMoveID = 0
+    private let doublesMoveInterval: Duration
+    private let doublesNewTile: Square?
 
     private(set) var event: GameSessionEvent?
     private(set) var wordsRack: [Words.Letter] = []
     private(set) var selectedWordTile: Words.Letter?
     private(set) var isFourDropping = false
+    private(set) var isDoublesMoving = false
 
     var boardType: Gameboard.BoardType { return game._type }
     var playerNumber: Int {
@@ -93,10 +97,12 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
-    init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90)) {
+    init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90), doublesMoveInterval: Duration = .milliseconds(40), doublesNewTile: Square? = nil) {
 
         game = Gameboard(boardType, testing: testing)
         self.fourDropInterval = fourDropInterval
+        self.doublesMoveInterval = doublesMoveInterval
+        self.doublesNewTile = doublesNewTile
 
         if boardType == .words { resetWords() }
 
@@ -114,6 +120,8 @@ enum GameSessionEvent: Equatable, Identifiable {
         event = nil
         fourDropID += 1
         isFourDropping = false
+        doublesMoveID += 1
+        isDoublesMoving = false
         memoryTurn += 1
         memoryPairPending = false
         if boardType == .words { resetWords() }
@@ -239,23 +247,34 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
-    func swipe(_ direction: GameSwipeDirection) {
+    func swipe(_ direction: GameSwipeDirection) async {
 
-        guard boardType == .doubles else { return }
+        guard boardType == .doubles, !isDoublesMoving, canMoveDoubles(direction) else { return }
 
-        var moved = false
+        doublesMoveID += 1
+        let moveID = doublesMoveID
+        var mergedTiles: Set<Int> = []
 
-        for _ in 0..<4 {
+        isDoublesMoving = true
+        defer {
 
-            moved = moveDoubles(direction) || moved
+            if moveID == doublesMoveID { isDoublesMoving = false }
 
         }
-
-        guard moved else { return }
-
-        _ = Doubles.random(game.grid)
         event = nil
+        _ = addDoublesTile()
         revision += 1
+
+        while true {
+
+            try? await Task.sleep(for: doublesMoveInterval)
+
+            guard !Task.isCancelled, moveID == doublesMoveID else { return }
+            guard moveDoubles(direction, mergedTiles: &mergedTiles) else { return }
+
+            revision += 1
+
+        }
 
     }
 
@@ -425,42 +444,58 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
-    private func moveDoubles(_ direction: GameSwipeDirection) -> Bool {
+    private func addDoublesTile() -> Bool {
+
+        guard let doublesNewTile else { return Doubles.random(game.grid) }
+        guard game.grid.onBoard(doublesNewTile), game.grid[doublesNewTile.c, doublesNewTile.r] as? String == " " else { return false }
+
+        game.grid[doublesNewTile.c, doublesNewTile.r] = "2"
+        return true
+
+    }
+
+    private func canMoveDoubles(_ direction: GameSwipeDirection) -> Bool {
+
+        for start in doublesCoordinates(direction) {
+
+            let end = doublesDestination(from: start, direction: direction)
+
+            guard game.grid.onBoard(end) else { continue }
+            guard let piece = game.grid[start.c, start.r] as? String, piece != " " else { continue }
+            guard let destination = game.grid[end.c, end.r] as? String else { continue }
+
+            if destination == " " || destination == piece { return true }
+
+        }
+
+        return false
+
+    }
+
+    private func moveDoubles(_ direction: GameSwipeDirection, mergedTiles: inout Set<Int>) -> Bool {
 
         var moved = false
-        let rows = Array(game.grid.rowRange)
-        let columns = Array(game.grid.colRange)
 
-        switch direction {
-        case .left:
+        for start in doublesCoordinates(direction) {
 
-            for row in rows {
+            let startIndex = doublesIndex(start)
+            let end = doublesDestination(from: start, direction: direction)
+            let endIndex = doublesIndex(end)
 
-                for column in columns { moved = moveDoubles(from: (row, column), to: (row, column - 1)) || moved }
+            guard !mergedTiles.contains(startIndex), game.grid.onBoard(end) else { continue }
+            guard let piece = game.grid[start.c, start.r] as? String, piece != " " else { continue }
+            guard let destination = game.grid[end.c, end.r] as? String else { continue }
+            guard destination == " " || destination == piece && !mergedTiles.contains(endIndex) else { continue }
 
-            }
+            do {
 
-        case .right:
+                let merged = try game.validateMove(start, end) != nil
+                if merged { mergedTiles.insert(endIndex) }
+                moved = true
 
-            for row in rows {
+            } catch {
 
-                for column in columns.reversed() { moved = moveDoubles(from: (row, column), to: (row, column + 1)) || moved }
-
-            }
-
-        case .up:
-
-            for row in rows {
-
-                for column in columns { moved = moveDoubles(from: (row, column), to: (row - 1, column)) || moved }
-
-            }
-
-        case .down:
-
-            for row in rows.reversed() {
-
-                for column in columns { moved = moveDoubles(from: (row, column), to: (row + 1, column)) || moved }
+                continue
 
             }
 
@@ -470,18 +505,34 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
-    private func moveDoubles(from start: Square, to end: Square) -> Bool {
+    private func doublesCoordinates(_ direction: GameSwipeDirection) -> [Square] {
 
-        do {
+        let rows = Array(game.grid.rowRange)
+        let columns = Array(game.grid.colRange)
 
-            _ = try game.validateMove(start, end)
-            return true
-
-        } catch {
-
-            return false
-
+        switch direction {
+        case .left: return rows.flatMap { row in columns.map { (row, $0) } }
+        case .right: return rows.flatMap { row in columns.reversed().map { (row, $0) } }
+        case .up: return rows.flatMap { row in columns.map { (row, $0) } }
+        case .down: return rows.reversed().flatMap { row in columns.map { (row, $0) } }
         }
+
+    }
+
+    private func doublesDestination(from start: Square, direction: GameSwipeDirection) -> Square {
+
+        switch direction {
+        case .left: return (start.c, start.r - 1)
+        case .right: return (start.c, start.r + 1)
+        case .up: return (start.c - 1, start.r)
+        case .down: return (start.c + 1, start.r)
+        }
+
+    }
+
+    private func doublesIndex(_ square: Square) -> Int {
+
+        return square.c * game.grid.colRange.count + square.r
 
     }
 

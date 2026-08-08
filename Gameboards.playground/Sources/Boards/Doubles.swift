@@ -33,13 +33,22 @@ public struct Doubles {
     }
     
     public static func random(_ grid: Grid) -> Bool {
-        
-        let c = Int(arc4random_uniform(4))
-        let r = Int(arc4random_uniform(4))
-        
-        guard " " == grid[c][r] as? String else { return random(grid) }
-        
-        grid[c][r] = "2"
+
+        var openSquares: [Square] = []
+
+        for row in grid.rowRange {
+
+            for column in grid.colRange where grid[row, column] as? String == " " {
+
+                openSquares.append((row, column))
+
+            }
+
+        }
+
+        guard let square = openSquares.randomElement() else { return false }
+
+        grid[square.c, square.r] = "2"
         
         return true
         

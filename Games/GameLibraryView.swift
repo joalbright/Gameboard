@@ -169,7 +169,11 @@ private struct GameDestinationView: View {
         case .checkers: CheckersLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
         case .chess: ChessLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
         case .dots: DotsLayoutUI(grid: session.grid, onSelect: session.move)
-        case .doubles: DoublesLayoutUI(grid: session.grid, onSwipe: session.swipe)
+        case .doubles: DoublesLayoutUI(grid: session.grid) { direction in
+
+            Task { await session.swipe(direction) }
+
+        }
         case .four: FourLayoutUI(grid: session.grid) { column in
 
             Task { await session.drop(inColumn: column) }

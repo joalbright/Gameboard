@@ -145,6 +145,46 @@ final class GameboardCatalogTests: XCTestCase {
 
     }
 
+    @MainActor func testDoublesSwipeAddsTileThenSettlesAndMerges() async {
+
+        let session = GameSession(.doubles, testing: true, doublesMoveInterval: .zero, doublesNewTile: (0, 3))
+
+        await session.swipe(.left)
+
+        XCTAssertEqual(session.grid[0, 0] as? String, "4")
+        XCTAssertEqual(session.grid[0, 1] as? String, " ")
+        XCTAssertEqual(session.grid[0, 2] as? String, " ")
+        XCTAssertEqual(session.grid[0, 3] as? String, " ")
+        XCTAssertFalse(session.isDoublesMoving)
+
+    }
+
+    @MainActor func testDoublesPublishesNewTileBeforeMovementTicks() async {
+
+        let session = GameSession(.doubles, testing: true, doublesMoveInterval: .seconds(10), doublesNewTile: (0, 3))
+        let swipe = Task { await session.swipe(.left) }
+
+        await Task.yield()
+
+        XCTAssertEqual(session.grid[0, 2] as? String, "2")
+        XCTAssertEqual(session.grid[0, 3] as? String, "2")
+        XCTAssertTrue(session.isDoublesMoving)
+
+        swipe.cancel()
+        await swipe.value
+
+        XCTAssertFalse(session.isDoublesMoving)
+
+    }
+
+    func testDoublesDoesNotLoopWhenBoardIsFull() {
+
+        let grid = Grid(4 ✕ (4 ✕ "2"))
+
+        XCTAssertFalse(Doubles.random(grid))
+
+    }
+
     @MainActor func testFourSessionDropsPiecesByColumn() async {
 
         let session = GameSession(.four, fourDropInterval: .zero)

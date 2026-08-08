@@ -106,6 +106,51 @@ struct FourPiecesUI: View {
 
 }
 
+private struct FourColumnInteractionGrid: View {
+
+    var action: (Int) -> Void
+
+    var body: some View {
+
+        let inset: CGFloat = 15
+
+        GeometryReader { geometry in
+
+            let width = geometry.size.width.isFinite ? max(geometry.size.width, 0) : 0
+            let height = geometry.size.height.isFinite ? max(geometry.size.height, 0) : 0
+            let usesBoardInsets = width >= inset * 2
+            let columnWidth = usesBoardInsets ? (width - inset * 2) / 7 : width / 7
+
+            ForEach(0..<7, id: \.self) { column in
+
+                let leading = usesBoardInsets && column > 0 ? inset + columnWidth * CGFloat(column) : columnWidth * CGFloat(column)
+                let trailing = usesBoardInsets && column < 6 ? inset + columnWidth * CGFloat(column + 1) : width
+                let hitWidth = max(trailing - leading, 0)
+
+                Button {
+
+                    action(column)
+
+                } label: {
+
+                    Rectangle()
+                        .fill(.clear)
+                        .contentShape(Rectangle())
+                        .frame(width: hitWidth, height: height)
+
+                }
+                .buttonStyle(.plain)
+                .position(x: leading + hitWidth / 2, y: height / 2)
+                .accessibilityLabel("Column \(column + 1)")
+
+            }
+
+        }
+
+    }
+
+}
+
 struct FourLayoutUI: View {
 
     var grid: Grid
@@ -125,13 +170,10 @@ struct FourLayoutUI: View {
 
                     FourPiecesUI(grid: grid)
 
-                    BoardInteractionGrid(rows: 1, columns: 7, selected: nil, highlights: []) { square in
-
-                        onSelectColumn(square.r)
-
-                    }
+                    FourColumnInteractionGrid(action: onSelectColumn)
 
                 }
+                .aspectRatio(1.0, contentMode: .fit)
                 .padding(32)
 
             }

@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 enum MemoryError: Error {
     
@@ -54,37 +54,21 @@ extension Difficulty {
     
 }
 
-extension String {
-    
-    var memoryColor: UIColor {
-        
-        switch self {
-            
-        case "🂡","🂢","🂣","🂤","🂥","🂦","🂧","🂨","🂩","🂪","🂫","🂬","🂭","🂮","🃑","🃒","🃓","🃔","🃕","🃖","🃗","🃘","🃙","🃚","🃛","🃜","🃝","🃞": return .darkText
-        case "🂱","🂲","🂳","🂴","🂵","🂶","🂷","🂸","🂹","🂺","🂻","🂼","🂽","🂾","🃁","🃂","🃃","🃄","🃅","🃆","🃇","🃈","🃉","🃊","🃋","🃌","🃍","🃎": return .systemRed
-        case "🃟": return .orange
-        default: return .clear
-            
-        }
-        
-    }
-    
-}
-
 public struct Memory {
     
     public static let playerPieces = ["🂠"]
 
     static func solution(_ difficulty: Difficulty) -> Grid {
         
-        let grid = difficulty.memoryBoard
+        var grid = difficulty.memoryBoard
         let deck = difficulty.memoryDeckRandomized
+        let columnCount = grid.colRange.count
         
         for r in grid.rowRange {
             
             for c in grid.colRange {
                 
-                grid[c,r] = deck[c+r*4]
+                grid[c,r] = deck[c + r * columnCount]
                 
             }
             
@@ -100,26 +84,26 @@ public struct Memory {
         
     }
     
-    public static func validateSelection(_ s1: Square, _ c1: Card, _ grid: Grid) throws {
+    public static func validateSelection(_ s1: Square, _ c1: Card, _ grid: inout Grid) throws {
         
-        guard grid[s1.0,s1.1] != EmptyPiece else { throw MoveError.invalidmove }
+        guard grid[s1.0,s1.1] != "" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = c1
         
     }
 
-    public static func validateMatch(_ s1: Square, _ s2: Square, _ c1: Card, _ c2: Card, _ grid: Grid, _ reset: Bool = false) throws -> Card? {
+    public static func validateMatch(_ s1: Square, _ s2: Square, _ c1: Card, _ c2: Card, _ grid: inout Grid, _ reset: Bool = false) throws -> Card? {
         
         if reset {
         
-            let card = c1 == c2 ? EmptyPiece : "🂠"
+            let card = c1 == c2 ? "" : "🂠"
             
             grid[s1.0][s1.1] = card
             grid[s2.0][s2.1] = card
             
         } else {
             
-            guard grid[s1.0,s1.1] != EmptyPiece else { throw MemoryError.nocard }
+            guard grid[s1.0,s1.1] != "" else { throw MemoryError.nocard }
             
             grid[s1.0,s1.1] = c1
             
@@ -129,44 +113,6 @@ public struct Memory {
         guard c1 == c2 else { throw MemoryError.badmatch }
         
         return c1
-        
-    }
-    
-}
-
-extension Grid {
-    
-    public func memory(_ rect: CGRect) -> UIView {
-        
-        let view = UIView(frame: rect)
-        
-        view.backgroundColor = colors.background
-        
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
-        let w = (rect.width - content.count + 1) / content.count
-        let h = (rect.height - content.count + 1) / content.count
-        
-        for (r,row) in content.enumerated() {
-            
-            for (c,item) in row.enumerated() {
-
-                let piece = "\(item)"
-                
-                let label = UILabel(frame: CGRect(x: c * w + c, y: r * h + r, width: w, height: h))
-                label.text = piece
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)
-                label.textColor = player(piece) == 0 ? colors.player1 : piece.memoryColor
-                
-                view.addSubview(label)
-                
-            }
-            
-        }
-        
-        return view
         
     }
     

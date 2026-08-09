@@ -1,6 +1,6 @@
-import UIKit
+import Foundation
 
-public enum MoveError: Error {
+public enum MoveError: Error, Equatable {
     
     /// Good try. Need a hint?
     case incorrectguess
@@ -82,7 +82,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .words: try Words.validate(t1, s1, grid)
+        case .words: try Words.validate(t1, s1, &grid)
         default: throw MoveError.incorrectpiece
             
         }
@@ -95,7 +95,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .bombsweeper: try Bombsweeper.validateGuess(s1, grid, solution)
+        case .bombsweeper: try Bombsweeper.validateGuess(s1, &grid, solution)
         default: throw MoveError.incorrectpiece
             
         }
@@ -108,7 +108,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
+        case .sudoku: try Sudoku.validateGuess(s1, g1, &grid, solution)
         default: throw MoveError.incorrectpiece
             
         }
@@ -125,7 +125,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .memory: return try Memory.validateSelection(s1, c1, grid)
+        case .memory: return try Memory.validateSelection(s1, c1, &grid)
         default: throw MoveError.incorrectpiece
             
         }
@@ -141,7 +141,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .memory: return try Memory.validateMatch(s1, s2, c1, c2, grid, reset)
+        case .memory: return try Memory.validateMatch(s1, s2, c1, c2, &grid, reset)
         default: throw MoveError.incorrectpiece
             
         }
@@ -161,7 +161,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .four: try Four.validateDrop(s1, p1, grid)
+        case .four: try Four.validateDrop(s1, p1, &grid)
         default: throw MoveError.incorrectpiece
             
         }
@@ -174,14 +174,14 @@ extension Gameboard {
         
         switch _type {
             
-        case .bombsweeper: try Bombsweeper.validateMark(s1, grid, solution)
+        case .bombsweeper: try Bombsweeper.validateMark(s1, &grid, solution)
         default: throw MoveError.incorrectpiece
             
         }
         
     }
     
-    mutating func validateMove(_ s1: Square) throws {
+    mutating func validateMove(_ s1: Square) throws -> Bool {
         
         guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
@@ -189,9 +189,18 @@ extension Gameboard {
         
         switch _type {
             
-        case .go: try Go.validateMove(s1, p1, grid, playerTurn)
-        case .tictactoe: try TicTacToe.validateMove(s1, p1, grid, playerTurn)
-        case .dots: try Dots.validateMove(s1, p1, grid, playerTurn)
+        case .go:
+
+            try Go.validateMove(s1, p1, &grid, playerTurn)
+            return false
+
+        case .tictactoe:
+
+            try TicTacToe.validateMove(s1, p1, &grid, playerTurn)
+            return false
+
+        case .dots: return try Dots.validateMove(s1, p1, &grid, playerTurn)
+        case .mancala: return try Mancala.validateMove(s1, p1, &grid, playerTurn)
         default: throw MoveError.incorrectpiece
             
         }
@@ -211,10 +220,10 @@ extension Gameboard {
         
         switch _type {
             
-        case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
-        case .chess: return try Chess.validateMove(s1, s2, p1, p2, grid, hint)
-        case .doubles: return try Doubles.validateMove(s1, s2, p1, p2, grid)
-        case .pegs: return try Pegs.validateMove(s1, s2, p1, p2, grid, hint)
+        case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, &grid, hint)
+        case .chess: return try Chess.validateMove(s1, s2, p1, p2, &grid, hint)
+        case .doubles: return try Doubles.validateMove(s1, s2, p1, p2, &grid)
+        case .pegs: return try Pegs.validateMove(s1, s2, p1, p2, &grid, hint)
         default: throw MoveError.incorrectpiece
             
         }

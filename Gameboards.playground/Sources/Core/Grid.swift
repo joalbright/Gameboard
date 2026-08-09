@@ -1,79 +1,67 @@
-import UIKit
+import Foundation
 
-let EmptyPiece: String = " "
+public struct Grid {
 
-public class Grid {
+    struct CellID: Hashable {
+
+        var row: Int
+        var column: Int
+
+    }
+
+    struct Row: Identifiable {
+
+        var id: CellID
+        var index: Int
+        var piece: Piece
+
+    }
+
+    struct Col: Identifiable {
+
+        var id: Int
+        var rows: [Row]
+        
+    }
+
+    var cols: [Col] {
+
+        return content.enumerated().map { row, content in
+
+            Col(id: row, rows: content.enumerated().map { column, piece in Row(id: CellID(row: row, column: column), index: column, piece: piece) })
+
+        }
+
+    }
     
-    public var content: [[String]]
+    public var content: [[Piece]]
     
     public var rowRange: CountableRange<Int> { return 0..<content.count }
     public var colRange: CountableRange<Int> { return content.count > 0 ? 0..<content[0].count : 0..<0 }
     
-    public var padding: CGFloat = 0
-    public var colors = BoardColors()
     public var playerPieces: [Piece] = []
     
-    public init(_ content: [[String]]) {
+    public init(_ content: [[Piece]], playerPieces: [Piece] = []) {
         
         self.content = content
+        self.playerPieces = playerPieces
         
     }
     
-    public subscript(c: Int, r: Int) -> String {
+    public subscript(c: Int, r: Int) -> Piece {
         
         get { return content[c][r] }
         set { content[c][r] = newValue }
         
     }
     
-    public subscript(c: Int) -> [String] {
+    public subscript(c: Int) -> [Piece] {
         
         get { return content[c] }
         set { content[c] = newValue }
         
     }
 
-    public subscript(c: Int) -> String {
-
-        get { return content[c / colRange.endIndex][c % colRange.endIndex] }
-        set { content[c / colRange.endIndex][c % colRange.endIndex] = newValue }
-
-    }
-    
-    public func matrix(_ rect: CGRect) -> UIView {
-        
-        let view = MatrixView(frame: rect)
-        
-        view.p = padding
-        view.backgroundColor = colors.background
-        view.lineColor = colors.foreground
-        
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
-        let w = (rect.width - padding * 2) / content.count
-        let h = (rect.height - padding * 2) / content.count
-        
-        for (c,col) in content.enumerated() {
-            
-            for (r,item) in col.enumerated() {
-                
-                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding, width: w, height: h))
-                
-                label.text = "\(item)"
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .thin)
-                
-                view.addSubview(label)
-                
-            }
-            
-        }
-        
-        return view
-        
-    }
-    
     public func onBoard(_ s1: Square, _ s2: Square) -> Bool {
         
         return s1.0.within(rowRange) && s1.1.within(colRange) && s2.0.within(rowRange) && s2.1.within(colRange)
@@ -98,33 +86,12 @@ public class Grid {
         
     }
 
-    public func piecesOnBoard() -> [Piece] {
+    func solid(_ piece: Piece) -> Piece {
 
-        return content.reduce([]) { $0 + $1 }.filter { $0 != EmptyPiece }
+        guard playerPieces.count > 1 else { return piece }
+        guard let index = playerPieces[1].array().firstIndex(of: piece) else { return piece }
+        return playerPieces[0].array()[index]
 
-    }
-    
-}
-
-class HintLabel: UILabel {
-    
-    var highlight: Bool = false { didSet { setNeedsDisplay() } }
-    var highlightColor: UIColor = .systemRed
-    
-    override func drawText(in rect: CGRect) {
-        
-        guard highlight else { return super.drawText(in: rect) }
-        
-        let c = UIGraphicsGetCurrentContext()
-        
-        highlightColor.set()
-        
-        c?.setLineJoin(.round)
-        c?.setLineWidth(1)
-        c?.stroke(rect.insetBy(dx: 3, dy: 3))
-        
-        super.drawText(in: rect)
-        
     }
     
 }

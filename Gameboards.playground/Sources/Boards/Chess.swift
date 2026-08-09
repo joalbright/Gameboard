@@ -1,10 +1,10 @@
-import UIKit
+import SwiftUI
 
 public struct Chess {
     
     public enum PieceType: String {
         
-        case none = " "
+        case none = ""
         
         case rook1 = "♜"
         case knight1 = "♞"
@@ -28,10 +28,10 @@ public struct Chess {
             
             "♜♞♝♛♚♝♞♜".array(),
             8 ✕ "♟",
-            8 ✕ EmptyPiece,
-            8 ✕ EmptyPiece,
-            8 ✕ EmptyPiece,
-            8 ✕ EmptyPiece,
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ "",
+            8 ✕ "",
             8 ✕ "♙",
             "♖♘♗♕♔♗♘♖".array()
             
@@ -40,6 +40,7 @@ public struct Chess {
     }
     
     public static let playerPieces = ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]
+    public static let playerColors = [Color.white, Color.black]
     
     public static func validateEmptyPath(_ s1: Square, _ s2: Square, _ grid: Grid) throws {
         
@@ -53,7 +54,7 @@ public struct Chess {
         
         while p1 != s2.0 || p2 != s2.1 {
             
-            guard grid[p1,p2] == EmptyPiece else { throw MoveError.blockedmove }
+            guard grid[p1,p2] == "" else { throw MoveError.blockedmove }
             
             p1 += d1
             p2 += d2
@@ -62,7 +63,7 @@ public struct Chess {
         
     }
     
-    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws -> Piece? {
+    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: inout Grid, _ hint: Bool = false) throws -> Piece? {
         
         let mRow = s2.0 - s1.0
         let mCol = s2.1 - s1.1
@@ -87,13 +88,13 @@ public struct Chess {
             
         case .pawn1:
             
-            guard (abs(mCol) == 0 && p2 == EmptyPiece) || (abs(mCol) == 1 && mRow == 1 && p2 != EmptyPiece) else { throw MoveError.invalidmove }
+            guard (abs(mCol) == 0 && p2 == "") || (abs(mCol) == 1 && mRow == 1 && p2 != "") else { throw MoveError.invalidmove }
             guard (mRow < 2 && mRow > 0) || (s1.0 == 1 && mRow == 2) else { throw MoveError.invalidmove }
             try validateEmptyPath(s1, s2, grid)
             
         case .pawn2:
             
-            guard (abs(mCol) == 0 && p2 == EmptyPiece) || (abs(mCol) == 1 && mRow == -1 && p2 != EmptyPiece) else { throw MoveError.invalidmove }
+            guard (abs(mCol) == 0 && p2 == "") || (abs(mCol) == 1 && mRow == -1 && p2 != "") else { throw MoveError.invalidmove }
             guard (mRow > -2 && mRow < 0) || (s1.0 == 6 && mRow == -2) else { throw MoveError.invalidmove }
             try validateEmptyPath(s1, s2, grid)
             
@@ -116,7 +117,7 @@ public struct Chess {
         let piece = grid[s2.0,s2.1]
 
         grid[s2.0,s2.1] = p1 // place my piece in target square
-        grid[s1.0,s1.1] = EmptyPiece // remove my piece from original square
+        grid[s1.0,s1.1] = "" // remove my piece from original square
         
         return piece
         

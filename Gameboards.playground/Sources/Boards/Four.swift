@@ -1,17 +1,18 @@
-import UIKit
+import SwiftUI
 
 public struct Four {
     
-    public static var board: Grid { return Grid(6 ✕ (7 ✕ EmptyPiece)) }
+    public static var board: Grid { return Grid(6 ✕ (7 ✕ " ")) }
     
     public static let playerPieces = ["◉","◎"]
+    public static let playerColors = [Color(red: 0.892, green: 0, blue: 0.222), Color(red: 0.947, green: 0.845, blue: 0.025)]
 
     public static var staticboard: Grid {
         
         return Grid([
             
-            7 ✕ EmptyPiece,
-            7 ✕ EmptyPiece,
+            7 ✕ " ",
+            7 ✕ " ",
             "     ◎ ".array(),
             "     ◉ ".array(),
             "    ◎◉ ".array(),
@@ -21,61 +22,13 @@ public struct Four {
         
     }
     
-    public static func validateDrop(_ s1: Square, _ p1: Piece, _ grid: Grid) throws {
-
-        guard grid[s1.0 + 1][s1.1] == EmptyPiece else { throw MoveError.invalidmove }
+    public static func validateDrop(_ s1: Square, _ p1: Piece, _ grid: inout Grid) throws {
+     
+        guard grid[s1.0 + 1][s1.1] == " " else { throw MoveError.invalidmove }
         grid[s1.0 + 1][s1.1] = p1
         
         guard grid.onBoard(s1) else { return }
-        grid[s1.0][s1.1] = EmptyPiece
-        
-    }
-    
-}
-
-extension Grid {
-    
-    public func four(_ rect: CGRect) -> UIView {
-        
-        let view = FourView(frame: rect)
-        
-        let w = (rect.width - padding * 2) / 7
-        let h = (rect.height - padding * 2) / 7
-        
-        view.backgroundColor = colors.foreground
-        view.holeColor = colors.background
-        view.spotColor = colors.selected
-        
-        view.p = padding
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
-        for (r,row) in content.enumerated() {
-            
-            for (c,item) in row.enumerated() {
-
-                var piece = "\(item)"
-
-                let label = UILabel(frame: CGRect(x: c * w + padding, y: r * h + padding + h, width: w, height: h))
-                label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
-                
-                if player(piece) == 1 {
-                    
-                    if let index = playerPieces[1].array().index(of: piece) { piece = playerPieces[0].array()[index] }
-                    
-                }
-                
-                label.text = piece
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 10, weight: .regular)
-                
-                view.addSubview(label)
-                
-            }
-            
-        }
-        
-        return view
+        grid[s1.0][s1.1] = " "
         
     }
     

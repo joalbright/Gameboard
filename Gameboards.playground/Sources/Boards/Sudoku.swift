@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 
 extension Difficulty {
     
@@ -57,11 +57,14 @@ public struct Sudoku {
     }
     
     public static let playerPieces = ["123456789"]
+    public static let playerColors = [Color.blue]
     
-    public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
+    public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: inout Grid, _ solution: Grid) throws {
         
-        guard g1 != EmptyPiece else { throw MoveError.invalidmove }        
-        guard g1 == solution[s1.0,s1.1] else { throw MoveError.incorrectguess }
+        guard g1 != "" else { throw MoveError.invalidmove }
+        let a1 = solution[s1.0,s1.1]
+        
+        guard a1 == g1 else { throw MoveError.incorrectguess }
         
         grid[s1.0,s1.1] = g1
         
@@ -73,9 +76,9 @@ public struct Sudoku {
         
         for _ in 0...2 {
             
-            let g1: [[String]] = [grid[0],grid[1],grid[2]].randomize()
-            let g2: [[String]] = [grid[3],grid[4],grid[5]].randomize()
-            let g3: [[String]] = [grid[6],grid[7],grid[8]].randomize()
+            let g1 = [grid[0],grid[1],grid[2]].randomize()
+            let g2 = [grid[3],grid[4],grid[5]].randomize()
+            let g3 = [grid[6],grid[7],grid[8]].randomize()
             
             grid = Grid([ g1[0], g1[1], g1[2], g2[0], g2[1], g2[2], g3[0], g3[1], g3[2] ])
             
@@ -89,7 +92,7 @@ public struct Sudoku {
     
     static func flipGrid(_ grid: Grid) -> Grid {
         
-        let newGrid = Grid(9 ✕ (9 ✕ EmptyPiece))
+        var newGrid = Grid(9 ✕ (9 ✕ ""))
         
         for r in newGrid.rowRange {
             
@@ -107,7 +110,7 @@ public struct Sudoku {
     
     static func puzzle(_ grid: Grid, difficulty: Difficulty) -> Grid {
         
-        let grid = Grid(grid.content)
+        var grid = Grid(grid.content)
         
         for r in 0...8 {
             
@@ -117,7 +120,7 @@ public struct Sudoku {
             
             for c in cols {
                 
-                grid[r,c] = EmptyPiece
+                grid[r,c] = ""
                 
             }
             
@@ -129,7 +132,7 @@ public struct Sudoku {
     
     static func staticpuzzle(_ grid: Grid) -> Grid {
         
-        let grid = Grid(grid.content)
+        var grid = Grid(grid.content)
         
         let hide = [
         
@@ -149,60 +152,13 @@ public struct Sudoku {
             
             for c in row {
                 
-                grid[r,c] = EmptyPiece
+                grid[r,c] = ""
                 
             }
             
         }
         
         return grid
-        
-    }
-    
-}
-
-extension Grid {
-    
-    public func sudoku(_ rect: CGRect, highlights: [Square]) -> UIView {
-        
-        let view = SudokuView(frame: rect)
-        
-        view.backgroundColor = colors.background
-        view.lineColor = colors.foreground
-        
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
-        let w = rect.width / content.count
-        let h = rect.height / content.count
-        
-        for (r,row) in content.enumerated() {
-            
-            for (c,item) in row.enumerated() {
-
-                let holder = UIView(frame: CGRect(x: c * w, y: r * h, width: w, height: h))
-                let label = UILabel(frame: CGRect(x: 0, y: 0, width: w, height: h))
-                label.text = "\(item)"
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2 - 15, weight: .regular)
-                label.textColor = colors.foreground
-                
-                for highlight in highlights {
-                    
-                    guard highlight.0 == r && highlight.1 == c else { continue }
-                    label.textColor = colors.highlight
-                    holder.backgroundColor = colors.foreground
-                    
-                }
-                
-                holder.addSubview(label)
-                view.addSubview(holder)
-                
-            }
-            
-        }
-        
-        return view
         
     }
     

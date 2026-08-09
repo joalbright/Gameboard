@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 
 enum GoError: Error {
     
@@ -8,11 +8,12 @@ enum GoError: Error {
 
 public struct Go {
     
-    public static var board: Grid { return Grid(9 ✕ (9 ✕ EmptyPiece)) }
+    public static var board: Grid { return Grid(9 ✕ (9 ✕ "")) }
     
     public static let playerPieces = ["●","○"]
+    public static let playerColors = [Color.white, Color.black]
     
-    public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: Grid) {
+    public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: inout Grid) {
         
         let points = [ (-1,0),(0,1),(1,0),(0,-1) ]
         
@@ -25,14 +26,11 @@ public struct Go {
             for p in points {
                 
                 let s = (s1.0 + p.0, s1.1 + p.1)
-
                 guard !(chain.contains { $0.0 == s.0 && $0.1 == s.1 }) else { continue }
                 guard grid.onBoard(s) else { continue }
-
                 let a1 = grid[s.0,s.1]
-
                 guard a1 != p1 else { continue }
-                guard a1 != EmptyPiece else { throw GoError.openchain }
+                guard a1 != "" else { throw GoError.openchain }
                 
                 chain.append(s)
                 
@@ -47,16 +45,13 @@ public struct Go {
         for p in points {
             
             let s = (s1.0 + p.0, s1.1 + p.1)
-
             guard grid.onBoard(s) else { continue }
-
             let a1 = grid[s.0,s.1]
-
-            guard a1 != EmptyPiece && a1 != p1 else { continue }
+            guard a1 != "" && a1 != p1 else { continue }
             
             if let squares = try? checkChain(s, [s]) {
                 
-                for s in squares { grid[s.0,s.1] = EmptyPiece }
+                for s in squares { grid[s.0,s.1] = "" }
                 
             }
             
@@ -64,61 +59,13 @@ public struct Go {
         
     }
     
-    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
+    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: inout Grid, _ player: Int) throws {
         
-        guard p1 == EmptyPiece else { throw MoveError.invalidmove }
+        guard p1 == "" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = playerPieces[player]
         
-        checkCapture(s1, playerPieces[player], grid)
-        
-    }
-    
-}
-
-extension Grid {
-    
-    public func go(_ rect: CGRect) -> UIView {
-        
-        let view = GoView(frame: rect)
-        
-        view.p = padding
-        view.backgroundColor = colors.background
-        view.lineColor = colors.foreground
-        
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        
-        let w = (rect.width - padding * 2) / 8
-        let h = (rect.height - padding * 2) / 8
-        
-        for (r,row) in content.enumerated() {
-            
-            for (c,item) in row.enumerated() {
-
-                var piece = "\(item)"
-
-                let label = UILabel(frame: CGRect(x: c * w + padding - w / 2, y: r * h + padding - h / 2, width: w, height: h))
-                label.textColor = player(piece) == 0 ? colors.player1 : colors.player2
-                
-                if player(piece) == 1 {
-                    
-                    if let index = playerPieces[1].array().index(of: piece) { piece = playerPieces[0].array()[index] }
-                    
-                }
-                
-                label.text = piece
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: (w + h) / 2, weight: .thin)
-                
-                view.addSubview(label)
-                
-                
-            }
-            
-        }
-        
-        return view
+        checkCapture(s1, playerPieces[player], &grid)
         
     }
     

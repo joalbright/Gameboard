@@ -1,8 +1,10 @@
-import UIKit
+import SwiftUI
 
-enum Difficulty {
+enum Difficulty: CaseIterable, Identifiable {
     
     case easy, medium, hard
+
+    var id: Self { return self }
     
     var name: String {
         
@@ -28,11 +30,27 @@ enum Difficulty {
 
 public struct Gameboard {
     
-    public enum BoardType: String {
+    public enum BoardType: String, CaseIterable, Identifiable {
+
+        public enum Readiness: String {
+
+            case ready
+            case comingSoon
+
+        }
         
         case backgammon, bombsweeper, checkers, chess, dots, doubles, four, go, mancala, memory, pegs, sudoku, tictactoe, words
         
-        static var playable: [BoardType] = [ .backgammon, .bombsweeper, .checkers, .chess, .dots, .doubles, .four, .go, .memory, .pegs, .sudoku, .tictactoe, .words ]
+        public var id: Self { self }
+
+        static var catalog: [BoardType] { allCases }
+        static var playable: [BoardType] { allCases.filter { $0.readiness == .ready } }
+
+        public var readiness: Readiness {
+
+            return .ready
+
+        }
         
         public var name: String {
             
@@ -76,44 +94,23 @@ public struct Gameboard {
             
         }
         
-        var controller: UINavigationController? {
-            
-            guard let vc = UIStoryboard(name: name.replacingOccurrences(of: " ", with: ""), bundle: nil).instantiateInitialViewController() as? BoardViewController else { return nil }
-            return UINavigationController(rootViewController: vc)
-            
-        }
-        
     }
-    
-    public var padding: CGFloat = 0 { didSet { grid.padding = padding } }
-    public var colors = BoardColors() { didSet { grid.colors = colors } }
     
     var _type: BoardType
     
-    var playerCount: Int = 2
-    var playerTurn: Int = 0 { didSet { playerChange?(playerTurn + 1) } }
-    var playerPieces: [Piece] = [] {
-
-        didSet {
-
-            grid.playerPieces = playerPieces
-            playerCount = playerPieces.count
-            
-        }
-
-    }
+    var playerCount: Int = 1
+    var playerTurn: Int = 0
+    var playerPieces: [Piece] = []
+    var playerColors: [Color] = [.accent]
+    var playerSecondaryColors: [Color] = [.text]
     
-    var grid: Grid = Grid(1 ✕ (1 ✕ EmptyPiece))
-    var solution: Grid = Grid(1 ✕ (1 ✕ EmptyPiece))
+    var grid: Grid = Grid(1 ✕ (1 ✕ ""))
+    var solution: Grid = Grid(1 ✕ (1 ✕ ""))
     
     var gridSize: Int { return grid.content.count }
-    var totalSpaces: Int { return grid.content.count == 0 ? 0 : grid.content.count * grid.content[0].count }
     var difficulty: Difficulty = .easy { didSet { reset() } }
     
     var _size: Int?
-    
-    public var playerChange: ((Int) -> Void)?
-    public var showAlert: ((String, String) -> Void)?
     
     public init(_ type: BoardType) {
         
@@ -156,10 +153,18 @@ public struct Gameboard {
             for r in grid.rowRange {
                 
                 for c in grid.colRange {
-                    
-                    guard let _ = try? validateMove(s1, (r,c), true) else { continue }
-                    selected = s1
-                    highlights.append((r,c))
+
+                    do {
+
+                        _ = try validateMove(s1, (r,c), true)
+                        selected = s1
+                        highlights.append((r,c))
+
+                    } catch {
+
+                        continue
+
+                    }
                     
                 }
                 
@@ -193,8 +198,8 @@ public struct Gameboard {
     
     public mutating func move(toSquare s1: Square) throws {
         
-        try validateMove(s1)
-        changePlayer()
+        let retainsTurn = try validateMove(s1)
+        if !retainsTurn { changePlayer() }
     
     }
     
@@ -235,11 +240,12 @@ public struct Gameboard {
             
             grid = Backgammon.board
             playerPieces = Backgammon.playerPieces
+            playerColors = Backgammon.playerColors
             
         case .bombsweeper:
             
-            solution = Bombsweeper.board
-            grid = Bombsweeper.field
+            solution = Bombsweeper.board(difficulty)
+            grid = Bombsweeper.field(difficulty)
             playerPieces = Bombsweeper.playerPieces
             
             guard testing else { break }
@@ -251,24 +257,27 @@ public struct Gameboard {
             
             grid = Checkers.board
             playerPieces = Checkers.playerPieces
+            playerColors = Checkers.playerColors
             
         case .chess:
             
             grid = Chess.board
             playerPieces = Chess.playerPieces
+            playerColors = Chess.playerColors
             
         case .dots:
             
             grid = Dots.board
             playerPieces = Dots.playerPieces
+            playerColors = Dots.playerColors
             
         case .doubles:
             
             grid = Doubles.board
             playerPieces = Doubles.playerPieces
             
-            let _ = Doubles.random(grid)
-            let _ = Doubles.random(grid)
+            let _ = Doubles.random(&grid)
+            let _ = Doubles.random(&grid)
             
             guard testing else { break }
             
@@ -279,6 +288,7 @@ public struct Gameboard {
             
             grid = Four.board
             playerPieces = Four.playerPieces
+            playerColors = Four.playerColors
             
             guard testing else { break }
             
@@ -289,12 +299,13 @@ public struct Gameboard {
             
             grid = Go.board
             playerPieces = Go.playerPieces
-            playerTurn = 0
+            playerColors = Go.playerColors
             
         case .mancala:
             
             grid = Mancala.board
             playerPieces = Mancala.playerPieces
+            playerColors = Mancala.playerColors
             
             guard testing else { break }
             
@@ -328,6 +339,7 @@ public struct Gameboard {
             
             grid = TicTacToe.board
             playerPieces = TicTacToe.playerPieces
+            playerColors = TicTacToe.playerColors
             
         case .words:
             
@@ -336,47 +348,12 @@ public struct Gameboard {
             
         }
         
+        grid.playerPieces = playerPieces
+        playerCount = playerColors.count
+        
     }
     
     public var highlights: [Square] = []
     public var selected: Square?
     
-    public func visualize(_ rect: CGRect = CGRect(x: 0, y: 0, width: 200, height: 200)) -> UIView {
-        
-        switch _type {
-            
-        case .backgammon: return grid.backgammon(rect)
-        case .bombsweeper: return grid.bomb(rect)
-        case .checkers, .chess: return grid.checker(rect, highlights: highlights, selected: selected)
-        case .four: return grid.four(rect)
-        case .dots: return grid.dots(rect)
-        case .doubles: return grid.doubles(rect)
-        case .go: return grid.go(rect)
-        case .mancala: return grid.mancala(rect)
-        case .memory: return grid.memory(rect)
-        case .pegs: return grid.pegs(rect, highlights: highlights, selected: selected)
-        case .sudoku: return grid.sudoku(rect, highlights: highlights)
-        case .tictactoe: return grid.ttt(rect)
-        case .words: return grid.words(rect)
-            
-        }
-        
-    }
-    
 }
-
-public struct BoardColors {
-    
-    public var background: UIColor = .white
-    public var foreground: UIColor = .black
-    
-    public var player1: UIColor = .systemRed
-    public var player2: UIColor = .systemBlue
-    
-    public var highlight: UIColor = .systemGreen
-    public var selected: UIColor = .systemGreen
-    
-    public init() { }
-    
-}
-

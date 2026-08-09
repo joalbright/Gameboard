@@ -104,16 +104,7 @@ class MancalaView: UIView {
 class MancalaSpotView: UILabel {
     
     var stoneColor: UIColor = .black
-    var stones: Int = 0 {
-        
-        didSet {
-            
-            setNeedsDisplay()
-//            text = stones == 0 ? EmptyPiece : "\(stones)"
-            
-        }
-        
-    }
+    var stones: Int = 0 { didSet { setNeedsDisplay() } }
     
     override func draw(_ rect: CGRect) {
         

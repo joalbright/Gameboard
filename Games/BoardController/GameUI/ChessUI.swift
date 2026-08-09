@@ -37,7 +37,7 @@ struct ChessPiecesUI: View {
                                 Text(grid.solid(row.piece))
                                     .foregroundColor(player ? .white : Color(white: 0.198))
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(.system(size: (w + h) / 2 - 10))
+                                    .font(.custom("AppleSymbols", size: (w + h) / 2 - 10))
 
                             }
                             .background(di ? Color(red: 0.614, green: 0.520, blue: 0.367) : Color(red: 0.530, green: 0.451, blue: 0.323))

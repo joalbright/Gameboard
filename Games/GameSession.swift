@@ -99,7 +99,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90), doublesMoveInterval: Duration = .milliseconds(40), doublesNewTile: Square? = nil) {
 
-        game = Gameboard(boardType, testing: testing)
+        self.game = Gameboard(boardType, testing: testing)
         self.fourDropInterval = fourDropInterval
         self.doublesMoveInterval = doublesMoveInterval
         self.doublesNewTile = doublesNewTile
@@ -171,16 +171,19 @@ enum GameSessionEvent: Equatable, Identifiable {
         guard game.grid[firstRow, column] as? String == " " else { return }
 
         fourDropID += 1
+        
         let dropID = fourDropID
         let piece = game.playerPieces[game.playerTurn]
         var row = firstRow
 
         isFourDropping = true
+        
         defer {
 
             if dropID == fourDropID { isFourDropping = false }
 
         }
+        
         event = nil
         game.grid[row, column] = piece
         revision += 1
@@ -252,15 +255,18 @@ enum GameSessionEvent: Equatable, Identifiable {
         guard boardType == .doubles, !isDoublesMoving, canMoveDoubles(direction) else { return }
 
         doublesMoveID += 1
+        
         let moveID = doublesMoveID
         var mergedTiles: Set<Int> = []
 
         isDoublesMoving = true
+        
         defer {
 
             if moveID == doublesMoveID { isDoublesMoving = false }
 
         }
+        
         event = nil
         _ = addDoublesTile()
         revision += 1
@@ -450,6 +456,7 @@ enum GameSessionEvent: Equatable, Identifiable {
         guard game.grid.onBoard(doublesNewTile), game.grid[doublesNewTile.c, doublesNewTile.r] as? String == " " else { return false }
 
         game.grid[doublesNewTile.c, doublesNewTile.r] = "2"
+        
         return true
 
     }
@@ -548,6 +555,7 @@ enum GameSessionEvent: Equatable, Identifiable {
     private func checkTicTacToeCompletion() {
 
         let combinations = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+        
         checkCompletion(combinations: combinations, emptyPiece: "")
 
     }
@@ -581,8 +589,11 @@ enum GameSessionEvent: Equatable, Identifiable {
         for combination in combinations {
 
             let line = combination.map { pieces[$0] }
+            
             guard let first = line.first, first != emptyPiece, line.allSatisfy({ $0 == first }) else { continue }
+            
             event = .winner
+            
             return
 
         }

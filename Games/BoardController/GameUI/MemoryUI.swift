@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+private let memoryCardVerticalOffset: CGFloat = -3
+
 struct MemoryPiecesUI: View {
 
     var grid: Grid
@@ -35,8 +37,8 @@ struct MemoryPiecesUI: View {
                                 Text(row.piece)
                                     .foregroundColor(player == 0 ? Color(red: 0, green: 0.478, blue: 1) : row.piece.memoryColor)
                                     .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(.system(size: (w + h) / 2, weight: .heavy))
-                                    .offset(y: -3)
+                                    .font(.custom("AppleSymbols", size: (w + h) / 2))
+                                    .offset(y: memoryCardVerticalOffset)
 
                             }
                             .cornerRadius(4)
@@ -76,6 +78,7 @@ struct MemoryLayoutUI: View {
                     MemoryPiecesUI(grid: grid)
 
                     BoardInteractionGrid(rows: grid.content.count, columns: grid.content.first?.count ?? 0, grid: grid, selected: selected, highlights: highlights, action: onSelect)
+                        .offset(y: memoryCardVerticalOffset)
 
                 }
                 .aspectRatio(1.0, contentMode: .fit)

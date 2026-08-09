@@ -9,14 +9,76 @@
 import SwiftUI
 
 struct MancalaBoardUI: View {
+    
+    let rows = [
+        
+        "12221",
+        "13 31",
+        "1   1",
+        "1   1",
+        "13 31",
+        "12221"
+        
+    ]
 
     var body: some View {
+        
+        let p: CGFloat = 25
 
         GeometryReader { g in
+            
+            let w = (g.rect.width - p * 2) / 5
+            let h = (g.rect.height - p * 2) / 6
+            
+            let radius: CGFloat = w / 4
 
+            Color(red: 0.630, green: 0.550, blue: 0.384)
+            
+            ForEach(Index.count(6)) { row in
+                
+                let r = CGFloat(row.id)
+                
+                if [0,5].contains(row.id) {
+                    
+                    Path { path in
+                        
+                        path.addRoundedRect(in: CGRect(x: w + p, y: h * r + p, width: w * 3, height: h).insetBy(dx: 2, dy: 2), cornerSize: CGSize(width: radius, height: radius))
+                        
+                    }.fill(Color(red: 0.350, green: 0.310, blue: 0.230))
+                    
+                }
+                
+                ForEach(Index.count(5)) { col in
+                    
+                    let c = CGFloat(col.id)
+                    
+                    let spot = rows[row.id].array()[col.id]
+                    
+                    if spot == "1" {
+                        
+                        Path { path in
+                            
+                            path.addRoundedRect(in: CGRect(x: w * c + p, y: h * r + p, width: w, height: h).insetBy(dx: 2, dy: 2), cornerSize: CGSize(width: radius, height: radius))
+                            
+                        }.fill(Color(red: 0.350, green: 0.310, blue: 0.230))
+                        
+                    } else if spot == "3" {
+                        
+                        Path { path in
+                            
+                            path.addRoundedRect(in: CGRect(x: w * c + p, y: h * r + p, width: w, height: h).insetBy(dx: w / 3, dy: w / 3), cornerSize: CGSize(width: radius, height: radius))
+                            
+                        }.fill(Color(red: 0.580, green: 0.500, blue: 0.330))
+                        
+                    }
+                    
+                }
+                
+            }
+            
         }
-        .cornerRadius(10)
-        .aspectRatio(1.0, contentMode: .fit)
+        .cornerRadius(30)
+        .aspectRatio(5/6, contentMode: .fit)
 
     }
 
@@ -25,14 +87,40 @@ struct MancalaBoardUI: View {
 struct MancalaPiecesUI: View {
 
     var grid: Grid
+    
+    let p: CGFloat = 25
 
     var body: some View {
 
         GeometryReader { g in
+            
+            let w = (g.rect.width - p * 2) / 5
+            let h = (g.rect.height - p * 2) / 6
+            
+            VStack(spacing: 0) {
+                
+                ForEach(grid.cols) { col in
+                    
+                    HStack(spacing: w) {
+                        
+                        ForEach(col.rows) { row in
+                            
+                            Text(row.piece)
+                                .foregroundColor(Color(red: 0.980, green: 0.900, blue: 0.734))
+                                .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
+                                .font(.system(size: h / 2))
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            .padding(25)
 
         }
-        .cornerRadius(10)
-        .aspectRatio(1.0, contentMode: .fit)
+        .aspectRatio(5/6, contentMode: .fit)
 
     }
 
@@ -73,7 +161,16 @@ struct MancalaLayoutUI: View {
 
     NavigationStack {
 
-        MancalaLayoutUI(grid: Grid([[]], playerPieces: ["◉","◎"]))
+        MancalaLayoutUI(grid: Grid([
+            
+            ["0","3","4"],
+            ["4"," ","4"],
+            ["0"," ","3"],
+            ["3"," ","0"],
+            ["4"," ","1"],
+            ["5","4","1"]
+        
+        ], playerPieces: ["◉","◎"]))
 
     }
 

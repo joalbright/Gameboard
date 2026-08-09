@@ -46,10 +46,7 @@ public struct Gameboard {
 
         public var readiness: Readiness {
 
-            switch self {
-            case .backgammon: return .comingSoon
-            default: return .ready
-            }
+            return .ready
 
         }
         

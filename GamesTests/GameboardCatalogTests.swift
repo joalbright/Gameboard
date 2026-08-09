@@ -19,9 +19,9 @@ final class GameboardCatalogTests: XCTestCase {
 
     func testInitialComingSoonClassification() {
 
-        XCTAssertEqual(Gameboard.BoardType.backgammon.readiness, .comingSoon)
+        XCTAssertEqual(Gameboard.BoardType.backgammon.readiness, .ready)
         XCTAssertEqual(Gameboard.BoardType.mancala.readiness, .ready)
-        XCTAssertEqual(Gameboard.BoardType.comingSoon, [.backgammon])
+        XCTAssertEqual(Gameboard.BoardType.comingSoon, [])
 
     }
 
@@ -141,6 +141,108 @@ final class GameboardCatalogTests: XCTestCase {
         XCTAssertEqual(session.grid[5, 0] as? String, "4")
         XCTAssertEqual(session.playerNumber, 2)
         XCTAssertNil(session.event)
+
+    }
+
+    func testBackgammonInitialStateMatchesBoardLayout() {
+
+        let state = Backgammon.State()
+
+        XCTAssertEqual(state.checkerCount(at: 24, for: 0), 2)
+        XCTAssertEqual(state.checkerCount(at: 13, for: 0), 5)
+        XCTAssertEqual(state.checkerCount(at: 1, for: 1), 2)
+        XCTAssertEqual(state.checkerCount(at: 12, for: 1), 5)
+        XCTAssertEqual(state.grid.content as? [[String]], Backgammon.board.content as? [[String]])
+
+    }
+
+    func testBackgammonHitsBlotAndMovesItToBar() throws {
+
+        var points = 24 ✕ 0
+        points[7] = 1
+        points[4] = -1
+
+        var state = Backgammon.State(points: points, dice: [3])
+        let move = try XCTUnwrap(state.legalMoves(for: 0).first { $0.source == .point(8) && $0.destination == .point(5) })
+
+        state.apply(move, for: 0)
+
+        XCTAssertEqual(state.checkerCount(at: 5, for: 0), 1)
+        XCTAssertEqual(state.checkerCount(at: 5, for: 1), 0)
+        XCTAssertEqual(state.bar, [0,1])
+
+    }
+
+    func testBackgammonRequiresBarEntryBeforeOtherMoves() {
+
+        var points = 24 ✕ 0
+        points[7] = 1
+
+        let state = Backgammon.State(points: points, bar: [1,0], dice: [3])
+        let moves = state.legalMoves(for: 0)
+
+        XCTAssertFalse(moves.isEmpty)
+        XCTAssertTrue(moves.allSatisfy { $0.source == .bar })
+        XCTAssertEqual(moves.first?.destination, .point(22))
+
+    }
+
+    func testBackgammonBearsOffFromHomeBoard() throws {
+
+        var points = 24 ✕ 0
+        points[0] = 14
+        points[1] = 1
+
+        var state = Backgammon.State(points: points, dice: [2])
+        let move = try XCTUnwrap(state.legalMoves(for: 0).first { $0.source == .point(2) && $0.destination == .borneOff })
+
+        state.apply(move, for: 0)
+
+        XCTAssertEqual(state.borneOff, [1,0])
+        XCTAssertEqual(state.checkerCount(at: 2, for: 0), 0)
+
+    }
+
+    func testBackgammonDoublesProvideFourMoves() {
+
+        var state = Backgammon.State()
+
+        state.roll(4, 4)
+
+        XCTAssertEqual(state.dice, [4,4,4,4])
+
+    }
+
+    func testBackgammonRequiresHigherDieWhenOnlyOneCanBePlayed() {
+
+        var points = 24 ✕ 0
+        points[7] = 1
+        points[0] = -2
+
+        let state = Backgammon.State(points: points, dice: [3,4])
+        let moves = state.legalMoves(for: 0)
+
+        XCTAssertEqual(moves, [Backgammon.Move(source: .point(8), destination: .point(4), die: 4)])
+
+    }
+
+    @MainActor func testBackgammonSessionRollsSelectsAndMoves() {
+
+        let session = GameSession(.backgammon, backgammonRoll: { (3,4) })
+
+        session.rollBackgammonDice()
+
+        XCTAssertEqual(session.backgammonDice, [3,4])
+
+        session.selectBackgammonPoint(8)
+
+        XCTAssertEqual(session.selectedBackgammonPoint, 8)
+        XCTAssertEqual(Set(session.highlightedBackgammonPoints), Set([4,5]))
+
+        session.selectBackgammonPoint(5)
+
+        XCTAssertEqual(session.backgammonDice, [4])
+        XCTAssertEqual(session.grid[9, 7] as? String, Backgammon.playerPieces[0])
 
     }
 

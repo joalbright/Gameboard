@@ -26,9 +26,9 @@ struct GameLibraryView: View {
             List(Gameboard.BoardType.catalog, selection: selectedGameBinding) { game in
 
                 NavigationLink(value: game) {
-
+                    
                     GameLibraryRow(game: game)
-
+                    
                 }
 
             }
@@ -152,7 +152,7 @@ private struct GameDestinationView: View {
     @ViewBuilder private var destination: some View {
 
         switch game {
-        case .backgammon: BackgammonLayoutUI(grid: session.grid)
+        case .backgammon: BackgammonLayoutUI(grid: session.grid, selectedPoint: session.selectedBackgammonPoint, highlightedPoints: session.highlightedBackgammonPoints, dice: session.backgammonDice, bar: session.backgammonBar, borneOff: session.backgammonBorneOff, pointCounts: session.backgammonPointCounts, canRoll: session.canRollBackgammonDice, canBearOff: session.canBearOffBackgammonChecker, onRoll: session.rollBackgammonDice, onSelect: session.selectBackgammonPoint, onBearOff: session.bearOffBackgammonChecker)
         case .bombsweeper: BombsweeperLayoutUI(grid: session.grid) { square, guess in
 
             if guess {
@@ -212,7 +212,7 @@ private struct GameDestinationView: View {
 
 }
 
-#Preview("Coming Soon Board") {
+#Preview("Backgammon") {
 
     NavigationStack {
 

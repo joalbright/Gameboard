@@ -48,6 +48,8 @@ enum GameSessionEvent: Equatable, Identifiable {
     private let doublesNewTile: Square?
     private var mancalaMoveID = 0
     private let mancalaMoveInterval: Duration
+    private var backgammon = Backgammon.State()
+    private let backgammonRoll: () -> (Int, Int)
 
     private(set) var event: GameSessionEvent?
     private(set) var wordsRack: [Words.Letter] = []
@@ -55,6 +57,7 @@ enum GameSessionEvent: Equatable, Identifiable {
     private(set) var isFourDropping = false
     private(set) var isDoublesMoving = false
     private(set) var isMancalaMoving = false
+    private(set) var selectedBackgammonPoint: Int?
 
     var boardType: Gameboard.BoardType { return game._type }
     var playerNumber: Int {
@@ -99,14 +102,64 @@ enum GameSessionEvent: Equatable, Identifiable {
         return game.selected
 
     }
+    var backgammonDice: [Int] {
 
-    init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90), doublesMoveInterval: Duration = .milliseconds(40), doublesNewTile: Square? = nil, mancalaMoveInterval: Duration = .milliseconds(90)) {
+        _ = revision
+        return backgammon.dice
+
+    }
+    var backgammonBar: [Int] {
+
+        _ = revision
+        return backgammon.bar
+
+    }
+    var backgammonBorneOff: [Int] {
+
+        _ = revision
+        return backgammon.borneOff
+
+    }
+    var backgammonPointCounts: [Int] {
+
+        _ = revision
+        return backgammon.points.map { abs($0) }
+
+    }
+    var highlightedBackgammonPoints: [Int] {
+
+        _ = revision
+
+        let moves = backgammon.legalMoves(for: game.playerTurn)
+
+        if backgammon.bar[game.playerTurn] > 0 { return moves.compactMap(\.destination.point) }
+        guard let selectedBackgammonPoint else { return [] }
+
+        return moves.filter { $0.source == .point(selectedBackgammonPoint) }.compactMap(\.destination.point)
+
+    }
+    var canRollBackgammonDice: Bool {
+
+        _ = revision
+        return backgammon.dice.isEmpty && backgammon.borneOff.allSatisfy { $0 < 15 }
+
+    }
+    var canBearOffBackgammonChecker: Bool {
+
+        _ = revision
+        guard let selectedBackgammonPoint else { return false }
+        return backgammon.legalMoves(for: game.playerTurn).contains { $0.source == .point(selectedBackgammonPoint) && $0.destination == .borneOff }
+
+    }
+
+    init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90), doublesMoveInterval: Duration = .milliseconds(40), doublesNewTile: Square? = nil, mancalaMoveInterval: Duration = .milliseconds(90), backgammonRoll: @escaping () -> (Int, Int) = { (Int.random(in: 1...6), Int.random(in: 1...6)) }) {
 
         self.game = Gameboard(boardType, testing: testing)
         self.fourDropInterval = fourDropInterval
         self.doublesMoveInterval = doublesMoveInterval
         self.doublesNewTile = doublesNewTile
         self.mancalaMoveInterval = mancalaMoveInterval
+        self.backgammonRoll = backgammonRoll
 
         if boardType == .words { resetWords() }
 
@@ -128,6 +181,9 @@ enum GameSessionEvent: Equatable, Identifiable {
         isDoublesMoving = false
         mancalaMoveID += 1
         isMancalaMoving = false
+        backgammon = Backgammon.State()
+        selectedBackgammonPoint = nil
+        if boardType == .backgammon { game.playerTurn = 0 }
         memoryTurn += 1
         memoryPairPending = false
         if boardType == .words { resetWords() }
@@ -139,6 +195,76 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         game.showAvailable(square)
         revision += 1
+
+    }
+
+    func rollBackgammonDice() {
+
+        guard boardType == .backgammon, canRollBackgammonDice else { return }
+
+        let roll = backgammonRoll()
+
+        backgammon.roll(roll.0, roll.1)
+        selectedBackgammonPoint = nil
+        event = nil
+        finishBackgammonTurnIfNeeded()
+        synchronizeBackgammonGrid()
+        revision += 1
+
+    }
+
+    func selectBackgammonPoint(_ point: Int) {
+
+        guard boardType == .backgammon, point.within(1..<25), !backgammon.dice.isEmpty else { return }
+
+        let player = game.playerTurn
+        let moves = backgammon.legalMoves(for: player)
+
+        if backgammon.bar[player] > 0 {
+
+            guard let move = moves.first(where: { $0.source == .bar && $0.destination == .point(point) }) else {
+
+                event = .invalidMove(.invalidmove)
+                revision += 1
+                return
+
+            }
+
+            performBackgammon(move)
+            return
+
+        }
+
+        if let selectedBackgammonPoint, let move = moves.first(where: { $0.source == .point(selectedBackgammonPoint) && $0.destination == .point(point) }) {
+
+            performBackgammon(move)
+            return
+
+        }
+
+        guard moves.contains(where: { $0.source == .point(point) }) else {
+
+            event = .invalidMove(.invalidmove)
+            revision += 1
+            return
+
+        }
+
+        selectedBackgammonPoint = point
+        event = nil
+        revision += 1
+
+    }
+
+    func bearOffBackgammonChecker() {
+
+        guard boardType == .backgammon, let selectedBackgammonPoint else { return }
+
+        let moves = backgammon.legalMoves(for: game.playerTurn).filter { $0.source == .point(selectedBackgammonPoint) && $0.destination == .borneOff }
+
+        guard let move = moves.min(by: { $0.die < $1.die }) else { return }
+
+        performBackgammon(move)
 
     }
 
@@ -688,6 +814,44 @@ enum GameSessionEvent: Equatable, Identifiable {
         let secondScore = Mancala.score(for: 1, in: game.grid)
 
         event = firstScore == secondScore ? .stalemate : .winner
+
+    }
+
+    private func performBackgammon(_ move: Backgammon.Move) {
+
+        backgammon.apply(move, for: game.playerTurn)
+        selectedBackgammonPoint = nil
+        event = nil
+
+        if backgammon.borneOff[game.playerTurn] == 15 {
+
+            backgammon.dice = []
+            event = .winner
+
+        } else {
+
+            finishBackgammonTurnIfNeeded()
+
+        }
+
+        synchronizeBackgammonGrid()
+        revision += 1
+
+    }
+
+    private func finishBackgammonTurnIfNeeded() {
+
+        guard backgammon.dice.isEmpty || backgammon.legalMoves(for: game.playerTurn).isEmpty else { return }
+
+        backgammon.dice = []
+        selectedBackgammonPoint = nil
+        game.changePlayer()
+
+    }
+
+    private func synchronizeBackgammonGrid() {
+
+        game.grid = backgammon.grid
 
     }
 

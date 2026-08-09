@@ -51,6 +51,7 @@ struct SudokuBoardUI: View {
 struct SudokuPiecesUI: View {
 
     var grid: Grid
+    var highlights: [Square] = []
 
     var body: some View {
 
@@ -58,8 +59,7 @@ struct SudokuPiecesUI: View {
 
             let w = g.rect.width / 9
             let h = g.rect.height / 9
-
-
+            
             VStack(spacing: 0) {
 
                 ForEach(grid.cols) { col in
@@ -67,8 +67,11 @@ struct SudokuPiecesUI: View {
                     HStack(spacing: 0) {
 
                         ForEach(col.rows) { row in
-
-                            Text(row.piece).foregroundColor(Color.background)
+                            
+                            let square = (col.id, row.index)
+                            let isHighlighted = highlights.contains(where: { $0 == square })
+                            
+                            Text(row.piece).foregroundColor(isHighlighted ? Color.blue : Color.background)
                                 .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
                                 .font(.system(size: (w + h) / 2 - 15, weight: .regular))
 
@@ -90,10 +93,12 @@ struct SudokuPiecesUI: View {
 
 struct SudokuLayoutUI: View {
 
-    @State private var number = 0
-
     var grid: Grid
     var highlights: [Square] = []
+    var difficulty: Difficulty = .easy
+    var selectedNumber = 1
+    var onDifficultySelect: (Difficulty) -> Void = { _ in }
+    var onNumberSelect: (Int) -> Void = { _ in }
     var onSelect: (Square, String) -> Void = { _,_ in }
 
     var body: some View {
@@ -104,27 +109,32 @@ struct SudokuLayoutUI: View {
 
             VStack {
 
+                DifficultyMenu(difficulty: difficulty, onSelect: onDifficultySelect)
+
+                Spacer()
+                
                 ZStack {
 
                     SudokuBoardUI()
 
-                    SudokuPiecesUI(grid: grid)
+                    SudokuPiecesUI(grid: grid, highlights: highlights)
 
-                    BoardInteractionGrid(rows: 9, columns: 9, grid: grid, selected: nil, highlights: highlights) { square in
+                    BoardInteractionGrid(rows: 9, columns: 9, grid: grid, selected: nil, highlights: []) { square in
 
-                        onSelect(square, "\(number + 1)")
+                        onSelect(square, "\(selectedNumber)")
 
                     }
 
                 }
                 .aspectRatio(1.0, contentMode: .fit)
-                .padding(32)
 
-                Picker("", selection: $number) {
+                Spacer()
+                
+                Picker("", selection: Binding(get: { selectedNumber }, set: onNumberSelect)) {
 
-                    ForEach(Index.count(9)) { index in
+                    ForEach(1...9, id: \.self) { number in
 
-                        Text("\(index.id + 1)").tag(index.id)
+                        Text("\(number)").tag(number)
 
                     }
 
@@ -134,6 +144,7 @@ struct SudokuLayoutUI: View {
                 .accessibilityLabel("Number")
 
             }
+            .padding(32)
 
         }
         .navigationTitle("Sudoku")

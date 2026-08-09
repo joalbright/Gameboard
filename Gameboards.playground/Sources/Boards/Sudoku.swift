@@ -64,9 +64,6 @@ public struct Sudoku {
         guard g1 != "" else { throw MoveError.invalidmove }
         let a1 = solution[s1.0,s1.1]
         
-        print(a1)
-        print(g1)
-        
         guard a1 == g1 else { throw MoveError.incorrectguess }
         
         grid[s1.0,s1.1] = g1

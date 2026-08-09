@@ -156,7 +156,7 @@ private struct GameDestinationView: View {
             
         case .bombsweeper:
             
-            BombsweeperLayoutUI(grid: session.grid) { square, guess in
+            BombsweeperLayoutUI(grid: session.grid, difficulty: session.difficulty, onDifficultySelect: session.selectDifficulty) { square, guess in
                 
                 if guess {
                     
@@ -208,7 +208,7 @@ private struct GameDestinationView: View {
             
         case .memory:
             
-            MemoryLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectMemoryCard)
+            MemoryLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, difficulty: session.difficulty, onDifficultySelect: session.selectDifficulty, onSelect: session.selectMemoryCard)
             
         case .pegs:
             
@@ -216,7 +216,7 @@ private struct GameDestinationView: View {
             
         case .sudoku:
             
-            SudokuLayoutUI(grid: session.grid, highlights: session.highlights, onSelect: session.guess)
+            SudokuLayoutUI(grid: session.grid, highlights: session.highlights, difficulty: session.difficulty, selectedNumber: session.selectedSudokuNumber, onDifficultySelect: session.selectDifficulty, onNumberSelect: session.selectSudokuNumber, onSelect: session.guess)
             
         case .tictactoe:
             
@@ -242,7 +242,7 @@ private struct GameDestinationView: View {
 
     NavigationStack {
 
-        GameDestinationView(game: .words)
+        GameDestinationView(game: .sudoku)
 
     }
 

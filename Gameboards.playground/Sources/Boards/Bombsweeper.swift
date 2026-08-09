@@ -36,16 +36,16 @@ extension Difficulty {
 
 public struct Bombsweeper {
     
-    public static var board: Grid {
+    public static var board: Grid { return board(.easy) }
 
-        // randomize play area
-        
-        var grid = Grid(10 ✕ (10 ✕ " "))
-        
-        for (r,_) in grid.content.enumerated() { grid[r,4] = "•" }
-        for (r,row) in grid.content.enumerated() { grid[r] = row.randomize().randomize().randomize() }
+    static func board(_ difficulty: Difficulty) -> Grid {
 
-        return addBombCount(grid)
+        let size = difficulty.bombsize
+        let emptyCount = size * size - difficulty.bombs
+        let pieces = ((difficulty.bombs ✕ "•") + (emptyCount ✕ " ")).randomize().randomize().randomize()
+        let content = (0..<size).map { row in Array(pieces[(row * size)..<((row + 1) * size)]) }
+
+        return addBombCount(Grid(content))
 
     }
     
@@ -70,7 +70,13 @@ public struct Bombsweeper {
         
     }
     
-    public static var field: Grid { return Grid(10 ✕ (10 ✕ "•")) }
+    public static var field: Grid { return field(.easy) }
+
+    static func field(_ difficulty: Difficulty) -> Grid {
+
+        return Grid(difficulty.bombsize ✕ (difficulty.bombsize ✕ "•"))
+
+    }
     
     public static let playerPieces = ["⚑","✘","⚐"]
     

@@ -53,12 +53,14 @@ enum GameSessionEvent: Equatable, Identifiable {
     private(set) var event: GameSessionEvent?
     private(set) var wordsRack: [Words.Letter] = []
     private(set) var selectedWordTile: Words.Letter?
+    private(set) var selectedSudokuNumber = 1
     private(set) var isFourDropping = false
     private(set) var isDoublesMoving = false
     private(set) var isMancalaMoving = false
     private(set) var selectedBackgammonPoint: Int?
 
     var boardType: Gameboard.BoardType { return game._type }
+    var difficulty: Difficulty { return game.difficulty }
     var playerNumber: Int { return game.playerTurn + 1 }
     var playerColor: Color { return game.playerColors[game.playerTurn] }
     var playerSecondaryColor: Color { return game.playerSecondaryColors[game.playerTurn] }
@@ -123,6 +125,7 @@ enum GameSessionEvent: Equatable, Identifiable {
         isMancalaMoving = false
         backgammon = Backgammon.State()
         selectedBackgammonPoint = nil
+        selectedSudokuNumber = 1
         
         if boardType == .backgammon { game.playerTurn = 0 }
         
@@ -404,6 +407,26 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
+    func selectSudokuNumber(_ number: Int) {
+
+        guard number.within(1..<10) else { return }
+
+        selectedSudokuNumber = number
+
+    }
+
+    func selectDifficulty(_ difficulty: Difficulty) {
+
+        guard [.bombsweeper, .memory, .sudoku].contains(boardType), difficulty != game.difficulty else { return }
+
+        memoryTurn += 1
+        memoryPairPending = false
+        selectedSudokuNumber = 1
+        event = nil
+        game.difficulty = difficulty
+
+    }
+
     func placeSelectedWordTile(at square: Square) {
 
         guard let tile = selectedWordTile else { return }
@@ -544,7 +567,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         Task { @MainActor in
 
-            try? await Task.sleep(for: .milliseconds(600))
+            try? await Task.sleep(for: .milliseconds(1200))
 
             guard turn == memoryTurn else { return }
 

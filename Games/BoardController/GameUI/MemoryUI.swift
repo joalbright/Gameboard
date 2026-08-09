@@ -20,7 +20,6 @@ struct MemoryPiecesUI: View {
 
             let c = CGFloat(grid.cols.count)
             let w = g.size.width / c
-            let h = g.size.height / c
 
             VStack(spacing: 0) {
 
@@ -36,8 +35,8 @@ struct MemoryPiecesUI: View {
 
                                 Text(row.piece)
                                     .foregroundColor(player == 0 ? Color(red: 0, green: 0.478, blue: 1) : row.piece.memoryColor)
-                                    .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                    .font(.custom("AppleSymbols", size: (w + h) / 2))
+                                    .frame(minWidth: w, maxWidth: w, minHeight: w, maxHeight: w)
+                                    .font(.custom("AppleSymbols", size: w))
                                     .offset(y: memoryCardVerticalOffset)
 
                             }
@@ -63,6 +62,8 @@ struct MemoryLayoutUI: View {
     var grid: Grid
     var selected: Square? = nil
     var highlights: [Square] = []
+    var difficulty: Difficulty = .easy
+    var onDifficultySelect: (Difficulty) -> Void = { _ in }
     var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
@@ -73,18 +74,50 @@ struct MemoryLayoutUI: View {
 
             VStack {
 
+                DifficultyMenu(difficulty: difficulty, onSelect: onDifficultySelect)
+
+                Spacer()
+
                 ZStack {
 
                     MemoryPiecesUI(grid: grid)
 
-                    BoardInteractionGrid(rows: grid.content.count, columns: grid.content.first?.count ?? 0, grid: grid, selected: selected, highlights: highlights, action: onSelect)
+                    BoardInteractionGrid(rows: grid.content.count, columns: grid.content.first?.count ?? 0, grid: grid, selected: nil, highlights: [], action: onSelect)
                         .offset(y: memoryCardVerticalOffset)
 
                 }
                 .aspectRatio(1.0, contentMode: .fit)
-                .padding(32)
+                
+                HStack {
+                    
+                    Spacer()
+                        
+                    if grid.cols.count > 4 {
+                        
+                        let squares = if let selected { [selected] } else { highlights }
+                        
+                        ForEach(0..<squares.count, id:\.self) { i in
+                            
+                            let square = squares[i]
+                            let piece = grid.cols[square.c].rows[square.r].piece
+                            
+                            Text(piece)
+                                .foregroundColor(piece.memoryColor)
+                                .font(.custom("AppleSymbols", size: 90))
+                            
+                        }
+                        
+                    }
+                        
+                    Spacer()
+                    
+                }
+                .frame(height: 100)
+
+                Spacer()
 
             }
+            .padding(32)
 
 
         }
@@ -107,7 +140,7 @@ struct MemoryLayoutUI: View {
             "🂠🂠🂠🂠🂠🃅".array(),
             6 ✕ "🂠",
 
-        ], playerPieces: ["🂠"]))
+        ], playerPieces: ["🂠"]), highlights: [(3,2),(4,5)])
 
     }
 

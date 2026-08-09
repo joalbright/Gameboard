@@ -26,6 +26,63 @@ struct Value<T: Any>: Identifiable {
 
 }
 
+struct DifficultyMenu: View {
+
+    var difficulty: Difficulty
+    var onSelect: (Difficulty) -> Void
+
+    var body: some View {
+
+        Menu {
+
+            ForEach(Difficulty.allCases) { option in
+
+                Button {
+
+                    onSelect(option)
+
+                } label: {
+
+                    if option == difficulty {
+
+                        Label(option.name, systemImage: "checkmark")
+
+                    } else {
+
+                        Text(option.name)
+
+                    }
+
+                }
+
+            }
+
+        } label: {
+
+            ZStack(alignment: .center) {
+
+                ForEach(Difficulty.allCases) { option in
+
+                    Text(option.name)
+                        .hidden()
+                        .accessibilityHidden(true)
+
+                }
+
+                Text(difficulty.name)
+
+            }
+
+        }
+        .foregroundStyle(Color.text)
+        .buttonStyle(.bordered)
+        .accessibilityLabel("Difficulty")
+        .accessibilityValue(difficulty.name)
+
+    }
+
+}
+
 extension GeometryProxy {
 
     var rect: CGRect { return CGRect(origin: .zero, size: size) }

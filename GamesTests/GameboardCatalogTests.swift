@@ -493,6 +493,43 @@ final class GameboardCatalogTests: XCTestCase {
 
     }
 
+    @MainActor func testSudokuNumberSelectionPersistsAfterGuess() throws {
+
+        let session = GameSession(.sudoku, testing: true)
+        let solution = Sudoku.staticboard
+        let square = try XCTUnwrap(session.grid.rowRange.lazy.flatMap { row in session.grid.colRange.map { (row, $0) } }.first { session.grid[$0.0, $0.1] == "" })
+        let number = try XCTUnwrap(Int(solution[square.0, square.1]))
+
+        session.selectSudokuNumber(number)
+        session.guess(at: square, with: "\(number)")
+
+        XCTAssertEqual(session.selectedSudokuNumber, number)
+        XCTAssertEqual(session.grid[square.0, square.1], "\(number)")
+
+    }
+
+    @MainActor func testDifficultyDefaultsToEasyAndRegeneratesSupportedBoards() {
+
+        let bombsweeper = GameSession(.bombsweeper)
+        let memory = GameSession(.memory)
+        let sudoku = GameSession(.sudoku)
+
+        XCTAssertEqual(bombsweeper.difficulty, .easy)
+        XCTAssertEqual(memory.difficulty, .easy)
+        XCTAssertEqual(sudoku.difficulty, .easy)
+
+        bombsweeper.selectDifficulty(.hard)
+        memory.selectDifficulty(.medium)
+        sudoku.selectDifficulty(.hard)
+
+        XCTAssertEqual(bombsweeper.grid.content.count, 20)
+        XCTAssertEqual(bombsweeper.grid.content.first?.count, 20)
+        XCTAssertEqual(memory.grid.content.count, 6)
+        XCTAssertEqual(memory.grid.content.first?.count, 6)
+        XCTAssertEqual(sudoku.grid.content.flatMap { $0 }.filter(\.isEmpty).count, 72)
+
+    }
+
 }
 
 private extension Gameboard.BoardType {

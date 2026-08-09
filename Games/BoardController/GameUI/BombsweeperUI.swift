@@ -63,6 +63,8 @@ struct BombsweeperLayoutUI: View {
     @State private var piece = 0
 
     var grid: Grid
+    var difficulty: Difficulty = .easy
+    var onDifficultySelect: (Difficulty) -> Void = { _ in }
     var onSelect: (Square, Bool) -> Void = { _,_ in }
 
     var body: some View {
@@ -73,18 +75,19 @@ struct BombsweeperLayoutUI: View {
 
             VStack {
 
+                DifficultyMenu(difficulty: difficulty, onSelect: onDifficultySelect)
+
                 ZStack {
 
                     BombsweeperPiecesUI(grid: grid)
 
-                    BoardInteractionGrid(rows: 10, columns: 10, grid: grid, selected: nil, highlights: []) { square in
+                    BoardInteractionGrid(rows: grid.content.count, columns: grid.content.first?.count ?? 0, grid: grid, selected: nil, highlights: []) { square in
 
                         onSelect(square, piece == 0)
 
                     }
 
                 }
-                .padding(32)
 
                 Picker("", selection: $piece) {
 
@@ -100,6 +103,7 @@ struct BombsweeperLayoutUI: View {
                 .accessibilityLabel("Action")
 
             }
+            .padding(32)
 
         }
         .navigationTitle("Bombsweeper")

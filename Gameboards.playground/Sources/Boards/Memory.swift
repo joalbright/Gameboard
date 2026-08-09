@@ -62,12 +62,13 @@ public struct Memory {
         
         var grid = difficulty.memoryBoard
         let deck = difficulty.memoryDeckRandomized
+        let columnCount = grid.colRange.count
         
         for r in grid.rowRange {
             
             for c in grid.colRange {
                 
-                grid[c,r] = deck[c+r*4]
+                grid[c,r] = deck[c + r * columnCount]
                 
             }
             

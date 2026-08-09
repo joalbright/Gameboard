@@ -1,8 +1,10 @@
 import SwiftUI
 
-enum Difficulty {
+enum Difficulty: CaseIterable, Identifiable {
     
     case easy, medium, hard
+
+    var id: Self { return self }
     
     var name: String {
         
@@ -242,8 +244,8 @@ public struct Gameboard {
             
         case .bombsweeper:
             
-            solution = Bombsweeper.board
-            grid = Bombsweeper.field
+            solution = Bombsweeper.board(difficulty)
+            grid = Bombsweeper.field(difficulty)
             playerPieces = Bombsweeper.playerPieces
             
             guard testing else { break }

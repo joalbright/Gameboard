@@ -23,7 +23,7 @@ struct GameSceneUI<Content: View>: View {
                             let diameter: CGFloat = isCurrentPlayer ? 50 : 40
                             
                             Text("\(player + 1)")
-                                .foregroundStyle(isCurrentPlayer ? Color.background : .text)
+                                .foregroundStyle(isCurrentPlayer ? session.playerSecondaryColor : .text)
                                 .background(Circle().fill(isCurrentPlayer ? session.playerColor : .gray).frame(width: diameter, height: diameter))
                                 .frame(width: 40, height: 40)
                             

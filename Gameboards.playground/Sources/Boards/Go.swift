@@ -12,6 +12,7 @@ public struct Go {
     
     public static let playerPieces = ["●","○"]
     public static let playerColors = [Color.white, Color.black]
+    public static let playerSecondaryColors = [Color.black, Color.white]
     
     public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: inout Grid) {
         

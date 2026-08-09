@@ -29,7 +29,8 @@ public struct Mancala {
     }
     
     public static let playerPieces = ["123456789","123456789"]
-    public static let playerColors = [Color.cyan, Color.pink]
+    public static let playerColors = [Color.black, Color.white]
+    public static let playerSecondaryColors = [Color.white, Color.black]
     
     public static var staticboard: Grid {
         

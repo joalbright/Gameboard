@@ -241,6 +241,7 @@ public struct Gameboard {
             grid = Backgammon.board
             playerPieces = Backgammon.playerPieces
             playerColors = Backgammon.playerColors
+            playerSecondaryColors = Backgammon.playerSecondaryColors
             
         case .bombsweeper:
             
@@ -258,18 +259,21 @@ public struct Gameboard {
             grid = Checkers.board
             playerPieces = Checkers.playerPieces
             playerColors = Checkers.playerColors
+            playerSecondaryColors = Checkers.playerSecondaryColors
             
         case .chess:
             
             grid = Chess.board
             playerPieces = Chess.playerPieces
             playerColors = Chess.playerColors
+            playerSecondaryColors = Chess.playerSecondaryColors
             
         case .dots:
             
             grid = Dots.board
             playerPieces = Dots.playerPieces
             playerColors = Dots.playerColors
+            playerSecondaryColors = Dots.playerSecondaryColors
             
         case .doubles:
             
@@ -289,6 +293,7 @@ public struct Gameboard {
             grid = Four.board
             playerPieces = Four.playerPieces
             playerColors = Four.playerColors
+            playerSecondaryColors = Four.playerSecondaryColors
             
             guard testing else { break }
             
@@ -300,12 +305,14 @@ public struct Gameboard {
             grid = Go.board
             playerPieces = Go.playerPieces
             playerColors = Go.playerColors
+            playerSecondaryColors = Go.playerSecondaryColors
             
         case .mancala:
             
             grid = Mancala.board
             playerPieces = Mancala.playerPieces
             playerColors = Mancala.playerColors
+            playerSecondaryColors = Mancala.playerSecondaryColors
             
             guard testing else { break }
             
@@ -340,6 +347,7 @@ public struct Gameboard {
             grid = TicTacToe.board
             playerPieces = TicTacToe.playerPieces
             playerColors = TicTacToe.playerColors
+            playerSecondaryColors = TicTacToe.playerSecondaryColors
             
         case .words:
             

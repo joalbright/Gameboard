@@ -32,6 +32,7 @@ public struct Checkers {
     
     public static let playerPieces = ["●◉","○◎"]
     public static let playerColors = [Color(red: 0.864, green: 0.052, blue: 0.022), Color(red: 0.577, green: 0.139, blue: 0.146)]
+    public static let playerSecondaryColors = [Color.white, Color.white]
     
     public static func validateJump(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: inout Grid, _ hint: Bool = false) -> Bool {
         

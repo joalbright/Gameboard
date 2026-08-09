@@ -6,6 +6,7 @@ public struct Four {
     
     public static let playerPieces = ["◉","◎"]
     public static let playerColors = [Color(red: 0.892, green: 0, blue: 0.222), Color(red: 0.947, green: 0.845, blue: 0.025)]
+    public static let playerSecondaryColors = [Color.white, Color.black]
 
     public static var staticboard: Grid {
         

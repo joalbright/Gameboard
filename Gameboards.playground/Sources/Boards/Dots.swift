@@ -32,6 +32,7 @@ public struct Dots {
 
     public static let playerPieces = ["1","2"]
     public static let playerColors = [Color.cyan, Color.pink]
+    public static let playerSecondaryColors = [Color.black, Color.white]
 
     public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: inout Grid, _ player: Int) throws -> Bool {
 

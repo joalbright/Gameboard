@@ -58,6 +58,7 @@ public struct Sudoku {
     
     public static let playerPieces = ["123456789"]
     public static let playerColors = [Color.blue]
+    public static let playerSecondaryColors = [Color.white]
     
     public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: inout Grid, _ solution: Grid) throws {
         

@@ -243,5 +243,6 @@ public struct Backgammon {
     public static var board: Grid { return State().grid }
     public static let playerPieces = ["●","○"]
     public static let playerColors = [Color.black, Color.white]
+    public static let playerSecondaryColors = [Color.white, Color.black]
 
 }

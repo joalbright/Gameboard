@@ -41,6 +41,7 @@ public struct Chess {
     
     public static let playerPieces = ["♜♞♝♛♚♝♞♜♟","♖♘♗♕♔♗♘♖♙"]
     public static let playerColors = [Color.white, Color.black]
+    public static let playerSecondaryColors = [Color.black, Color.white]
     
     public static func validateEmptyPath(_ s1: Square, _ s2: Square, _ grid: Grid) throws {
         

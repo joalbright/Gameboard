@@ -200,6 +200,7 @@ extension Gameboard {
             return false
 
         case .dots: return try Dots.validateMove(s1, p1, grid, playerTurn)
+        case .mancala: return try Mancala.validateMove(s1, p1, grid, playerTurn)
         default: throw MoveError.incorrectpiece
             
         }

@@ -47,7 +47,7 @@ public struct Gameboard {
         public var readiness: Readiness {
 
             switch self {
-            case .backgammon, .mancala: return .comingSoon
+            case .backgammon: return .comingSoon
             default: return .ready
             }
 
@@ -305,6 +305,7 @@ public struct Gameboard {
             
             grid = Mancala.board
             playerPieces = Mancala.playerPieces
+            playerColors = Mancala.playerColors
             
             guard testing else { break }
             

@@ -180,7 +180,11 @@ private struct GameDestinationView: View {
 
         }
         case .go: GoLayoutUI(grid: session.grid, onSelect: session.move)
-        case .mancala: MancalaLayoutUI(grid: session.grid)
+        case .mancala: MancalaLayoutUI(grid: session.grid) { square in
+
+            Task { await session.sowMancala(from: square) }
+
+        }
         case .memory: MemoryLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectMemoryCard)
         case .pegs: PegsLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
         case .sudoku: SudokuLayoutUI(grid: session.grid, highlights: session.highlights, onSelect: session.guess)

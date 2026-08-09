@@ -46,12 +46,15 @@ enum GameSessionEvent: Equatable, Identifiable {
     private var doublesMoveID = 0
     private let doublesMoveInterval: Duration
     private let doublesNewTile: Square?
+    private var mancalaMoveID = 0
+    private let mancalaMoveInterval: Duration
 
     private(set) var event: GameSessionEvent?
     private(set) var wordsRack: [Words.Letter] = []
     private(set) var selectedWordTile: Words.Letter?
     private(set) var isFourDropping = false
     private(set) var isDoublesMoving = false
+    private(set) var isMancalaMoving = false
 
     var boardType: Gameboard.BoardType { return game._type }
     var playerNumber: Int {
@@ -97,12 +100,13 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
-    init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90), doublesMoveInterval: Duration = .milliseconds(40), doublesNewTile: Square? = nil) {
+    init(_ boardType: Gameboard.BoardType, testing: Bool = false, fourDropInterval: Duration = .milliseconds(90), doublesMoveInterval: Duration = .milliseconds(40), doublesNewTile: Square? = nil, mancalaMoveInterval: Duration = .milliseconds(90)) {
 
         self.game = Gameboard(boardType, testing: testing)
         self.fourDropInterval = fourDropInterval
         self.doublesMoveInterval = doublesMoveInterval
         self.doublesNewTile = doublesNewTile
+        self.mancalaMoveInterval = mancalaMoveInterval
 
         if boardType == .words { resetWords() }
 
@@ -122,6 +126,8 @@ enum GameSessionEvent: Equatable, Identifiable {
         isFourDropping = false
         doublesMoveID += 1
         isDoublesMoving = false
+        mancalaMoveID += 1
+        isMancalaMoving = false
         memoryTurn += 1
         memoryPairPending = false
         if boardType == .words { resetWords() }
@@ -284,6 +290,61 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
 
+    func sowMancala(from square: Square) async {
+
+        guard boardType == .mancala, !isMancalaMoving else { return }
+        guard game.grid.onBoard(square), let piece = game.grid[square.c, square.r] as? Piece else { return }
+
+        let move: MancalaMove
+
+        do {
+
+            move = try Mancala.plannedMove(from: square, piece: piece, player: game.playerTurn)
+
+        } catch {
+
+            handle(error)
+            revision += 1
+            return
+
+        }
+
+        mancalaMoveID += 1
+
+        let moveID = mancalaMoveID
+
+        isMancalaMoving = true
+
+        defer {
+
+            if moveID == mancalaMoveID { isMancalaMoving = false }
+
+        }
+
+        event = nil
+        Mancala.begin(move, in: game.grid)
+        revision += 1
+
+        for destination in move.destinations {
+
+            try? await Task.sleep(for: mancalaMoveInterval)
+
+            guard !Task.isCancelled, moveID == mancalaMoveID else { return }
+
+            Mancala.placeStone(at: destination, in: game.grid)
+            revision += 1
+
+        }
+
+        guard moveID == mancalaMoveID else { return }
+
+        Mancala.finish(move, in: game.grid)
+        if !move.retainsTurn { game.changePlayer() }
+        checkMancalaCompletion()
+        revision += 1
+
+    }
+
     func chooseWordTile(_ tile: Words.Letter) {
 
         guard tile != .none else { return }
@@ -355,6 +416,7 @@ enum GameSessionEvent: Equatable, Identifiable {
         perform { try $0.move(toSquare: square) }
         if boardType == .tictactoe { checkTicTacToeCompletion() }
         if boardType == .bombsweeper { checkBombsweeperCompletion() }
+        if boardType == .mancala { checkMancalaCompletion() }
 
     }
 
@@ -615,6 +677,17 @@ enum GameSessionEvent: Equatable, Identifiable {
             event = .winner
 
         }
+
+    }
+
+    private func checkMancalaCompletion() {
+
+        guard event == nil, Mancala.isComplete(game.grid) else { return }
+
+        let firstScore = Mancala.score(for: 0, in: game.grid)
+        let secondScore = Mancala.score(for: 1, in: game.grid)
+
+        event = firstScore == secondScore ? .stalemate : .winner
 
     }
 

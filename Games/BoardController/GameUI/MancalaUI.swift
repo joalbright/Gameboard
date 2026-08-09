@@ -87,6 +87,7 @@ struct MancalaBoardUI: View {
 struct MancalaPiecesUI: View {
 
     var grid: Grid
+    var onSelect: (Square) -> Void
     
     let p: CGFloat = 25
 
@@ -104,11 +105,22 @@ struct MancalaPiecesUI: View {
                     HStack(spacing: w) {
                         
                         ForEach(col.rows) { row in
-                            
-                            Text(row.piece)
-                                .foregroundColor(Color(red: 0.980, green: 0.900, blue: 0.734))
-                                .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
-                                .font(.system(size: h / 2))
+
+                            Button {
+
+                                onSelect((col.id, row.index))
+
+                            } label: {
+
+                                Text(row.piece)
+                                    .foregroundColor(Color(red: 0.980, green: 0.900, blue: 0.734))
+                                    .frame(minWidth: w, maxWidth: w, minHeight: h, maxHeight: h)
+                                    .font(.system(size: h / 2))
+
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(row.index == 1)
+                            .accessibilityLabel(row.index == 1 ? "Store with \(row.piece) stones" : "Pit with \(row.piece) stones")
                             
                         }
                         
@@ -129,6 +141,7 @@ struct MancalaPiecesUI: View {
 struct MancalaLayoutUI: View {
 
     var grid: Grid
+    var onSelect: (Square) -> Void = { _ in }
 
     var body: some View {
 
@@ -142,7 +155,7 @@ struct MancalaLayoutUI: View {
 
                     MancalaBoardUI()
 
-                    MancalaPiecesUI(grid: grid)
+                    MancalaPiecesUI(grid: grid, onSelect: onSelect)
 
                 }
                 .padding(32)

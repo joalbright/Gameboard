@@ -20,8 +20,8 @@ final class GameboardCatalogTests: XCTestCase {
     func testInitialComingSoonClassification() {
 
         XCTAssertEqual(Gameboard.BoardType.backgammon.readiness, .comingSoon)
-        XCTAssertEqual(Gameboard.BoardType.mancala.readiness, .comingSoon)
-        XCTAssertEqual(Gameboard.BoardType.comingSoon, [.backgammon, .mancala])
+        XCTAssertEqual(Gameboard.BoardType.mancala.readiness, .ready)
+        XCTAssertEqual(Gameboard.BoardType.comingSoon, [.backgammon])
 
     }
 
@@ -126,6 +126,93 @@ final class GameboardCatalogTests: XCTestCase {
 
         XCTAssertEqual(session.grid[1, 1] as? String, Dots.playerPieces[1])
         XCTAssertEqual(session.playerNumber, 2)
+
+    }
+
+    @MainActor func testMancalaSowsStonesAndChangesPlayer() async {
+
+        let session = GameSession(.mancala, mancalaMoveInterval: .zero)
+
+        await session.sowMancala(from: (2, 0))
+
+        XCTAssertEqual(session.grid[2, 0] as? String, "0")
+        XCTAssertEqual(session.grid[3, 0] as? String, "4")
+        XCTAssertEqual(session.grid[4, 0] as? String, "4")
+        XCTAssertEqual(session.grid[5, 0] as? String, "4")
+        XCTAssertEqual(session.playerNumber, 2)
+        XCTAssertNil(session.event)
+
+    }
+
+    @MainActor func testMancalaStoreGrantsAnotherTurn() async {
+
+        let session = GameSession(.mancala, mancalaMoveInterval: .zero)
+
+        await session.sowMancala(from: (3, 0))
+
+        XCTAssertEqual(session.grid[5, 1] as? String, "1")
+        XCTAssertEqual(session.playerNumber, 1)
+
+    }
+
+    @MainActor func testMancalaPublishesPickupBeforePlacementIntervals() async {
+
+        let session = GameSession(.mancala, mancalaMoveInterval: .seconds(10))
+        let sow = Task { await session.sowMancala(from: (3, 0)) }
+
+        await Task.yield()
+
+        XCTAssertEqual(session.grid[3, 0] as? String, "0")
+        XCTAssertEqual(session.grid[4, 0] as? String, "3")
+        XCTAssertEqual(session.playerNumber, 1)
+        XCTAssertTrue(session.isMancalaMoving)
+
+        sow.cancel()
+        await sow.value
+
+        XCTAssertFalse(session.isMancalaMoving)
+
+    }
+
+    func testMancalaCapturesOppositePit() throws {
+
+        let grid = Grid([
+
+            ["0","0","1"],
+            ["1"," ","0"],
+            ["0"," ","4"],
+            ["0"," ","0"],
+            ["0"," ","0"],
+            ["0","0","1"]
+
+        ])
+
+        _ = try Mancala.validateMove((1, 0), "1", grid, 0)
+
+        XCTAssertEqual(grid[2, 0] as? String, "0")
+        XCTAssertEqual(grid[2, 2] as? String, "0")
+        XCTAssertEqual(grid[5, 1] as? String, "5")
+
+    }
+
+    func testMancalaSweepsRemainingStonesAtGameEnd() throws {
+
+        let grid = Grid([
+
+            ["0","0","2"],
+            ["0"," ","2"],
+            ["0"," ","2"],
+            ["0"," ","2"],
+            ["0"," ","2"],
+            ["1","0","2"]
+
+        ])
+
+        _ = try Mancala.validateMove((5, 0), "1", grid, 0)
+
+        XCTAssertTrue(Mancala.isComplete(grid))
+        XCTAssertEqual(Mancala.score(for: 0, in: grid), 1)
+        XCTAssertEqual(Mancala.score(for: 1, in: grid), 12)
 
     }
 

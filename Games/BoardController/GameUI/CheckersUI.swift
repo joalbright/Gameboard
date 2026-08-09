@@ -96,18 +96,7 @@ struct CheckersLayoutUI: View {
 
     NavigationStack {
 
-        CheckersLayoutUI(grid: Grid([
-
-            8 ✕ ("" %% "●"),
-            8 ✕ ("●" %% ""),
-            8 ✕ ("" %% "●"),
-            8 ✕ "",
-            8 ✕ "",
-            8 ✕ ("○" %% ""),
-            8 ✕ ("" %% "○"),
-            8 ✕ ("○" %% "")
-
-        ], playerPieces: ["●◉","○◎"]))
+        CheckersLayoutUI(grid: Grid(Checkers.board.content, playerPieces: Checkers.playerPieces))
 
     }
 

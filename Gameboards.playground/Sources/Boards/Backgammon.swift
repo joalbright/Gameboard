@@ -239,7 +239,7 @@ public struct Backgammon {
 
     }
 
-    static let initialPoints = [-2,0,0,0,0,5,0,3,0,0,0,-6,5,0,0,0,-3,0,-5,0,0,0,0,2]
+    static let initialPoints = [-2,0,0,0,0,5,0,3,0,0,0,-5,5,0,0,0,-3,0,-5,0,0,0,0,2]
     public static var board: Grid { return State().grid }
     public static let playerPieces = ["●","○"]
     public static let playerColors = [Color.black, Color.white]

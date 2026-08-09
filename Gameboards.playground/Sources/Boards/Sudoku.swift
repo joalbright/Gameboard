@@ -59,10 +59,10 @@ public struct Sudoku {
     public static let playerPieces = ["123456789"]
     public static let playerColors = [Color.blue]
     
-    public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: Grid, _ solution: Grid) throws {
+    public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: inout Grid, _ solution: Grid) throws {
         
         guard g1 != "" else { throw MoveError.invalidmove }
-        guard let a1 = solution[s1.0,s1.1] as? Guess else { throw MoveError.incorrectpiece }
+        let a1 = solution[s1.0,s1.1]
         
         print(a1)
         print(g1)
@@ -95,7 +95,7 @@ public struct Sudoku {
     
     static func flipGrid(_ grid: Grid) -> Grid {
         
-        let newGrid = Grid(9 ✕ (9 ✕ ""))
+        var newGrid = Grid(9 ✕ (9 ✕ ""))
         
         for r in newGrid.rowRange {
             
@@ -113,7 +113,7 @@ public struct Sudoku {
     
     static func puzzle(_ grid: Grid, difficulty: Difficulty) -> Grid {
         
-        let grid = Grid(grid.content)
+        var grid = Grid(grid.content)
         
         for r in 0...8 {
             
@@ -135,7 +135,7 @@ public struct Sudoku {
     
     static func staticpuzzle(_ grid: Grid) -> Grid {
         
-        let grid = Grid(grid.content)
+        var grid = Grid(grid.content)
         
         let hide = [
         

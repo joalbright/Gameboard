@@ -19,7 +19,7 @@ public struct Doubles {
         
     }
     
-    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid) throws -> Piece? {
+    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: inout Grid) throws -> Piece? {
         
         guard p1 != " " && (p1 == p2 || p2 == " ") else { throw MoveError.invalidmove }
         
@@ -32,13 +32,13 @@ public struct Doubles {
         
     }
     
-    public static func random(_ grid: Grid) -> Bool {
+    public static func random(_ grid: inout Grid) -> Bool {
 
         var openSquares: [Square] = []
 
         for row in grid.rowRange {
 
-            for column in grid.colRange where grid[row, column] as? String == " " {
+            for column in grid.colRange where grid[row, column] == " " {
 
                 openSquares.append((row, column))
 

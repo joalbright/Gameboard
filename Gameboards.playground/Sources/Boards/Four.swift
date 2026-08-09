@@ -22,9 +22,9 @@ public struct Four {
         
     }
     
-    public static func validateDrop(_ s1: Square, _ p1: Piece, _ grid: Grid) throws {
+    public static func validateDrop(_ s1: Square, _ p1: Piece, _ grid: inout Grid) throws {
      
-        guard let piece = grid[s1.0 + 1][s1.1] as? Piece, piece == " " else { throw MoveError.invalidmove }
+        guard grid[s1.0 + 1][s1.1] == " " else { throw MoveError.invalidmove }
         grid[s1.0 + 1][s1.1] = p1
         
         guard grid.onBoard(s1) else { return }

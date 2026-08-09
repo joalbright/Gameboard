@@ -37,7 +37,6 @@ enum GameSessionEvent: Equatable, Identifiable {
 @MainActor @Observable final class GameSession {
 
     private var game: Gameboard
-    private(set) var revision = 0
     private var memoryTurn = 0
     private var memoryPairPending = false
     private var wordsBag: [Words.Letter] = []
@@ -60,75 +59,20 @@ enum GameSessionEvent: Equatable, Identifiable {
     private(set) var selectedBackgammonPoint: Int?
 
     var boardType: Gameboard.BoardType { return game._type }
-    var playerNumber: Int {
-
-        _ = revision
-        return game.playerTurn + 1
-
-    }
-    var playerColor: Color {
-
-        _ = revision
-        return game.playerColors[game.playerTurn]
-
-    }
-    var playerCount: Int {
-
-        _ = revision
-        return game.playerCount
-
-    }
-    var isMultiplayer: Bool {
-
-        _ = revision
-        return game.playerCount > 1
-
-    }
-    var grid: Grid {
-
-        _ = revision
-        return game.grid
-
-    }
-    var highlights: [Square] {
-
-        _ = revision
-        return game.highlights
-
-    }
-    var selected: Square? {
-
-        _ = revision
-        return game.selected
-
-    }
-    var backgammonDice: [Int] {
-
-        _ = revision
-        return backgammon.dice
-
-    }
-    var backgammonBar: [Int] {
-
-        _ = revision
-        return backgammon.bar
-
-    }
-    var backgammonBorneOff: [Int] {
-
-        _ = revision
-        return backgammon.borneOff
-
-    }
-    var backgammonPointCounts: [Int] {
-
-        _ = revision
-        return backgammon.points.map { abs($0) }
-
-    }
+    var playerNumber: Int { return game.playerTurn + 1 }
+    var playerColor: Color { return game.playerColors[game.playerTurn] }
+    var playerSecondaryColor: Color { return game.playerSecondaryColors[game.playerTurn] }
+    var playerCount: Int { return game.playerCount }
+    var isMultiplayer: Bool { return game.playerCount > 1 }
+    var grid: Grid { return game.grid }
+    var highlights: [Square] { return game.highlights }
+    var selected: Square? { return game.selected }
+    var backgammonDice: [Int] { return backgammon.dice }
+    var backgammonBar: [Int] { return backgammon.bar }
+    var backgammonBorneOff: [Int] { return backgammon.borneOff }
+    var backgammonPointCounts: [Int] { return backgammon.points.map { abs($0) } }
+    
     var highlightedBackgammonPoints: [Int] {
-
-        _ = revision
 
         let moves = backgammon.legalMoves(for: game.playerTurn)
 
@@ -138,15 +82,11 @@ enum GameSessionEvent: Equatable, Identifiable {
         return moves.filter { $0.source == .point(selectedBackgammonPoint) }.compactMap(\.destination.point)
 
     }
-    var canRollBackgammonDice: Bool {
-
-        _ = revision
-        return backgammon.dice.isEmpty && backgammon.borneOff.allSatisfy { $0 < 15 }
-
-    }
+    
+    var canRollBackgammonDice: Bool { return backgammon.dice.isEmpty && backgammon.borneOff.allSatisfy { $0 < 15 } }
+    
     var canBearOffBackgammonChecker: Bool {
 
-        _ = revision
         guard let selectedBackgammonPoint else { return false }
         return backgammon.legalMoves(for: game.playerTurn).contains { $0.source == .point(selectedBackgammonPoint) && $0.destination == .borneOff }
 
@@ -183,18 +123,19 @@ enum GameSessionEvent: Equatable, Identifiable {
         isMancalaMoving = false
         backgammon = Backgammon.State()
         selectedBackgammonPoint = nil
+        
         if boardType == .backgammon { game.playerTurn = 0 }
+        
         memoryTurn += 1
         memoryPairPending = false
+        
         if boardType == .words { resetWords() }
-        revision += 1
-
+        
     }
 
     func showAvailable(at square: Square) {
 
         game.showAvailable(square)
-        revision += 1
 
     }
 
@@ -209,7 +150,6 @@ enum GameSessionEvent: Equatable, Identifiable {
         event = nil
         finishBackgammonTurnIfNeeded()
         synchronizeBackgammonGrid()
-        revision += 1
 
     }
 
@@ -225,7 +165,6 @@ enum GameSessionEvent: Equatable, Identifiable {
             guard let move = moves.first(where: { $0.source == .bar && $0.destination == .point(point) }) else {
 
                 event = .invalidMove(.invalidmove)
-                revision += 1
                 return
 
             }
@@ -245,14 +184,12 @@ enum GameSessionEvent: Equatable, Identifiable {
         guard moves.contains(where: { $0.source == .point(point) }) else {
 
             event = .invalidMove(.invalidmove)
-            revision += 1
             return
 
         }
 
         selectedBackgammonPoint = point
         event = nil
-        revision += 1
 
     }
 
@@ -269,8 +206,6 @@ enum GameSessionEvent: Equatable, Identifiable {
     }
 
     func selectOrMove(at square: Square) {
-
-        defer { revision += 1 }
 
         guard let selected = game.selected else {
 
@@ -300,7 +235,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         guard boardType == .four, !isFourDropping else { return }
         guard column.within(game.grid.colRange), let firstRow = game.grid.rowRange.first else { return }
-        guard game.grid[firstRow, column] as? String == " " else { return }
+        guard game.grid[firstRow, column] == " " else { return }
 
         fourDropID += 1
         
@@ -318,9 +253,8 @@ enum GameSessionEvent: Equatable, Identifiable {
         
         event = nil
         game.grid[row, column] = piece
-        revision += 1
 
-        while row + 1 < game.grid.rowRange.endIndex, game.grid[row + 1, column] as? String == " " {
+        while row + 1 < game.grid.rowRange.endIndex, game.grid[row + 1, column] == " " {
 
             try? await Task.sleep(for: fourDropInterval)
 
@@ -329,7 +263,6 @@ enum GameSessionEvent: Equatable, Identifiable {
             game.grid[row, column] = " "
             row += 1
             game.grid[row, column] = piece
-            revision += 1
 
         }
 
@@ -337,7 +270,6 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         game.changePlayer()
         checkFourCompletion()
-        revision += 1
 
     }
 
@@ -378,8 +310,6 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         }
 
-        revision += 1
-
     }
 
     func swipe(_ direction: GameSwipeDirection) async {
@@ -401,7 +331,6 @@ enum GameSessionEvent: Equatable, Identifiable {
         
         event = nil
         _ = addDoublesTile()
-        revision += 1
 
         while true {
 
@@ -410,8 +339,6 @@ enum GameSessionEvent: Equatable, Identifiable {
             guard !Task.isCancelled, moveID == doublesMoveID else { return }
             guard moveDoubles(direction, mergedTiles: &mergedTiles) else { return }
 
-            revision += 1
-
         }
 
     }
@@ -419,7 +346,9 @@ enum GameSessionEvent: Equatable, Identifiable {
     func sowMancala(from square: Square) async {
 
         guard boardType == .mancala, !isMancalaMoving else { return }
-        guard game.grid.onBoard(square), let piece = game.grid[square.c, square.r] as? Piece else { return }
+        guard game.grid.onBoard(square) else { return }
+
+        let piece = game.grid[square.c, square.r]
 
         let move: MancalaMove
 
@@ -430,7 +359,6 @@ enum GameSessionEvent: Equatable, Identifiable {
         } catch {
 
             handle(error)
-            revision += 1
             return
 
         }
@@ -448,8 +376,7 @@ enum GameSessionEvent: Equatable, Identifiable {
         }
 
         event = nil
-        Mancala.begin(move, in: game.grid)
-        revision += 1
+        Mancala.begin(move, in: &game.grid)
 
         for destination in move.destinations {
 
@@ -457,17 +384,15 @@ enum GameSessionEvent: Equatable, Identifiable {
 
             guard !Task.isCancelled, moveID == mancalaMoveID else { return }
 
-            Mancala.placeStone(at: destination, in: game.grid)
-            revision += 1
+            Mancala.placeStone(at: destination, in: &game.grid)
 
         }
 
         guard moveID == mancalaMoveID else { return }
 
-        Mancala.finish(move, in: game.grid)
+        Mancala.finish(move, in: &game.grid)
         if !move.retainsTurn { game.changePlayer() }
         checkMancalaCompletion()
-        revision += 1
 
     }
 
@@ -566,8 +491,6 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     private func perform<T>(_ action: (inout Gameboard) throws -> T) -> T? {
 
-        defer { revision += 1 }
-
         do {
 
             let result = try action(&game)
@@ -629,10 +552,8 @@ enum GameSessionEvent: Equatable, Identifiable {
             game.highlights = []
             memoryPairPending = false
 
-            let remainingCards = game.grid.content.flatMap { $0 }.compactMap { $0 as? String }.filter { !$0.isEmpty }.count
+            let remainingCards = game.grid.content.flatMap { $0 }.filter { !$0.isEmpty }.count
             if remainingCards == 0 { event = .winner }
-
-            revision += 1
 
         }
 
@@ -640,8 +561,8 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     private func addDoublesTile() -> Bool {
 
-        guard let doublesNewTile else { return Doubles.random(game.grid) }
-        guard game.grid.onBoard(doublesNewTile), game.grid[doublesNewTile.c, doublesNewTile.r] as? String == " " else { return false }
+        guard let doublesNewTile else { return Doubles.random(&game.grid) }
+        guard game.grid.onBoard(doublesNewTile), game.grid[doublesNewTile.c, doublesNewTile.r] == " " else { return false }
 
         game.grid[doublesNewTile.c, doublesNewTile.r] = "2"
         
@@ -656,8 +577,9 @@ enum GameSessionEvent: Equatable, Identifiable {
             let end = doublesDestination(from: start, direction: direction)
 
             guard game.grid.onBoard(end) else { continue }
-            guard let piece = game.grid[start.c, start.r] as? String, piece != " " else { continue }
-            guard let destination = game.grid[end.c, end.r] as? String else { continue }
+            let piece = game.grid[start.c, start.r]
+            let destination = game.grid[end.c, end.r]
+            guard piece != " " else { continue }
 
             if destination == " " || destination == piece { return true }
 
@@ -678,8 +600,9 @@ enum GameSessionEvent: Equatable, Identifiable {
             let endIndex = doublesIndex(end)
 
             guard !mergedTiles.contains(startIndex), game.grid.onBoard(end) else { continue }
-            guard let piece = game.grid[start.c, start.r] as? String, piece != " " else { continue }
-            guard let destination = game.grid[end.c, end.r] as? String else { continue }
+            let piece = game.grid[start.c, start.r]
+            let destination = game.grid[end.c, end.r]
+            guard piece != " " else { continue }
             guard destination == " " || destination == piece && !mergedTiles.contains(endIndex) else { continue }
 
             do {
@@ -772,7 +695,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     private func checkCompletion(combinations: [[Int]], emptyPiece: String) {
 
-        let pieces = game.grid.content.flatMap { $0 }.compactMap { $0 as? String }
+        let pieces = game.grid.content.flatMap { $0 }
 
         for combination in combinations {
 
@@ -792,7 +715,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     private func checkBombsweeperCompletion() {
 
-        let pieces = game.grid.content.flatMap { $0 }.compactMap { $0 as? String }
+        let pieces = game.grid.content.flatMap { $0 }
 
         if pieces.contains("✘") {
 
@@ -835,7 +758,6 @@ enum GameSessionEvent: Equatable, Identifiable {
         }
 
         synchronizeBackgammonGrid()
-        revision += 1
 
     }
 

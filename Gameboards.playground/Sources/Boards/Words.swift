@@ -91,9 +91,9 @@ public struct Words {
     
     public static let playerPieces = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ_"]
     
-    public static func validate(_ tile: Letter, _ s1: Square, _ grid: Grid) throws {
+    public static func validate(_ tile: Letter, _ s1: Square, _ grid: inout Grid) throws {
         
-        guard let spot = grid[s1.0,s1.1] as? String else { throw MoveError.invalidmove }
+        let spot = grid[s1.0,s1.1]
         guard PieceType(rawValue: spot) != nil else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = tile.rawValue.uppercased()

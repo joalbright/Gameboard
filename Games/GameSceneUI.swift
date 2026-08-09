@@ -148,7 +148,9 @@ private extension Grid {
 
     func accessibilityDescription(at square: Square) -> String {
 
-        guard onBoard(square), let piece = self[square.c, square.r] as? String else { return "" }
+        guard onBoard(square) else { return "" }
+
+        let piece = self[square.c, square.r]
 
         switch piece {
         case "", " ": return "Empty"

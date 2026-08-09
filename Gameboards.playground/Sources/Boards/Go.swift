@@ -13,7 +13,7 @@ public struct Go {
     public static let playerPieces = ["●","○"]
     public static let playerColors = [Color.white, Color.black]
     
-    public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: Grid) {
+    public static func checkCapture(_ s1: Square, _ p1: Piece, _ grid: inout Grid) {
         
         let points = [ (-1,0),(0,1),(1,0),(0,-1) ]
         
@@ -28,7 +28,8 @@ public struct Go {
                 let s = (s1.0 + p.0, s1.1 + p.1)
                 guard !(chain.contains { $0.0 == s.0 && $0.1 == s.1 }) else { continue }
                 guard grid.onBoard(s) else { continue }
-                guard let a1 = grid[s.0,s.1] as? Piece, a1 != p1 else { continue }
+                let a1 = grid[s.0,s.1]
+                guard a1 != p1 else { continue }
                 guard a1 != "" else { throw GoError.openchain }
                 
                 chain.append(s)
@@ -45,7 +46,8 @@ public struct Go {
             
             let s = (s1.0 + p.0, s1.1 + p.1)
             guard grid.onBoard(s) else { continue }
-            guard let a1 = grid[s.0,s.1] as? Piece, a1 != "" && a1 != p1 else { continue }
+            let a1 = grid[s.0,s.1]
+            guard a1 != "" && a1 != p1 else { continue }
             
             if let squares = try? checkChain(s, [s]) {
                 
@@ -57,13 +59,13 @@ public struct Go {
         
     }
     
-    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: Grid, _ player: Int) throws {
+    public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: inout Grid, _ player: Int) throws {
         
         guard p1 == "" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = playerPieces[player]
         
-        checkCapture(s1, playerPieces[player], grid)
+        checkCapture(s1, playerPieces[player], &grid)
         
     }
     

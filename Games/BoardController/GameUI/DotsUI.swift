@@ -112,7 +112,7 @@ private struct DotsInteractionGrid: View {
                         .buttonStyle(.plain)
                         .position(x: width * (CGFloat(column) + 0.5), y: height * (CGFloat(row) + 0.5))
                         .accessibilityLabel("\(row.isMultiple(of: 2) ? "Horizontal" : "Vertical") line, row \(row + 1), column \(column + 1)")
-                        .accessibilityValue(grid[row, column] as? String == "0" ? "Open" : "Claimed")
+                        .accessibilityValue(grid[row, column] == "0" ? "Open" : "Claimed")
 
                     }
 

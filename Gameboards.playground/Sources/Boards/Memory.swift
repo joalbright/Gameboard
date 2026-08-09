@@ -60,7 +60,7 @@ public struct Memory {
 
     static func solution(_ difficulty: Difficulty) -> Grid {
         
-        let grid = difficulty.memoryBoard
+        var grid = difficulty.memoryBoard
         let deck = difficulty.memoryDeckRandomized
         
         for r in grid.rowRange {
@@ -83,15 +83,15 @@ public struct Memory {
         
     }
     
-    public static func validateSelection(_ s1: Square, _ c1: Card, _ grid: Grid) throws {
+    public static func validateSelection(_ s1: Square, _ c1: Card, _ grid: inout Grid) throws {
         
-        guard let card = grid[s1.0,s1.1] as? Card, card != "" else { throw MoveError.invalidmove }
+        guard grid[s1.0,s1.1] != "" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = c1
         
     }
 
-    public static func validateMatch(_ s1: Square, _ s2: Square, _ c1: Card, _ c2: Card, _ grid: Grid, _ reset: Bool = false) throws -> Card? {
+    public static func validateMatch(_ s1: Square, _ s2: Square, _ c1: Card, _ c2: Card, _ grid: inout Grid, _ reset: Bool = false) throws -> Card? {
         
         if reset {
         
@@ -102,7 +102,7 @@ public struct Memory {
             
         } else {
             
-            guard let card = grid[s1.0,s1.1] as? Card, card != "" else { throw MemoryError.nocard }
+            guard grid[s1.0,s1.1] != "" else { throw MemoryError.nocard }
             
             grid[s1.0,s1.1] = c1
             

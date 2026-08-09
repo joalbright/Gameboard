@@ -28,7 +28,7 @@ class Pegs: NSObject {
     
     public static let playerPieces = ["●"]
     
-    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws -> Piece? {
+    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: inout Grid, _ hint: Bool = false) throws -> Piece? {
         
         let m1 = s2.0 - s1.0
         let m2 = s2.1 - s1.1
@@ -40,7 +40,7 @@ class Pegs: NSObject {
         let e1 = s1.0 + m1 / 2
         let e2 = s1.1 + m2 / 2
         
-        let piece = grid[e1,e2] as? Piece
+        let piece = grid[e1,e2]
         
         guard piece == "●" else { throw MoveError.invalidmove }
         

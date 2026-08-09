@@ -54,7 +54,7 @@ public struct Chess {
         
         while p1 != s2.0 || p2 != s2.1 {
             
-            guard let piece = grid[p1,p2] as? Piece, piece == "" else { throw MoveError.blockedmove }
+            guard grid[p1,p2] == "" else { throw MoveError.blockedmove }
             
             p1 += d1
             p2 += d2
@@ -63,7 +63,7 @@ public struct Chess {
         
     }
     
-    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: Grid, _ hint: Bool = false) throws -> Piece? {
+    public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: inout Grid, _ hint: Bool = false) throws -> Piece? {
         
         let mRow = s2.0 - s1.0
         let mCol = s2.1 - s1.1
@@ -119,7 +119,7 @@ public struct Chess {
         grid[s2.0,s2.1] = p1 // place my piece in target square
         grid[s1.0,s1.1] = "" // remove my piece from original square
         
-        return piece as? Piece
+        return piece
         
     }
     

@@ -127,69 +127,105 @@ private struct GameDestinationView: View {
         GameSceneUI(session: session, readiness: game.readiness) {
 
             destination
-                .id(session.revision)
-
         }
-            .allowsHitTesting(game.readiness == .ready)
-            .overlay(alignment: .top) {
+        .allowsHitTesting(game.readiness == .ready)
+        .overlay(alignment: .top) {
 
-                if game.readiness == .comingSoon {
+            if game.readiness == .comingSoon {
 
-                    Label("Coming Soon", systemImage: "hammer.fill")
-                        .font(.headline)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
-                        .background(.regularMaterial, in: Capsule())
-                        .padding()
-                        .accessibilityLabel("\(game.name), coming soon preview")
-
-                }
+                Label("Coming Soon", systemImage: "hammer.fill")
+                    .font(.headline)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(.regularMaterial, in: Capsule())
+                    .padding()
+                    .accessibilityLabel("\(game.name), coming soon preview")
 
             }
+
+        }
 
     }
 
     @ViewBuilder private var destination: some View {
 
         switch game {
-        case .backgammon: BackgammonLayoutUI(grid: session.grid, selectedPoint: session.selectedBackgammonPoint, highlightedPoints: session.highlightedBackgammonPoints, dice: session.backgammonDice, bar: session.backgammonBar, borneOff: session.backgammonBorneOff, pointCounts: session.backgammonPointCounts, canRoll: session.canRollBackgammonDice, canBearOff: session.canBearOffBackgammonChecker, onRoll: session.rollBackgammonDice, onSelect: session.selectBackgammonPoint, onBearOff: session.bearOffBackgammonChecker)
-        case .bombsweeper: BombsweeperLayoutUI(grid: session.grid) { square, guess in
-
-            if guess {
-
-                session.guess(at: square)
-
-            } else {
-
-                session.mark(at: square)
-
+        case .backgammon:
+            
+            BackgammonLayoutUI(grid: session.grid, selectedPoint: session.selectedBackgammonPoint, highlightedPoints: session.highlightedBackgammonPoints, dice: session.backgammonDice, bar: session.backgammonBar, borneOff: session.backgammonBorneOff, pointCounts: session.backgammonPointCounts, canRoll: session.canRollBackgammonDice, canBearOff: session.canBearOffBackgammonChecker, onRoll: session.rollBackgammonDice, onSelect: session.selectBackgammonPoint, onBearOff: session.bearOffBackgammonChecker)
+            
+        case .bombsweeper:
+            
+            BombsweeperLayoutUI(grid: session.grid) { square, guess in
+                
+                if guess {
+                    
+                    session.guess(at: square)
+                    
+                } else {
+                    
+                    session.mark(at: square)
+                    
+                }
+                
             }
-
-        }
-        case .checkers: CheckersLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
-        case .chess: ChessLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
-        case .dots: DotsLayoutUI(grid: session.grid, onSelect: session.move)
-        case .doubles: DoublesLayoutUI(grid: session.grid) { direction in
-
-            Task { await session.swipe(direction) }
-
-        }
-        case .four: FourLayoutUI(grid: session.grid) { column in
-
-            Task { await session.drop(inColumn: column) }
-
-        }
+            
+        case .checkers:
+            
+            CheckersLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
+            
+        case .chess:
+            
+            ChessLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
+            
+        case .dots:
+            
+            DotsLayoutUI(grid: session.grid, onSelect: session.move)
+            
+        case .doubles:
+            
+            DoublesLayoutUI(grid: session.grid) { direction in
+                
+                Task { await session.swipe(direction) }
+                
+            }
+            
+        case .four:
+            
+            FourLayoutUI(grid: session.grid) { column in
+                
+                Task { await session.drop(inColumn: column) }
+            }
+            
         case .go: GoLayoutUI(grid: session.grid, onSelect: session.move)
-        case .mancala: MancalaLayoutUI(grid: session.grid) { square in
-
-            Task { await session.sowMancala(from: square) }
-
-        }
-        case .memory: MemoryLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectMemoryCard)
-        case .pegs: PegsLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
-        case .sudoku: SudokuLayoutUI(grid: session.grid, highlights: session.highlights, onSelect: session.guess)
-        case .tictactoe: TicTacToeLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.move)
-        case .words: WordsLayoutUI(grid: session.grid, rack: session.wordsRack, selectedTile: session.selectedWordTile, onSelectTile: session.chooseWordTile, onSelectSquare: session.placeSelectedWordTile, onFillRack: session.fillWordsRack)
+        case .mancala:
+            
+            MancalaLayoutUI(grid: session.grid) { square in
+                
+                Task { await session.sowMancala(from: square) }
+                
+            }
+            
+        case .memory:
+            
+            MemoryLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectMemoryCard)
+            
+        case .pegs:
+            
+            PegsLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.selectOrMove)
+            
+        case .sudoku:
+            
+            SudokuLayoutUI(grid: session.grid, highlights: session.highlights, onSelect: session.guess)
+            
+        case .tictactoe:
+            
+            TicTacToeLayoutUI(grid: session.grid, selected: session.selected, highlights: session.highlights, onSelect: session.move)
+            
+        case .words:
+            
+            WordsLayoutUI(grid: session.grid, rack: session.wordsRack, selectedTile: session.selectedWordTile, onSelectTile: session.chooseWordTile, onSelectSquare: session.placeSelectedWordTile, onFillRack: session.fillWordsRack)
+            
         }
 
     }

@@ -82,7 +82,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .words: try Words.validate(t1, s1, grid)
+        case .words: try Words.validate(t1, s1, &grid)
         default: throw MoveError.incorrectpiece
             
         }
@@ -95,7 +95,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .bombsweeper: try Bombsweeper.validateGuess(s1, grid, solution)
+        case .bombsweeper: try Bombsweeper.validateGuess(s1, &grid, solution)
         default: throw MoveError.incorrectpiece
             
         }
@@ -108,7 +108,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .sudoku: try Sudoku.validateGuess(s1, g1, grid, solution)
+        case .sudoku: try Sudoku.validateGuess(s1, g1, &grid, solution)
         default: throw MoveError.incorrectpiece
             
         }
@@ -121,11 +121,11 @@ extension Gameboard {
         
         guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
-        guard let c1 = solution[s1.0,s1.1] as? Card else { throw MoveError.incorrectpiece }
+        let c1 = solution[s1.0,s1.1]
         
         switch _type {
             
-        case .memory: return try Memory.validateSelection(s1, c1, grid)
+        case .memory: return try Memory.validateSelection(s1, c1, &grid)
         default: throw MoveError.incorrectpiece
             
         }
@@ -136,12 +136,12 @@ extension Gameboard {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.outofbounds }
         
-        guard let c1 = solution[s1.0,s1.1] as? Card else { throw MoveError.incorrectpiece }
-        guard let c2 = solution[s2.0,s2.1] as? Card else { throw MoveError.incorrectpiece }
+        let c1 = solution[s1.0,s1.1]
+        let c2 = solution[s2.0,s2.1]
         
         switch _type {
             
-        case .memory: return try Memory.validateMatch(s1, s2, c1, c2, grid, reset)
+        case .memory: return try Memory.validateMatch(s1, s2, c1, c2, &grid, reset)
         default: throw MoveError.incorrectpiece
             
         }
@@ -155,13 +155,13 @@ extension Gameboard {
         
         var p1 = playerPieces[playerTurn]
         
-        if grid.onBoard(s1) { p1 = grid[s1.0][s1.1] as? Piece ?? p1 }
+        if grid.onBoard(s1) { p1 = grid[s1.0][s1.1] }
         
         if s1.0 == 0 { changePlayer() }
         
         switch _type {
             
-        case .four: try Four.validateDrop(s1, p1, grid)
+        case .four: try Four.validateDrop(s1, p1, &grid)
         default: throw MoveError.incorrectpiece
             
         }
@@ -174,7 +174,7 @@ extension Gameboard {
         
         switch _type {
             
-        case .bombsweeper: try Bombsweeper.validateMark(s1, grid, solution)
+        case .bombsweeper: try Bombsweeper.validateMark(s1, &grid, solution)
         default: throw MoveError.incorrectpiece
             
         }
@@ -185,22 +185,22 @@ extension Gameboard {
         
         guard grid.onBoard(s1) else { throw MoveError.outofbounds }
         
-        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.incorrectpiece }
+        let p1 = grid[s1.0,s1.1]
         
         switch _type {
             
         case .go:
 
-            try Go.validateMove(s1, p1, grid, playerTurn)
+            try Go.validateMove(s1, p1, &grid, playerTurn)
             return false
 
         case .tictactoe:
 
-            try TicTacToe.validateMove(s1, p1, grid, playerTurn)
+            try TicTacToe.validateMove(s1, p1, &grid, playerTurn)
             return false
 
-        case .dots: return try Dots.validateMove(s1, p1, grid, playerTurn)
-        case .mancala: return try Mancala.validateMove(s1, p1, grid, playerTurn)
+        case .dots: return try Dots.validateMove(s1, p1, &grid, playerTurn)
+        case .mancala: return try Mancala.validateMove(s1, p1, &grid, playerTurn)
         default: throw MoveError.incorrectpiece
             
         }
@@ -211,8 +211,8 @@ extension Gameboard {
         
         guard grid.onBoard(s1, s2) else { throw MoveError.outofbounds }
         
-        guard let p1 = grid[s1.0,s1.1] as? Piece else { throw MoveError.incorrectpiece }
-        guard let p2 = grid[s2.0,s2.1] as? Piece else { throw MoveError.incorrectpiece }
+        let p1 = grid[s1.0,s1.1]
+        let p2 = grid[s2.0,s2.1]
         
         guard validatePlayer(p1) else { throw MoveError.notyourturn }
         
@@ -220,10 +220,10 @@ extension Gameboard {
         
         switch _type {
             
-        case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, grid, hint)
-        case .chess: return try Chess.validateMove(s1, s2, p1, p2, grid, hint)
-        case .doubles: return try Doubles.validateMove(s1, s2, p1, p2, grid)
-        case .pegs: return try Pegs.validateMove(s1, s2, p1, p2, grid, hint)
+        case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, &grid, hint)
+        case .chess: return try Chess.validateMove(s1, s2, p1, p2, &grid, hint)
+        case .doubles: return try Doubles.validateMove(s1, s2, p1, p2, &grid)
+        case .pegs: return try Pegs.validateMove(s1, s2, p1, p2, &grid, hint)
         default: throw MoveError.incorrectpiece
             
         }

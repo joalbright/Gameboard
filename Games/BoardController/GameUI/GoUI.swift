@@ -123,7 +123,7 @@ private struct GoInteractionGrid: View {
                     .buttonStyle(.plain)
                     .position(x: inset + width * CGFloat(column), y: inset + height * CGFloat(row))
                     .accessibilityLabel("Row \(row + 1), column \(column + 1)")
-                    .accessibilityValue(grid[row, column] as? String ?? "")
+                    .accessibilityValue(grid[row, column])
 
                 }
 

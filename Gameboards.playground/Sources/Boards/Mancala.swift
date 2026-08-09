@@ -46,15 +46,15 @@ public struct Mancala {
         
     }
 
-    public static func validateMove(_ square: Square, _ piece: Piece, _ grid: Grid, _ player: Int) throws -> Bool {
+    public static func validateMove(_ square: Square, _ piece: Piece, _ grid: inout Grid, _ player: Int) throws -> Bool {
 
         let move = try plannedMove(from: square, piece: piece, player: player)
 
-        begin(move, in: grid)
+        begin(move, in: &grid)
 
-        for destination in move.destinations { placeStone(at: destination, in: grid) }
+        for destination in move.destinations { placeStone(at: destination, in: &grid) }
 
-        finish(move, in: grid)
+        finish(move, in: &grid)
 
         return move.retainsTurn
 
@@ -89,25 +89,25 @@ public struct Mancala {
 
     }
 
-    static func begin(_ move: MancalaMove, in grid: Grid) {
+    static func begin(_ move: MancalaMove, in grid: inout Grid) {
 
         grid[move.start.c, move.start.r] = "0"
 
     }
 
-    static func placeStone(at square: Square, in grid: Grid) {
+    static func placeStone(at square: Square, in grid: inout Grid) {
 
         grid[square.c, square.r] = "\(stoneCount(at: square, in: grid) + 1)"
 
     }
 
-    static func finish(_ move: MancalaMove, in grid: Grid) {
+    static func finish(_ move: MancalaMove, in grid: inout Grid) {
 
         guard let lastSquare = move.destinations.last else { return }
 
-        captureIfNeeded(at: lastSquare, for: move.player, in: grid)
+        captureIfNeeded(at: lastSquare, for: move.player, in: &grid)
 
-        if isComplete(grid) { collectRemainingStones(in: grid) }
+        if isComplete(grid) { collectRemainingStones(in: &grid) }
 
     }
 
@@ -138,11 +138,11 @@ public struct Mancala {
 
     private static func stoneCount(at square: Square, in grid: Grid) -> Int {
 
-        return Int(grid[square.c, square.r] as? String ?? "") ?? 0
+        return Int(grid[square.c, square.r]) ?? 0
 
     }
 
-    private static func captureIfNeeded(at square: Square, for player: Int, in grid: Grid) {
+    private static func captureIfNeeded(at square: Square, for player: Int, in grid: inout Grid) {
 
         guard ownedPits(for: player).contains(where: { $0 == square }) else { return }
         guard stoneCount(at: square, in: grid) == 1 else { return }
@@ -161,7 +161,7 @@ public struct Mancala {
 
     }
 
-    private static func collectRemainingStones(in grid: Grid) {
+    private static func collectRemainingStones(in grid: inout Grid) {
 
         for player in 0...1 {
 

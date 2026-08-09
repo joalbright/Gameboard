@@ -100,6 +100,7 @@ public struct Gameboard {
     var playerTurn: Int = 0
     var playerPieces: [Piece] = []
     var playerColors: [Color] = [.accent]
+    var playerSecondaryColors: [Color] = [.text]
     
     var grid: Grid = Grid(1 ✕ (1 ✕ ""))
     var solution: Grid = Grid(1 ✕ (1 ✕ ""))
@@ -273,8 +274,8 @@ public struct Gameboard {
             grid = Doubles.board
             playerPieces = Doubles.playerPieces
             
-            let _ = Doubles.random(grid)
-            let _ = Doubles.random(grid)
+            let _ = Doubles.random(&grid)
+            let _ = Doubles.random(&grid)
             
             guard testing else { break }
             

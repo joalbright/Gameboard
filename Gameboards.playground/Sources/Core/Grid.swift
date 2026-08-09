@@ -1,6 +1,6 @@
 import Foundation
 
-public final class Grid {
+public struct Grid {
 
     struct CellID: Hashable {
 
@@ -13,7 +13,7 @@ public final class Grid {
 
         var id: CellID
         var index: Int
-        var piece: String
+        var piece: Piece
 
     }
 
@@ -28,47 +28,40 @@ public final class Grid {
 
         return content.enumerated().map { row, content in
 
-            Col(id: row, rows: content.enumerated().map { column, piece in Row(id: CellID(row: row, column: column), index: column, piece: piece as? String ?? "") })
+            Col(id: row, rows: content.enumerated().map { column, piece in Row(id: CellID(row: row, column: column), index: column, piece: piece) })
 
         }
 
     }
     
-    public var content: [[Any]]
+    public var content: [[Piece]]
     
     public var rowRange: CountableRange<Int> { return 0..<content.count }
     public var colRange: CountableRange<Int> { return content.count > 0 ? 0..<content[0].count : 0..<0 }
     
     public var playerPieces: [Piece] = []
     
-    public init(_ content: [[Any]], playerPieces: [Piece] = []) {
+    public init(_ content: [[Piece]], playerPieces: [Piece] = []) {
         
         self.content = content
         self.playerPieces = playerPieces
         
     }
     
-    public subscript(c: Int, r: Int) -> Any {
+    public subscript(c: Int, r: Int) -> Piece {
         
         get { return content[c][r] }
         set { content[c][r] = newValue }
         
     }
     
-    public subscript(c: Int) -> [Any] {
+    public subscript(c: Int) -> [Piece] {
         
         get { return content[c] }
         set { content[c] = newValue }
         
     }
 
-    public subscript(c: Int) -> Any {
-
-        get { return content[c / colRange.endIndex][c % colRange.endIndex] }
-        set { content[c / colRange.endIndex][c % colRange.endIndex] = newValue }
-
-    }
-    
     public func onBoard(_ s1: Square, _ s2: Square) -> Bool {
         
         return s1.0.within(rowRange) && s1.1.within(colRange) && s2.0.within(rowRange) && s2.1.within(colRange)

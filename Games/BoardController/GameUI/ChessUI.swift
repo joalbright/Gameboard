@@ -187,6 +187,8 @@ struct ChessLayoutUI: View {
                     }
 
                 }
+                .padding(.horizontal, 32)
+                .padding(.vertical, 64)
 
             }
 

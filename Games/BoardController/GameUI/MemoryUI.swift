@@ -87,6 +87,7 @@ struct MemoryLayoutUI: View {
 
                 }
                 .aspectRatio(1.0, contentMode: .fit)
+                .padding(.vertical, 32)
                 
                 HStack {
                     

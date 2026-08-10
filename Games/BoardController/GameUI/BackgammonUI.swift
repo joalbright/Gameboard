@@ -288,7 +288,7 @@ struct BackgammonLayoutUI: View {
                     BackgammonInteractionUI(selectedPoint: selectedPoint, highlightedPoints: highlightedPoints, pointCounts: pointCounts, onSelect: onSelect)
                     
                 }
-                .padding(.horizontal, 32)
+                .padding(32)
                 
                 Button("Bear Off", action: onBearOff)
                     .buttonStyle(.bordered)

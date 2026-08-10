@@ -81,7 +81,8 @@ struct CheckersLayoutUI: View {
 
                 }
                 .aspectRatio(1.0, contentMode: .fit)
-                .padding(32)
+                .padding(.horizontal, 32)
+                .padding(.vertical, 64)
 
             }
 

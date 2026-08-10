@@ -88,6 +88,7 @@ struct BombsweeperLayoutUI: View {
                     }
 
                 }
+                .padding(.vertical, 32)
 
                 Picker("", selection: $piece) {
 

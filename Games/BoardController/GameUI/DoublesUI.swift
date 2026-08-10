@@ -75,7 +75,8 @@ struct DoublesLayoutUI: View {
                     DoublesPiecesUI(grid: grid)
 
                 }
-                .padding(32)
+                .padding(.horizontal, 32)
+                .padding(.vertical, 64)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 20).onEnded { value in
 

@@ -127,6 +127,7 @@ struct SudokuLayoutUI: View {
 
                 }
                 .aspectRatio(1.0, contentMode: .fit)
+                .padding(.vertical, 32)
 
                 Spacer()
                 

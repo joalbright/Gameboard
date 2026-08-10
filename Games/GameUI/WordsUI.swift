@@ -97,34 +97,57 @@ struct WordsLayoutUI: View {
 
                 HStack(spacing: 6) {
 
-                    ForEach(Value<Words.Letter>.array(rack)) { item in
+                    ForEach(0..<7) { i in
 
-                        Button {
+                        if let item = rack.indices.contains(i) ? rack[i] : nil {
+                            
+                            Button {
 
-                            onSelectTile(item.value)
+                                onSelectTile(item)
 
-                        } label: {
+                            } label: {
 
+                                VStack(spacing: 0) {
+
+                                    Text(item == .blank ? "_" : item.rawValue.uppercased())
+                                        .font(.headline)
+
+                                    Text("\(item.point)")
+                                        .font(.caption2)
+
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 60)
+                                .background(selectedTile == item ? Color.accentColor : Color.text.opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
+
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(item == .none)
+                            
+                        } else {
+                            
                             VStack(spacing: 0) {
 
-                                Text(item.value == .blank ? "_" : item.value.rawValue.uppercased())
+                                Text("A")
                                     .font(.headline)
 
-                                Text("\(item.value.point)")
+                                Text("1")
                                     .font(.caption2)
 
                             }
-                            .frame(maxWidth: .infinity, minHeight: 48)
-                            .background(selectedTile == item.value ? Color.accentColor : Color.text.opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
-
+                            .opacity(0.2)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 60)
+                            .background(Color.text.opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
+                            
                         }
-                        .buttonStyle(.plain)
-                        .disabled(item.value == .none)
 
                     }
 
                 }
+                .frame(maxWidth: 400)
                 .padding(.horizontal, 32)
+                .padding(.bottom, 16)
 
                 Button("Fill Rack", systemImage: "rectangle.stack.badge.plus", action: onFillRack)
 

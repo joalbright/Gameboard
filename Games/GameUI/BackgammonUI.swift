@@ -14,68 +14,74 @@ struct BackgammonBoardUI: View {
         
         VStack(spacing: 0) {
             
-            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 10, style: .circular)
-                .fill(Color(red: 0.716, green: 0.642, blue: 0.523))
-                .frame(height: 60)
-                .padding(.horizontal, 16)
-            
             GeometryReader { g in
                 
-                let p: CGFloat = g.size.width / 20
+                let e: CGFloat = g.size.width / 20
+                let h: CGFloat = g.size.width
                 
-                let hG: CGFloat = g.size.height / 4
+                let hG: CGFloat = h / 4
+                
+                let pW = (g.rect.width - e * 3) / 12
+                let pH = (h - e * 2 - hG) / 12
+                
+                let sH = (g.rect.height - g.rect.width) / 2
+                    
+                UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 10, style: .circular)
+                    .fill(Color(red: 0.716, green: 0.642, blue: 0.523))
+                    .frame(height: sH)
+                    .padding(.horizontal, 16)
                 
                 Color(red: 0.404, green: 0.333, blue: 0.191)
+                    .cornerRadius(10)
+                    .frame(width: g.size.width, height: h)
+                    .offset(y: sH)
                 
                 Path { path in
                     
-                    path.addRect(g.rect.insetBy(dx: p, dy: p))
+                    path.addRect(g.rect.insetBy(dx: e, dy: e + sH))
                     
                 }.fill(Color(red: 0.716, green: 0.642, blue: 0.523))
                 
                 Path { path in
                     
-                    path.addRect(CGRect(x: g.rect.midX - p / 2, y: 0, width: p, height: g.rect.height))
+                    path.addRect(CGRect(x: g.rect.midX - e / 2, y: sH, width: e, height: h))
                     
                 }.fill(Color(red: 0.404, green: 0.333, blue: 0.191))
-                
-                let w = (g.rect.width - p * 3) / 12
-                let h = (g.rect.height - p * 2 - hG) / 12
                 
                 ForEach(Index.count(12)) { index in
                     
                     let i = CGFloat(index.id)
-                    let x: CGFloat = index.id > 5 ? p * 2 : p
+                    let x: CGFloat = index.id > 5 ? e * 2 : e
                     let eo = index.id % 2 == 0
                     
                     Path { path in
                         
-                        path.move(to: CGPoint(x: w * i + x, y: p))
-                        path.addLine(to: CGPoint(x: w * i + x + w, y: p))
-                        path.addLine(to: CGPoint(x: w * i + x + w / 2, y: h * 7 + p))
+                        path.move(to: CGPoint(x: pW * i + x, y: e + sH))
+                        path.addLine(to: CGPoint(x: pW * i + x + pW, y: e + sH))
+                        path.addLine(to: CGPoint(x: pW * i + x + pW / 2, y: pH * 7 + e + sH))
                         path.closeSubpath()
                         
                     }.fill(eo ? Color(red: 0.716, green: 0.642, blue: 0.523) : Color(red: 0.404, green: 0.333, blue: 0.191)).blendMode(.multiply).opacity(0.5)
                     
                     Path { path in
                         
-                        path.move(to: CGPoint(x: w * i + x, y: g.rect.height - p))
-                        path.addLine(to: CGPoint(x: w * i + x + w, y: g.rect.height - p))
-                        path.addLine(to: CGPoint(x: w * i + x + w / 2, y: h * 5 + hG + p))
+                        path.move(to: CGPoint(x: pW * i + x, y: h - e + sH))
+                        path.addLine(to: CGPoint(x: pW * i + x + pW, y: h - e + sH))
+                        path.addLine(to: CGPoint(x: pW * i + x + pW / 2, y: pH * 5 + hG + e + sH))
                         path.closeSubpath()
                         
                     }.fill(eo ? Color(red: 0.404, green: 0.333, blue: 0.191) : Color(red: 0.716, green: 0.642, blue: 0.523)).blendMode(.multiply).opacity(0.5)
                     
                 }
                 
+                UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 10, bottomTrailingRadius: 10, topTrailingRadius: 0, style: .circular)
+                    .offset(y: g.rect.height - sH)
+                    .fill(Color(red: 0.716, green: 0.642, blue: 0.523))
+                    .frame(height: sH)
+                    .padding(.horizontal, 16)
+                
             }
-            .cornerRadius(10)
-            .aspectRatio(1.0, contentMode: .fit)
-            
-            UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 10, bottomTrailingRadius: 10, topTrailingRadius: 0, style: .circular)
-                .fill(Color(red: 0.716, green: 0.642, blue: 0.523))
-                .frame(height: 60)
-                .padding(.horizontal, 16)
+            .aspectRatio(10/13, contentMode: .fit)
             
         }
 
@@ -91,30 +97,33 @@ struct BackgammonPiecesUI: View {
 
         GeometryReader { g in
             
-            let p: CGFloat = g.size.width / 20
+            let e: CGFloat = g.size.width / 20
+            let h: CGFloat = g.size.width
             
-            let hG: CGFloat = g.size.height / 4
-
-            let w = (g.rect.width - p * 3) / 12
-            let h = (g.rect.height - hG - p * 2) / 12
+            let hG: CGFloat = h / 4
+            
+            let pW = (g.rect.width - e * 3) / 12
+            let pH = (h - e * 2 - hG) / 12
+            
+            let sH = (g.rect.height - g.rect.width) / 2
 
             VStack(spacing: 0) {
 
                 ForEach(grid.cols) { col in
 
-                    if col.id == 6 { Text("").frame(width: w, height: hG) }
+                    if col.id == 6 { Text("").frame(width: pW, height: hG) }
 
                     HStack(spacing: 0) {
 
                         ForEach(col.rows) { row in
 
-                            if row.index == 6 { Text("").frame(width: p, height: h) }
+                            if row.index == 6 { Text("").frame(width: e, height: pH) }
 
                             let player = grid.player(row.piece) == 0
 
                             Text(grid.solid(row.piece)).foregroundColor(player ? Color(white: 0.198) : .white)
-                                .frame(width: w, height: h)
-                                .font(.system(size: (w + h) / 2, weight: .regular))
+                                .frame(width: pW, height: pH)
+                                .font(.system(size: (pW + pH) / 2, weight: .regular))
 
                         }
 
@@ -123,11 +132,11 @@ struct BackgammonPiecesUI: View {
                 }
 
             }
-            .padding(p)
+            .padding(.horizontal, e)
+            .padding(.vertical, e + sH)
             
         }
-        .cornerRadius(10)
-        .aspectRatio(1.0, contentMode: .fit)
+        .aspectRatio(10/13, contentMode: .fit)
 
     }
 
@@ -144,30 +153,30 @@ struct BackgammonInteractionUI: View {
 
         GeometryReader { g in
 
-            let padding: CGFloat = 15
-            let verticalGap: CGFloat = 20
-            let horizontalGap: CGFloat = 50
-            let width = (g.rect.width - padding * 2 - verticalGap) / 12
-            let pointHeight = (g.rect.height - padding * 2 - horizontalGap) / 2
+            let padding: CGFloat = g.size.width / 20
+            let horizontalGap: CGFloat = g.size.width / 4
+            let width = (g.rect.width - padding * 3) / 12
+            let pointHeight = (g.rect.width - padding * 2 - horizontalGap) / 2
+            let shelf = (g.rect.height - g.rect.width) / 2
 
             ForEach(0..<12, id: \.self) { column in
 
-                let xOffset: CGFloat = column > 5 ? 35 : 15
+                let xOffset: CGFloat = column > 5 ? padding * 2 : padding
                 let topPoint = column + 13
                 let bottomPoint = 12 - column
 
                 pointButton(topPoint, count: pointCounts[topPoint - 1], pointsDown: true)
                     .frame(width: width, height: pointHeight)
-                    .position(x: width * CGFloat(column) + xOffset + width / 2, y: padding + pointHeight / 2)
+                    .position(x: width * CGFloat(column) + xOffset + width / 2, y: padding + shelf + pointHeight / 2)
 
                 pointButton(bottomPoint, count: pointCounts[bottomPoint - 1], pointsDown: false)
                     .frame(width: width, height: pointHeight)
-                    .position(x: width * CGFloat(column) + xOffset + width / 2, y: g.rect.height - padding - pointHeight / 2)
+                    .position(x: width * CGFloat(column) + xOffset + width / 2, y: g.rect.height - padding - shelf - pointHeight / 2)
 
             }
 
         }
-        .aspectRatio(1.0, contentMode: .fit)
+        .aspectRatio(10/13, contentMode: .fit)
 
     }
 
@@ -239,6 +248,8 @@ struct BackgammonLayoutUI: View {
                     
                     VStack(spacing: 0) {
                         
+                        Spacer(minLength: 0)
+                        
                         HStack(spacing: 12) {
                             
                             Button("Roll", systemImage: "die.face.5.fill", action: onRoll)
@@ -258,12 +269,15 @@ struct BackgammonLayoutUI: View {
                             Spacer(minLength: 0)
                             
                         }
-                        .frame(height: 60)
                         .padding(.horizontal, 32)
+                        
+                        Spacer(minLength: 0)
                         
                         Rectangle()
                             .fill(Color.clear)
                             .aspectRatio(1, contentMode: .fit)
+                        
+                        Spacer(minLength: 0)
                         
                         HStack {
                             
@@ -280,10 +294,12 @@ struct BackgammonLayoutUI: View {
                         }
                         .font(.caption.monospacedDigit())
                         .foregroundStyle(.secondary)
-                        .frame(height: 60)
                         .padding(.horizontal, 32)
                         
+                        Spacer(minLength: 0)
+                        
                     }
+                    .aspectRatio(10/13, contentMode: .fit)
                     
                     BackgammonInteractionUI(selectedPoint: selectedPoint, highlightedPoints: highlightedPoints, pointCounts: pointCounts, onSelect: onSelect)
                     

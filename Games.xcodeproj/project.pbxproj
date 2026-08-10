@@ -174,14 +174,6 @@
 			name = InProgress;
 			sourceTree = "<group>";
 		};
-		A9DBACA9208EDE3D00C03C12 /* BoardController */ = {
-			isa = PBXGroup;
-			children = (
-				0EE6B60126291A97001C835E /* GameUI */,
-			);
-			path = BoardController;
-			sourceTree = "<group>";
-		};
 		A9DC4FA81C62B89700E7920E /* System */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,7 +209,7 @@
 				C0DE0000000000000000001B /* GameSceneUI.swift */,
 				C0DE00000000000000000019 /* GameSession.swift */,
 				A9DD741F1C62A35300219C78 /* Gameboards */,
-				A9DBACA9208EDE3D00C03C12 /* BoardController */,
+				0EE6B60126291A97001C835E /* GameUI */,
 				A9DC4FA81C62B89700E7920E /* System */,
 			);
 			path = Games;

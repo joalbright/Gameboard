@@ -12,9 +12,9 @@ struct PegsBoardUI: View {
 
     var body: some View {
 
-        let p: CGFloat = 20
-
         GeometryReader { g in
+            
+            let p: CGFloat = g.size.width / 20
 
             let w = (g.size.width - p * 5) / 7
             let h = (g.size.height - p * 5) / 7
@@ -76,10 +76,10 @@ struct PegsPiecesUI: View {
     var grid: Grid
 
     var body: some View {
-
-        let p: CGFloat = 20
-
+        
         GeometryReader { g in
+            
+            let p: CGFloat = g.size.width / 20
 
             ForEach(grid.cols) { col in
 

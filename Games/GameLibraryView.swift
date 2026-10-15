@@ -197,7 +197,7 @@ private struct GameDestinationView: View {
                 Task { await session.drop(inColumn: column) }
             }
             
-        case .go: GoLayoutUI(grid: session.grid, onSelect: session.move)
+        case .go: GoLayoutUI(grid: session.grid, deadStones: session.goDeadStones, onSelect: session.move)
         case .mancala:
             
             MancalaLayoutUI(grid: session.grid) { square in
@@ -224,9 +224,15 @@ private struct GameDestinationView: View {
             
         case .words:
             
-            WordsLayoutUI(grid: session.grid, rack: session.wordsRack, selectedTile: session.selectedWordTile, onSelectTile: session.chooseWordTile, onSelectSquare: session.placeSelectedWordTile, onFillRack: session.fillWordsRack)
+            wordsView
             
         }
+
+    }
+
+    private var wordsView: some View {
+
+        WordsLayoutUI(grid: session.grid, rack: session.wordsRack, selectedTile: session.selectedWordTile, scores: session.wordsScores, bagCount: session.wordsBagCount, pending: session.pendingWordSquares, blankLetter: session.blankWordLetter, onSelectTile: session.chooseWordTile, onSelectSquare: session.placeSelectedWordTile, onBlankLetter: session.chooseBlankWordLetter, onSubmit: session.submitWordTurn, onRecall: session.recallWordTiles, onPass: session.passWordTurn, onExchange: session.exchangeSelectedWordTile)
 
     }
 

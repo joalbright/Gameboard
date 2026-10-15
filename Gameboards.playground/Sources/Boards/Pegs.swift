@@ -27,6 +27,28 @@ class Pegs: NSObject {
     }
     
     public static let playerPieces = ["●"]
+
+    static func hasLegalMove(_ grid: Grid) -> Bool {
+
+        for row in grid.rowRange {
+
+            for column in grid.colRange where grid[row,column] == "●" {
+
+                for direction: Square in [(-2,0), (2,0), (0,-2), (0,2)] {
+
+                    let end = (row + direction.0, column + direction.1)
+                    guard grid.onBoard(end) else { continue }
+                    if grid[end.0,end.1] == " ", grid[row + direction.0 / 2,column + direction.1 / 2] == "●" { return true }
+
+                }
+
+            }
+
+        }
+
+        return false
+
+    }
     
     public static func validateMove(_ s1: Square, _ s2: Square, _ p1: Piece, _ p2: Piece, _ grid: inout Grid, _ hint: Bool = false) throws -> Piece? {
         

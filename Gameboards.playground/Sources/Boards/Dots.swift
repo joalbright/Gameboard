@@ -34,6 +34,24 @@ public struct Dots {
     public static let playerColors = [Color.cyan, Color.pink]
     public static let playerSecondaryColors = [Color.black, Color.white]
 
+    static func scores(_ grid: Grid) -> [Int] {
+
+        var scores = [0,0]
+
+        for row in grid.rowRange where !row.isMultiple(of: 2) {
+
+            for column in grid.colRange where !column.isMultiple(of: 2) {
+
+                if let player = playerPieces.firstIndex(of: grid[row,column]) { scores[player] += 1 }
+
+            }
+
+        }
+
+        return scores
+
+    }
+
     public static func validateMove(_ s1: Square, _ p1: Piece, _ grid: inout Grid, _ player: Int) throws -> Bool {
 
         guard p1 == "0" else { throw MoveError.invalidmove }

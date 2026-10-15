@@ -5,6 +5,24 @@ public struct Doubles {
     public static var board: Grid { return Grid(4 ✕ (4 ✕ " ")) }
     
     public static let playerPieces: [String] = []
+
+    static func hasLegalMove(_ grid: Grid) -> Bool {
+
+        for row in grid.rowRange {
+
+            for column in grid.colRange {
+
+                if grid[row,column] == " " { return true }
+                if row + 1 < grid.rowRange.upperBound, grid[row,column] == grid[row + 1,column] { return true }
+                if column + 1 < grid.colRange.upperBound, grid[row,column] == grid[row,column + 1] { return true }
+
+            }
+
+        }
+
+        return false
+
+    }
     
     public static var staticboard: Grid {
         

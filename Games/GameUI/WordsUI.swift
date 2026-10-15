@@ -72,9 +72,17 @@ struct WordsLayoutUI: View {
     var grid: Grid
     var rack: [Words.Letter] = []
     var selectedTile: Words.Letter? = nil
+    var scores: [Int] = [0,0]
+    var bagCount = 0
+    var pending: [Square] = []
+    var blankLetter: Words.Letter = .a
     var onSelectTile: (Words.Letter) -> Void = { _ in }
     var onSelectSquare: (Square) -> Void = { _ in }
-    var onFillRack: () -> Void = { }
+    var onBlankLetter: (Words.Letter) -> Void = { _ in }
+    var onSubmit: () -> Void = { }
+    var onRecall: () -> Void = { }
+    var onPass: () -> Void = { }
+    var onExchange: () -> Void = { }
 
     var body: some View {
 
@@ -84,13 +92,16 @@ struct WordsLayoutUI: View {
 
             VStack {
 
+                Text("Player 1: \(scores[0]) · Player 2: \(scores[1]) · Bag: \(bagCount)")
+                    .font(.subheadline)
+
                 ZStack {
 
                     WordsBoardUI()
 
                     WordsPiecesUI(grid: grid)
 
-                    BoardInteractionGrid(rows: 15, columns: 15, grid: grid, selected: nil, highlights: [], action: onSelectSquare)
+                    BoardInteractionGrid(rows: 15, columns: 15, grid: grid, selected: nil, highlights: pending, action: onSelectSquare)
 
                 }
                 .padding(32)
@@ -149,7 +160,37 @@ struct WordsLayoutUI: View {
                 .padding(.horizontal, 32)
                 .padding(.bottom, 16)
 
-                Button("Fill Rack", systemImage: "rectangle.stack.badge.plus", action: onFillRack)
+                HStack {
+
+                    Button("Submit", action: onSubmit)
+                        .disabled(pending.isEmpty)
+                    Button("Recall", action: onRecall)
+                        .disabled(pending.isEmpty)
+                    Button("Pass", action: onPass)
+                        .disabled(!pending.isEmpty)
+                    Button("Exchange", action: onExchange)
+                        .disabled(selectedTile == nil || !pending.isEmpty || bagCount < 7)
+
+                }
+                .buttonStyle(.bordered)
+
+                if selectedTile == .blank {
+
+                    Menu("Blank letter: \(blankLetter.rawValue.uppercased())") {
+
+                        ForEach(Words.Letter.all.filter { $0 != .blank && $0 != .none }, id: \.self) { letter in
+
+                            Button(letter.rawValue.uppercased()) { onBlankLetter(letter) }
+
+                        }
+
+                    }
+
+                }
+
+                Text("Tap an unsubmitted tile on the board to return it to your rack.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
 
             }
 

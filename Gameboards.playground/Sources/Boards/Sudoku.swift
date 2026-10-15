@@ -2,12 +2,14 @@ import SwiftUI
 
 extension Difficulty {
     
-    var sudokuRange: CountableClosedRange<Int> {
+    var sudokuClues: Int {
         
         switch self {
-        case .easy: return 2...6
-        case .medium: return 3...5
-        case .hard: return 4...4
+
+        case .easy: return 45
+        case .medium: return 33
+        case .hard: return 27
+
         }
         
     }
@@ -62,7 +64,7 @@ public struct Sudoku {
     
     public static func validateGuess(_ s1: Square, _ g1: Guess, _ grid: inout Grid, _ solution: Grid) throws {
         
-        guard g1 != "" else { throw MoveError.invalidmove }
+        guard g1 != "", grid[s1.0,s1.1].isEmpty else { throw MoveError.invalidmove }
         let a1 = solution[s1.0,s1.1]
         
         guard a1 == g1 else { throw MoveError.incorrectguess }
@@ -110,25 +112,109 @@ public struct Sudoku {
     }
     
     static func puzzle(_ grid: Grid, difficulty: Difficulty) -> Grid {
-        
+
         var grid = Grid(grid.content)
-        
-        for r in 0...8 {
-            
-            var cols = [0,1,2,3,4,5,6,7,8].randomize()
-            
-            cols.removeSubrange(difficulty.sudokuRange)
-            
-            for c in cols {
-                
-                grid[r,c] = ""
-                
+        var clues = 81
+
+        for index in (0..<81).shuffled() {
+
+            guard clues > difficulty.sudokuClues else { break }
+            let row = index / 9
+            let column = index % 9
+            let value = grid[row,column]
+            grid[row,column] = ""
+
+            if solutionCount(grid) == 1 {
+
+                clues -= 1
+
+            } else {
+
+                grid[row,column] = value
+
             }
-            
+
         }
-        
+
         return grid
-        
+
+    }
+
+    static func solutionCount(_ grid: Grid, limit: Int = 2) -> Int {
+
+        guard grid.content.count == 9, grid.content.allSatisfy({ $0.count == 9 }), limit > 0 else { return 0 }
+        var cells = [Int](repeating: 0, count: 81)
+        var rows = [Int](repeating: 0, count: 9)
+        var columns = rows
+        var boxes = rows
+
+        for index in 0..<81 {
+
+            let row = index / 9
+            let column = index % 9
+            let value = grid[row,column]
+            if value.isEmpty { continue }
+            guard let number = Int(value), (1...9).contains(number) else { return 0 }
+            let box = row / 3 * 3 + column / 3
+            let bit = 1 << number
+            guard (rows[row] | columns[column] | boxes[box]) & bit == 0 else { return 0 }
+            cells[index] = number
+            rows[row] |= bit
+            columns[column] |= bit
+            boxes[box] |= bit
+
+        }
+
+        func search(_ remainingLimit: Int) -> Int {
+
+            var bestIndex: Int?
+            var bestCandidates = 0
+
+            for index in 0..<81 where cells[index] == 0 {
+
+                let row = index / 9
+                let column = index % 9
+                let candidates = 1022 & ~(rows[row] | columns[column] | boxes[row / 3 * 3 + column / 3])
+                if candidates == 0 { return 0 }
+
+                if bestIndex == nil || candidates.nonzeroBitCount < bestCandidates.nonzeroBitCount {
+
+                    bestIndex = index
+                    bestCandidates = candidates
+                    if candidates.nonzeroBitCount == 1 { break }
+
+                }
+
+            }
+
+            guard let index = bestIndex else { return 1 }
+            let row = index / 9
+            let column = index % 9
+            let box = row / 3 * 3 + column / 3
+            var count = 0
+
+            for number in 1...9 where bestCandidates & (1 << number) != 0 {
+
+                let bit = 1 << number
+                cells[index] = number
+                rows[row] |= bit
+                columns[column] |= bit
+                boxes[box] |= bit
+                count += search(remainingLimit - count)
+                cells[index] = 0
+                rows[row] &= ~bit
+                columns[column] &= ~bit
+                boxes[box] &= ~bit
+                if count >= remainingLimit { break }
+
+            }
+
+            return count
+
+        }
+
+        return search(limit)
+
     }
     
     static func staticpuzzle(_ grid: Grid) -> Grid {

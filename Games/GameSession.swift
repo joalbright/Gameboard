@@ -10,6 +10,26 @@ enum GameSwipeDirection {
 
 }
 
+enum GameResult: Equatable {
+
+    case winner(player: Int)
+    case draw
+    case loss
+
+    var message: String {
+
+        switch self {
+
+        case .winner(let player): return "Player \(player) wins."
+        case .draw: return "The game ended in a draw."
+        case .loss: return "The game has ended."
+
+        }
+
+    }
+
+}
+
 enum GameSessionEvent: Equatable, Identifiable {
 
     case gameOver
@@ -39,7 +59,12 @@ enum GameSessionEvent: Equatable, Identifiable {
     private var game: Gameboard
     private var memoryTurn = 0
     private var memoryPairPending = false
-    private var wordsBag: [Words.Letter] = []
+    private var words = Words.State()
+    private var rulePositions: [String: Int] = [:]
+    private var isBackgammonOpening = true
+    private var goPasses = 0
+    private var goReviewPlayer = 0
+    private var goApprovals: Set<Int> = []
     private var fourDropID = 0
     private let fourDropInterval: Duration
     private var doublesMoveID = 0
@@ -51,6 +76,12 @@ enum GameSessionEvent: Equatable, Identifiable {
     private let backgammonRoll: () -> (Int, Int)
 
     private(set) var event: GameSessionEvent?
+    private(set) var result: GameResult?
+    private(set) var doublesScore = 0
+    private(set) var goKomi = 6.5
+    private(set) var isReviewingGoScore = false
+    private(set) var goDeadStones: Set<Int> = []
+    private(set) var blankWordLetter: Words.Letter = .a
     private(set) var wordsRack: [Words.Letter] = []
     private(set) var selectedWordTile: Words.Letter?
     private(set) var selectedSudokuNumber = 1
@@ -60,6 +91,7 @@ enum GameSessionEvent: Equatable, Identifiable {
     private(set) var selectedBackgammonPoint: Int?
 
     var boardType: Gameboard.BoardType { return game._type }
+    var isFinished: Bool { return result != nil }
     var difficulty: Difficulty { return game.difficulty }
     var playerNumber: Int { return game.playerTurn + 1 }
     var playerColor: Color { return game.playerColors[game.playerTurn] }
@@ -69,6 +101,50 @@ enum GameSessionEvent: Equatable, Identifiable {
     var grid: Grid { return game.grid }
     var highlights: [Square] { return game.highlights }
     var selected: Square? { return game.selected }
+    var chessPromotion: Chess.Promotion { game.chessPromotion }
+    var isChessInCheck: Bool { boardType == .chess && Chess.isInCheck(game.playerTurn, in: game.grid) }
+    var dotsScores: [Int] { Dots.scores(game.grid) }
+    var wordsScores: [Int] { words.scores }
+    var wordsBagCount: Int { words.bag.count }
+    var pendingWordSquares: [Square] { words.pending.keys.map { ($0 / 15, $0 % 15) } }
+    var goScores: [Double] { Go.areaScores(game.grid, dead: goDeadStones, komi: goKomi) }
+    var canSetGoKomi: Bool { boardType == .go && !isFinished && !isReviewingGoScore && game.grid.content.flatMap { $0 }.allSatisfy { $0.isEmpty } }
+    var canClaimDraw: Bool {
+
+        guard !isFinished, game.checkersContinuation == nil else { return false }
+        let repeated = rulePositions[rulePositionKey(), default: 0] >= 3
+
+        switch boardType {
+
+        case .chess: return repeated || game.chessState.halfMoves >= 100
+        case .checkers: return repeated || game.checkersQuietMoves >= 80
+        default: return false
+
+        }
+
+    }
+
+    var claimableChessDestinations: [Square] {
+
+        guard boardType == .chess, !isFinished, let start = game.selected else { return [] }
+        var destinations: [Square] = []
+
+        for row in game.grid.rowRange {
+
+            for column in game.grid.colRange {
+
+                let end = (row,column)
+                guard let next = try? Chess.applying(start, to: end, in: game.grid, state: game.chessState, promotion: game.chessPromotion) else { continue }
+                let key = Chess.positionKey(next.grid, player: 1 - game.playerTurn, state: next.state)
+                if next.state.halfMoves >= 100 || rulePositions[key, default: 0] >= 2 { destinations.append(end) }
+
+            }
+
+        }
+
+        return destinations
+
+    }
     var backgammonDice: [Int] { return backgammon.dice }
     var backgammonBar: [Int] { return backgammon.bar }
     var backgammonBorneOff: [Int] { return backgammon.borneOff }
@@ -85,11 +161,11 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     }
     
-    var canRollBackgammonDice: Bool { return backgammon.dice.isEmpty && backgammon.borneOff.allSatisfy { $0 < 15 } }
+    var canRollBackgammonDice: Bool { return !isFinished && backgammon.dice.isEmpty && backgammon.borneOff.allSatisfy { $0 < 15 } }
     
     var canBearOffBackgammonChecker: Bool {
 
-        guard let selectedBackgammonPoint else { return false }
+        guard !isFinished, let selectedBackgammonPoint else { return false }
         return backgammon.legalMoves(for: game.playerTurn).contains { $0.source == .point(selectedBackgammonPoint) && $0.destination == .borneOff }
 
     }
@@ -104,6 +180,16 @@ enum GameSessionEvent: Equatable, Identifiable {
         self.backgammonRoll = backgammonRoll
 
         if boardType == .words { resetWords() }
+        recordRulePosition()
+
+    }
+
+    convenience init(game: Gameboard) {
+
+        self.init(game._type)
+        self.game = game
+        rulePositions = [:]
+        recordRulePosition()
 
     }
 
@@ -117,6 +203,14 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         game.reset(testing)
         event = nil
+        result = nil
+        doublesScore = 0
+        rulePositions = [:]
+        isBackgammonOpening = true
+        goPasses = 0
+        goApprovals = []
+        goDeadStones = []
+        isReviewingGoScore = false
         fourDropID += 1
         isFourDropping = false
         doublesMoveID += 1
@@ -127,17 +221,19 @@ enum GameSessionEvent: Equatable, Identifiable {
         selectedBackgammonPoint = nil
         selectedSudokuNumber = 1
         
-        if boardType == .backgammon { game.playerTurn = 0 }
+        if [.backgammon, .chess, .checkers, .go, .words].contains(boardType) { game.playerTurn = 0 }
         
         memoryTurn += 1
         memoryPairPending = false
         
         if boardType == .words { resetWords() }
+        recordRulePosition()
         
     }
 
     func showAvailable(at square: Square) {
 
+        guard !isFinished else { return }
         game.showAvailable(square)
 
     }
@@ -147,6 +243,22 @@ enum GameSessionEvent: Equatable, Identifiable {
         guard boardType == .backgammon, canRollBackgammonDice else { return }
 
         let roll = backgammonRoll()
+
+        guard (1...6).contains(roll.0), (1...6).contains(roll.1) else { return }
+
+        if isBackgammonOpening {
+
+            guard roll.0 != roll.1 else {
+
+                event = .failure("The opening dice tied. Roll again; the higher die determines who starts.")
+                return
+
+            }
+
+            game.playerTurn = roll.0 > roll.1 ? 0 : 1
+            isBackgammonOpening = false
+
+        }
 
         backgammon.roll(roll.0, roll.1)
         selectedBackgammonPoint = nil
@@ -158,7 +270,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func selectBackgammonPoint(_ point: Int) {
 
-        guard boardType == .backgammon, point.within(1..<25), !backgammon.dice.isEmpty else { return }
+        guard !isFinished, boardType == .backgammon, point.within(1..<25), !backgammon.dice.isEmpty else { return }
 
         let player = game.playerTurn
         let moves = backgammon.legalMoves(for: player)
@@ -198,7 +310,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func bearOffBackgammonChecker() {
 
-        guard boardType == .backgammon, let selectedBackgammonPoint else { return }
+        guard !isFinished, boardType == .backgammon, let selectedBackgammonPoint else { return }
 
         let moves = backgammon.legalMoves(for: game.playerTurn).filter { $0.source == .point(selectedBackgammonPoint) && $0.destination == .borneOff }
 
@@ -210,6 +322,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func selectOrMove(at square: Square) {
 
+        guard !isFinished else { return }
         guard let selected = game.selected else {
 
             game.showAvailable(square)
@@ -221,9 +334,20 @@ enum GameSessionEvent: Equatable, Identifiable {
         do {
 
             _ = try game.move(pieceAt: selected, toSquare: square)
-            game.selected = nil
-            game.highlights = []
+
+            if let continuation = game.checkersContinuation {
+
+                game.showAvailable(continuation)
+
+            } else {
+
+                game.selected = nil
+                game.highlights = []
+
+            }
+
             event = nil
+            checkSelectionGameCompletion()
 
         } catch {
 
@@ -236,7 +360,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func drop(inColumn column: Int) async {
 
-        guard boardType == .four, !isFourDropping else { return }
+        guard !isFinished, boardType == .four, !isFourDropping else { return }
         guard column.within(game.grid.colRange), let firstRow = game.grid.rowRange.first else { return }
         guard game.grid[firstRow, column] == " " else { return }
 
@@ -278,7 +402,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func selectMemoryCard(at square: Square) {
 
-        guard !memoryPairPending else { return }
+        guard !isFinished, !memoryPairPending else { return }
 
         if let selected = game.selected {
 
@@ -317,7 +441,14 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func swipe(_ direction: GameSwipeDirection) async {
 
-        guard boardType == .doubles, !isDoublesMoving, canMoveDoubles(direction) else { return }
+        guard !isFinished, boardType == .doubles, !isDoublesMoving else { return }
+
+        guard canMoveDoubles(direction) else {
+
+            checkDoublesCompletion()
+            return
+
+        }
 
         doublesMoveID += 1
         
@@ -340,7 +471,12 @@ enum GameSessionEvent: Equatable, Identifiable {
             try? await Task.sleep(for: doublesMoveInterval)
 
             guard !Task.isCancelled, moveID == doublesMoveID else { return }
-            guard moveDoubles(direction, mergedTiles: &mergedTiles) else { return }
+            if !moveDoubles(direction, mergedTiles: &mergedTiles) {
+
+                checkDoublesCompletion()
+                return
+
+            }
 
         }
 
@@ -348,7 +484,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func sowMancala(from square: Square) async {
 
-        guard boardType == .mancala, !isMancalaMoving else { return }
+        guard !isFinished, boardType == .mancala, !isMancalaMoving else { return }
         guard game.grid.onBoard(square) else { return }
 
         let piece = game.grid[square.c, square.r]
@@ -401,7 +537,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func chooseWordTile(_ tile: Words.Letter) {
 
-        guard tile != .none else { return }
+        guard !isFinished, tile != .none else { return }
 
         selectedWordTile = selectedWordTile == tile ? nil : tile
 
@@ -423,33 +559,43 @@ enum GameSessionEvent: Equatable, Identifiable {
         memoryPairPending = false
         selectedSudokuNumber = 1
         event = nil
+        result = nil
         game.difficulty = difficulty
 
     }
 
     func placeSelectedWordTile(at square: Square) {
 
+        guard !isFinished else { return }
+
+        if words.pending[square.0 * 15 + square.1] != nil {
+
+            words.removePending(at: square)
+            synchronizeWords()
+            return
+
+        }
+
         guard let tile = selectedWordTile else { return }
 
-        perform { try $0.place(tile: tile, at: square) }
+        do {
 
-        guard event == nil, let index = wordsRack.firstIndex(of: tile) else { return }
+            try words.stage(tile, at: square, blank: blankWordLetter)
+            selectedWordTile = nil
+            event = nil
+            synchronizeWords()
 
-        wordsRack[index] = .none
-        selectedWordTile = nil
+        } catch {
+
+            handle(error)
+
+        }
 
     }
 
     func fillWordsRack() {
 
-        wordsRack.removeAll { $0 == .none }
-
-        let tileCount = min(7 - wordsRack.count, wordsBag.count)
-
-        guard tileCount > 0 else { return }
-
-        wordsRack += wordsBag.prefix(tileCount)
-        wordsBag.removeFirst(tileCount)
+        submitWordTurn()
 
     }
 
@@ -467,6 +613,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func guess(at square: Square) {
 
+        guard !isFinished else { return }
         perform { try $0.guess(toSquare: square) }
         checkBombsweeperCompletion()
 
@@ -474,12 +621,15 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func guess(at square: Square, with guess: Guess) {
 
+        guard !isFinished else { return }
         perform { try $0.guess(toSquare: square, withGuess: guess) }
+        checkSudokuCompletion()
 
     }
 
     func mark(at square: Square) {
 
+        guard !isFinished else { return }
         perform { try $0.mark(toSquare: square) }
         checkBombsweeperCompletion()
 
@@ -487,7 +637,18 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     func move(to square: Square) {
 
+        guard !isFinished else { return }
+
+        if boardType == .go, isReviewingGoScore {
+
+            toggleDeadGoGroup(at: square)
+            return
+
+        }
+
         perform { try $0.move(toSquare: square) }
+        if boardType == .go, event == nil { goPasses = 0 }
+        if boardType == .dots, event == nil, !game.grid.content.flatMap({ $0 }).contains("0") { finishByScores(dotsScores) }
         if boardType == .tictactoe { checkTicTacToeCompletion() }
         if boardType == .bombsweeper { checkBombsweeperCompletion() }
         if boardType == .mancala { checkMancalaCompletion() }
@@ -496,7 +657,9 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     @discardableResult func move(from start: Square, to end: Square) -> Piece? {
 
-        return perform { try $0.move(pieceAt: start, toSquare: end) } ?? nil
+        let piece = perform { try $0.move(pieceAt: start, toSquare: end) }
+        if !isFinished, event == nil { checkSelectionGameCompletion() }
+        return piece ?? nil
 
     }
 
@@ -514,6 +677,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     private func perform<T>(_ action: (inout Gameboard) throws -> T) -> T? {
 
+        guard !isFinished else { return nil }
         do {
 
             let result = try action(&game)
@@ -535,9 +699,9 @@ enum GameSessionEvent: Equatable, Identifiable {
         if let status = error as? GameStatus {
 
             switch status {
-            case .gameover: event = .gameOver
-            case .winner: event = .winner
-            case .stalemate: event = .stalemate
+            case .gameover: finish(.loss)
+            case .winner: finish(.winner(player: playerNumber))
+            case .stalemate: finish(.draw)
             }
 
         } else if let moveError = error as? MoveError {
@@ -550,7 +714,7 @@ enum GameSessionEvent: Equatable, Identifiable {
 
         } else {
 
-            event = .failure(String(describing: error))
+            event = .failure((error as? LocalizedError)?.errorDescription ?? String(describing: error))
 
         }
 
@@ -576,7 +740,7 @@ enum GameSessionEvent: Equatable, Identifiable {
             memoryPairPending = false
 
             let remainingCards = game.grid.content.flatMap { $0 }.filter { !$0.isEmpty }.count
-            if remainingCards == 0 { event = .winner }
+            if remainingCards == 0 { finish(.winner(player: 1)) }
 
         }
 
@@ -630,8 +794,12 @@ enum GameSessionEvent: Equatable, Identifiable {
 
             do {
 
-                let merged = try game.validateMove(start, end) != nil
-                if merged { mergedTiles.insert(endIndex) }
+                if let merged = try game.validateMove(start, end) {
+
+                    mergedTiles.insert(endIndex)
+                    doublesScore += Int(merged) ?? 0
+
+                }
                 moved = true
 
             } catch {
@@ -679,10 +847,273 @@ enum GameSessionEvent: Equatable, Identifiable {
 
     private func resetWords() {
 
-        wordsBag = Words.Letter.bag
-        wordsRack = []
+        words = Words.State()
         selectedWordTile = nil
-        fillWordsRack()
+        blankWordLetter = .a
+        synchronizeWords()
+
+    }
+
+    func selectChessPromotion(_ promotion: Chess.Promotion) {
+
+        guard !isFinished, boardType == .chess else { return }
+        game.chessPromotion = promotion
+
+    }
+
+    func claimDraw() {
+
+        if canClaimDraw { finish(.draw) }
+
+    }
+
+    func agreeToDraw() {
+
+        guard !isFinished, isMultiplayer else { return }
+        finish(.draw)
+
+    }
+
+    func claimDraw(byMovingTo end: Square) {
+
+        guard let start = game.selected, claimableChessDestinations.contains(where: { $0 == end }) else { return }
+        move(from: start, to: end)
+        if event == nil { finish(.draw) }
+
+    }
+
+    func resign() {
+
+        guard !isFinished, isMultiplayer else { return }
+        finish(.winner(player: 3 - playerNumber))
+
+    }
+
+    func selectGoKomi(_ komi: Double) {
+
+        guard canSetGoKomi, [0.5, 5.5, 6.5, 7.5].contains(komi) else { return }
+        goKomi = komi
+
+    }
+
+    func passGoTurn() {
+
+        guard boardType == .go, !isFinished, !isReviewingGoScore else { return }
+        goPasses += 1
+        game.changePlayer()
+        event = nil
+
+        if goPasses == 2 {
+
+            isReviewingGoScore = true
+            goReviewPlayer = game.playerTurn
+            goApprovals = []
+            goDeadStones = []
+
+        }
+
+    }
+
+    func resumeGoPlay() {
+
+        guard boardType == .go, !isFinished, isReviewingGoScore else { return }
+        isReviewingGoScore = false
+        goPasses = 0
+        goApprovals = []
+        goDeadStones = []
+        game.playerTurn = goReviewPlayer
+        event = nil
+
+    }
+
+    func acceptGoScore() {
+
+        guard boardType == .go, !isFinished, isReviewingGoScore else { return }
+        goApprovals.insert(game.playerTurn)
+
+        if goApprovals.count == 2 {
+
+            let scores = goScores
+
+            for index in goDeadStones { game.grid[index / 9,index % 9] = "" }
+            goDeadStones = []
+            isReviewingGoScore = false
+            if scores[0] == scores[1] { finish(.draw) } else { finish(.winner(player: scores[0] > scores[1] ? 1 : 2)) }
+
+        } else {
+
+            game.changePlayer()
+
+        }
+
+    }
+
+    private func toggleDeadGoGroup(at square: Square) {
+
+        guard game.grid.onBoard(square), !game.grid[square.0,square.1].isEmpty else { return }
+        let group = Go.group(at: square.0 * 9 + square.1, in: game.grid)
+
+        if group.isSubset(of: goDeadStones) {
+
+            goDeadStones.subtract(group)
+
+        } else {
+
+            goDeadStones.formUnion(group)
+
+        }
+
+        goApprovals = []
+        event = nil
+
+    }
+
+    func chooseBlankWordLetter(_ letter: Words.Letter) {
+
+        guard letter != .blank, letter != .none else { return }
+        blankWordLetter = letter
+
+    }
+
+    func submitWordTurn() {
+
+        guard boardType == .words, !isFinished else { return }
+
+        do {
+
+            try words.submit(accepts: Words.isEnglishWord)
+            event = nil
+            selectedWordTile = nil
+            synchronizeWords()
+            if words.isComplete { finishByScores(words.scores) }
+
+        } catch {
+
+            handle(error)
+
+        }
+
+    }
+
+    func recallWordTiles() {
+
+        guard boardType == .words, !isFinished else { return }
+        words.recall()
+        selectedWordTile = nil
+        event = nil
+        synchronizeWords()
+
+    }
+
+    func passWordTurn() {
+
+        performWordAction { try $0.pass() }
+
+    }
+
+    func exchangeSelectedWordTile() {
+
+        guard let tile = selectedWordTile else { return }
+        performWordAction { try $0.exchange(tile) }
+
+    }
+
+    private func performWordAction(_ action: (inout Words.State) throws -> Void) {
+
+        guard boardType == .words, !isFinished else { return }
+
+        do {
+
+            try action(&words)
+            event = nil
+            selectedWordTile = nil
+            synchronizeWords()
+            if words.isComplete { finishByScores(words.scores) }
+
+        } catch {
+
+            handle(error)
+
+        }
+
+    }
+
+    private func synchronizeWords() {
+
+        game.grid = words.grid
+        game.playerTurn = words.player
+        wordsRack = words.racks[words.player]
+
+    }
+
+    private func finishByScores(_ scores: [Int]) {
+
+        finish(scores[0] == scores[1] ? .draw : .winner(player: scores[0] > scores[1] ? 1 : 2))
+
+    }
+
+    private func rulePositionKey() -> String {
+
+        if boardType == .chess { return Chess.positionKey(game.grid, player: game.playerTurn, state: game.chessState) }
+        return game.grid.content.flatMap { $0 }.map { $0.isEmpty ? "." : $0 }.joined() + ":\(game.playerTurn)"
+
+    }
+
+    private func recordRulePosition() {
+
+        guard [.chess, .checkers].contains(boardType), game.checkersContinuation == nil else { return }
+        rulePositions[rulePositionKey(), default: 0] += 1
+
+    }
+
+    private func checkSelectionGameCompletion() {
+
+        guard event == nil, !isFinished else { return }
+
+        switch boardType {
+
+        case .chess:
+
+            recordRulePosition()
+            let moves = Chess.legalMoves(for: game.playerTurn, in: game.grid, state: game.chessState)
+
+            if moves.isEmpty {
+
+                finish(isChessInCheck ? .winner(player: 2 - game.playerTurn) : .draw)
+
+            } else if Chess.hasInsufficientMaterial(game.grid) || game.chessState.halfMoves >= 150 || rulePositions[rulePositionKey(), default: 0] >= 5 {
+
+                finish(.draw)
+
+            }
+
+        case .checkers:
+
+            recordRulePosition()
+            checkCheckersCompletion()
+
+        case .pegs:
+
+            let count = game.grid.content.flatMap { $0 }.filter { $0 == "●" }.count
+            if count == 1 { finish(.winner(player: 1)) } else if !Pegs.hasLegalMove(game.grid) { finish(.loss) }
+
+        default: break
+
+        }
+
+    }
+
+    private func checkDoublesCompletion() {
+
+        if game.grid.content.flatMap({ $0 }).contains(where: { (Int($0) ?? 0) >= 2048 }) {
+
+            finish(.winner(player: 1))
+
+        } else if !Doubles.hasLegalMove(game.grid) {
+
+            finish(.loss)
+
+        }
 
     }
 
@@ -726,27 +1157,33 @@ enum GameSessionEvent: Equatable, Identifiable {
             
             guard let first = line.first, first != emptyPiece, line.allSatisfy({ $0 == first }) else { continue }
             
-            event = .winner
+            let player = (game.playerPieces.firstIndex { $0.contains(first) } ?? 0) + 1
+            finish(.winner(player: player))
             
             return
 
         }
 
-        if !pieces.contains(emptyPiece) { event = .stalemate }
+        if !pieces.contains(emptyPiece) { finish(.draw) }
 
     }
 
     private func checkBombsweeperCompletion() {
 
+        guard boardType == .bombsweeper, !isFinished else { return }
         let pieces = game.grid.content.flatMap { $0 }
 
         if pieces.contains("✘") {
 
-            event = .gameOver
+            finish(.loss)
 
-        } else if !pieces.contains("•") {
+        } else if game.grid.rowRange.allSatisfy({ row in
 
-            event = .winner
+            game.grid.colRange.allSatisfy { column in game.solution[row,column] == "•" || game.grid[row,column] == game.solution[row,column] }
+
+        }) {
+
+            finish(.winner(player: 1))
 
         }
 
@@ -759,7 +1196,48 @@ enum GameSessionEvent: Equatable, Identifiable {
         let firstScore = Mancala.score(for: 0, in: game.grid)
         let secondScore = Mancala.score(for: 1, in: game.grid)
 
-        event = firstScore == secondScore ? .stalemate : .winner
+        if firstScore == secondScore {
+
+            finish(.draw)
+
+        } else {
+
+            let winner = firstScore > secondScore ? 1 : 2
+            finish(.winner(player: winner))
+
+        }
+
+    }
+
+    private func checkSudokuCompletion() {
+
+        guard boardType == .sudoku, event == nil, !isFinished else { return }
+        if game.grid.content.allSatisfy({ $0.allSatisfy { !$0.isEmpty } }) { finish(.winner(player: 1)) }
+
+    }
+
+    private func checkCheckersCompletion() {
+
+        guard boardType == .checkers, !isFinished, game.checkersContinuation == nil else { return }
+        if !Checkers.hasLegalMove(for: game.playerTurn, in: game.grid) { finish(.winner(player: 2 - game.playerTurn)) }
+
+    }
+
+    private func finish(_ result: GameResult) {
+
+        guard !isFinished else { return }
+        self.result = result
+        game.selected = nil
+        game.highlights = []
+        selectedBackgammonPoint = nil
+
+        switch result {
+
+        case .winner: event = .winner
+        case .draw: event = .stalemate
+        case .loss: event = .gameOver
+
+        }
 
     }
 
@@ -772,7 +1250,7 @@ enum GameSessionEvent: Equatable, Identifiable {
         if backgammon.borneOff[game.playerTurn] == 15 {
 
             backgammon.dice = []
-            event = .winner
+            finish(.winner(player: playerNumber))
 
         } else {
 

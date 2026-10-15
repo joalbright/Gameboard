@@ -53,6 +53,7 @@ struct GoBoardUI: View {
 struct GoPiecesUI: View {
 
     var grid: Grid
+    var deadStones: Set<Int> = []
 
     var body: some View {
 
@@ -73,6 +74,12 @@ struct GoPiecesUI: View {
 
                         Text("●")
                             .foregroundColor(player == 0 ? Go.playerColors[0] : Go.playerColors[1])
+                            .opacity(deadStones.contains(row.id * 9 + column.index) ? 0.3 : 1)
+                            .overlay {
+
+                                if deadStones.contains(row.id * 9 + column.index) { Text("×").foregroundStyle(.red) }
+
+                            }
                             .font(.system(size: min(w, h), weight: .thin))
                             .position(x: p + w * CGFloat(column.index), y: p + h * CGFloat(row.id))
 
@@ -138,6 +145,7 @@ private struct GoInteractionGrid: View {
 struct GoLayoutUI: View {
 
     var grid: Grid
+    var deadStones: Set<Int> = []
     var selected: Square? = nil
     var highlights: [Square] = []
     var onSelect: (Square) -> Void = { _ in }
@@ -154,7 +162,7 @@ struct GoLayoutUI: View {
 
                     GoBoardUI()
 
-                    GoPiecesUI(grid: grid)
+                    GoPiecesUI(grid: grid, deadStones: deadStones)
 
                     GoInteractionGrid(grid: grid, action: onSelect)
 

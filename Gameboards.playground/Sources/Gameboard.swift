@@ -100,6 +100,11 @@ public struct Gameboard {
     
     var playerCount: Int = 1
     var playerTurn: Int = 0
+    private(set) var checkersContinuation: Square?
+    var chessState = Chess.State()
+    var chessPromotion: Chess.Promotion = .queen
+    private(set) var checkersQuietMoves = 0
+    var goPositions: Set<String> = []
     var playerPieces: [Piece] = []
     var playerColors: [Color] = [.accent]
     var playerSecondaryColors: [Color] = [.text]
@@ -141,6 +146,13 @@ public struct Gameboard {
     }
     
     public mutating func showAvailable(_ s1: Square) {
+
+        if _type == .checkers, let forced = checkersContinuation, forced != s1 {
+
+            showAvailable(forced)
+            return
+
+        }
         
         highlights = []
         
@@ -204,8 +216,27 @@ public struct Gameboard {
     }
     
     public mutating func move(pieceAt s1: Square, toSquare s2: Square) throws -> Piece? {
-        
+
+        let originalPiece = grid.onBoard(s1) ? grid[s1.0,s1.1] : ""
         let piece = try validateMove(s1,s2)
+
+        if _type == .checkers {
+
+            let jumped = abs(s2.0 - s1.0) == 2
+            let promoted = grid[s2.0,s2.1] != originalPiece
+            checkersQuietMoves = jumped || ["●","○"].contains(originalPiece) ? 0 : checkersQuietMoves + 1
+            checkersContinuation = nil
+
+            if jumped, !promoted, !Checkers.captures(from: s2, in: grid).isEmpty {
+
+                checkersContinuation = s2
+                showAvailable(s2)
+                return piece
+
+            }
+
+        }
+
         changePlayer()
         return piece
     
@@ -217,11 +248,7 @@ public struct Gameboard {
         guard let c1 = cols.firstIndex(of: s1.0), let c2 = cols.firstIndex(of: s2.0) else { return nil }
         let r1 = 8 - s1.1, r2 = 8 - s2.1
         
-        let piece = try validateMove((r1,c1), (r2,c2))
-        
-        changePlayer()
-                
-        return piece
+        return try move(pieceAt: (r1,c1), toSquare: (r2,c2))
         
     }
     
@@ -230,6 +257,13 @@ public struct Gameboard {
     public mutating func match(cardAt s1: Square, withCard s2: Square, reset: Bool = false) throws -> Card? { return try validateMatch(s1, s2, reset) }
     
     public mutating func reset(_ testing: Bool = false) {
+
+        if [.chess, .checkers, .go, .words].contains(_type) { playerTurn = 0 }
+        checkersContinuation = nil
+        chessState = Chess.State()
+        chessPromotion = .queen
+        checkersQuietMoves = 0
+        goPositions = []
         
         highlights = []
         selected = nil
@@ -353,11 +387,14 @@ public struct Gameboard {
             
             grid = Words.board
             playerPieces = Words.playerPieces
+            playerColors = [.cyan, .pink]
+            playerSecondaryColors = [.black, .white]
             
         }
         
         grid.playerPieces = playerPieces
         playerCount = playerColors.count
+        if _type == .go { goPositions = [Go.positionKey(grid)] }
         
     }
     

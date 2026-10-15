@@ -191,7 +191,12 @@ extension Gameboard {
             
         case .go:
 
-            try Go.validateMove(s1, p1, &grid, playerTurn)
+            var next = grid
+            try Go.validateMove(s1, p1, &next, playerTurn)
+            let key = Go.positionKey(next)
+            guard !goPositions.contains(key) else { throw MoveError.invalidmove }
+            grid = next
+            goPositions.insert(key)
             return false
 
         case .tictactoe:
@@ -220,8 +225,27 @@ extension Gameboard {
         
         switch _type {
             
-        case .checkers: return try Checkers.validateMove(s1, s2, p1, p2, &grid, hint)
-        case .chess: return try Chess.validateMove(s1, s2, p1, p2, &grid, hint)
+        case .checkers:
+
+            if let forced = checkersContinuation {
+
+                guard s1 == forced, abs(s2.0 - s1.0) == 2 else { throw MoveError.invalidmove }
+
+            }
+
+            return try Checkers.validateMove(s1, s2, p1, p2, &grid, hint)
+        case .chess:
+
+            let move = try Chess.applying(s1, to: s2, in: grid, state: chessState, promotion: chessPromotion)
+
+            if !hint {
+
+                grid = move.grid
+                chessState = move.state
+
+            }
+
+            return move.captured
         case .doubles: return try Doubles.validateMove(s1, s2, p1, p2, &grid)
         case .pegs: return try Pegs.validateMove(s1, s2, p1, p2, &grid, hint)
         default: throw MoveError.incorrectpiece

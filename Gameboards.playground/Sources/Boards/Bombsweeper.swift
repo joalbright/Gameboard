@@ -83,7 +83,7 @@ public struct Bombsweeper {
     public static func validateGuess(_ s1: Square, _ grid: inout Grid, _ solution: Grid) throws {
         
         let a1 = solution[s1.0,s1.1]
-        guard a1 != "⚑" else { throw MoveError.invalidmove }
+        guard grid[s1.0,s1.1] == "•" else { throw MoveError.invalidmove }
         
         grid[s1.0,s1.1] = a1
         
@@ -113,7 +113,7 @@ public struct Bombsweeper {
             guard grid.onBoard(s) else { continue }
             let a1 = solution[s.0,s.1]
             let g1 = grid[s.0,s.1]
-            guard g1 != a1 else { continue }
+            guard g1 == "•", a1 != "•" else { continue }
             
             grid[s.0,s.1] = a1
             
